@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PharmaCalc">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>PharmaCalc</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4F8;--surface:#FFFFFF;--s2:#F7FAFC;--border:#D9E2EC;--b2:#BCCCDC;
+  --navy:#0B1F3A;--accent:#0A7EA4;--green:#1A6B4A;--amber:#B45309;
+  --red:#C0392B;--purple:#6D28D9;--cyan:#0891B2;--text:#1A202C;--muted:#627D98;
+  --font:'Syne',sans-serif;--serif:'DM Serif Display',serif;--mono:'JetBrains Mono',monospace;
+  --tab-h:62px;--hdr-h:56px;
+}
+html,body{height:100%;overflow:hidden;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
+
+.hdr{height:var(--hdr-h);background:var(--navy);display:flex;align-items:center;padding:0 1rem;gap:10px;flex-shrink:0;z-index:20;}
+.hdr-logo{width:36px;height:36px;flex-shrink:0;}
+.hdr-info h1{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.01em;}
+.hdr-info p{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.05em;}
+.hdr-badge{margin-left:auto;font-size:9px;font-family:var(--mono);color:rgba(255,255,255,.4);background:rgba(255,255,255,.08);padding:3px 8px;border-radius:8px;}
+
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h)+8px);}
+
+.tabbar{height:var(--tab-h);background:var(--surface);border-top:1px solid var(--border);display:flex;flex-shrink:0;position:fixed;bottom:0;left:0;right:0;z-index:100;padding-bottom:env(safe-area-inset-bottom);}
+.tb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:transparent;cursor:pointer;color:var(--muted);font-family:var(--font);font-size:9.5px;font-weight:700;letter-spacing:.05em;padding:6px 0;transition:color .2s;-webkit-tap-highlight-color:transparent;}
+.tb svg{width:21px;height:21px;transition:transform .2s;}
+.tb.active{color:var(--accent);}
+.tb.active svg{transform:scale(1.12);}
+.tab-line{position:absolute;top:0;left:0;height:2px;background:var(--accent);transition:left .25s cubic-bezier(.4,0,.2,1),width .25s;border-radius:0 0 2px 2px;}
+
+.scr{display:none;padding:1rem 1rem 0;}
+.scr.on{display:block;}
+
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;}
+.callout{border-radius:8px;padding:.8rem 1rem;margin:.7rem 0;border-left:3px solid;}
+.callout.bl{background:#E6F4FA;border-color:var(--accent);}
+.callout.gr{background:#E6F4EE;border-color:var(--green);}
+.callout.am{background:#FEF3C7;border-color:var(--amber);}
+.callout.re{background:#FAEAEA;border-color:var(--red);}
+.callout-t{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;}
+.callout.bl .callout-t{color:var(--accent);}
+.callout.gr .callout-t{color:var(--green);}
+.callout.am .callout-t{color:var(--amber);}
+.callout.re .callout-t{color:var(--red);}
+.callout p{font-size:12px;line-height:1.65;margin:0;}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9.5px;font-weight:700;letter-spacing:.04em;}
+.p-bl{background:#E6F4FA;color:var(--accent);}
+.p-gr{background:#E6F4EE;color:var(--green);}
+.p-am{background:#FEF3C7;color:var(--amber);}
+.p-re{background:#FAEAEA;color:var(--red);}
+.p-pu{background:#EDE9FE;color:var(--purple);}
+.p-cy{background:#E0F2FE;color:var(--cyan);}
+.p-gy{background:var(--s2);color:var(--muted);}
+.tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.35rem;}
+
+/* CALC */
+.calc-grid{display:flex;flex-direction:column;gap:.7rem;}
+.calc-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.1rem;display:flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--text);-webkit-tap-highlight-color:transparent;}
+.calc-card:active{opacity:.85;}
+.ci{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ci.bl{background:#E6F4FA;}
+.ci.gr{background:#E6F4EE;}
+.cc-body{flex:1;}
+.cc-body h3{font-size:14px;font-weight:700;margin-bottom:2px;}
+.cc-body p{font-size:11px;color:var(--muted);line-height:1.5;}
+.cc-arr{color:var(--b2);font-size:18px;}
+.coming{background:var(--surface);border:1px dashed var(--b2);border-radius:12px;padding:.9rem;display:flex;align-items:center;gap:.75rem;opacity:.5;margin-top:.65rem;}
+.coming p{font-size:13px;font-weight:600;color:var(--muted);}
+.coming span{font-size:11px;color:var(--muted);}
+
+/* MECHANISM */
+.mech-wrap{padding:.5rem 0 .5rem;}
+.mech-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:.3rem;text-align:center;}
+.mech-hint{font-size:10px;color:var(--muted);text-align:center;margin-bottom:.5rem;font-style:italic;}
+.mech-container{position:relative;width:100%;}
+.mech-container svg{width:100%;height:auto;display:block;}
+.mech-tooltip{position:absolute;background:var(--navy);color:#fff;border-radius:10px;padding:.65rem .85rem;font-size:11px;line-height:1.6;max-width:210px;pointer-events:none;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;transition:opacity .2s;}
+.mech-tooltip.show{opacity:1;}
+.mech-tooltip strong{color:#7DD3FA;display:block;font-size:11.5px;margin-bottom:.2rem;}
+.mech-tooltip em{color:rgba(255,255,255,.55);font-size:10px;font-style:normal;}
+.tgt{cursor:pointer;}
+.tgt .hl{opacity:0;transition:opacity .25s;}
+.tgt.lit .hl{opacity:1;}
+
+/* ABX ACCORDION */
+.abx-list{display:flex;flex-direction:column;gap:.6rem;}
+.abx-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.abx-head{padding:.85rem 1rem;display:flex;align-items:center;gap:.7rem;}
+.abx-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.abx-info{flex:1;}
+.abx-info h3{font-size:13.5px;font-weight:700;}
+.abx-info span{font-size:11px;color:var(--muted);}
+.abx-chev{color:var(--muted);font-size:16px;transition:transform .25s;flex-shrink:0;}
+.abx-card.open .abx-chev{transform:rotate(90deg);}
+.abx-body{display:none;border-top:1px solid var(--border);padding:1rem;}
+.abx-card.open .abx-body{display:block;}
+.fb{margin-bottom:.8rem;}
+.fb:last-child{margin-bottom:0;}
+.fl{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.28rem;}
+.ft{font-size:12.5px;line-height:1.7;color:#2D3748;}
+
+/* BACTERIA */
+.bact-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;}
+.bact-btn{font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s;}
+.bact-btn.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.bact-grid{display:flex;flex-direction:column;gap:.65rem;}
+.bact-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.bact-head{padding:.85rem 1rem;display:flex;align-items:center;gap:.75rem;}
+.gram-badge{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;font-family:var(--mono);}
+.gram-neg{background:#FAEAEA;color:var(--red);}
+.gram-pos{background:#E6F4FA;color:var(--accent);}
+.bact-info{flex:1;}
+.bact-info h3{font-size:13px;font-weight:700;font-style:italic;}
+.bact-info span{font-size:10.5px;color:var(--muted);}
+.bact-chev{color:var(--b2);font-size:15px;transition:transform .25s;}
+.bact-card.open .bact-chev{transform:rotate(90deg);}
+.bact-body{display:none;border-top:1px solid var(--border);padding:1rem;}
+.bact-card.open .bact-body{display:block;}
+
+/* PK/PD */
+.pkpd-section{margin-bottom:1.6rem;}
+.pkpd-section h3{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--text);margin-bottom:.55rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);}
+.pkpd-section p{font-size:12.5px;line-height:1.78;color:#2D3748;margin-bottom:.6rem;}
+.idx-table{width:100%;border-collapse:collapse;font-size:12px;margin:.7rem 0;}
+.idx-table th{padding:.45rem .7rem;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--s2);border-bottom:2px solid var(--border);text-align:left;}
+.idx-table td{padding:.6rem .7rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;}
+.idx-table tr:last-child td{border-bottom:none;}
+.brc-mini{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:.7rem 0;}
+.brc-mini-h{padding:.5rem .85rem;background:var(--s2);border-bottom:1px solid var(--border);}
+.brc-mini-h p{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+table.brc{width:100%;border-collapse:collapse;font-size:11px;}
+table.brc th{padding:.4rem .7rem;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;border-bottom:1px solid var(--border);}
+table.brc td{padding:.5rem .7rem;border-bottom:1px solid var(--border);}
+table.brc tr:last-child td{border-bottom:none;}
+.cat-s{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:700;background:#E6F4EE;color:var(--green);}
+.cat-i{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:700;background:#FEF3C7;color:var(--amber);}
+.cat-r{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:700;background:#FAEAEA;color:var(--red);}
+
+/* ABOUT */
+.about-hero{background:linear-gradient(135deg,var(--navy),#1A3A5C);border-radius:14px;padding:1.5rem 1.25rem;text-align:center;margin-bottom:1rem;}
+.about-hero h2{font-size:22px;font-weight:800;color:#fff;margin-bottom:.2rem;}
+.about-hero p{font-size:12px;color:rgba(255,255,255,.6);}
+.about-sec{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;margin-bottom:.75rem;}
+.about-sec h4{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;}
+.a-row{display:flex;justify-content:space-between;align-items:baseline;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+.a-row:last-child{border-bottom:none;}
+.a-label{color:var(--muted);font-size:11px;}
+.a-val{font-family:var(--mono);font-size:11.5px;color:var(--text);}
+.ref-item{font-size:11.5px;color:var(--muted);padding:.4rem 0;border-bottom:1px solid var(--border);line-height:1.6;}
+.ref-item:last-child{border-bottom:none;}
+.ref-item a{color:var(--accent);text-decoration:none;}
+.rn{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--accent);margin-right:.35rem;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <svg class="hdr-logo" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="54" rx="22" ry="32" fill="rgba(255,255,255,0.92)"/>
+    <line x1="50" y1="22" x2="42" y2="8" stroke="rgba(255,255,255,0.7)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="22" x2="58" y2="8" stroke="rgba(255,255,255,0.55)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="50" y1="86" x2="42" y2="98" stroke="rgba(255,255,255,0.7)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="86" x2="58" y2="98" stroke="rgba(255,255,255,0.55)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="28" y1="44" x2="12" y2="40" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="28" y1="56" x2="12" y2="58" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="72" y1="44" x2="88" y2="40" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="72" y1="56" x2="88" y2="58" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="50" y="59" font-family="'Syne',sans-serif" font-size="18" font-weight="800" fill="#0B1F3A" text-anchor="middle" dominant-baseline="middle">PC</text>
+  </svg>
+  <div class="hdr-info"><h1>PharmaCalc</h1><p>Guia PK/PD &amp; Antimicrobianos</p></div>
+  <div class="hdr-badge">v1.0</div>
+</div>
+
+<div class="content">
+
+<!-- ── ABA 1: CALCULADORAS ── -->
+<div class="scr on" id="scr-calc">
+  <div class="sec-label">Calculadoras PK/PD</div>
+  <div class="calc-grid">
+    <a class="calc-card" href="calculadoras/meropenem.html">
+      <div class="ci bl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A7EA4" stroke-width="2" stroke-linecap="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg></div>
+      <div class="cc-body"><h3>Meropenem</h3><p>%T&gt;MIC · Infusão 30–180 min · BrCAST v14.0</p><div class="tags"><span class="pill p-bl">Carbapenem</span></div></div>
+      <div class="cc-arr">›</div>
+    </a>
+    <a class="calc-card" href="calculadoras/amicacina.html">
+      <div class="ci gr"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6B4A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+      <div class="cc-body"><h3>Amicacina</h3><p>Cmax/MIC ≥ 10 · Dose única diária · Hull &amp; Sarubbi</p><div class="tags"><span class="pill p-gr">Aminoglicosídeo</span></div></div>
+      <div class="cc-arr">›</div>
+    </a>
+  </div>
+  <div class="coming"><span style="font-size:22px">🔬</span><div><p>Vancomicina, Pip-Tazo e outras</p><span>Em desenvolvimento</span></div></div>
+</div>
+
+<!-- ── ABA 2: ANTIBIÓTICOS ── -->
+<div class="scr" id="scr-abx">
+  <!-- MECANISMO INTERATIVO -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
+    <div class="mech-title">Alvos moleculares dos antimicrobianos</div>
+    <div class="mech-hint">Toque em uma região para ver o mecanismo de ação</div>
+    <div class="mech-container" id="mech-container">
+      <svg id="msv" viewBox="0 0 420 310" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- background -->
+        <rect width="420" height="310" fill="#EBF5FB" rx="10"/>
+        <!-- zone labels -->
+        <text x="210" y="293" font-family="Syne" font-size="8.5" fill="#7A9AB5" text-anchor="middle" font-weight="700" letter-spacing="1">SÍNTESE DA PAREDE CELULAR</text>
+        <text x="86" y="243" font-family="Syne" font-size="7.5" fill="#7A9AB5" text-anchor="middle" font-weight="700">SÍNTESE DE FOLATO</text>
+        <text x="68" y="112" font-family="Syne" font-size="7.5" fill="#7A9AB5" text-anchor="middle" font-weight="700">DNA/RNA</text>
+        <text x="316" y="38" font-family="Syne" font-size="7.5" fill="#7A9AB5" text-anchor="middle" font-weight="700">SÍNTESE PROTEICA</text>
+        <text x="358" y="198" font-family="Syne" font-size="7.5" fill="#7A9AB5" text-anchor="middle" font-weight="700">MEMBRANA</text>
+        <!-- outer wall -->
+        <ellipse cx="210" cy="155" rx="165" ry="124" fill="none" stroke="#8EC5A8" stroke-width="9" opacity="0.55"/>
+        <!-- inner membrane + cytoplasm -->
+        <ellipse cx="210" cy="155" rx="149" ry="108" fill="#FFFDE7" stroke="#5BA882" stroke-width="2.5" opacity="0.95"/>
+
+        <!-- ═══ TARGET: WALL (beta-lactams + glycopeptides) ═══ -->
+        <g class="tgt" id="tgt-wall" onclick="showTip(event,'wall')">
+          <ellipse class="hl" cx="210" cy="155" rx="165" ry="124" fill="none" stroke="#0A7EA4" stroke-width="5" filter="url(#glow)"/>
+          <!-- PBP protein clusters -->
+          <rect x="60" y="112" width="12" height="9" rx="3" fill="#3498DB" opacity="0.9"/>
+          <rect x="60" y="123" width="12" height="4" rx="2" fill="#2980B9" opacity="0.9"/>
+          <rect x="68" y="142" width="12" height="9" rx="3" fill="#3498DB" opacity="0.9"/>
+          <rect x="336" y="112" width="12" height="9" rx="3" fill="#3498DB" opacity="0.9"/>
+          <rect x="336" y="123" width="12" height="4" rx="2" fill="#2980B9" opacity="0.9"/>
+          <rect x="328" y="142" width="12" height="9" rx="3" fill="#3498DB" opacity="0.9"/>
+          <rect x="130" y="46" width="9" height="12" rx="3" fill="#3498DB" opacity="0.9"/>
+          <rect x="141" y="46" width="4" height="12" rx="2" fill="#2980B9" opacity="0.9"/>
+          <rect x="276" y="46" width="9" height="12" rx="3" fill="#3498DB" opacity="0.9"/>
+          <rect x="163" y="264" width="9" height="12" rx="3" fill="#3498DB" opacity="0.9"/>
+          <rect x="246" y="264" width="9" height="12" rx="3" fill="#3498DB" opacity="0.9"/>
+          <!-- label -->
+          <text x="210" y="82" font-family="Syne" font-size="8" fill="#0A7EA4" text-anchor="middle" font-weight="700">Beta-lactâmicos</text>
+          <text x="210" y="73" font-family="Syne" font-size="8" fill="#6D28D9" text-anchor="middle" font-weight="700">Glicopeptídeos</text>
+          <circle cx="210" cy="90" r="8" fill="#E6F4FA" stroke="#0A7EA4" stroke-width="1.5"/>
+          <text x="210" y="93.5" font-size="9" text-anchor="middle" fill="#0A7EA4">⬡</text>
+        </g>
+
+        <!-- ═══ TARGET: DNA (quinolones) ═══ -->
+        <g class="tgt" id="tgt-dna" onclick="showTip(event,'dna')">
+          <ellipse class="hl" cx="142" cy="140" rx="54" ry="46" fill="#EDE9FE" opacity="0.45" filter="url(#glow)"/>
+          <g transform="translate(106,112)">
+            <path d="M0,0 Q18,9 36,0 Q54,9 72,0" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M0,9 Q18,18 36,9 Q54,18 72,9" fill="none" stroke="#6D28D9" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="8" y1="1.5" x2="8" y2="10" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="20" y1="7" x2="20" y2="16" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="32" y1="1.5" x2="32" y2="10" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="44" y1="7" x2="44" y2="16" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="56" y1="1.5" x2="56" y2="10" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="68" y1="7" x2="68" y2="16" stroke="#A78BFA" stroke-width="1.5"/>
+            <path d="M0,20 Q18,29 36,20 Q54,29 72,20" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M0,29 Q18,38 36,29 Q54,38 72,29" fill="none" stroke="#6D28D9" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="8" y1="22" x2="8" y2="31" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="20" y1="28" x2="20" y2="37" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="32" y1="22" x2="32" y2="31" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="44" y1="28" x2="44" y2="37" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="56" y1="22" x2="56" y2="31" stroke="#A78BFA" stroke-width="1.5"/>
+            <line x1="68" y1="28" x2="68" y2="37" stroke="#A78BFA" stroke-width="1.5"/>
+          </g>
+          <ellipse cx="142" cy="168" rx="14" ry="8" fill="#7C3AED" opacity="0.85"/>
+          <text x="142" y="171" font-size="6.5" fill="white" text-anchor="middle" font-family="Syne" font-weight="700">GYR/TOPO</text>
+          <text x="112" y="112" font-family="Syne" font-size="8" fill="#7C3AED" text-anchor="middle" font-weight="700">Quinolonas</text>
+        </g>
+
+        <!-- ═══ TARGET: RIBOSOME 50S ═══ -->
+        <g class="tgt" id="tgt-50s" onclick="showTip(event,'50s')">
+          <ellipse class="hl" cx="280" cy="122" rx="52" ry="40" fill="#FEF3C7" opacity="0.5" filter="url(#glow)"/>
+          <ellipse cx="280" cy="114" rx="28" ry="17" fill="#F59E0B" opacity="0.88"/>
+          <text x="280" y="117" font-size="8.5" fill="white" text-anchor="middle" font-family="JetBrains Mono" font-weight="700">50S</text>
+          <ellipse cx="280" cy="136" rx="22" ry="13" fill="#D97706" opacity="0.88"/>
+          <text x="280" y="139" font-size="8.5" fill="white" text-anchor="middle" font-family="JetBrains Mono" font-weight="700">30S</text>
+          <path d="M252,142 Q268,150 286,142 Q302,134 318,142" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="308" y="95" font-family="Syne" font-size="7.5" fill="#B45309" text-anchor="middle" font-weight="700">Macrolídeos</text>
+          <text x="308" y="105" font-family="Syne" font-size="7.5" fill="#B45309" text-anchor="middle" font-weight="700">Linezolida</text>
+        </g>
+
+        <!-- ═══ TARGET: RIBOSOME 30S (aminoglycosides) ═══ -->
+        <g class="tgt" id="tgt-30s" onclick="showTip(event,'30s')">
+          <ellipse class="hl" cx="272" cy="182" rx="48" ry="34" fill="#E6F4EE" opacity="0.5" filter="url(#glow)"/>
+          <path d="M298,162 Q316,172 308,186 Q300,200 288,193" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="308" cy="176" r="5" fill="#10B981" opacity="0.8"/>
+          <text x="320" y="180" font-size="7" fill="#10B981" font-family="JetBrains Mono">aa</text>
+          <text x="252" y="208" font-family="Syne" font-size="7.5" fill="#1A6B4A" text-anchor="middle" font-weight="700">Aminoglicosídeos</text>
+          <text x="252" y="218" font-family="Syne" font-size="7.5" fill="#1A6B4A" text-anchor="middle" font-weight="700">Tetraciclinas</text>
+        </g>
+
+        <!-- ═══ TARGET: FOLATE (SMX-TMP) ═══ -->
+        <g class="tgt" id="tgt-folate" onclick="showTip(event,'folate')">
+          <ellipse class="hl" cx="142" cy="212" rx="52" ry="34" fill="#FEF3C7" opacity="0.5" filter="url(#glow)"/>
+          <rect x="104" y="198" width="28" height="16" rx="5" fill="#0891B2" opacity="0.9"/>
+          <text x="118" y="209" font-size="7.5" fill="white" text-anchor="middle" font-family="JetBrains Mono" font-weight="700">DHPS</text>
+          <rect x="146" y="198" width="28" height="16" rx="5" fill="#0A7EA4" opacity="0.9"/>
+          <text x="160" y="209" font-size="7.5" fill="white" text-anchor="middle" font-family="JetBrains Mono" font-weight="700">DHFR</text>
+          <text x="91" y="210" font-size="6.5" fill="#0891B2" font-family="JetBrains Mono">PABA</text>
+          <text x="133" y="224" font-size="6.5" fill="#0891B2" font-family="JetBrains Mono">DHP</text>
+          <text x="166" y="224" font-size="6.5" fill="#0A7EA4" font-family="JetBrains Mono">DHF</text>
+          <text x="192" y="210" font-size="6.5" fill="#1A6B4A" font-family="JetBrains Mono">THF</text>
+          <text x="118" y="242" font-family="Syne" font-size="8" fill="#0891B2" text-anchor="middle" font-weight="700">SMX-TMP</text>
+        </g>
+
+        <!-- ═══ TARGET: MEMBRANE (polymyxins) ═══ -->
+        <g class="tgt" id="tgt-mem" onclick="showTip(event,'mem')">
+          <ellipse class="hl" cx="362" cy="178" rx="34" ry="48" fill="#FAEAEA" opacity="0.5" filter="url(#glow)"/>
+          <ellipse cx="362" cy="174" rx="14" ry="40" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="4,3" opacity="0.8"/>
+          <circle cx="354" cy="144" r="4" fill="#EF4444" opacity="0.7"/>
+          <circle cx="362" cy="138" r="4" fill="#EF4444" opacity="0.7"/>
+          <circle cx="370" cy="144" r="4" fill="#EF4444" opacity="0.7"/>
+          <circle cx="354" cy="202" r="4" fill="#EF4444" opacity="0.7"/>
+          <circle cx="362" cy="210" r="4" fill="#EF4444" opacity="0.7"/>
+          <circle cx="370" cy="202" r="4" fill="#EF4444" opacity="0.7"/>
+          <line x1="348" y1="160" x2="376" y2="170" stroke="#EF4444" stroke-width="1.5" opacity="0.6"/>
+          <line x1="348" y1="180" x2="376" y2="190" stroke="#EF4444" stroke-width="1.5" opacity="0.6"/>
+          <text x="362" y="228" font-family="Syne" font-size="8" fill="#C0392B" text-anchor="middle" font-weight="700">Polimixinas</text>
+        </g>
+
+        <!-- hint -->
+        <rect x="8" y="286" width="126" height="18" rx="4" fill="rgba(255,255,255,0.75)"/>
+        <text x="14" y="298" font-size="8" fill="#627D98" font-family="Syne">👆 Toque para detalhes</text>
+      </svg>
+      <div class="mech-tooltip" id="mtip"></div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="margin-top:.25rem">Fichas por classe</div>
+  <div class="abx-list">
+    <div class="abx-card" onclick="toggleAbx(this)">
+      <div class="abx-head"><div class="abx-dot" style="background:#0A7EA4"></div><div class="abx-info"><h3>Beta-lactâmicos</h3><span>Penicilinas · Cefalosporinas · Carbapenêmicos</span></div><span class="abx-chev">›</span></div>
+      <div class="abx-body">
+        <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligação covalente às <strong>PBPs</strong> → bloqueio da transpeptidação do peptidoglicano. Bactericida tempo-dependente (%T&gt;MIC).</div></div>
+        <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-bl">%T&gt;MIC</span><span class="pill p-gy">Tempo-dependente</span><span class="pill p-bl">Alvo: 40–100%</span></div></div>
+        <div class="fb"><div class="fl">Espectro</div><div class="ft"><strong>Penicilinas:</strong> Gram+ + inibidores de β-lactamase (pip-tazo).<br><strong>Cefalosporinas G1–G4:</strong> espectro crescente Gram–.<br><strong>Carbapenêmicos:</strong> Gram+, Gram–, anaeróbios.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">ESBL</span><span class="pill p-re">KPC/NDM/OXA (carbapenemases)</span><span class="pill p-re">Alteração PBP (MRSA)</span></div></div>
+        <div class="fb"><div class="fl">Clínica</div><div class="ft">Infusão prolongada (EIP) aumenta %T&gt;MIC para MIC elevada. Ajuste renal obrigatório.</div></div>
+      </div>
+    </div>
+    <div class="abx-card" onclick="toggleAbx(this)">
+      <div class="abx-head"><div class="abx-dot" style="background:#1A6B4A"></div><div class="abx-info"><h3>Aminoglicosídeos</h3><span>Amicacina · Gentamicina · Tobramicina</span></div><span class="abx-chev">›</span></div>
+      <div class="abx-body">
+        <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligação irreversível à <strong>30S</strong> → leitura errônea do mRNA → proteínas defeituosas. Efeito pós-antibiótico prolongado.</div></div>
+        <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-gr">Cmax/MIC ≥ 8–10</span><span class="pill p-gy">Concentração-dependente</span><span class="pill p-am">Vale &lt; 5 mg/L</span></div></div>
+        <div class="fb"><div class="fl">Espectro</div><div class="ft">Gram-negativos aeróbios. Amicacina: maior estabilidade frente a enzimas modificadoras que gentamicina.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">AAC/ANT/APH (enzimas mod.)</span><span class="pill p-re">16S rRNA metilases</span><span class="pill p-re">Bombas de efluxo</span></div></div>
+        <div class="fb"><div class="fl">Toxicidade</div><div class="tags"><span class="pill p-re">Nefrotoxicidade</span><span class="pill p-re">Ototoxicidade</span><span class="pill p-am">Monitorar vale + ClCr</span></div></div>
+      </div>
+    </div>
+    <div class="abx-card" onclick="toggleAbx(this)">
+      <div class="abx-head"><div class="abx-dot" style="background:#B45309"></div><div class="abx-info"><h3>Quinolonas / Fluoroquinolonas</h3><span>Ciprofloxacino · Levofloxacino · Moxifloxacino</span></div><span class="abx-chev">›</span></div>
+      <div class="abx-body">
+        <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Inibem <strong>DNA girase (topo II)</strong> e <strong>topo IV</strong> → bloqueio replicação e transcrição do DNA. Bactericida concentração-dependente.</div></div>
+        <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-am">AUC₂₄/MIC ≥ 125</span><span class="pill p-am">Cmax/MIC ≥ 10</span></div></div>
+        <div class="fb"><div class="fl">Espectro por geração</div><div class="ft"><strong>Cipro (G2):</strong> Gram–, Pseudomonas. <strong>Levo (G3):</strong> + respiratório. <strong>Moxi (G4):</strong> + anaeróbios, sem atividade urinária.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Mutação gyrA/parC</span><span class="pill p-re">Bombas de efluxo</span><span class="pill p-re">PMQR (plasmídeo)</span></div></div>
+        <div class="fb"><div class="fl">Clínica</div><div class="ft">Biodisponibilidade oral ~100% → switch iv/vo. Risco: tendinopatia, QT longo, neurotoxicidade.</div></div>
+      </div>
+    </div>
+    <div class="abx-card" onclick="toggleAbx(this)">
+      <div class="abx-head"><div class="abx-dot" style="background:#6D28D9"></div><div class="abx-info"><h3>Glicopeptídeos</h3><span>Vancomicina · Teicoplanina</span></div><span class="abx-chev">›</span></div>
+      <div class="abx-body">
+        <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligam-se ao <strong>D-ala-D-ala</strong> dos precursores de peptidoglicano → bloqueio da transglicosilação. Gram+ exclusivo.</div></div>
+        <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-pu">AUC₂₄/MIC 400–600</span><span class="pill p-pu">TDM obrigatório</span></div></div>
+        <div class="fb"><div class="fl">Espectro</div><div class="ft">MRSA, Enterococcus spp., Streptococcus spp., C. difficile (vancomicina oral). Droga de escolha para MRSA invasivo.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">VRE (vanA, vanB)</span><span class="pill p-re">VISA / hVISA</span><span class="pill p-re">Espessamento de parede</span></div></div>
+        <div class="fb"><div class="fl">TDM</div><div class="ft">Alvo AUC₂₄/MIC 400–600 (ASHP/IDSA 2020). Nefrotoxicidade aumentada com aminoglicosídeos.</div></div>
+      </div>
+    </div>
+    <div class="abx-card" onclick="toggleAbx(this)">
+      <div class="abx-head"><div class="abx-dot" style="background:#0891B2"></div><div class="abx-info"><h3>Sulfametoxazol-Trimetoprima</h3><span>SMX-TMP · Bactrim®</span></div><span class="abx-chev">›</span></div>
+      <div class="abx-body">
+        <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Dupla inibição da síntese de folato: <strong>SMX</strong> bloqueia DHPS (PABA→DHP) e <strong>TMP</strong> bloqueia DHFR (DHF→THF) → bloqueio de síntese de purinas e DNA.</div></div>
+        <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-cy">AUC/MIC</span><span class="pill p-gy">Tempo-dependente (TMP)</span></div></div>
+        <div class="fb"><div class="fl">Indicações</div><div class="ft">MRSA (partes moles), <strong>Stenotrophomonas maltophilia</strong> (escolha), PCP, Nocardia, Toxoplasma.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Mutações DHPS/DHFR</span><span class="pill p-re">Genes sul1/sul2</span></div></div>
+        <div class="fb"><div class="fl">Atenção</div><div class="ft">Hiperpotassemia em doses altas. Aumento de creatinina por competição tubular. CI: ClCr &lt;15, gravidez.</div></div>
+      </div>
+    </div>
+    <div class="abx-card" onclick="toggleAbx(this)">
+      <div class="abx-head"><div class="abx-dot" style="background:#C0392B"></div><div class="abx-info"><h3>Polimixinas</h3><span>Polimixina B · Colistina (PME)</span></div><span class="abx-chev">›</span></div>
+      <div class="abx-body">
+        <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Peptídeos catiônicos que se ligam ao <strong>LPS</strong> da membrana externa de Gram– → desestabilização → extravasamento → morte celular rápida.</div></div>
+        <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-re">AUC/MIC</span><span class="pill p-re">Última linha MDR/XDR</span></div></div>
+        <div class="fb"><div class="fl">Espectro</div><div class="ft">Gram– MDR/XDR: A. baumannii, P. aeruginosa, K. pneumoniae produtoras de carbapenemase.</div></div>
+        <div class="fb"><div class="fl">PMB vs Colistina</div><div class="ft"><strong>PMB:</strong> ativa, PK previsível. <strong>Colistina (CMS):</strong> pró-fármaco, concentrações variáveis.</div></div>
+        <div class="fb"><div class="fl">Toxicidade</div><div class="tags"><span class="pill p-re">Nefrotoxicidade grave</span><span class="pill p-re">Neurotoxicidade</span><span class="pill p-am">TDM recomendado</span></div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Modificação LPS</span><span class="pill p-re">mcr-1 (plasmídeo)</span></div></div>
+      </div>
+    </div>
+    <div class="coming"><span style="font-size:22px">🍄</span><div><p>Antifúngicos — em breve</p><span>Azóis, Equinocandinas, Anfotericina B</span></div></div>
+  </div>
+</div>
+
+<!-- ── ABA 3: BACTÉRIAS ── -->
+<div class="scr" id="scr-bact">
+  <div class="bact-filter">
+    <button class="bact-btn on" onclick="filterBact('all',this)">Todas</button>
+    <button class="bact-btn" onclick="filterBact('neg',this)">Gram–</button>
+    <button class="bact-btn" onclick="filterBact('pos',this)">Gram+</button>
+  </div>
+  <div class="bact-grid">
+    <div class="bact-card" data-gram="neg" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-neg">G–</div><div class="bact-info"><h3>Klebsiella pneumoniae</h3><span>Enterobacterales · Bacilo encapsulado</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Bacilo Gram-negativo encapsulado, não-móvel. Cápsula polissacarídica volumosa (antifagocitária). Mucóide em cultura.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">IRAS: pneumonia hospitalar, ITU em cateter, bacteriemia. Alta prevalência de ESBL e KPC no Brasil.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">ESBL (CTX-M)</span><span class="pill p-re">KPC</span><span class="pill p-re">NDM</span><span class="pill p-re">OXA-48</span></div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>ESBL:</strong> Meropenem, Ertapenem.<br><strong>KPC/NDM:</strong> Ceftazidima-avibactam, Meropenem-vaborbactam, Polimixinas.</div></div>
+        <div class="fb"><div class="fl">BrCAST — Meropenem</div><div class="tags"><span class="cat-s">S ≤ 2</span><span class="cat-i">I 4–8</span><span class="cat-r">R > 8 mg/L</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-gram="neg" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-neg">G–</div><div class="bact-info"><h3>Pseudomonas aeruginosa</h3><span>Não-fermentador · Aeróbio estrito</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Bacilo Gram-negativo, móvel (flagelo polar). Pigmentos: piocianina (azul) e pioverdina (verde). Alta capacidade de formação de biofilme.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Pneumonia em VM, infecções em queimados, imunossuprimidos. Alta resistência intrínseca. Seleção de mutantes resistentes sob tratamento.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Perda de OprD</span><span class="pill p-re">Bombas MexAB/MexCD</span><span class="pill p-re">MBL (NDM, VIM)</span><span class="pill p-re">AmpC constitutiva</span></div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Sensível:</strong> Pip-tazo, Ceftazidima, Cipro, Amicacina, Meropenem.<br><strong>MDR:</strong> Ceftolozana-tazobactam, Imipenem-cilastatina-relebactam.</div></div>
+        <div class="fb"><div class="fl">BrCAST — Meropenem</div><div class="tags"><span class="cat-s">S ≤ 2</span><span class="cat-i">I 4–8</span><span class="cat-r">R > 8 mg/L</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-gram="neg" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-neg">G–</div><div class="bact-info"><h3>Acinetobacter baumannii</h3><span>Não-fermentador · Cocobacilo</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Cocobacilo Gram-negativo, aeróbio estrito, não-móvel. Alta sobrevida em superfícies (semanas). Principal agente de surtos em UTI.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Pneumonia hospitalar/VM, bacteriemia, ISC. Brasil: alta prevalência de CRAB (carbapenem-resistant A. baumannii).</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">OXA-23/OXA-24</span><span class="pill p-re">NDM</span><span class="pill p-re">AdeABC (efluxo)</span><span class="pill p-re">CRAB prevalente Brasil</span></div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Sensível:</strong> Amp-sulbactam, Meropenem, Amicacina.<br><strong>CRAB:</strong> Polimixinas + sulbactam, Cefiderocol.</div></div>
+        <div class="fb"><div class="fl">BrCAST — Meropenem</div><div class="tags"><span class="cat-s">S ≤ 2</span><span class="cat-i">I 4–8</span><span class="cat-r">R > 8 mg/L</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-gram="neg" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-neg">G–</div><div class="bact-info"><h3>Escherichia coli</h3><span>Enterobacterales · Facultativo</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Bacilo Gram-negativo facultativo, móvel. Microbiota intestinal normal. Causa infecções graves em sítios estéreis.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Principal causa de ITU hospitalar e comunitária, bacteriemia de foco urinário/abdominal. Alta prevalência de ESBL CTX-M no Brasil.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">ESBL (CTX-M-15)</span><span class="pill p-re">AmpC plasmidial</span><span class="pill p-re">Carbapenemases (crescente)</span></div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>ESBL:</strong> Meropenem/Ertapenem.<br><strong>ITU simples:</strong> Nitrofurantoína, Fosfomicina, SMX-TMP.</div></div>
+        <div class="fb"><div class="fl">BrCAST — Meropenem</div><div class="tags"><span class="cat-s">S ≤ 2</span><span class="cat-i">I 4–8</span><span class="cat-r">R > 8 mg/L</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-gram="neg" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-neg">G–</div><div class="bact-info"><h3>Stenotrophomonas maltophilia</h3><span>Não-fermentador · Resistência intrínseca a carbapenêmicos</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Bacilo Gram-negativo aeróbio, móvel. Resistência intrínseca a carbapenêmicos (MBL L1). Associado a uso prévio de carbapenêmicos e imunossupressão.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Pneumonia em VM, bacteriemia em imunossuprimidos, fibrose cística. Selecionado por carbapenêmicos de amplo espectro.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">MBL L1 (carbapenêmicos)</span><span class="pill p-re">β-lactamase L2</span><span class="pill p-re">SmeDEF (efluxo)</span></div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>1ª linha:</strong> SMX-TMP (droga de escolha).<br><strong>Alternativas:</strong> Levofloxacino, Minociclina, Ceftazidima-avibactam.<br><strong>Meropenem:</strong> resistência intrínseca — evitar.</div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-gram="pos" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-pos">G+</div><div class="bact-info"><h3>Staphylococcus aureus (MRSA)</h3><span>Coco Gram-positivo · Coagulase+</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Cocos Gram-positivos em cachos. Coagulase-positivo. Toxinas: TSST-1, leucocidina PVL, toxinas esfoliativas.</div></div>
+        <div class="fb"><div class="fl">MRSA</div><div class="ft">Resistência mediada pelo gene <strong>mecA</strong> → codifica PBP2a (baixa afinidade por todos os beta-lactâmicos, exceto ceftarolina/ceftobiprole).</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Bacteriemia nosocomial, endocardite, pneumonia, infecção de dispositivos, osteomielite, partes moles.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">mecA (todos β-lactâmicos)</span><span class="pill p-re">VISA (MIC 4–8)</span><span class="pill p-re">VRSA (vanA)</span></div></div>
+        <div class="fb"><div class="fl">Tratamento MRSA</div><div class="ft"><strong>Invasivo:</strong> Vancomicina (AUC/MIC 400–600), Daptomicina.<br><strong>Partes moles:</strong> SMX-TMP, Clindamicina.<br><strong>Alternativas:</strong> Linezolida, Ceftarolina.</div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-gram="pos" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-pos">G+</div><div class="bact-info"><h3>Enterococcus faecium / faecalis</h3><span>Coco Gram-positivo · VRE</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Cocos Gram-positivos em pares ou cadeias curtas. Tolerantes a calor, sal e pH extremos. Resistência intrínseca a cefalosporinas.</div></div>
+        <div class="fb"><div class="fl">VRE</div><div class="ft"><strong>vanA:</strong> resistência a vancomicina e teicoplanina, transferível por plasmídeo.<br><strong>vanB:</strong> resistência a vancomicina, teicoplanina sensível.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">ITU hospitalar, bacteriemia (especialmente E. faecium em imunossuprimidos), endocardite, peritonite. Rastreio em pacientes de alto risco.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">vanA / vanB</span><span class="pill p-re">Resist. intrínseca cefalosporinas</span><span class="pill p-re">Alta CMI aminoglicosídeos</span></div></div>
+        <div class="fb"><div class="fl">Tratamento VRE</div><div class="ft"><strong>E. faecium VRE:</strong> Linezolida, Daptomicina.<br><strong>E. faecalis:</strong> Ampicilina em altas doses (geralmente sensível).</div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-gram="pos" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-badge gram-pos">G+</div><div class="bact-info"><h3>Streptococcus pneumoniae</h3><span>Diplococo Gram-positivo · Pneumococo</span></div><span class="bact-chev">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Morfologia</div><div class="ft">Diplococo Gram-positivo encapsulado, lanceolado, alfa-hemolítico (esverdeado em ágar-sangue). >100 sorogrupos capsulares. Autolisina — lise espontânea.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Principal causa de PAC bacteriana, meningite bacteriana e otite média. Bacteriemia e empiema. Impacto reduzido pela vacinação PCV13/PCV23.</div></div>
+        <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-am">Resist. penicilina (alt. PBP)</span><span class="pill p-am">Macrolídeos (crescente)</span><span class="pill p-gy">Quinolonas (baixa)</span></div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Sensível:</strong> Amoxicilina, Penicilina G IV.<br><strong>Resistente:</strong> Ceftriaxona alta dose, Levofloxacino.<br><strong>Meningite:</strong> Ceftriaxona + Vancomicina (empírico).</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABA 4: PK/PD ── -->
+<div class="scr" id="scr-pkpd">
+  <div class="pkpd-section">
+    <h3>O que é PK/PD?</h3>
+    <p><strong>Farmacocinética (PK)</strong> é o que o organismo faz com o fármaco — absorção, distribuição, metabolismo e eliminação. <strong>Farmacodinâmica (PD)</strong> é o que o fármaco faz com o microrganismo.</p>
+    <div class="callout bl"><div class="callout-t">Integração PK/PD</div><p>Permite definir regimes que maximizam eficácia e minimizam toxicidade — base do <strong>Antimicrobial Stewardship</strong> e da individualização posológica em UTI.</p></div>
+  </div>
+  <div class="pkpd-section">
+    <h3>Os três índices PK/PD</h3>
+    <table class="idx-table">
+      <thead><tr><th>Índice</th><th>Tipo</th><th>Classes</th><th>Alvo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>%T&gt;MIC</strong></td><td><span class="pill p-bl" style="font-size:9px">Tempo</span></td><td>Beta-lactâmicos, Carbapenêmicos</td><td>40–100%</td></tr>
+        <tr><td><strong>Cmax/MIC</strong></td><td><span class="pill p-gr" style="font-size:9px">Conc.</span></td><td>Aminoglicosídeos</td><td>≥ 8–10</td></tr>
+        <tr><td><strong>AUC/MIC</strong></td><td><span class="pill p-am" style="font-size:9px">Expos.</span></td><td>Vancomicina, Quinolonas</td><td>400–600 (vanco)</td></tr>
+      </tbody>
+    </table>
+    <div class="callout bl"><div class="callout-t">%T&gt;MIC — Meropenem</div><p>Infusão prolongada (180 min) aumenta o tempo acima da MIC — essencial para MIC 4–8 mg/L (categoria I BrCAST).</p></div>
+    <div class="callout gr"><div class="callout-t">Cmax/MIC — Amicacina</div><p>Dose única diária: maximiza pico, explora efeito pós-antibiótico, mantém vale &lt;5 mg/L — reduz nefrotoxicidade.</p></div>
+  </div>
+  <div class="pkpd-section">
+    <h3>Categorias BrCAST-EUCAST v14.0</h3>
+    <div class="tags" style="margin-bottom:.65rem"><span class="pill p-gr">S — Dose padrão</span><span class="pill p-am">I — Exposição aumentada</span><span class="pill p-re">R — Resistente</span></div>
+    <div class="brc-mini"><div class="brc-mini-h"><p>Meropenem — BrCAST v14.0</p></div><table class="brc"><thead><tr><th>Organismo</th><th>S ≤</th><th>I</th><th>R &gt;</th></tr></thead><tbody><tr><td>Enterobacterales</td><td>2 mg/L</td><td>4–8</td><td>8</td></tr><tr><td>Pseudomonas spp.</td><td>2 mg/L</td><td>4–8</td><td>8</td></tr><tr><td>Acinetobacter spp.</td><td>2 mg/L</td><td>4–8</td><td>8</td></tr></tbody></table></div>
+    <div class="brc-mini"><div class="brc-mini-h"><p>Amicacina — BrCAST v14.0 (ECOFF)</p></div><table class="brc"><thead><tr><th>Organismo</th><th>S ≤</th><th>R &gt;</th></tr></thead><tbody><tr><td>Enterobacterales</td><td>(8) mg/L</td><td>(8)</td></tr><tr><td>Pseudomonas spp.</td><td>(16) mg/L</td><td>(16)</td></tr></tbody></table></div>
+  </div>
+  <div class="pkpd-section">
+    <h3>Fórmulas PK essenciais</h3>
+    <div class="callout bl"><div class="callout-t">Cockcroft-Gault</div><p>ClCr = [(140−idade)×peso] / (72×creatinina) × 0,85 (se feminino)</p></div>
+    <div class="callout gr"><div class="callout-t">ke e T½</div><p>ke = 0,693 / T½ &nbsp;·&nbsp; T½ = 0,693 / ke<br>Amicacina: ke = (ClCr × 0,0028) + 0,01</p></div>
+    <div class="callout am"><div class="callout-t">Cmax IV</div><p>Ocorre exatamente no término da infusão. Cmax ≈ Dose/Vd (bolus). Vd amicacina ≈ meropenem ≈ 0,25 L/kg.</p></div>
+  </div>
+</div>
+
+<!-- ── ABA 5: SOBRE ── -->
+<div class="scr" id="scr-about">
+  <div class="about-hero"><h2>PharmaCalc</h2><p>Guia de bolso PK/PD para farmacêuticos hospitalares</p></div>
+  <div class="about-sec">
+    <h4>App</h4>
+    <div class="a-row"><span class="a-label">Versão</span><span class="a-val">1.0.0</span></div>
+    <div class="a-row"><span class="a-label">Desenvolvedor</span><span class="a-val">Alan Steihogen</span></div>
+    <div class="a-row"><span class="a-label">Breakpoints</span><span class="a-val">BrCAST-EUCAST v14.0</span></div>
+    <div class="a-row"><span class="a-label">ke amicacina</span><span class="a-val">(ClCr×0,0028)+0,01</span></div>
+    <div class="a-row"><span class="a-label">ClCr</span><span class="a-val">Cockcroft-Gault</span></div>
+  </div>
+  <div class="about-sec">
+    <h4>Referências</h4>
+    <div class="ref-item"><span class="rn">[1]</span>Nicasio AM et al. <em>Clin Ther</em> 2016. <a href="https://doi.org/10.1016/j.clinthera.2016.06.015" target="_blank">doi:10.1016/j.clinthera.2016.06.015</a></div>
+    <div class="ref-item"><span class="rn">[2]</span>Patel N et al. <em>Antibiotics</em> 2025, 14(1). <a href="https://doi.org/10.3390/antibiotics14010092" target="_blank">doi:10.3390/antibiotics14010092</a></div>
+    <div class="ref-item"><span class="rn">[3]</span>TDM-based PK Amikacin. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8541462/" target="_blank">PMC8541462</a></div>
+    <div class="ref-item"><span class="rn">[4]</span>BrCAST Tabela v14.0. <a href="https://brcast.org.br" target="_blank">brcast.org.br</a></div>
+    <div class="ref-item"><span class="rn">[5]</span>ASHP/IDSA Vancomycin Guidelines 2020.</div>
+  </div>
+  <div class="about-sec"><h4>Aviso</h4><div class="ref-item" style="border:none;color:var(--muted);font-size:12px;line-height:1.7">Ferramenta de suporte à decisão clínica para profissionais de saúde. Não substitui julgamento clínico, protocolos institucionais ou literatura científica atualizada.</div></div>
+</div>
+
+</div><!-- /content -->
+
+<!-- TAB BAR -->
+<div class="tabbar">
+  <div class="tab-line" id="tline"></div>
+  <button class="tb active" id="tb-calc" onclick="goTab('calc',0)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+    Calcular
+  </button>
+  <button class="tb" id="tb-abx" onclick="goTab('abx',1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Antibióticos
+  </button>
+  <button class="tb" id="tb-bact" onclick="goTab('bact',2)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+    Bactérias
+  </button>
+  <button class="tb" id="tb-pkpd" onclick="goTab('pkpd',3)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    PK/PD
+  </button>
+  <button class="tb" id="tb-about" onclick="goTab('about',4)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Sobre
+  </button>
+</div>
+
+<script>
+const TABS=['calc','abx','bact','pkpd','about'];
+const tline=document.getElementById('tline');
+const W=100/TABS.length;
+tline.style.width=W+'%';
+
+function goTab(id,idx){
+  TABS.forEach(t=>{document.getElementById('tb-'+t).classList.remove('active');document.getElementById('scr-'+t).classList.remove('on');});
+  document.getElementById('tb-'+id).classList.add('active');
+  document.getElementById('scr-'+id).classList.add('on');
+  tline.style.left=(W*idx)+'%';
+  document.querySelector('.content').scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleAbx(card){
+  const o=card.classList.contains('open');
+  document.querySelectorAll('.abx-card').forEach(c=>c.classList.remove('open'));
+  if(!o)card.classList.add('open');
+}
+
+function toggleBact(card){
+  const o=card.classList.contains('open');
+  document.querySelectorAll('.bact-card').forEach(c=>c.classList.remove('open'));
+  if(!o)card.classList.add('open');
+}
+
+function filterBact(gram,btn){
+  document.querySelectorAll('.bact-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.bact-card').forEach(c=>{
+    c.style.display=(gram==='all'||c.dataset.gram===gram)?'':'none';
+  });
+}
+
+// ── MECHANISM INTERACTIVE ──────────────────
+const TIPS={
+  wall:{t:'Parede celular — Beta-lactâmicos & Glicopeptídeos',b:'Beta-lactâmicos bloqueiam as PBPs → inibem transpeptidação do peptidoglicano. Glicopeptídeos ligam-se ao D-ala-D-ala → bloqueiam transglicosilação.',s:'%T>MIC (beta-lactâmicos) · AUC/MIC (glicopeptídeos)'},
+  dna:{t:'DNA / RNA — Quinolonas',b:'Inibem DNA girase (topoisomerase II) e topoisomerase IV → bloqueio da replicação e transcrição do DNA bacteriano.',s:'AUC₂₄/MIC ≥ 125 · Cmax/MIC ≥ 10'},
+  '50s':{t:'Ribossomo 50S — Macrolídeos & Linezolida',b:'Macrolídeos bloqueiam o canal de saída peptídico (sítio A). Linezolida liga-se ao RNA 23S → inibe formação do complexo de iniciação.',s:'AUC/MIC (linezolida)'},
+  '30s':{t:'Ribossomo 30S — Aminoglicosídeos & Tetraciclinas',b:'Aminoglicosídeos: ligação irreversível à 30S → leitura errônea do mRNA → proteínas defeituosas. Tetraciclinas: bloqueiam aminoacil-tRNA no sítio A.',s:'Cmax/MIC ≥ 8–10 (aminoglicosídeos)'},
+  folate:{t:'Síntese de folato — SMX-TMP',b:'SMX inibe DHPS (PABA→DHP). TMP inibe DHFR (DHF→THF). Dupla inibição sequencial → bloqueio de síntese de purinas e DNA.',s:'AUC/MIC · Droga de escolha para Stenotrophomonas'},
+  mem:{t:'Membrana externa — Polimixinas',b:'Peptídeos catiônicos que se ligam ao LPS → desestabilização da membrana externa → extravasamento do conteúdo celular → morte rápida.',s:'AUC/MIC · Reservadas para MDR/XDR Gram-negativos'}
+};
+
+let activeTip=null;
+
+function showTip(evt,id){
+  evt.stopPropagation();
+  const tip=document.getElementById('mtip');
+  const d=TIPS[id];if(!d)return;
+
+  // highlight
+  document.querySelectorAll('#msv .tgt').forEach(g=>g.classList.remove('lit'));
+  document.getElementById('tgt-'+id).classList.add('lit');
+
+  tip.innerHTML=`<strong>${d.t}</strong>${d.b}<br><em>${d.s}</em>`;
+
+  const cont=document.getElementById('mech-container');
+  const cr=cont.getBoundingClientRect();
+  const cx=evt.touches?evt.touches[0].clientX:evt.clientX;
+  const cy=evt.touches?evt.touches[0].clientY:evt.clientY;
+  let tx=cx-cr.left+12, ty=cy-cr.top-110;
+  if(tx+215>cr.width)tx=cr.width-220;
+  if(tx<0)tx=4;
+  if(ty<0)ty=cy-cr.top+16;
+  tip.style.left=tx+'px';tip.style.top=ty+'px';
+  tip.classList.add('show');
+  activeTip=id;
+}
+
+document.addEventListener('click',()=>{
+  if(activeTip){
+    document.getElementById('mtip').classList.remove('show');
+    document.querySelectorAll('#msv .tgt').forEach(g=>g.classList.remove('lit'));
+    activeTip=null;
+  }
+});
+
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+</script>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia PK/PD — PharmaCalc</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4F8;
+  --surface:#FFFFFF;
+  --surface2:#F7FAFC;
+  --border:#D9E2EC;
+  --accent:#0A7EA4;
+  --green:#1A6B4A;
+  --warn:#B45309;
+  --danger:#C0392B;
+  --text:#1A202C;
+  --muted:#627D98;
+  --font:'Syne',sans-serif;
+  --serif:'DM Serif Display',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,#0A7EA4 0%,#065f7a 100%);
+  color:#fff;padding:3rem 1.5rem 2.5rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-label{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:.7;margin-bottom:.75rem;}
+.hero h1{font-family:var(--serif);font-size:clamp(28px,5vw,48px);font-weight:400;line-height:1.15;margin-bottom:.75rem;}
+.hero h1 em{font-style:italic;opacity:.85;}
+.hero p{font-size:14px;opacity:.8;max-width:520px;margin:0 auto 1.5rem;line-height:1.7;}
+.hero-authors{font-size:12px;opacity:.6;letter-spacing:0.04em;}
+
+.hero-badges{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem;}
+.hero-badge{
+  font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.12);
+}
+
+/* ── NAV ── */
+.nav-bar{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:.6rem 1rem;display:flex;gap:.5rem;flex-wrap:wrap;
+  justify-content:center;position:sticky;top:0;z-index:10;
+}
+.nav-btn{
+  font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 14px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);cursor:pointer;text-decoration:none;
+  transition:all .2s;
+}
+.nav-btn:hover,.nav-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* ── LAYOUT ── */
+.container{max-width:800px;margin:0 auto;padding:2rem 1rem 4rem;}
+
+/* ── SECTION ── */
+.section{margin-bottom:3rem;}
+.section-anchor{scroll-margin-top:60px;}
+.section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:2px solid var(--border);}
+.section-num{
+  width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;flex-shrink:0;background:var(--accent);color:#fff;
+}
+.section-num.green{background:var(--green);}
+.section-num.warn{background:var(--warn);}
+.section-num.dark{background:var(--text);}
+.section-title{font-family:var(--serif);font-size:clamp(20px,3vw,26px);font-weight:400;color:var(--text);}
+
+/* ── PROSE ── */
+p{font-size:14px;line-height:1.8;color:#2D3748;margin-bottom:1rem;}
+p:last-child{margin-bottom:0;}
+strong{color:var(--text);}
+
+/* ── CALLOUT ── */
+.callout{
+  border-radius:10px;padding:1rem 1.25rem;margin:1.25rem 0;
+  border-left:4px solid;
+}
+.callout.blue{background:#E6F4FA;border-color:var(--accent);}
+.callout.green{background:#E6F4EE;border-color:var(--green);}
+.callout.warn{background:#FEF3C7;border-color:var(--warn);}
+.callout.dark{background:var(--surface2);border-color:var(--text);}
+.callout-title{font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.callout.blue .callout-title{color:var(--accent);}
+.callout.green .callout-title{color:var(--green);}
+.callout.warn .callout-title{color:var(--warn);}
+.callout.dark .callout-title{color:var(--text);}
+.callout p{font-size:13px;margin-bottom:0;}
+
+/* ── CONCEPT CARDS ── */
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem;margin:1.25rem 0;}
+.concept-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:1rem 1.1rem;
+}
+.concept-card-icon{font-size:22px;margin-bottom:.4rem;}
+.concept-card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+.concept-card-formula{font-family:var(--mono);font-size:12px;color:var(--accent);background:#E6F4FA;padding:3px 8px;border-radius:5px;display:inline-block;margin-bottom:.5rem;}
+.concept-card p{font-size:12px;color:var(--muted);margin:0;line-height:1.6;}
+
+/* ── INDEX PK/PD TABLE ── */
+.index-table{width:100%;border-collapse:collapse;font-size:13px;margin:1.25rem 0;}
+.index-table th{
+  padding:.6rem .85rem;text-align:left;font-size:10px;font-weight:800;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+  background:var(--surface2);border-bottom:2px solid var(--border);
+}
+.index-table td{padding:.75rem .85rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;}
+.index-table tr:last-child td{border-bottom:none;}
+.index-table tr:hover td{background:var(--surface2);}
+.tag-index{
+  display:inline-block;padding:2px 9px;border-radius:12px;font-size:10px;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;
+}
+.tag-time{background:#E6F4FA;color:var(--accent);}
+.tag-conc{background:#E6F4EE;color:var(--green);}
+.tag-auc{background:#FEF3C7;color:var(--warn);}
+
+/* ── DRUG CARD ── */
+.drug-section{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.25rem 0;}
+@media(max-width:540px){.drug-section{grid-template-columns:1fr;}}
+.drug-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;
+}
+.drug-card-head{
+  padding:.85rem 1.1rem;display:flex;align-items:center;gap:.65rem;
+}
+.drug-card-head.blue{background:var(--accent);}
+.drug-card-head.green{background:var(--green);}
+.drug-card-head h3{font-size:15px;font-weight:700;color:#fff;}
+.drug-card-head span{font-size:10px;color:rgba(255,255,255,.75);display:block;margin-top:1px;}
+.drug-card-body{padding:.85rem 1.1rem;}
+.drug-row{display:flex;justify-content:space-between;align-items:baseline;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+.drug-row:last-child{border-bottom:none;}
+.drug-row-label{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.drug-row-val{font-family:var(--mono);font-size:12px;color:var(--text);text-align:right;}
+.drug-row-val.highlight{color:var(--accent);font-weight:700;}
+.drug-row-val.green{color:var(--green);font-weight:700;}
+
+/* ── BRCAST TABLE ── */
+.brcast-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:1.25rem 0;}
+.brcast-head{padding:.75rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem;}
+.brcast-head h4{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.brcast-body{padding:.75rem 0;}
+table.brc{width:100%;border-collapse:collapse;font-size:12.5px;}
+table.brc th{padding:.5rem .85rem;text-align:left;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);}
+table.brc td{padding:.65rem .85rem;border-bottom:1px solid var(--border);}
+table.brc tr:last-child td{border-bottom:none;}
+table.brc tr:hover td{background:var(--surface2);}
+.cat-s{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;background:#E6F4EE;color:var(--green);}
+.cat-i{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;background:#FEF3C7;color:var(--warn);}
+.cat-r{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;background:#FAEAEA;color:var(--danger);}
+
+/* ── REFERENCES ── */
+.ref-list{list-style:none;padding:0;}
+.ref-list li{font-size:12.5px;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border);line-height:1.7;}
+.ref-list li:last-child{border-bottom:none;}
+.ref-list a{color:var(--accent);text-decoration:none;}
+.ref-list a:hover{text-decoration:underline;}
+.ref-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);margin-right:.5rem;}
+
+/* ── CTA ── */
+.cta-box{
+  background:linear-gradient(135deg,#0A7EA4,#065f7a);
+  border-radius:14px;padding:1.75rem 1.5rem;text-align:center;margin-top:2rem;
+}
+.cta-box h3{font-family:var(--serif);font-size:22px;color:#fff;margin-bottom:.5rem;}
+.cta-box p{font-size:13px;color:rgba(255,255,255,.8);margin-bottom:1.25rem;}
+.cta-buttons{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.cta-btn{
+  padding:9px 22px;border-radius:8px;font-family:var(--font);font-size:12px;font-weight:700;
+  letter-spacing:.06em;text-decoration:none;transition:opacity .2s;
+}
+.cta-btn.white{background:#fff;color:var(--accent);}
+.cta-btn.outline{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;}
+.cta-btn:hover{opacity:.88;}
+
+/* ── FOOTER ── */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:1.5rem;text-align:center;}
+footer p{font-size:12px;color:var(--muted);}
+footer a{color:var(--accent);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">PharmaCalc · Guia Educativo</div>
+  <h1>Fundamentos de <em>Farmacocinética</em><br>e Farmacodinâmica</h1>
+  <p>Uma introdução clínica ao uso racional de antimicrobianos baseada em índices PK/PD, com foco em meropenem e amicacina.</p>
+  <div class="hero-authors">Desenvolvido por Alan Steihogen</div>
+  <div class="hero-badges">
+    <span class="hero-badge">BrCAST-EUCAST v14.0</span>
+    <span class="hero-badge">Antimicrobial Stewardship</span>
+    <span class="hero-badge">TDM Clínico</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <a class="nav-btn" href="#o-que-e">O que é PK/PD</a>
+  <a class="nav-btn" href="#parametros">Parâmetros</a>
+  <a class="nav-btn" href="#indices">Índices PK/PD</a>
+  <a class="nav-btn" href="#mic-brcast">MIC e BrCAST</a>
+  <a class="nav-btn" href="#farmacos">Meropenem e Amicacina</a>
+  <a class="nav-btn" href="#referencias">Referências</a>
+</div>
+
+<div class="container">
+
+  <!-- SEÇÃO 1 -->
+  <div class="section section-anchor" id="o-que-e">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">O que é Farmacocinética e Farmacodinâmica?</h2>
+    </div>
+
+    <p>A <strong>farmacocinética (PK)</strong> estuda o que o organismo faz com o fármaco — como ele é absorvido, distribuído, metabolizado e eliminado. Em outras palavras, ela descreve como a concentração do medicamento varia no tempo após a administração.</p>
+
+    <p>A <strong>farmacodinâmica (PD)</strong> estuda o que o fármaco faz com o organismo — no contexto dos antimicrobianos, como ele age sobre o microrganismo, incluindo o efeito bacteriostático ou bactericida em função da concentração.</p>
+
+    <div class="callout blue">
+      <div class="callout-title">Integração PK/PD</div>
+      <p>A integração dos dois conceitos permite definir regimes posológicos que maximizam a eficácia antibacteriana ao mesmo tempo que minimizam a toxicidade e a pressão seletiva sobre resistência. É a base do <strong>Antimicrobial Stewardship</strong> moderno.</p>
+    </div>
+
+    <p>Pacientes críticos internados em UTI apresentam alterações fisiopatológicas — como hipoalbuminemia, aumento do volume de distribuição, alteração da função renal e hepática — que modificam profundamente os parâmetros farmacocinéticos. Isso significa que doses padrão podem resultar em exposições sub ou supratherapêuticas, tornando a abordagem PK/PD essencial para uma terapia individualizada.</p>
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="section section-anchor" id="parametros">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">Parâmetros Farmacocinéticos Essenciais</h2>
+    </div>
+
+    <p>Os parâmetros abaixo são os pilares do cálculo PK/PD e estão integrados às calculadoras do PharmaCalc:</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="concept-card-icon">⚗️</div>
+        <div class="concept-card-title">Volume de Distribuição (Vd)</div>
+        <div class="concept-card-formula">Vd = 0,25 × peso (L)</div>
+        <p>Representa o volume "virtual" em que o fármaco se distribui. Antimicrobianos hidrofílicos como meropenem e amicacina têm Vd baixo (~0,25 L/kg). Em pacientes sépticos, o Vd pode aumentar significativamente devido ao extravasamento capilar.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">⏱️</div>
+        <div class="concept-card-title">Meia-vida de Eliminação (T½)</div>
+        <div class="concept-card-formula">T½ = 0,693 / ke</div>
+        <p>Tempo necessário para que a concentração plasmática caia à metade. Depende diretamente da função renal — quanto maior o comprometimento renal, maior a T½ e maior o risco de acúmulo.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">📉</div>
+        <div class="concept-card-title">Constante de Eliminação (ke)</div>
+        <div class="concept-card-formula">ke = 0,693 / T½</div>
+        <p>Taxa fracionária de eliminação do fármaco por unidade de tempo. Para a amicacina, é calculada pela fórmula: ke = (ClCr × 0,0028) + 0,01.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">🏔️</div>
+        <div class="concept-card-title">Concentração Máxima (Cmax)</div>
+        <div class="concept-card-formula">Cmax = Dose / Vd</div>
+        <p>Pico de concentração plasmática, alcançado exatamente ao término da infusão IV. Para infusão prolongada, é ligeiramente menor do que a infusão rápida, pois há eliminação simultânea durante a administração.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">🧮</div>
+        <div class="concept-card-title">Clearance de Creatinina (ClCr)</div>
+        <div class="concept-card-formula">Cockcroft-Gault</div>
+        <p>Estimativa da função renal. Antimicrobianos como meropenem e amicacina têm eliminação predominantemente renal — o ClCr é o principal parâmetro para ajuste de dose e intervalo.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">📊</div>
+        <div class="concept-card-title">Área Sob a Curva (AUC)</div>
+        <div class="concept-card-formula">AUC = Dose / CL</div>
+        <p>Representa a exposição total ao fármaco ao longo do tempo. Muito utilizada para fluoroquinolonas e glicopeptídeos (vancomicina), onde o índice AUC/MIC é o principal preditor de eficácia.</p>
+      </div>
+    </div>
+
+    <div class="callout dark">
+      <div class="callout-title">Fórmula de Cockcroft-Gault</div>
+      <p>ClCr (mL/min) = [(140 − idade) × peso] / (72 × creatinina sérica) × 0,85 se feminino. Esta é a fórmula utilizada nas calculadoras PharmaCalc para ajuste renal automático dos parâmetros PK.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="section section-anchor" id="indices">
+    <div class="section-header">
+      <div class="section-num green">3</div>
+      <h2 class="section-title">Índices PK/PD dos Antimicrobianos</h2>
+    </div>
+
+    <p>Os antimicrobianos são classificados de acordo com o índice PK/PD que melhor prediz sua eficácia clínica e microbiológica. Existem três índices principais:</p>
+
+    <table class="index-table">
+      <thead>
+        <tr>
+          <th>Índice PK/PD</th>
+          <th>Tipo de atividade</th>
+          <th>Classes principais</th>
+          <th>Alvo típico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>%T&gt;MIC</strong><br><span style="font-size:11px;color:var(--muted)">Tempo acima da MIC</span></td>
+          <td><span class="tag-index tag-time">Tempo-dependente</span></td>
+          <td>Beta-lactâmicos, Carbapenêmicos, Cefalosporinas</td>
+          <td>40–100% do intervalo</td>
+        </tr>
+        <tr>
+          <td><strong>Cmax/MIC</strong><br><span style="font-size:11px;color:var(--muted)">Pico / MIC</span></td>
+          <td><span class="tag-index tag-conc">Concentração-dependente</span></td>
+          <td>Aminoglicosídeos, Metronidazol</td>
+          <td>≥ 8–10</td>
+        </tr>
+        <tr>
+          <td><strong>AUC₂₄/MIC</strong><br><span style="font-size:11px;color:var(--muted)">Exposição total / MIC</span></td>
+          <td><span class="tag-index tag-auc">Dependente de exposição</span></td>
+          <td>Vancomicina, Fluoroquinolonas, Polimixinas</td>
+          <td>Variável por fármaco</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout blue">
+      <div class="callout-title">%T&gt;MIC — Antimicrobianos Tempo-Dependentes</div>
+      <p>Para beta-lactâmicos como o meropenem, a eficácia bactericida não aumenta proporcionalmente com concentrações muito acima da MIC. O que importa é <strong>por quanto tempo</strong> a concentração livre permanece acima da MIC durante o intervalo de dose. Alvos de 40% (bacteriostático), 50% (bactericida) e 100% (máxima eficácia / EIP) são usados conforme a gravidade da infecção.</p>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title">Cmax/MIC — Antimicrobianos Concentração-Dependentes</div>
+      <p>Para aminoglicosídeos como a amicacina, quanto maior o pico de concentração em relação à MIC, maior o efeito bactericida e pós-antibiótico. O regime de <strong>dose única diária</strong> (once daily dosing) maximiza o pico, mantém o vale baixo (reduzindo nefrotoxicidade) e explora o efeito pós-antibiótico prolongado. O alvo é Cmax/MIC ≥ 8–10.</p>
+    </div>
+
+    <p>A escolha do regime de infusão também impacta diretamente o índice PK/PD. Para meropenem, a <strong>infusão prolongada de 180 minutos</strong> aumenta significativamente o %T&gt;MIC em comparação com a infusão padrão de 30 minutos, especialmente frente a organismos com MIC mais elevada — o que é crucial no manejo de infecções por patógenos multirresistentes.</p>
+  </div>
+
+  <!-- SEÇÃO 4 -->
+  <div class="section section-anchor" id="mic-brcast">
+    <div class="section-header">
+      <div class="section-num warn">4</div>
+      <h2 class="section-title">MIC e os Pontos de Corte BrCAST-EUCAST</h2>
+    </div>
+
+    <p>A <strong>Concentração Inibitória Mínima (MIC)</strong> é a menor concentração de um antimicrobiano que inibe visivelmente o crescimento de um microrganismo. É o principal parâmetro microbiológico utilizado na análise PK/PD.</p>
+
+    <p>O <strong>BrCAST</strong> (Brazilian Committee on Antimicrobial Susceptibility Testing) é o comitê nacional alinhado ao EUCAST europeu. Ele define os <strong>pontos de corte clínicos</strong> que categorizam os microrganismos em três categorias:</p>
+
+    <div class="concept-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="concept-card">
+        <div class="concept-card-icon">🟢</div>
+        <div class="concept-card-title">S — Sensível (dose padrão)</div>
+        <p>Alta probabilidade de sucesso terapêutico com regime de dose padrão.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">🟡</div>
+        <div class="concept-card-title">I — Sensível (exposição aumentada)</div>
+        <p>Sucesso terapêutico apenas com aumento da exposição — maior dose, infusão prolongada ou concentração local elevada.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">🔴</div>
+        <div class="concept-card-title">R — Resistente</div>
+        <p>Alta probabilidade de falha terapêutica independentemente do regime. Terapia alternativa necessária.</p>
+      </div>
+    </div>
+
+    <p>A categoria <strong>I (Sensível, aumentando exposição)</strong> representa uma inovação importante do EUCAST em relação ao sistema antigo. Ela elimina a zona intermediária ambígua e indica explicitamente que a otimização farmacocinética — como infusão prolongada ou aumento de dose — pode ser suficiente para atingir o alvo terapêutico.</p>
+
+    <!-- Tabela Meropenem -->
+    <div class="brcast-block">
+      <div class="brcast-head">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A7EA4" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h4>Meropenem — Pontos de Corte BrCAST-EUCAST v14.0</h4>
+      </div>
+      <div class="brcast-body">
+        <table class="brc">
+          <thead>
+            <tr><th>Microrganismo</th><th>S ≤ (mg/L)</th><th>I (mg/L)</th><th>R > (mg/L)</th><th>Categoria</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Enterobacterales</td><td>2</td><td>4–8</td><td>8</td><td><span class="cat-s">S</span> <span class="cat-i">I</span> <span class="cat-r">R</span></td></tr>
+            <tr><td>Pseudomonas aeruginosa</td><td>2</td><td>4–8</td><td>8</td><td><span class="cat-s">S</span> <span class="cat-i">I</span> <span class="cat-r">R</span></td></tr>
+            <tr><td>Acinetobacter spp.</td><td>2</td><td>4–8</td><td>8</td><td><span class="cat-s">S</span> <span class="cat-i">I</span> <span class="cat-r">R</span></td></tr>
+            <tr><td>Burkholderia cepacia complex</td><td colspan="3" style="color:var(--muted);font-style:italic">Sem ponto de corte clínico BrCAST-EUCAST</td><td>—</td></tr>
+            <tr><td>Stenotrophomonas maltophilia</td><td colspan="3" style="color:var(--muted);font-style:italic">Meropenem não é agente de escolha — sem ponto de corte</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tabela Amicacina -->
+    <div class="brcast-block">
+      <div class="brcast-head">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A6B4A" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <h4>Amicacina — Pontos de Corte BrCAST-EUCAST v14.0</h4>
+      </div>
+      <div class="brcast-body">
+        <table class="brc">
+          <thead>
+            <tr><th>Microrganismo</th><th>S ≤ (mg/L)</th><th>R > (mg/L)</th><th>Nota</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Enterobacterales (sistêmico)</td><td>(8)</td><td>(8)</td><td>ECOFF — ponto de corte entre parênteses</td></tr>
+            <tr><td>Pseudomonas aeruginosa (sistêmico)</td><td>(16)</td><td>(16)</td><td>ECOFF — ponto de corte entre parênteses</td></tr>
+            <tr><td>Acinetobacter spp.</td><td colspan="2" style="color:var(--muted);font-style:italic">Sem ponto de corte clínico</td><td>Avaliar caso a caso</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">Pontos de corte entre parênteses (ECOFF)</div>
+      <p>Valores entre parênteses representam o <strong>ECOFF (Epidemiological Cut-Off Value)</strong> — são valores epidemiológicos que separam populações selvagens de microrganismos com mecanismos de resistência adquirida. Não são pontos de corte clínicos baseados em desfechos. Consulte sempre o documento de orientação BrCAST para interpretação adequada.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 5 -->
+  <div class="section section-anchor" id="farmacos">
+    <div class="section-header">
+      <div class="section-num dark">5</div>
+      <h2 class="section-title">Meropenem e Amicacina — Perfis PK/PD</h2>
+    </div>
+
+    <p>As calculadoras PharmaCalc foram desenvolvidas com base nas propriedades farmacocinéticas e farmacodinâmicas específicas de cada fármaco:</p>
+
+    <div class="drug-section">
+      <!-- Meropenem -->
+      <div class="drug-card">
+        <div class="drug-card-head blue">
+          <div>
+            <h3>Meropenem</h3>
+            <span>Carbapenem — Beta-lactâmico</span>
+          </div>
+        </div>
+        <div class="drug-card-body">
+          <div class="drug-row">
+            <span class="drug-row-label">Índice PK/PD</span>
+            <span class="drug-row-val highlight">%T&gt;MIC</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Alvo bacteriostático</span>
+            <span class="drug-row-val">40% %T&gt;MIC</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Alvo bactericida</span>
+            <span class="drug-row-val">50% %T&gt;MIC</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Alvo EIP/crítico</span>
+            <span class="drug-row-val">100% %T&gt;MIC</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Vd estimado</span>
+            <span class="drug-row-val">0,25 L/kg</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">T½ normal</span>
+            <span class="drug-row-val">~1 h</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Eliminação</span>
+            <span class="drug-row-val">Renal (~70%)</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Infusão prolongada</span>
+            <span class="drug-row-val" style="color:var(--green)">180 min ↑ %T&gt;MIC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amicacina -->
+      <div class="drug-card">
+        <div class="drug-card-head green">
+          <div>
+            <h3>Amicacina</h3>
+            <span>Aminoglicosídeo</span>
+          </div>
+        </div>
+        <div class="drug-card-body">
+          <div class="drug-row">
+            <span class="drug-row-label">Índice PK/PD</span>
+            <span class="drug-row-val green">Cmax/MIC</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Alvo eficácia</span>
+            <span class="drug-row-val">Cmax/MIC ≥ 8–10</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Vale seguro</span>
+            <span class="drug-row-val">&lt; 5 mg/L</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Dose por peso</span>
+            <span class="drug-row-val">15–30 mg/kg/dia</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Vd estimado</span>
+            <span class="drug-row-val">0,25 L/kg</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">T½ normal</span>
+            <span class="drug-row-val">~2–3 h</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">ke (fórmula)</span>
+            <span class="drug-row-val">(ClCr×0,0028)+0,01</span>
+          </div>
+          <div class="drug-row">
+            <span class="drug-row-label">Regime ideal</span>
+            <span class="drug-row-val" style="color:var(--green)">Dose única diária</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout blue">
+      <div class="callout-title">Infusão prolongada do meropenem — evidência clínica</div>
+      <p>Estudos demonstram que a infusão de meropenem em 3 horas (180 min) aumenta significativamente o %T&gt;MIC frente a patógenos com MIC de 4–8 mg/L (categoria I — sensível, aumentando exposição). Em pacientes sépticos com função renal normal, o regime de 1g a cada 8h em infusão de 3h pode atingir alvos que 30 min não consegue — evitando escalonamento desnecessário para 2g. (Patel et al., 2024; Nicasio et al., 2016)</p>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title">Dose única diária de amicacina — racional farmacocinético</div>
+      <p>A administração de toda a dose diária em uma única infusão concentra o pico (maximizando Cmax/MIC ≥ 10) e permite que o vale sérico caia abaixo de 5 mg/L antes da próxima dose, explorando o efeito pós-antibiótico prolongado e reduzindo o risco de acúmulo renal. Estudos populacionais em pacientes brasileiros (HUSM) confirmam que doses ≥ 2000 mg/dia são necessárias para atingir Cmax/MIC ≥ 8 até MIC de 8 µg/mL. (PMC8541462)</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <h3>Aplique esses conceitos na prática</h3>
+      <p>As calculadoras PharmaCalc integram todos esses parâmetros em tempo real, com análise de função renal, pontos de corte BrCAST e interpretação clínica automática.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn white" href="calculadoras/meropenem.html">Calculadora Meropenem</a>
+        <a class="cta-btn outline" href="calculadoras/amicacina.html">Calculadora Amicacina</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERÊNCIAS -->
+  <div class="section section-anchor" id="referencias">
+    <div class="section-header">
+      <div class="section-num" style="background:var(--muted)">6</div>
+      <h2 class="section-title">Referências</h2>
+    </div>
+
+    <ul class="ref-list">
+      <li>
+        <span class="ref-num">[1]</span>
+        Nicasio AM, et al. <em>Population Pharmacokinetics of High-Dose, Prolonged-Infusion Meropenem in Critically Ill Patients.</em> Clinical Therapeutics, 2016. 
+        <a href="https://doi.org/10.1016/j.clinthera.2016.06.015" target="_blank">doi:10.1016/j.clinthera.2016.06.015</a>
+      </li>
+      <li>
+        <span class="ref-num">[2]</span>
+        Patel N, et al. <em>Precision Dosing of Aminoglycosides and Carbapenems.</em> Antibiotics (MDPI), 2025, 14(1), 92.
+        <a href="https://doi.org/10.3390/antibiotics14010092" target="_blank">doi:10.3390/antibiotics14010092</a>
+      </li>
+      <li>
+        <span class="ref-num">[3]</span>
+        <em>Therapeutic Drug Monitoring-Based Population Pharmacokinetics of Amikacin in Patients at a Teaching Hospital.</em> Brazilian Journal of Biological Sciences / PMC.
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8541462/" target="_blank">PMC8541462</a>
+      </li>
+      <li>
+        <span class="ref-num">[4]</span>
+        BrCAST. <em>Tabela de Pontos de Corte Clínicos — Versão 14.0, EUCAST / BrCAST válida a partir de 13-04-2024.</em>
+        <a href="https://brcast.org.br" target="_blank">brcast.org.br</a>
+      </li>
+      <li>
+        <span class="ref-num">[5]</span>
+        Nicolau DP. <em>Pharmacokinetic and Pharmacodynamic Properties of Meropenem.</em> Clinical Infectious Diseases, 2008; 47(S1): S32–S40.
+        <a href="https://doi.org/10.1086/590064" target="_blank">doi:10.1086/590064</a>
+      </li>
+      <li>
+        <span class="ref-num">[6]</span>
+        <em>Population Pharmacokinetics/Pharmacodynamics and Clinical Outcomes of Meropenem in Critically Ill Patients.</em> Antimicrobial Agents and Chemotherapy, 2022.
+        <a href="https://journals.asm.org/doi/10.1128/aac.00845-22" target="_blank">doi:10.1128/aac.00845-22</a>
+      </li>
+      <li>
+        <span class="ref-num">[7]</span>
+        <em>Clinical pharmacokinetics of 3-h extended infusion of meropenem in sepsis and septic shock.</em> PMC6954163.
+        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6954163/" target="_blank">PMC6954163</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>PharmaCalc · Guia PK/PD Clínico · Desenvolvido por Alan Steihogen &nbsp;·&nbsp; BrCAST-EUCAST v14.0 &nbsp;·&nbsp; <a href="index.html">← Voltar ao app</a></p>
+</footer>
+
+<script>
+// Active nav on scroll
+const sections = document.querySelectorAll('.section-anchor');
+const navBtns  = document.querySelectorAll('.nav-btn');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navBtns.forEach(b => b.classList.remove('active'));
+      const id = e.target.id;
+      const active = document.querySelector(`.nav-btn[href="#${id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, {rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#0A7EA4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora PK/PD — Meropenem</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+.back-link{display:inline-flex;align-items:center;font-family:var(--font,Syne,sans-serif);font-size:11px;font-weight:700;color:var(--accent,#0A7EA4);text-decoration:none;padding:4px 0;opacity:.75;transition:opacity .2s;margin-bottom:.4rem;}.back-link:hover{opacity:1;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4F8;--surface:#FFFFFF;--surface2:#F7FAFC;
+  --border:#D9E2EC;--border2:#BCCCDC;
+  --accent:#0A7EA4;--accent2:#1A6B4A;
+  --warn:#B45309;--danger:#C0392B;--ok:#1A6B4A;
+  --text:#1A202C;--muted:#627D98;
+  --font:'Syne',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem 1rem 3rem;}
+
+/* HEADER */
+.header{max-width:980px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+.header-left h1{font-size:clamp(16px,2.5vw,22px);font-weight:800;letter-spacing:-0.02em;color:var(--accent);}
+.header-author{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:0.04em;}
+.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.status-pill{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);transition:all .3s;}
+.status-pill.ok{background:#E6F4EE;border-color:#A8D9C0;color:var(--ok);}
+.status-pill.warn{background:#FEF3C7;border-color:#FCD34D;color:var(--warn);}
+.status-pill.danger{background:#FAEAEA;border-color:#E8AAAA;color:var(--danger);}
+.btn-pdf{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;transition:opacity .2s;}
+.btn-pdf:hover{opacity:.85;}
+.btn-pdf svg{width:13px;height:13px;}
+
+/* LAYOUT */
+.wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:1.25rem;align-items:start;}
+@media(max-width:680px){.wrap{grid-template-columns:1fr;}}
+
+/* PANELS */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;}
+.panel:last-child{margin-bottom:0;}
+.panel-head{padding:.65rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--surface2);}
+.panel-head-dot{width:7px;height:7px;border-radius:50%;}
+.panel-head h2{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.panel-body{padding:1rem;}
+
+/* FORM */
+label{display:block;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;padding:7px 10px;outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--accent);}
+.form-row{margin-bottom:.8rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+
+/* MIC BUTTONS */
+.mic-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px;}
+.mic-btn{font-size:12px;padding:5px 10px;cursor:pointer;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-family:var(--mono);font-weight:500;transition:all .15s;}
+.mic-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.mic-btn:hover:not(.active){border-color:var(--accent);color:var(--accent);}
+
+.btn-calc{width:100%;margin-top:.4rem;padding:9px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:0.06em;cursor:pointer;transition:opacity .2s;}
+.btn-calc:hover{opacity:.88;}
+.btn-reset{width:100%;margin-top:.4rem;padding:7px;border:1px solid var(--border2);border-radius:7px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-reset:hover{border-color:var(--muted);color:var(--text);}
+
+/* METRIC GRID */
+.metric-grid{display:grid;gap:.65rem;padding:1rem;}
+.metric-grid-3{grid-template-columns:repeat(3,1fr);}
+.metric-grid-2{grid-template-columns:repeat(2,1fr);}
+.metric{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.7rem .85rem;}
+.metric-label{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.metric-value{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);}
+.metric-value small{font-size:10px;color:var(--muted);margin-left:2px;}
+.metric.c-accent .metric-value{color:var(--accent);}
+.metric.c-green .metric-value{color:var(--ok);}
+.metric.c-warn .metric-value{color:var(--warn);}
+
+/* RESULT BOX */
+.result-box{margin:0 1rem 1rem;padding:.9rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);}
+.result-box.ok{border-color:#A8D9C0;background:#E6F4EE;}
+.result-box.warn{border-color:#FCD34D;background:#FEF3C7;}
+.result-box.danger{border-color:#E8AAAA;background:#FAEAEA;}
+.result-title{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;color:var(--muted);}
+.result-title.ok{color:var(--ok);}
+.result-title.warn{color:var(--warn);}
+.result-title.danger{color:var(--danger);}
+.result-body{font-size:13px;line-height:1.6;color:var(--text);}
+
+/* SECTION LABEL */
+.section-label{padding:.55rem 1rem .25rem;font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+
+/* CHART */
+.chart-btn{margin:0 1rem 1rem;padding:8px;border:1px dashed var(--border2);border-radius:8px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.06em;cursor:pointer;width:calc(100% - 2rem);transition:all .3s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.chart-btn:hover{border-color:var(--accent);color:var(--accent);}
+.chart-btn svg{width:14px;height:14px;}
+.chart-wrap{display:none;margin:0 1rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.chart-wrap.open{display:block;}
+
+/* DETAIL TABLE */
+.detail-toggle{margin:0 1rem 1rem;padding:7px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.08em;cursor:pointer;width:calc(100% - 2rem);transition:all .2s;}
+.detail-toggle:hover{border-color:var(--muted);}
+.detail-table{display:none;margin:0 1rem 1rem;}
+.detail-table.open{display:block;}
+table.det{width:100%;border-collapse:collapse;font-size:12px;}
+table.det td{padding:6px 10px;border-bottom:1px solid var(--border);}
+table.det tr:last-child td{border-bottom:none;}
+table.det tr:hover td{background:var(--surface2);}
+table.det td:first-child{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;width:52%;}
+table.det td:last-child{font-family:var(--mono);color:var(--text);}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .btn-pdf,.btn-calc,.btn-reset,.chart-btn,.detail-toggle{display:none!important;}
+  .wrap{display:block;}
+  .panel{break-inside:avoid;margin-bottom:1rem;}
+}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← PharmaCalc</a>
+<div class="header">
+  <div class="header-left">
+    <h1>Calculadora PK/PD — Meropenem</h1>
+    <div class="header-author">Desenvolvido por Alan Steihogen</div>
+  </div>
+  <div class="header-right">
+    <div id="status-pill" class="status-pill">Aguardando dados</div>
+    <button class="btn-pdf" onclick="gerarPDF()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      Gerar PDF
+    </button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- LEFT: FORM -->
+  <div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent)"></div>
+        <h2>Dados do Paciente</h2>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid">
+          <div class="form-row"><label>Sexo</label>
+            <select id="sexo" onchange="calcular()"><option value="">—</option><option value="M">Masculino</option><option value="F">Feminino</option></select>
+          </div>
+          <div class="form-row"><label>Idade (anos)</label>
+            <input type="number" id="idade" placeholder="Ex: 55" oninput="calcular()">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Peso (kg)</label>
+            <input type="number" id="peso" placeholder="Ex: 70" oninput="calcular()">
+          </div>
+          <div class="form-row"><label>Creatinina (mg/dL)</label>
+            <input type="number" step="0.01" id="creat" placeholder="Ex: 1.0" oninput="calcular()">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>MIC (mg/L) — BrCAST-EUCAST v14.0</label>
+          <div class="mic-row">
+            <button class="mic-btn active" onclick="selectMIC(this,0.25)">0,25</button>
+            <button class="mic-btn" onclick="selectMIC(this,0.5)">0,5</button>
+            <button class="mic-btn" onclick="selectMIC(this,1)">1</button>
+            <button class="mic-btn" onclick="selectMIC(this,2)">2</button>
+            <button class="mic-btn" onclick="selectMIC(this,4)">4</button>
+            <button class="mic-btn" onclick="selectMIC(this,8)">8</button>
+            <button class="mic-btn" onclick="selectMIC(this,16)">&gt;8</button>
+          </div>
+        </div>
+
+        <div class="form-row"><label>Dose prescrita (mg)</label>
+          <select id="dose" onchange="calcular()">
+            <option value="500">500 mg</option>
+            <option value="1000">1000 mg</option>
+            <option value="2000">2000 mg</option>
+          </select>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Intervalo (h)</label>
+            <select id="intervalo" onchange="calcular()">
+              <option value="8" selected>8 h</option>
+              <option value="12">12 h</option>
+              <option value="24">24 h</option>
+            </select>
+          </div>
+          <div class="form-row"><label>Infusão (min)</label>
+            <select id="tempo" onchange="calcular()">
+              <option value="30" selected>30 min</option>
+              <option value="180">180 min</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row"><label>Alvo %T&gt;MIC</label>
+          <select id="alvo" onchange="calcular()">
+            <option value="40">40% (bacteriostático)</option>
+            <option value="50" selected>50% (bactericida)</option>
+            <option value="100">100% (EIP/contínua)</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Bactéria isolada (opcional)</label>
+          <select id="bacteria" onchange="calcular()">
+            <option value="">Selecione...</option>
+            <option value="Pseudomonas aeruginosa">Pseudomonas aeruginosa</option>
+            <option value="Klebsiella pneumoniae">Klebsiella pneumoniae</option>
+            <option value="Acinetobacter baumannii">Acinetobacter baumannii</option>
+            <option value="Enterobacter cloacae">Enterobacter cloacae</option>
+            <option value="Enterobacter aerogenes">Enterobacter aerogenes</option>
+            <option value="Escherichia coli">Escherichia coli</option>
+            <option value="Serratia marcescens">Serratia marcescens</option>
+            <option value="Burkholderia cepacia">Burkholderia cepacia</option>
+            <option value="Stenotrophomonas maltophilia">Stenotrophomonas maltophilia</option>
+            <option value="Providencia stuartii">Providencia stuartii</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
+        <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div>
+
+    <!-- PK Parameters -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent)"></div>
+        <h2>Parâmetros PK — Meropenem</h2>
+      </div>
+      <div class="metric-grid metric-grid-3">
+        <div class="metric c-accent"><div class="metric-label">Vd estimado</div><div class="metric-value" id="m-vd">—<small>L</small></div></div>
+        <div class="metric c-accent"><div class="metric-label">ke</div><div class="metric-value" id="m-ke">—<small>h⁻¹</small></div></div>
+        <div class="metric"><div class="metric-label">T½ ajustada</div><div class="metric-value" id="m-t12">—<small>h</small></div></div>
+        <div class="metric c-green"><div class="metric-label">Cmax estimada</div><div class="metric-value" id="m-cmax">—<small>mg/L</small></div></div>
+        <div class="metric c-warn"><div class="metric-label">Alvo %T&gt;MIC</div><div class="metric-value" id="m-alvo">—<small>%</small></div></div>
+        <div class="metric"><div class="metric-label">%T&gt;MIC estimado</div><div class="metric-value" id="m-tmic">—<small>%</small></div></div>
+      </div>
+    </div>
+
+    <!-- BrCAST breakpoints panel -->
+    <div class="panel" id="panel-brcast" style="display:none">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:#7C3AED"></div>
+        <h2>Pontos de Corte BrCAST-EUCAST — Meropenem</h2>
+      </div>
+      <div class="result-box" id="box-brcast" style="margin:1rem">
+        <div class="result-title" id="brcast-title">—</div>
+        <div class="result-body" id="brcast-body">—</div>
+      </div>
+    </div>
+
+    <!-- Análise 1: Função Renal -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--warn)"></div>
+        <h2>Análise 1 — Função Renal (Cockcroft-Gault)</h2>
+      </div>
+      <div class="metric-grid metric-grid-2">
+        <div class="metric"><div class="metric-label">ClCr</div><div class="metric-value" id="m-clcr">—<small>mL/min</small></div></div>
+        <div class="metric"><div class="metric-label">Categoria renal</div><div class="metric-value" style="font-size:13px;padding-top:2px" id="m-renal">—</div></div>
+      </div>
+      <div class="result-box" id="box-renal">
+        <div class="result-title">Aguardando dados</div>
+        <div class="result-body" id="txt-renal">Preencha sexo, idade, peso e creatinina para calcular o ClCr.</div>
+      </div>
+    </div>
+
+    <!-- Análise 2: Adequação da Dose -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent2)"></div>
+        <h2>Análise 2 — Adequação da Dose</h2>
+      </div>
+      <div class="result-box" id="box-dose">
+        <div class="result-title">Aguardando cálculo</div>
+        <div class="result-body" id="txt-dose">Selecione MIC, dose e tempo de infusão.</div>
+      </div>
+
+      <div class="section-label">Parâmetros PK/PD estimados</div>
+      <div class="result-box" id="box-pkpd">
+        <div class="result-title">PK/PD</div>
+        <div class="result-body" id="txt-pkpd">—</div>
+      </div>
+
+      <!-- Gráfico SVG -->
+      <div class="section-label">Curva de decaimento sérico</div>
+      <button class="chart-btn" id="btn-chart" onclick="toggleChart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Gerar gráfico de decaimento
+      </button>
+      <div class="chart-wrap" id="chart-wrap">
+        <div id="chart-svg-container"></div>
+      </div>
+
+      <!-- Detalhamento -->
+      <button class="detail-toggle" id="btn-det" onclick="toggleDetail()">▼ Detalhamento do cálculo</button>
+      <div class="detail-table" id="det-wrap">
+        <table class="det">
+          <tr><td>Fórmula ClCr</td><td>Cockcroft-Gault</td></tr>
+          <tr><td>ClCr calculado</td><td id="d-clcr">—</td></tr>
+          <tr><td>Categoria renal</td><td id="d-renal">—</td></tr>
+          <tr><td>Dose prescrita</td><td id="d-dose">—</td></tr>
+          <tr><td>Intervalo</td><td id="d-intervalo">—</td></tr>
+          <tr><td>Tempo de infusão</td><td id="d-tempo">—</td></tr>
+          <tr><td>MIC</td><td id="d-mic">—</td></tr>
+          <tr><td>Vd estimado</td><td id="d-vd">—</td></tr>
+          <tr><td>ke</td><td id="d-ke">—</td></tr>
+          <tr><td>T½ ajustada ao ClCr</td><td id="d-t12">—</td></tr>
+          <tr><td>Cmax estimada</td><td id="d-cmax">—</td></tr>
+          <tr><td>%T&gt;MIC estimado</td><td id="d-tmic">—</td></tr>
+          <tr><td>Alvo %T&gt;MIC</td><td id="d-alvo">—</td></tr>
+          <tr><td>Análise da dose</td><td id="d-a1">—</td></tr>
+          <tr><td>Análise renal</td><td id="d-a2">—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let micAtual = 0.25;
+let lastData = null;
+
+// ── SVG Chart ──────────────────────────────────────────────
+function toggleChart(){
+  const wrap = document.getElementById('chart-wrap');
+  const btn  = document.getElementById('btn-chart');
+  wrap.classList.toggle('open');
+  if(wrap.classList.contains('open')){
+    btn.innerHTML = '✕ Fechar gráfico';
+    if(lastData) drawSVGChart(lastData);
+  } else {
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Gerar gráfico de decaimento`;
+    document.getElementById('chart-svg-container').innerHTML = '';
+  }
+}
+
+function drawSVGChart(d){
+  const {cmax, ke, intervalo, tempo, mic} = d;
+  const tempoH = tempo / 60; // 0.5 ou 3.0
+
+  // ── dimensões
+  const W=540, H=220, PL=52, PR=18, PT=28, PB=38;
+  const CW=W-PL-PR, CH=H-PT-PB;
+
+  // ── escala Y: máximo = Cmax * 1.25, arredondado
+  const yMax = Math.ceil(cmax * 1.3 / 10) * 10;
+  const xMax = intervalo; // horas
+
+  function sx(t){ return PL + (t/xMax)*CW; }
+  function sy(c){ return PT + CH - (c/yMax)*CH; }
+
+  // ── pontos da curva a cada 0.5h
+  const pts = [];
+  for(let t=0; t<=intervalo+0.001; t=parseFloat((t+0.5).toFixed(1))){
+    let c;
+    if(t <= tempoH){
+      // Subida LINEAR de 0 → Cmax
+      c = cmax * (t / tempoH);
+    } else {
+      // Decaimento exponencial a partir do Cmax
+      c = cmax * Math.exp(-ke * (t - tempoH));
+    }
+    pts.push({t, c: Math.max(0,c)});
+  }
+
+  // pathdata da curva
+  const curvePath = pts.map((p,i)=> (i===0?'M':'L') + sx(p.t).toFixed(1)+','+sy(p.c).toFixed(1)).join(' ');
+  // área preenchida
+  const areaPath = curvePath + ` L${sx(intervalo).toFixed(1)},${sy(0).toFixed(1)} L${sx(0).toFixed(1)},${sy(0).toFixed(1)} Z`;
+
+  // ── ticks X: 0, 0.5, 1 ... intervalo
+  const xTicks = [];
+  for(let t=0; t<=intervalo+0.001; t=parseFloat((t+0.5).toFixed(1))) xTicks.push(t);
+
+  // ── ticks Y
+  const yStep = yMax <= 20 ? 5 : yMax <= 40 ? 10 : yMax <= 80 ? 20 : 20;
+  const yTicks = [];
+  for(let y=0; y<=yMax; y+=yStep) yTicks.push(y);
+
+  // ── linha vertical no fim da infusão
+  const xEndInf = sx(tempoH);
+  const endLabel = tempoH === 0.5 ? 'Fim 0,5h' : 'Fim 3h';
+
+  const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="width:100%;font-family:'JetBrains Mono',monospace">
+  <defs>
+    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A7EA4" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0A7EA4" stop-opacity="0.02"/>
+    </linearGradient>
+    <clipPath id="chartClip">
+      <rect x="${PL}" y="${PT}" width="${CW}" height="${CH}"/>
+    </clipPath>
+  </defs>
+
+  <!-- fundo -->
+  <rect x="${PL}" y="${PT}" width="${CW}" height="${CH}" fill="#F7FAFC" rx="4"/>
+
+  <!-- grid horizontal -->
+  ${yTicks.map(y=>`<line x1="${PL}" y1="${sy(y).toFixed(1)}" x2="${PL+CW}" y2="${sy(y).toFixed(1)}" stroke="#D9E2EC" stroke-width="1"/>`).join('')}
+
+  <!-- grid vertical -->
+  ${xTicks.filter(t=>Number.isInteger(t)).map(t=>`<line x1="${sx(t).toFixed(1)}" y1="${PT}" x2="${sx(t).toFixed(1)}" y2="${PT+CH}" stroke="#D9E2EC" stroke-width="1"/>`).join('')}
+
+  <!-- linha MIC -->
+  <line x1="${PL}" y1="${sy(mic).toFixed(1)}" x2="${PL+CW}" y2="${sy(mic).toFixed(1)}"
+        stroke="#C0392B" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.75" clip-path="url(#chartClip)"/>
+  <text x="${PL+CW-2}" y="${(sy(mic)-4).toFixed(1)}" font-size="9" fill="#C0392B" text-anchor="end">MIC ${mic} mg/L</text>
+
+  <!-- linha vertical fim da infusão -->
+  <line x1="${xEndInf.toFixed(1)}" y1="${PT}" x2="${xEndInf.toFixed(1)}" y2="${(PT+CH).toFixed(1)}"
+        stroke="#627D98" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+  <text x="${xEndInf.toFixed(1)}" y="${(PT-6).toFixed(1)}" font-size="9" fill="#627D98" text-anchor="middle">${endLabel}</text>
+
+  <!-- área preenchida -->
+  <path d="${areaPath}" fill="url(#areaGrad)" clip-path="url(#chartClip)"/>
+
+  <!-- curva -->
+  <path d="${curvePath}" fill="none" stroke="#0A7EA4" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" clip-path="url(#chartClip)"/>
+
+  <!-- ponto Cmax -->
+  <circle cx="${sx(tempoH).toFixed(1)}" cy="${sy(cmax).toFixed(1)}" r="4" fill="#0A7EA4" stroke="#fff" stroke-width="1.5"/>
+  <text x="${(sx(tempoH)+6).toFixed(1)}" y="${(sy(cmax)-4).toFixed(1)}" font-size="9" fill="#0A7EA4" font-weight="bold">Cmax ${cmax.toFixed(1)} mg/L</text>
+
+  <!-- eixo X -->
+  <line x1="${PL}" y1="${PT+CH}" x2="${PL+CW}" y2="${PT+CH}" stroke="#BCCCDC" stroke-width="1.5"/>
+  ${xTicks.map(t=>`
+    <line x1="${sx(t).toFixed(1)}" y1="${PT+CH}" x2="${sx(t).toFixed(1)}" y2="${PT+CH+4}" stroke="#BCCCDC" stroke-width="1"/>
+    <text x="${sx(t).toFixed(1)}" y="${PT+CH+14}" font-size="8.5" fill="#627D98" text-anchor="middle">${t%1===0?t+'h':t+'h'}</text>
+  `).join('')}
+  <text x="${(PL+CW/2).toFixed(1)}" y="${H-2}" font-size="10" fill="#627D98" text-anchor="middle">Tempo (h)</text>
+
+  <!-- eixo Y -->
+  <line x1="${PL}" y1="${PT}" x2="${PL}" y2="${PT+CH}" stroke="#BCCCDC" stroke-width="1.5"/>
+  ${yTicks.map(y=>`
+    <line x1="${PL-4}" y1="${sy(y).toFixed(1)}" x2="${PL}" y2="${sy(y).toFixed(1)}" stroke="#BCCCDC" stroke-width="1"/>
+    <text x="${PL-7}" y="${(sy(y)+3).toFixed(1)}" font-size="8.5" fill="#627D98" text-anchor="end">${y}</text>
+  `).join('')}
+  <text transform="rotate(-90)" x="${-(PT+CH/2).toFixed(1)}" y="12" font-size="9.5" fill="#627D98" text-anchor="middle">Conc. (mg/L)</text>
+</svg>`;
+
+  document.getElementById('chart-svg-container').innerHTML = svg;
+}
+// ── fim SVG Chart ──────────────────────────────────────────
+
+// BrCAST-EUCAST v14.0 breakpoints for Meropenem
+const BRCAST_MERO = {
+  'Klebsiella pneumoniae':   { s:2, i_max:8, r:8, grupo:'Enterobacterales', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0. Dose padrão: 1 g × 3 iv 30 min; Dose alta: 2 g × 3 iv 3 h.' },
+  'Escherichia coli':        { s:2, i_max:8, r:8, grupo:'Enterobacterales', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0.' },
+  'Enterobacter cloacae':    { s:2, i_max:8, r:8, grupo:'Enterobacterales', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0.' },
+  'Enterobacter aerogenes':  { s:2, i_max:8, r:8, grupo:'Enterobacterales', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0.' },
+  'Serratia marcescens':     { s:2, i_max:8, r:8, grupo:'Enterobacterales', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0.' },
+  'Providencia stuartii':    { s:2, i_max:8, r:8, grupo:'Enterobacterales', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0.' },
+  'Pseudomonas aeruginosa':  { s:2, i_max:8, r:8, grupo:'Pseudomonas spp.', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0. Para infecções graves: 2 g × 3 iv em infusão de 3–4 h.' },
+  'Acinetobacter baumannii': { s:2, i_max:8, r:8, grupo:'Acinetobacter spp.', nota:'S ≤ 2 / I 4–8 / R > 8 mg/L. BrCAST-EUCAST v14.0. Nota: alta prevalência de resistência adquirida; verificar mecanismos de carbapenemase.' },
+  'Burkholderia cepacia':    { s:null, i_max:null, r:null, grupo:'Burkholderia cepacia complex', nota:'Sem ponto de corte clínico BrCAST-EUCAST para meropenem neste complexo. Consultar documento de orientação BrCAST.' },
+  'Stenotrophomonas maltophilia': { s:null, i_max:null, r:null, grupo:'Stenotrophomonas spp.', nota:'Meropenem não é o agente de escolha para Stenotrophomonas maltophilia. Sem ponto de corte clínico BrCAST-EUCAST.' },
+};
+
+function getBrcastInterp(mic, bacteria){
+  const bp = BRCAST_MERO[bacteria];
+  if(!bp) return null;
+  if(bp.s === null) return { cat:'Sem breakpoint', classe:'', s:null };
+  if(mic <= bp.s)      return { cat:'Sensível (S)', classe:'ok' };
+  if(mic <= bp.i_max)  return { cat:'Sensível – exposição aumentada (I)', classe:'warn' };
+  return { cat:'Resistente (R)', classe:'danger' };
+}
+
+function getMICCategoria(mic){
+  if(mic <= 2)  return {label:'Sensível (S)', cls:'ok'};
+  if(mic <= 8)  return {label:'Sensível – exposição aumentada (I)', cls:'warn'};
+  return {label:'Resistente (R)', cls:'danger'};
+}
+
+function getAnalise1(mic, dose, tempo){
+  if(mic > 8) return {classe:'danger', titulo:'Resistente', msg:'MIC >8 mg/L — microrganismo resistente ao meropenem. Terapia alternativa necessária.'};
+  const d=dose, t=tempo, m=mic;
+  if(m===0.25){
+    if(d>=1000) return {classe:'warn', titulo:'Falha de descalonamento', msg:`MIC 0,25 mg/L com dose ${d} mg — dose excessiva para o perfil de sensibilidade. Considerar descalonamento para 500 mg.`};
+    return {classe:'ok', titulo:'Dose adequada', msg:`MIC 0,25 mg/L com ${d} mg em ${t} min — dose adequada para o perfil de sensibilidade.`};
+  }
+  if(m===0.5){
+    if(d===500)  return {classe:'ok',   titulo:'Dose adequada',         msg:`MIC 0,5 mg/L com 500 mg em ${t} min — dose adequada.`};
+    if(d===1000) return {classe:'ok',   titulo:'Dose adequada',         msg:`MIC 0,5 mg/L com 1000 mg em ${t} min — dose adequada.`};
+    if(d===2000) return {classe:'warn', titulo:'Falha de descalonamento', msg:'MIC 0,5 mg/L com 2000 mg — dose excessiva. Considerar descalonamento.'};
+  }
+  if(m===1){
+    if(d===500 && t===30)  return {classe:'warn', titulo:'Subdose possível', msg:'MIC 1 mg/L com 500 mg em 30 min — subdose possível. Considerar aumento de dose ou infusão prolongada.'};
+    if(d===500 && t===180) return {classe:'ok',   titulo:'Dose adequada',   msg:'MIC 1 mg/L com 500 mg em 180 min (prolongada) — dose adequada.'};
+    if(d===1000) return {classe:'ok',   titulo:'Dose adequada',            msg:`MIC 1 mg/L com 1000 mg em ${t} min — dose adequada.`};
+    if(d===2000) return {classe:'warn', titulo:'Falha de descalonamento',  msg:'MIC 1 mg/L com 2000 mg — dose excessiva. Considerar descalonamento para 1000 mg.'};
+  }
+  if(m===2){
+    if(d===500)            return {classe:'warn', titulo:'Subdose possível',         msg:'MIC 2 mg/L com 500 mg — subdose possível independente do tempo de infusão.'};
+    if(d===1000 && t===30)  return {classe:'warn', titulo:'Subdose possível',         msg:'MIC 2 mg/L com 1000 mg em 30 min — subdose possível. Considerar infusão prolongada (180 min).'};
+    if(d===1000 && t===180) return {classe:'ok',   titulo:'Dose adequada',            msg:'MIC 2 mg/L com 1000 mg em 180 min (prolongada) — dose adequada.'};
+    if(d===2000 && t===30)  return {classe:'ok',   titulo:'Dose adequada',            msg:'MIC 2 mg/L com 2000 mg em 30 min — dose adequada.'};
+    if(d===2000 && t===180) return {classe:'warn', titulo:'Falha de descalonamento',  msg:'MIC 2 mg/L com 2000 mg em 180 min — dose excessiva. Considerar descalonamento para 1000 mg + infusão prolongada.'};
+  }
+  if(m===4){
+    if(d===2000 && t===180) return {classe:'ok',   titulo:'Dose adequada',   msg:'MIC 4 mg/L (I — exposição aumentada) com 2000 mg em 180 min — dose adequada.'};
+    return {classe:'warn', titulo:'Subdose possível', msg:`MIC 4 mg/L com ${d} mg em ${t} min — subdose possível. Para atingir alvo PK/PD: 2000 mg em infusão de 180 min.`};
+  }
+  if(m===8){
+    if(d===2000 && t===180) return {classe:'ok',   titulo:'Dose adequada',   msg:'MIC 8 mg/L (I — exposição aumentada) com 2000 mg em 180 min — dose adequada.'};
+    if(d===2000 && t===30)  return {classe:'warn', titulo:'Subdose possível', msg:'MIC 8 mg/L com 2000 mg em 30 min — subdose possível. Usar infusão prolongada de 180 min.'};
+    return {classe:'warn', titulo:'Subdose possível', msg:`MIC 8 mg/L com ${d} mg — subdose possível. Necessário 2000 mg em 180 min para atingir alvo PK/PD.`};
+  }
+  return {classe:'', titulo:'Verificar combinação', msg:'Combinação não mapeada. Consulte protocolo clínico.'};
+}
+
+function selectMIC(btn, val){
+  document.querySelectorAll('.mic-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  micAtual = val;
+  calcular();
+}
+
+function calcular(){
+  const sexo     = document.getElementById('sexo').value;
+  const idade    = parseFloat(document.getElementById('idade').value);
+  const peso     = parseFloat(document.getElementById('peso').value);
+  const creat    = parseFloat(document.getElementById('creat').value);
+  const dose     = parseInt(document.getElementById('dose').value);
+  const tempo    = parseInt(document.getElementById('tempo').value);
+  const intervalo= parseInt(document.getElementById('intervalo').value);
+  const alvo     = parseInt(document.getElementById('alvo').value);
+  const bacteria = document.getElementById('bacteria').value;
+  const pill     = document.getElementById('status-pill');
+  const mic      = micAtual;
+
+  // Análise 1 — dose (sempre calculada)
+  const r1 = getAnalise1(mic, dose, tempo);
+  const bd = document.getElementById('box-dose');
+  bd.className = 'result-box ' + r1.classe;
+  bd.querySelector('.result-title').className = 'result-title ' + r1.classe;
+  bd.querySelector('.result-title').textContent = 'Adequação da Dose — ' + r1.titulo;
+  document.getElementById('txt-dose').textContent = r1.msg;
+
+  // Alvo %T>MIC
+  document.getElementById('m-alvo').innerHTML = alvo + '<small>%</small>';
+
+  // BrCAST
+  const panelBrcast = document.getElementById('panel-brcast');
+  if(bacteria && BRCAST_MERO[bacteria] !== undefined){
+    panelBrcast.style.display = 'block';
+    const bp = BRCAST_MERO[bacteria];
+    const interp = getBrcastInterp(mic, bacteria);
+    const boxB = document.getElementById('box-brcast');
+    const bTitle = document.getElementById('brcast-title');
+    const bBody = document.getElementById('brcast-body');
+    if(bp.s === null){
+      boxB.className = 'result-box'; bTitle.className = 'result-title';
+      bTitle.textContent = bp.grupo + ' — Sem breakpoint clínico BrCAST';
+    } else {
+      const micLabel = mic === 16 ? '>8' : mic.toString();
+      boxB.className = 'result-box ' + interp.classe;
+      bTitle.className = 'result-title ' + interp.classe;
+      bTitle.textContent = bp.grupo + ' — ' + interp.cat;
+    }
+    bBody.textContent = bp.nota;
+  } else {
+    panelBrcast.style.display = 'none';
+  }
+
+  // ClCr
+  const dadosPaciente = sexo && !isNaN(idade) && !isNaN(peso) && !isNaN(creat);
+  let clcr = null, clcrR = null;
+  let renalLabel = '—', a1Class = '', a1Title = '', a1Msg = '';
+
+  if(dadosPaciente){
+    clcr = ((140 - idade) * peso) / (72 * creat);
+    if(sexo === 'F') clcr *= 0.85;
+    clcrR = Math.round(clcr);
+    document.getElementById('m-clcr').innerHTML = clcrR + '<small>mL/min</small>';
+
+    const limN = sexo === 'F' ? 70 : 75;
+    if(clcr >= limN)        renalLabel = 'Normal';
+    else if(clcr >= 51)     renalLabel = 'Normal / Leve redução';
+    else if(clcr >= 26)     renalLabel = 'Moderada (26–50 mL/min)';
+    else if(clcr >= 10)     renalLabel = 'Grave (10–25 mL/min)';
+    else                    renalLabel = 'Muito grave (<10 mL/min)';
+    document.getElementById('m-renal').textContent = renalLabel;
+
+    if(clcr >= 51){
+      a1Class = 'ok';
+      a1Title = clcr >= limN ? 'Sem necessidade de ajuste' : 'Sem necessidade de ajuste (leve redução)';
+      a1Msg   = clcr >= limN
+        ? `ClCr ${clcrR} mL/min — função renal normal. Dose padrão mantida sem necessidade de ajuste.`
+        : `ClCr ${clcrR} mL/min — função renal normal com leve redução. Dose padrão mantida sem necessidade de ajuste.`;
+    } else if(clcr >= 26){
+      a1Class = 'warn'; a1Title = 'Ajuste necessário';
+      a1Msg   = `ClCr ${clcrR} mL/min — disfunção moderada. Recomendação: administrar a dose prescrita (${dose} mg) a cada 12 horas.`;
+    } else if(clcr >= 10){
+      a1Class = 'danger'; a1Title = 'Ajuste necessário';
+      a1Msg   = `ClCr ${clcrR} mL/min — disfunção grave. Recomendação: administrar metade da dose prescrita (${Math.round(dose/2)} mg) a cada 12 horas.`;
+    } else {
+      a1Class = 'danger'; a1Title = 'Ajuste necessário';
+      a1Msg   = `ClCr ${clcrR} mL/min — disfunção muito grave. Recomendação: administrar metade da dose prescrita (${Math.round(dose/2)} mg) a cada 24 horas.`;
+    }
+
+    const br = document.getElementById('box-renal');
+    br.className = 'result-box ' + a1Class;
+    br.querySelector('.result-title').className = 'result-title ' + a1Class;
+    br.querySelector('.result-title').textContent = 'Análise Renal — ' + a1Title;
+    document.getElementById('txt-renal').textContent = a1Msg;
+    document.getElementById('d-clcr').textContent = clcrR + ' mL/min';
+    document.getElementById('d-renal').textContent = renalLabel;
+    document.getElementById('d-a2').textContent = a1Title;
+  } else {
+    document.getElementById('m-clcr').innerHTML = '—<small>mL/min</small>';
+    document.getElementById('m-renal').textContent = '—';
+    const br = document.getElementById('box-renal');
+    br.className = 'result-box'; br.querySelector('.result-title').className = 'result-title';
+    br.querySelector('.result-title').textContent = 'Aguardando dados';
+    document.getElementById('txt-renal').textContent = 'Preencha sexo, idade, peso e creatinina para calcular o ClCr.';
+  }
+
+  // PK — meropenem
+  // Vd = 0,25 L/kg (distribuição em fluidos corporais)
+  // ke por ClCr (Cockcroft-Gault): baseado em clearance renal do meropenem
+  //   T½ referência com função renal normal ≈ 1h; insuficiência grave ≈ 5–6h
+  //   ke = 0,693 / T½; T½ ajustada por ClCr:
+  //   ≥80 → 1,0h; 50–79 → 1,5h; 26–50 → 2,5h; <26 → 5,0h
+  if(!isNaN(peso) && clcr !== null){
+    const vd = 0.25 * peso;
+    const t12 = clcr >= 80 ? 1.0 : clcr >= 50 ? 1.5 : clcr >= 26 ? 2.5 : 5.0;
+    const ke = 0.693 / t12;
+    const tempoH = tempo / 60;
+
+    // Cmax ajustada ao tempo de infusão
+    let cmax;
+    if(tempoH < 0.6){
+      cmax = dose / vd;
+    } else {
+      const taxa = dose / vd / tempoH;
+      cmax = (taxa / ke) * (1 - Math.exp(-ke * tempoH));
+    }
+
+    // %T>MIC: tempo acima do MIC dentro do intervalo
+    let tMicH = 0;
+    if(cmax > mic){
+      tMicH = Math.min(tempoH + Math.log(cmax / mic) / ke, intervalo);
+    }
+    const pctTMic = Math.max(0, Math.round((tMicH / intervalo) * 100));
+    const metaAtingida = pctTMic >= alvo;
+
+    document.getElementById('m-vd').innerHTML  = vd.toFixed(1)   + '<small>L</small>';
+    document.getElementById('m-ke').innerHTML  = ke.toFixed(3)   + '<small>h⁻¹</small>';
+    document.getElementById('m-t12').innerHTML = t12.toFixed(1)  + '<small>h</small>';
+    document.getElementById('m-cmax').innerHTML= cmax.toFixed(1) + '<small>mg/L</small>';
+    document.getElementById('m-tmic').innerHTML= pctTMic         + '<small>%</small>';
+
+    // PK/PD box
+    const bpk = document.getElementById('box-pkpd');
+    const pkClass = metaAtingida ? 'ok' : 'warn';
+    bpk.className = 'result-box ' + pkClass;
+    bpk.querySelector('.result-title').className = 'result-title ' + pkClass;
+    bpk.querySelector('.result-title').textContent = metaAtingida
+      ? `✅ Meta %T>MIC atingida (${pctTMic}% ≥ ${alvo}%)`
+      : `⚠️ Meta %T>MIC não atingida (${pctTMic}% < ${alvo}%)`;
+    document.getElementById('txt-pkpd').textContent =
+      `Vd ${vd.toFixed(1)} L · ke ${ke.toFixed(3)} h⁻¹ · T½ ${t12.toFixed(1)} h · Cmax ${cmax.toFixed(1)} mg/L · %T>MIC estimado ${pctTMic}% (alvo: ${alvo}%)`;
+
+    // Status pill
+    if(r1.classe === 'danger' || a1Class === 'danger'){
+      pill.className = 'status-pill danger'; pill.textContent = 'Revisar — ação necessária';
+    } else if(r1.classe === 'warn' || a1Class === 'warn' || !metaAtingida){
+      pill.className = 'status-pill warn'; pill.textContent = 'Atenção — avaliar ajuste';
+    } else {
+      pill.className = 'status-pill ok'; pill.textContent = 'Parâmetros adequados';
+    }
+
+    // Detalhamento
+    const micLabel = mic === 16 ? '>8 mg/L' : mic + ' mg/L';
+    document.getElementById('d-dose').textContent      = dose + ' mg';
+    document.getElementById('d-intervalo').textContent = intervalo + ' h';
+    document.getElementById('d-tempo').textContent     = tempo + ' min';
+    document.getElementById('d-mic').textContent       = micLabel;
+    document.getElementById('d-vd').textContent        = vd.toFixed(1) + ' L';
+    document.getElementById('d-ke').textContent        = ke.toFixed(3) + ' h⁻¹';
+    document.getElementById('d-t12').textContent       = t12.toFixed(1) + ' h';
+    document.getElementById('d-cmax').textContent      = cmax.toFixed(1) + ' mg/L';
+    document.getElementById('d-tmic').textContent      = pctTMic + '%';
+    document.getElementById('d-alvo').textContent      = alvo + '%';
+    document.getElementById('d-a1').textContent        = r1.titulo;
+
+    lastData = { cmax, ke, intervalo, tempo, mic, alvo };
+    if(document.getElementById('chart-wrap').classList.contains('open')){
+      drawSVGChart(lastData);
+    }
+  }
+}
+
+function toggleDetail(){
+  const det = document.getElementById('det-wrap');
+  const btn = document.getElementById('btn-det');
+  det.classList.toggle('open');
+  btn.textContent = det.classList.contains('open') ? '▲ Fechar detalhamento' : '▼ Detalhamento do cálculo';
+}
+
+function gerarPDF(){
+  const chart = document.getElementById('chart-wrap');
+  const det   = document.getElementById('det-wrap');
+  const wC = chart.classList.contains('open');
+  const wD = det.classList.contains('open');
+  if(!wC && lastData){ chart.classList.add('open'); drawSVGChart(lastData); }
+  if(!wD){ det.classList.add('open'); }
+  setTimeout(()=>{
+    window.print();
+    if(!wC){ chart.classList.remove('open'); document.getElementById('chart-svg-container').innerHTML=''; }
+    if(!wD){ det.classList.remove('open'); }
+  }, 400);
+}
+
+function resetar(){
+  ['sexo','bacteria'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('dose').value='500';
+  document.getElementById('intervalo').value='8';
+  document.getElementById('tempo').value='30';
+  document.getElementById('alvo').value='50';
+  ['idade','peso','creat'].forEach(id=>document.getElementById(id).value='');
+  document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.mic-btn').classList.add('active');
+  micAtual=0.25;
+  document.getElementById('chart-wrap').classList.remove('open');
+  document.getElementById('chart-svg-container').innerHTML='';
+  document.getElementById('btn-chart').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Gerar gráfico de decaimento`;
+  document.getElementById('det-wrap').classList.remove('open');
+  lastData=null;
+  calcular();
+}
+
+calcular();
+</script>
+</body>
+</html>

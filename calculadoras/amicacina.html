@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#0A7EA4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora PK/PD — Amicacina</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+.back-link{display:inline-flex;align-items:center;font-family:var(--font,Syne,sans-serif);font-size:11px;font-weight:700;color:var(--accent,#0A7EA4);text-decoration:none;padding:4px 0;opacity:.75;transition:opacity .2s;margin-bottom:.4rem;}.back-link:hover{opacity:1;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F0F4F8;
+  --surface:#FFFFFF;
+  --surface2:#F7FAFC;
+  --border:#D9E2EC;
+  --border2:#BCCCDC;
+  --accent:#0A7EA4;
+  --accent2:#1A6B4A;
+  --warn:#B45309;
+  --danger:#C0392B;
+  --ok:#1A6B4A;
+  --text:#1A202C;
+  --muted:#627D98;
+  --font:'Syne',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:1.5rem 1rem 3rem;
+}
+
+/* ── HEADER ── */
+.header{
+  max-width:980px;margin:0 auto 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:1rem 1.25rem;
+}
+.header-left h1{
+  font-size:clamp(16px,2.5vw,22px);font-weight:800;letter-spacing:-0.02em;color:var(--accent);
+}
+.header-left p{font-size:11px;color:var(--muted);margin-top:2px;font-weight:400;letter-spacing:0.04em;}
+.header-author{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:0.04em;}
+.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+
+.status-pill{
+  font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:5px 14px;border-radius:20px;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--muted);transition:all .3s;
+}
+.status-pill.ok{background:#E6F4EE;border-color:#A8D9C0;color:var(--ok);}
+.status-pill.warn{background:#FEF3C7;border-color:#FCD34D;color:var(--warn);}
+.status-pill.danger{background:#FAEAEA;border-color:#E8AAAA;color:var(--danger);}
+
+.btn-pdf{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+  padding:6px 14px;border-radius:20px;border:1px solid var(--accent);
+  background:var(--accent);color:#fff;cursor:pointer;transition:opacity .2s;
+}
+.btn-pdf:hover{opacity:.85;}
+.btn-pdf svg{width:13px;height:13px;}
+
+/* ── LAYOUT ── */
+.wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:1.25rem;align-items:start;}
+@media(max-width:680px){.wrap{grid-template-columns:1fr;}}
+
+/* ── PANELS ── */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;}
+.panel:last-child{margin-bottom:0;}
+.panel-head{
+  padding:.65rem 1rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;background:var(--surface2);
+}
+.panel-head-dot{width:7px;height:7px;border-radius:50%;}
+.panel-head h2{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.panel-body{padding:1rem;}
+
+/* ── FORM ── */
+label{display:block;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+input,select{
+  width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  color:var(--text);font-family:var(--mono);font-size:13px;padding:7px 10px;
+  outline:none;transition:border-color .2s;
+}
+input:focus,select:focus{border-color:var(--accent);}
+.form-row{margin-bottom:.8rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+
+.btn-calc{
+  width:100%;margin-top:.4rem;padding:9px;border:none;border-radius:7px;
+  background:var(--accent);
+  color:#fff;font-family:var(--font);font-size:12px;font-weight:700;
+  letter-spacing:0.06em;cursor:pointer;transition:opacity .2s;
+}
+.btn-calc:hover{opacity:.88;}
+.btn-reset{
+  width:100%;margin-top:.4rem;padding:7px;border:1px solid var(--border2);border-radius:7px;
+  background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;
+  font-weight:600;cursor:pointer;transition:all .2s;
+}
+.btn-reset:hover{border-color:var(--muted);color:var(--text);}
+
+/* ── METRIC GRID ── */
+.metric-grid{display:grid;gap:.65rem;padding:1rem;}
+.metric-grid-3{grid-template-columns:repeat(3,1fr);}
+.metric-grid-2{grid-template-columns:repeat(2,1fr);}
+.metric{
+  background:var(--surface2);border:1px solid var(--border);border-radius:8px;
+  padding:.7rem .85rem;
+}
+.metric-label{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.metric-value{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);}
+.metric-value small{font-size:10px;color:var(--muted);margin-left:2px;}
+.metric.c-accent .metric-value{color:var(--accent);}
+.metric.c-green .metric-value{color:var(--ok);}
+.metric.c-warn .metric-value{color:var(--warn);}
+
+/* ── RESULT BOX ── */
+.result-box{
+  margin:0 1rem 1rem;padding:.9rem 1rem;border-radius:8px;border:1px solid var(--border);
+  background:var(--surface2);
+}
+.result-box.ok{border-color:#A8D9C0;background:#E6F4EE;}
+.result-box.warn{border-color:#FCD34D;background:#FEF3C7;}
+.result-box.danger{border-color:#E8AAAA;background:#FAEAEA;}
+.result-title{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;color:var(--muted);}
+.result-title.ok{color:var(--ok);}
+.result-title.warn{color:var(--warn);}
+.result-title.danger{color:var(--danger);}
+.result-body{font-size:13px;line-height:1.6;color:var(--text);}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  padding:.55rem 1rem .25rem;font-size:9px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);
+}
+
+/* ── CHART ── */
+.chart-btn{
+  margin:0 1rem 1rem;padding:8px;border:1px dashed var(--border2);border-radius:8px;
+  background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;
+  font-weight:700;letter-spacing:0.06em;cursor:pointer;width:calc(100% - 2rem);
+  transition:all .3s;display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.chart-btn:hover{border-color:var(--accent);color:var(--accent);}
+.chart-btn svg{width:14px;height:14px;}
+.chart-wrap{
+  display:none;margin:0 1rem 1rem;
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  padding:1rem;
+}
+.chart-wrap.open{display:block;}
+.chart-wrap canvas{max-height:200px;}
+
+/* ── DETAIL TABLE ── */
+.detail-toggle{
+  margin:0 1rem 1rem;padding:7px;border:1px solid var(--border);border-radius:8px;
+  background:transparent;color:var(--muted);font-size:10px;font-weight:700;
+  letter-spacing:0.08em;cursor:pointer;width:calc(100% - 2rem);transition:all .2s;
+}
+.detail-toggle:hover{border-color:var(--muted);}
+.detail-table{display:none;margin:0 1rem 1rem;}
+.detail-table.open{display:block;}
+table.det{width:100%;border-collapse:collapse;font-size:12px;}
+table.det td{padding:6px 10px;border-bottom:1px solid var(--border);}
+table.det tr:last-child td{border-bottom:none;}
+table.det tr:hover td{background:var(--surface2);}
+table.det td:first-child{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;width:52%;}
+table.det td:last-child{font-family:var(--mono);color:var(--text);}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .btn-pdf,.btn-calc,.btn-reset,.chart-btn,.detail-toggle{display:none!important;}
+  .wrap{display:block;}
+  .panel{break-inside:avoid;margin-bottom:1rem;}
+}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← PharmaCalc</a>
+<div class="header">
+  <div class="header-left">
+    <h1>Calculadora PK/PD — Amicacina</h1>
+    <div class="header-author">Desenvolvido por Alan Steihogen</div>
+  </div>
+  <div class="header-right">
+    <div id="status-pill" class="status-pill">Aguardando dados</div>
+    <button class="btn-pdf" onclick="gerarPDF()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      Gerar PDF
+    </button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ── LEFT ── -->
+  <div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent)"></div>
+        <h2>Dados do Paciente</h2>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid">
+          <div class="form-row"><label>Sexo</label>
+            <select id="sexo" onchange="calcular()">
+              <option value="">—</option>
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select>
+          </div>
+          <div class="form-row"><label>Idade (anos)</label>
+            <input type="number" id="idade" placeholder="Ex: 55" oninput="calcular()">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Peso (kg)</label>
+            <input type="number" id="peso" placeholder="Ex: 70" oninput="calcular()">
+          </div>
+          <div class="form-row"><label>Creatinina (mg/dL)</label>
+            <input type="number" step="0.01" id="creat" placeholder="Ex: 1.2" oninput="calcular()">
+          </div>
+        </div>
+        <div class="form-row"><label>MIC (mg/L)</label>
+          <select id="mic" onchange="calcular()">
+            <option value="1">1 mg/L</option>
+            <option value="2">2 mg/L</option>
+            <option value="4">4 mg/L</option>
+            <option value="8">8 mg/L</option>
+            <option value="16">16 mg/L</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Dose prescrita (mg)</label>
+          <select id="dose" onchange="calcular()">
+            <option value="500">500 mg</option>
+            <option value="750">750 mg</option>
+            <option value="1000">1000 mg</option>
+            <option value="1250">1250 mg</option>
+            <option value="1500">1500 mg</option>
+            <option value="1750">1750 mg</option>
+            <option value="2000">2000 mg</option>
+          </select>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Intervalo (h)</label>
+            <select id="intervalo" onchange="calcular()">
+              <option value="8">8 h</option>
+              <option value="12">12 h</option>
+              <option value="24" selected>24 h</option>
+              <option value="48">48 h</option>
+              <option value="72">72 h</option>
+            </select>
+          </div>
+          <div class="form-row"><label>Infusão (min)</label>
+            <select id="tempo" onchange="calcular()">
+              <option value="30" selected>30 min</option>
+              <option value="60">60 min</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row"><label>Bactéria isolada (opcional)</label>
+          <select id="bacteria" onchange="calcular()">
+            <option value="">Selecione...</option>
+            <option value="Pseudomonas aeruginosa">Pseudomonas aeruginosa</option>
+            <option value="Klebsiella pneumoniae">Klebsiella pneumoniae</option>
+            <option value="Acinetobacter baumannii">Acinetobacter baumannii</option>
+            <option value="Enterobacter cloacae">Enterobacter cloacae</option>
+            <option value="Escherichia coli">Escherichia coli</option>
+            <option value="Serratia marcescens">Serratia marcescens</option>
+            <option value="Providencia stuartii">Providencia stuartii</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
+        <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RIGHT ── -->
+  <div>
+
+    <!-- Parâmetros PK -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent)"></div>
+        <h2>Parâmetros PK — ke = (ClCr × 0,0028) + 0,01</h2>
+      </div>
+      <div class="metric-grid metric-grid-3">
+        <div class="metric c-accent"><div class="metric-label">Vd estimado</div><div class="metric-value" id="m-vd">—<small>L</small></div></div>
+        <div class="metric c-accent"><div class="metric-label">ke (Hull & Sarubbi)</div><div class="metric-value" id="m-ke">—<small>h⁻¹</small></div></div>
+        <div class="metric"><div class="metric-label">T½ ajustada</div><div class="metric-value" id="m-t12">—<small>h</small></div></div>
+        <div class="metric c-green"><div class="metric-label">Cmax estimada</div><div class="metric-value" id="m-cmax">—<small>mg/L</small></div></div>
+        <div class="metric c-warn"><div class="metric-label">Cmax alvo (10×MIC)</div><div class="metric-value" id="m-cmax-alvo">—<small>mg/L</small></div></div>
+        <div class="metric"><div class="metric-label">Cmax/MIC obtido</div><div class="metric-value" id="m-ratio">—</div></div>
+      </div>
+    </div>
+
+    <!-- BrCAST Breakpoints -->
+    <div class="panel" id="panel-brcast" style="display:none">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:#7C3AED"></div>
+        <h2>Pontos de Corte BrCAST-EUCAST — Amicacina</h2>
+      </div>
+      <div class="result-box" id="box-brcast" style="margin:1rem">
+        <div class="result-title" id="brcast-title">—</div>
+        <div class="result-body" id="brcast-body">—</div>
+      </div>
+    </div>
+
+    <!-- Análise 1: Função Renal -->    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--warn)"></div>
+        <h2>Análise 1 — Função Renal (Cockcroft-Gault)</h2>
+      </div>
+      <div class="metric-grid metric-grid-2">
+        <div class="metric"><div class="metric-label">ClCr</div><div class="metric-value" id="m-clcr">—<small>mL/min</small></div></div>
+        <div class="metric"><div class="metric-label">Categoria renal</div><div class="metric-value" style="font-size:13px;padding-top:2px" id="m-renal">—</div></div>
+      </div>
+      <div class="result-box" id="box-renal">
+        <div class="result-title">Aguardando dados</div>
+        <div class="result-body" id="txt-renal">Preencha sexo, idade, peso e creatinina para calcular o ClCr.</div>
+      </div>
+    </div>
+
+    <!-- Análise 2: Adequação da Dose -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent2)"></div>
+        <h2>Análise 2 — Adequação da Dose</h2>
+      </div>
+      <div class="result-box" id="box-dose">
+        <div class="result-title">Aguardando cálculo</div>
+        <div class="result-body" id="txt-dose">Preencha os dados e selecione dose e MIC.</div>
+      </div>
+
+      <div class="section-label">Segurança — Vale sérico estimado</div>
+      <div class="result-box" id="box-vale">
+        <div class="result-title">Aguardando cálculo</div>
+        <div class="result-body" id="txt-vale">—</div>
+      </div>
+
+      <!-- Gráfico -->
+      <div class="section-label">Curva de decaimento sérico</div>
+      <button class="chart-btn" id="btn-chart" onclick="toggleChart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Gerar gráfico de decaimento
+      </button>
+      <div class="chart-wrap" id="chart-wrap">
+        <canvas id="decay-chart"></canvas>
+      </div>
+
+      <!-- Detalhamento -->
+      <button class="detail-toggle" id="btn-det" onclick="toggleDetail()">▼ Detalhamento do cálculo</button>
+      <div class="detail-table" id="det-wrap">
+        <table class="det">
+          <tr><td>Fórmula ClCr</td><td>Cockcroft-Gault</td></tr>
+          <tr><td>ClCr calculado</td><td id="d-clcr">—</td></tr>
+          <tr><td>Categoria renal</td><td id="d-renal">—</td></tr>
+          <tr><td>Dose prescrita</td><td id="d-dose">—</td></tr>
+          <tr><td>Intervalo</td><td id="d-intervalo">—</td></tr>
+          <tr><td>Tempo de infusão</td><td id="d-tempo">—</td></tr>
+          <tr><td>MIC</td><td id="d-mic">—</td></tr>
+          <tr><td>Vd estimado</td><td id="d-vd">—</td></tr>
+          <tr><td>ke (ClCr × 0,0028 + 0,01)</td><td id="d-ke">—</td></tr>
+          <tr><td>T½ ajustada ao ClCr</td><td id="d-t12">—</td></tr>
+          <tr><td>Cmax estimada</td><td id="d-cmax">—</td></tr>
+          <tr><td>Cmax alvo (10×MIC)</td><td id="d-cmax-alvo">—</td></tr>
+          <tr><td>Cmax/MIC obtido</td><td id="d-ratio">—</td></tr>
+          <tr><td>Dose (mg/kg)</td><td id="d-dose-kg">—</td></tr>
+          <tr><td>Vale sérico estimado</td><td id="d-vale">—</td></tr>
+          <tr><td>Análise da dose</td><td id="d-a1">—</td></tr>
+          <tr><td>Análise renal</td><td id="d-a2">—</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+let chartInstance = null;
+let lastData = null;
+
+// BrCAST-EUCAST breakpoints for Amikacin (v14.0, 2024)
+const BRCAST = {
+  'Pseudomonas aeruginosa': {
+    s: 16, r: 16, nota: 'Ponto de corte ECOFF (entre parênteses). S ≤ 16 mg/L / R > 16 mg/L (infecções sistêmicas). BrCAST-EUCAST v14.0.',
+    grupo: 'Pseudomonas spp.'
+  },
+  'Klebsiella pneumoniae': {
+    s: 8, r: 8, nota: 'Ponto de corte ECOFF (entre parênteses). S ≤ 8 mg/L / R > 8 mg/L (infecções sistêmicas). BrCAST-EUCAST v14.0.',
+    grupo: 'Enterobacterales'
+  },
+  'Escherichia coli': {
+    s: 8, r: 8, nota: 'Ponto de corte ECOFF (entre parênteses). S ≤ 8 mg/L / R > 8 mg/L (infecções sistêmicas). BrCAST-EUCAST v14.0.',
+    grupo: 'Enterobacterales'
+  },
+  'Enterobacter cloacae': {
+    s: 8, r: 8, nota: 'Ponto de corte ECOFF (entre parênteses). S ≤ 8 mg/L / R > 8 mg/L (infecções sistêmicas). BrCAST-EUCAST v14.0.',
+    grupo: 'Enterobacterales'
+  },
+  'Serratia marcescens': {
+    s: 8, r: 8, nota: 'Ponto de corte ECOFF (entre parênteses). S ≤ 8 mg/L / R > 8 mg/L (infecções sistêmicas). BrCAST-EUCAST v14.0.',
+    grupo: 'Enterobacterales'
+  },
+  'Providencia stuartii': {
+    s: null, r: null, nota: 'Sem ponto de corte clínico específico para amicacina no BrCAST-EUCAST v14.0 para Providencia spp. Consultar documento de orientação do BrCAST.',
+    grupo: 'Enterobacterales (sem breakpoint específico)'
+  },
+  'Acinetobacter baumannii': {
+    s: null, r: null, nota: 'Sem ponto de corte clínico para amicacina em Acinetobacter spp. no BrCAST-EUCAST v14.0. O teste de sensibilidade e uso clínico devem ser avaliados com cautela.',
+    grupo: 'Acinetobacter spp.'
+  }
+};
+
+function getBrcastInterpretacao(mic, bacteria){
+  const bp = BRCAST[bacteria];
+  if(!bp) return null;
+  if(bp.s === null) return { cat: 'Sem breakpoint', classe: '', label: '—' };
+  if(mic <= bp.s) return { cat: 'Sensível (S)', classe: 'ok', label: `S — MIC ${mic} mg/L ≤ ${bp.s} mg/L` };
+  return { cat: 'Resistente (R)', classe: 'danger', label: `R — MIC ${mic} mg/L > ${bp.r} mg/L` };
+}
+
+function calcular(){
+  const sexo     = document.getElementById('sexo').value;
+  const idade    = parseFloat(document.getElementById('idade').value);
+  const peso     = parseFloat(document.getElementById('peso').value);
+  const creat    = parseFloat(document.getElementById('creat').value);
+  const mic      = parseFloat(document.getElementById('mic').value);
+  const dose     = parseFloat(document.getElementById('dose').value);
+  const intervalo= parseFloat(document.getElementById('intervalo').value);
+  const tempo    = parseFloat(document.getElementById('tempo').value);
+  const bacteria = document.getElementById('bacteria').value;
+  const pill     = document.getElementById('status-pill');
+
+  // ── BrCAST breakpoints por bactéria
+  const panelBrcast = document.getElementById('panel-brcast');
+  if(bacteria && BRCAST[bacteria] !== undefined){
+    panelBrcast.style.display = 'block';
+    const bp = BRCAST[bacteria];
+    const interp = getBrcastInterpretacao(mic, bacteria);
+    const boxB = document.getElementById('box-brcast');
+    const bTitle = document.getElementById('brcast-title');
+    const bBody = document.getElementById('brcast-body');
+    if(bp.s === null){
+      boxB.className = 'result-box';
+      bTitle.className = 'result-title muted';
+      bTitle.textContent = bp.grupo + ' — Sem breakpoint clínico BrCAST';
+      bBody.textContent = bp.nota;
+    } else {
+      boxB.className = 'result-box ' + interp.classe;
+      bTitle.className = 'result-title ' + interp.classe;
+      bTitle.textContent = bp.grupo + ' — ' + interp.cat;
+      bBody.textContent = interp.label + '. ' + bp.nota;
+    }
+  } else {
+    panelBrcast.style.display = 'none';
+  }
+
+  // ── ClCr (Cockcroft-Gault)
+  const dadosPaciente = sexo && !isNaN(idade) && !isNaN(peso) && !isNaN(creat);
+  let clcr = null, clcrR = null;
+  let renalLabel = '—', a1Class = '', a1Title = '', a1Msg = '';
+
+  if(dadosPaciente){
+    clcr = ((140 - idade) * peso) / (72 * creat);
+    if(sexo === 'F') clcr *= 0.85;
+    clcrR = Math.round(clcr);
+    document.getElementById('m-clcr').innerHTML = clcrR + '<small>mL/min</small>';
+
+    const limN = sexo === 'F' ? 70 : 75;
+    if(clcr >= limN)        renalLabel = 'Normal';
+    else if(clcr >= 51)     renalLabel = 'Normal / Leve redução';
+    else if(clcr >= 10)     renalLabel = 'Moderada / Grave (10–50 mL/min)';
+    else                    renalLabel = 'Muito grave (<10 mL/min)';
+
+    // Critérios da bula / guideline
+    if(clcr >= 50){
+      a1Class = 'ok';
+      a1Title = clcr >= limN ? 'Sem necessidade de ajuste' : 'Sem necessidade de ajuste (leve redução)';
+      a1Msg   = `ClCr ${clcrR} mL/min — ClCr ≥ 50 mL/min: ajuste de intervalo não necessário.`;
+    } else if(clcr >= 10){
+      a1Class = 'warn';
+      a1Title = 'Ajuste necessário';
+      a1Msg   = `ClCr ${clcrR} mL/min — ClCr 10–50 mL/min: administrar a cada 24–72h com base no nível sérico.`;
+    } else {
+      a1Class = 'danger';
+      a1Title = 'Ajuste obrigatório';
+      a1Msg   = `ClCr ${clcrR} mL/min — ClCr < 10 mL/min: administrar a cada 48–72h com base no nível sérico. Considerar diálise.`;
+    }
+
+    const br = document.getElementById('box-renal');
+    br.className = 'result-box ' + a1Class;
+    br.querySelector('.result-title').className = 'result-title ' + a1Class;
+    br.querySelector('.result-title').textContent = 'Análise Renal — ' + a1Title;
+    document.getElementById('txt-renal').textContent = a1Msg;
+    document.getElementById('m-renal').textContent = renalLabel;
+
+    document.getElementById('d-clcr').textContent = clcrR + ' mL/min';
+    document.getElementById('d-renal').textContent = renalLabel;
+    document.getElementById('d-a2').textContent = a1Title;
+  } else {
+    document.getElementById('m-clcr').innerHTML = '—<small>mL/min</small>';
+    document.getElementById('m-renal').textContent = '—';
+    const br = document.getElementById('box-renal');
+    br.className = 'result-box';
+    br.querySelector('.result-title').className = 'result-title';
+    br.querySelector('.result-title').textContent = 'Aguardando dados';
+    document.getElementById('txt-renal').textContent = 'Preencha sexo, idade, peso e creatinina para calcular o ClCr.';
+  }
+
+  // ── PK (requer peso e ClCr)
+  if(!isNaN(peso) && !isNaN(mic) && !isNaN(dose) && clcr !== null){
+    // Vd amicacina: 0,25 L/kg
+    const vd = 0.25 * peso;
+
+    // ke — fórmula da planilha: ke = (ClCr × 0,0028) + 0,01
+    const ke = (clcr * 0.0028) + 0.01;
+    const t12 = 0.693 / ke;
+
+    // Cmax com ajuste ao tempo de infusão (h)
+    const tempoH = tempo / 60;
+    let cmax;
+    if(tempoH < 0.6){
+      // 30 min ≈ bolus
+      cmax = dose / vd;
+    } else {
+      // infusão prolongada: Cmax = (taxa/ke)*(1-e^(-ke*tinf))
+      const taxa = dose / vd / tempoH;
+      cmax = (taxa / ke) * (1 - Math.exp(-ke * tempoH));
+    }
+
+    const cmaxAlvo = mic * 10;
+    const ratio    = cmax / mic;
+    const doseKg   = dose / peso;
+
+    // Vale sérico no final do intervalo
+    const vale = cmax * Math.exp(-ke * intervalo);
+
+    document.getElementById('m-vd').innerHTML      = vd.toFixed(1)    + '<small>L</small>';
+    document.getElementById('m-ke').innerHTML      = ke.toFixed(4)    + '<small>h⁻¹</small>';
+    document.getElementById('m-t12').innerHTML     = t12.toFixed(2)   + '<small>h</small>';
+    document.getElementById('m-cmax').innerHTML    = cmax.toFixed(1)  + '<small>mg/L</small>';
+    document.getElementById('m-cmax-alvo').innerHTML = cmaxAlvo.toFixed(0) + '<small>mg/L</small>';
+    document.getElementById('m-ratio').innerHTML   = ratio.toFixed(1);
+
+    // ── Análise da dose — critérios da planilha
+    let a2Class, a2Title, a2Msg;
+    if(ratio < 8){
+      a2Class = 'danger';
+      a2Title = '❌ Falha PK/PD';
+      a2Msg   = `Cmax/MIC = ${ratio.toFixed(1)} < 8. Razão sub-terapêutica. Aumente a dose.`;
+    } else if(doseKg < 15){
+      a2Class = 'warn';
+      a2Title = '⚠️ Alvo OK, mas Subdose por peso';
+      a2Msg   = `Cmax/MIC = ${ratio.toFixed(1)} (≥ 8). Porém dose por peso = ${doseKg.toFixed(1)} mg/kg — abaixo de 15 mg/kg. Avaliar aumento de dose.`;
+    } else if(doseKg > 30){
+      a2Class = 'warn';
+      a2Title = '⚠️ Alvo OK, mas Dose Elevada';
+      a2Msg   = `Cmax/MIC = ${ratio.toFixed(1)}. Dose por peso = ${doseKg.toFixed(1)} mg/kg — acima de 30 mg/kg. Avaliar toxicidade.`;
+    } else {
+      a2Class = 'ok';
+      a2Title = '✅ Ajuste Ideal';
+      a2Msg   = `Cmax/MIC = ${ratio.toFixed(1)} ≥ 8. Dose = ${doseKg.toFixed(1)} mg/kg (faixa 15–30 mg/kg). Parâmetros PK adequados.`;
+    }
+
+    const bd = document.getElementById('box-dose');
+    bd.className = 'result-box ' + a2Class;
+    bd.querySelector('.result-title').className = 'result-title ' + a2Class;
+    bd.querySelector('.result-title').textContent = 'Adequação da Dose — ' + a2Title;
+    document.getElementById('txt-dose').textContent = a2Msg;
+
+    // ── Vale sérico (segurança) — fórmula da planilha
+    let vsClass, vsTitle, vsMsg;
+    if(isNaN(intervalo)){
+      vsClass = ''; vsTitle = 'Defina Intervalo'; vsMsg = 'Selecione o intervalo para calcular o vale.';
+    } else if(vale > 5){
+      vsClass = 'danger';
+      vsTitle = '🛑 Tóxico';
+      vsMsg   = `Vale sérico estimado: ${vale.toFixed(1)} mg/L > 5 mg/L. Risco elevado de nefrotoxicidade/ototoxicidade. Revisar intervalo ou dose.`;
+    } else {
+      vsClass = 'ok';
+      vsTitle = '✅ Seguro';
+      vsMsg   = `Vale sérico estimado: ${vale.toFixed(1)} mg/L (< 5 mg/L). Risco de toxicidade baixo.`;
+    }
+
+    const bv = document.getElementById('box-vale');
+    bv.className = 'result-box ' + vsClass;
+    bv.querySelector('.result-title').className = 'result-title ' + vsClass;
+    bv.querySelector('.result-title').textContent = 'Vale Sérico — ' + vsTitle;
+    document.getElementById('txt-vale').textContent = vsMsg;
+
+    // Status pill
+    if(a2Class === 'ok' && vsClass === 'ok' && a1Class !== 'danger'){
+      pill.className = 'status-pill ok'; pill.textContent = 'Parâmetros adequados';
+    } else if(a2Class === 'danger' || vsClass === 'danger'){
+      pill.className = 'status-pill danger'; pill.textContent = 'Revisar — ação necessária';
+    } else {
+      pill.className = 'status-pill warn'; pill.textContent = 'Atenção — avaliar ajuste';
+    }
+
+    // Detalhamento
+    document.getElementById('d-dose').textContent      = dose + ' mg';
+    document.getElementById('d-intervalo').textContent = intervalo + ' h';
+    document.getElementById('d-tempo').textContent     = tempo + ' min';
+    document.getElementById('d-mic').textContent       = mic + ' mg/L';
+    document.getElementById('d-vd').textContent        = vd.toFixed(1) + ' L';
+    document.getElementById('d-ke').textContent        = ke.toFixed(4) + ' h⁻¹';
+    document.getElementById('d-t12').textContent       = t12.toFixed(2) + ' h';
+    document.getElementById('d-cmax').textContent      = cmax.toFixed(1) + ' mg/L';
+    document.getElementById('d-cmax-alvo').textContent = cmaxAlvo.toFixed(0) + ' mg/L';
+    document.getElementById('d-ratio').textContent     = ratio.toFixed(1);
+    document.getElementById('d-dose-kg').textContent   = doseKg.toFixed(1) + ' mg/kg';
+    document.getElementById('d-vale').textContent      = vale.toFixed(1) + ' mg/L';
+    document.getElementById('d-a1').textContent        = a2Title;
+
+    lastData = {cmax, ke, intervalo, mic, cmaxAlvo};
+    if(document.getElementById('chart-wrap').classList.contains('open') && lastData){
+      drawChart(lastData);
+    }
+  }
+}
+
+function toggleChart(){
+  const wrap = document.getElementById('chart-wrap');
+  wrap.classList.toggle('open');
+  const btn = document.getElementById('btn-chart');
+  if(wrap.classList.contains('open')){
+    btn.textContent = '✕ Fechar gráfico';
+    if(lastData) drawChart(lastData);
+  } else {
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Gerar gráfico de decaimento`;
+    if(chartInstance){ chartInstance.destroy(); chartInstance = null; }
+  }
+}
+
+function drawChart(d){
+  const {cmax, ke, intervalo, mic, cmaxAlvo} = d;
+  // Use integer hour points only
+  const labels = [];
+  const serum = [], micArr = [], cmaxArr = [], limTox = [];
+
+  for(let t = 0; t <= intervalo; t++){
+    labels.push(t + 'h');
+    serum.push(parseFloat((cmax * Math.exp(-ke * t)).toFixed(2)));
+    micArr.push(mic);
+    cmaxArr.push(cmaxAlvo);
+    limTox.push(5);
+  }
+
+  if(chartInstance){ chartInstance.destroy(); }
+  const ctx = document.getElementById('decay-chart').getContext('2d');
+  chartInstance = new Chart(ctx,{
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        {label:'Conc. sérica (mg/L)',data:serum,borderColor:'#0A7EA4',backgroundColor:'rgba(10,126,164,0.10)',borderWidth:2.2,pointRadius:3,pointBackgroundColor:'#0A7EA4',tension:0.2,fill:true},
+        {label:`MIC (${mic} mg/L)`,data:micArr,borderColor:'rgba(192,57,43,0.7)',borderWidth:1.5,borderDash:[5,4],pointRadius:0,fill:false},
+        {label:`Cmax alvo 10×MIC (${cmaxAlvo} mg/L)`,data:cmaxArr,borderColor:'rgba(26,107,74,0.6)',borderWidth:1.5,borderDash:[3,3],pointRadius:0,fill:false},
+        {label:'Limite vale tóxico (5 mg/L)',data:limTox,borderColor:'rgba(180,83,9,0.5)',borderWidth:1,borderDash:[2,5],pointRadius:0,fill:false}
+      ]
+    },
+    options:{
+      responsive:true,
+      animation:{duration:500},
+      plugins:{
+        legend:{labels:{color:'#627D98',font:{size:10,family:'JetBrains Mono'}}},
+        tooltip:{callbacks:{
+          title: c => c[0].label,
+          label: c => c.dataset.label+': '+c.parsed.y.toFixed(1)+' mg/L'
+        }}
+      },
+      scales:{
+        x:{
+          title:{display:true,text:'Tempo até próxima dose (h)',color:'#627D98',font:{size:10}},
+          ticks:{color:'#627D98',font:{size:9,family:'JetBrains Mono'},maxRotation:0},
+          grid:{color:'rgba(0,0,0,0.05)'}
+        },
+        y:{
+          title:{display:true,text:'Concentração (mg/L)',color:'#627D98',font:{size:10}},
+          ticks:{color:'#627D98',font:{size:9,family:'JetBrains Mono'}},
+          grid:{color:'rgba(0,0,0,0.05)'},
+          min:0
+        }
+      }
+    }
+  });
+}
+
+function toggleDetail(){
+  const det = document.getElementById('det-wrap');
+  const btn = document.getElementById('btn-det');
+  det.classList.toggle('open');
+  btn.textContent = det.classList.contains('open') ? '▲ Fechar detalhamento' : '▼ Detalhamento do cálculo';
+}
+
+function gerarPDF(){
+  // Abre gráfico e detalhamento antes de imprimir
+  const chart = document.getElementById('chart-wrap');
+  const det   = document.getElementById('det-wrap');
+  const wasChart  = chart.classList.contains('open');
+  const wasDet    = det.classList.contains('open');
+  if(!wasChart && lastData){ chart.classList.add('open'); drawChart(lastData); }
+  if(!wasDet){ det.classList.add('open'); }
+  setTimeout(()=>{
+    window.print();
+    if(!wasChart){ chart.classList.remove('open'); if(chartInstance){ chartInstance.destroy(); chartInstance=null; } }
+    if(!wasDet){ det.classList.remove('open'); }
+  }, 400);
+}
+
+function resetar(){
+  ['sexo','bacteria'].forEach(id=>document.getElementById(id).value='');  document.getElementById('mic').value='1';
+  document.getElementById('dose').value='500';
+  document.getElementById('intervalo').value='24';
+  document.getElementById('tempo').value='30';
+  ['idade','peso','creat'].forEach(id=>document.getElementById(id).value='');
+  if(chartInstance){chartInstance.destroy();chartInstance=null;}
+  document.getElementById('chart-wrap').classList.remove('open');
+  document.getElementById('btn-chart').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Gerar gráfico de decaimento`;
+  document.getElementById('det-wrap').classList.remove('open');
+  lastData=null;
+  calcular();
+}
+
+calcular();
+</script>
+</body>
+</html>
