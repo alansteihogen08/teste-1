@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora PK/PD — Vancomicina</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4F8;--surface:#FFFFFF;--surface2:#F7FAFC;
+  --border:#D9E2EC;--border2:#BCCCDC;
+  --accent:#6B21A8;--accent2:#1A6B4A;
+  --warn:#B45309;--danger:#C0392B;--ok:#1A6B4A;
+  --text:#1A202C;--muted:#627D98;
+  --font:'Syne',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem 1rem 3rem;}
+
+.header{max-width:1060px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+.header-left h1{font-size:clamp(14px,2.2vw,20px);font-weight:800;letter-spacing:-0.02em;color:var(--accent);}
+.header-sub{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:0.05em;font-weight:500;}
+.header-author{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:0.04em;}
+.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+
+.status-pill{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);transition:all .3s;}
+.status-pill.ok{background:#E6F4EE;border-color:#A8D9C0;color:var(--ok);}
+.status-pill.warn{background:#FEF3C7;border-color:#FCD34D;color:var(--warn);}
+.status-pill.danger{background:#FAEAEA;border-color:#E8AAAA;color:var(--danger);}
+
+.btn-pdf{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;transition:opacity .2s;}
+.btn-pdf:hover{opacity:.85;}
+.btn-pdf svg{width:13px;height:13px;}
+
+.wrap{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:1.25rem;align-items:start;}
+@media(max-width:740px){.wrap{grid-template-columns:1fr;}}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;}
+.panel:last-child{margin-bottom:0;}
+.panel-head{padding:.65rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--surface2);}
+.panel-head-dot{width:7px;height:7px;border-radius:50%;}
+.panel-head h2{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.panel-body{padding:1rem;}
+
+label{display:block;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;padding:7px 10px;outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--accent);}
+.form-row{margin-bottom:.8rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+
+.btn-calc{width:100%;margin-top:.4rem;padding:9px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:0.06em;cursor:pointer;transition:opacity .2s;}
+.btn-calc:hover{opacity:.88;}
+.btn-reset{width:100%;margin-top:.4rem;padding:7px;border:1px solid var(--border2);border-radius:7px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-reset:hover{border-color:var(--muted);color:var(--text);}
+
+.metric-grid{display:grid;gap:.65rem;padding:1rem;}
+.mg5{grid-template-columns:repeat(5,1fr);}
+.mg3{grid-template-columns:repeat(3,1fr);}
+.mg2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:740px){.mg5,.mg3{grid-template-columns:repeat(2,1fr);}.mg2{grid-template-columns:1fr 1fr;}}
+.metric{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.7rem .85rem;}
+.metric-label{font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;line-height:1.4;}
+.metric-value{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);}
+.metric-value small{font-size:10px;color:var(--muted);margin-left:2px;}
+.metric.c-accent .metric-value{color:var(--accent);}
+.metric.c-green .metric-value{color:var(--ok);}
+.metric.c-warn .metric-value{color:var(--warn);}
+.metric.c-blue .metric-value{color:#0369A1;}
+
+.result-box{margin:0 1rem 1rem;padding:.9rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);}
+.result-box.ok{border-color:#A8D9C0;background:#E6F4EE;}
+.result-box.warn{border-color:#FCD34D;background:#FEF3C7;}
+.result-box.danger{border-color:#E8AAAA;background:#FAEAEA;}
+.result-title{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;color:var(--muted);}
+.result-title.ok{color:var(--ok);}
+.result-title.warn{color:var(--warn);}
+.result-title.danger{color:var(--danger);}
+.result-body{font-size:13px;line-height:1.6;color:var(--text);}
+
+.section-label{padding:.55rem 1rem .25rem;font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+
+.mic-badge{display:inline-block;margin-top:5px;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:0.05em;}
+.mic-badge.s{background:#E6F4EE;color:var(--ok);border:1px solid #A8D9C0;}
+.mic-badge.r{background:#FAEAEA;color:var(--danger);border:1px solid #E8AAAA;}
+
+.chart-btn{margin:0 1rem 1rem;padding:8px;border:1px dashed var(--border2);border-radius:8px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.06em;cursor:pointer;width:calc(100% - 2rem);transition:all .3s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.chart-btn:hover{border-color:var(--accent);color:var(--accent);}
+.chart-btn svg{width:14px;height:14px;}
+.chart-wrap{display:none;margin:0 1rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.chart-wrap.open{display:block;}
+.chart-wrap canvas{max-height:220px;}
+
+.detail-toggle{margin:0 1rem 1rem;padding:7px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.08em;cursor:pointer;width:calc(100% - 2rem);transition:all .2s;}
+.detail-toggle:hover{border-color:var(--muted);}
+.detail-table{display:none;margin:0 1rem 1rem;}
+.detail-table.open{display:block;}
+table.det{width:100%;border-collapse:collapse;font-size:12px;}
+table.det td{padding:6px 10px;border-bottom:1px solid var(--border);}
+table.det tr:last-child td{border-bottom:none;}
+table.det tr:hover td{background:var(--surface2);}
+table.det td:first-child{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;width:55%;}
+table.det td:last-child{font-family:var(--mono);color:var(--text);}
+
+.info-box{margin:0 1rem 1rem;padding:.8rem 1rem;border-radius:8px;border:1px solid #C4B5FD;background:#F5F3FF;font-size:11.5px;line-height:1.7;color:#5B21B6;}
+.info-box strong{font-weight:700;}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .btn-pdf,.btn-calc,.btn-reset,.chart-btn,.detail-toggle{display:none!important;}
+  .wrap{display:block;}
+  .panel{break-inside:avoid;margin-bottom:1rem;}
+  .chart-wrap,.detail-table{display:block!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Calculadora PK/PD — Vancomicina · AUC₂₄/MIC</h1>
+    <div class="header-sub">Modelo Matzke · ClVanco = ClCr × 0,06 · Vd = 0,7 L/kg · Ke = ClVanco/Vd · Alvo AUC₂₄/MIC 400–600 mg·h/L</div>
+    <div class="header-author">Desenvolvido por Alan Steihogen</div>
+  </div>
+  <div class="header-right">
+    <div id="status-pill" class="status-pill">Aguardando dados</div>
+    <button class="btn-pdf" onclick="gerarPDF()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
+      </svg>
+      Gerar PDF
+    </button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div>
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:var(--accent)"></div>
+      <h2>Dados do Paciente</h2>
+    </div>
+    <div class="panel-body">
+      <div class="form-grid">
+        <div class="form-row"><label>Sexo</label>
+          <select id="sexo" onchange="calcular()">
+            <option value="">—</option>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Idade (anos)</label>
+          <input type="number" id="idade" placeholder="Ex: 45" oninput="calcular()">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row"><label>Peso (kg)</label>
+          <input type="number" id="peso" placeholder="Ex: 70" oninput="calcular()">
+        </div>
+        <div class="form-row"><label>Creatinina (mg/dL)</label>
+          <input type="number" step="0.01" id="creat" placeholder="Ex: 1.2" oninput="calcular()">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>MIC (mg/L)</label>
+        <select id="mic" onchange="calcular()">
+          <option value="0.25">0,25 mg/L — Sensível</option>
+          <option value="0.5">0,50 mg/L — Sensível</option>
+          <option value="1" selected>1 mg/L — Sensível · padrão empírico ASHP 2020</option>
+          <option value="2">2 mg/L — Resistente (não recomendado)</option>
+        </select>
+        <div id="mic-badge"></div>
+      </div>
+
+      <div class="form-row"><label>Bactéria isolada (opcional)</label>
+        <select id="bacteria" onchange="calcular()">
+          <option value="">Selecione...</option>
+          <option value="MRSA">MRSA</option>
+          <option value="MSSA">MSSA</option>
+          <option value="S. epidermidis">S. epidermidis</option>
+          <option value="E. faecalis">E. faecalis</option>
+          <option value="S. pneumoniae">S. pneumoniae</option>
+          <option value="Outro">Outro gram-positivo</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:var(--accent2)"></div>
+      <h2>Dose Prescrita</h2>
+    </div>
+    <div class="panel-body">
+      <div class="form-row"><label>Dose por intervalo (mg)</label>
+        <select id="dose" onchange="calcular()">
+          <option value="500">500 mg</option>
+          <option value="750">750 mg</option>
+          <option value="1000">1000 mg</option>
+          <option value="1250">1250 mg</option>
+          <option value="1500">1500 mg</option>
+          <option value="1750">1750 mg</option>
+          <option value="2000" selected>2000 mg</option>
+          <option value="2500">2500 mg</option>
+          <option value="3000">3000 mg</option>
+        </select>
+      </div>
+      <div class="form-grid">
+        <div class="form-row"><label>Intervalo τ (h)</label>
+          <select id="intervalo" onchange="calcular()">
+            <option value="6">6 h</option>
+            <option value="8" selected>8 h</option>
+            <option value="12">12 h</option>
+            <option value="24">24 h</option>
+            <option value="48">48 h</option>
+            <option value="72">72 h</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Tempo de infusão</label>
+          <select id="tempo" onchange="calcular()">
+            <option value="1">60 min</option>
+            <option value="1.5" selected>90 min</option>
+            <option value="2">120 min</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
+      <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:#7C3AED"></div>
+      <h2>Meta Terapêutica</h2>
+    </div>
+    <div class="info-box" style="margin:1rem;margin-bottom:1rem">
+      <strong>Alvo AUC₂₄/MIC:</strong> 400–600 mg·h/L (ASHP/IDSA/SIDP 2020)<br>
+      <strong>MIC empírico padrão:</strong> 1 mg/L → AUC₂₄ alvo 400–600 mg·h/L<br>
+      <strong>MIC ≥ 2 mg/L:</strong> resistente — reavaliar antimicrobiano<br>
+      <strong>Dose de ataque:</strong> 25 mg/kg (máx 3000 mg) em pacientes críticos<br>
+      <strong>Concentração de infusão:</strong> ≤ 5 mg/mL em SF 0,9%
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:var(--accent)"></div>
+      <h2>Parâmetros PK — Modelo Matzke</h2>
+    </div>
+    <div class="metric-grid mg5">
+      <div class="metric c-accent"><div class="metric-label">Vd</div><div class="metric-value" id="m-vd">—<small>L</small></div></div>
+      <div class="metric c-accent"><div class="metric-label">ClVanco</div><div class="metric-value" id="m-clv">—<small>L/h</small></div></div>
+      <div class="metric c-accent"><div class="metric-label">Ke</div><div class="metric-value" id="m-ke">—<small>h⁻¹</small></div></div>
+      <div class="metric"><div class="metric-label">T½ ajustada</div><div class="metric-value" id="m-t12">—<small>h</small></div></div>
+      <div class="metric c-green"><div class="metric-label">AUC₂₄ atual</div><div class="metric-value" id="m-auc">—<small>mg·h/L</small></div></div>
+    </div>
+
+    <div class="section-label">Concentrações em steady-state</div>
+    <div class="metric-grid mg2" style="padding-top:.5rem">
+      <div class="metric c-blue">
+        <div class="metric-label">Cpeak (fim da infusão)</div>
+        <div class="metric-value" id="m-cpeak">—<small>mg/L</small></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Ctrough (pré-dose)</div>
+        <div class="metric-value" id="m-ctrough">—<small>mg/L</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-brcast" style="display:none">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:#7C3AED"></div>
+      <h2>Pontos de Corte BrCAST-EUCAST v14.0</h2>
+    </div>
+    <div class="result-box" id="box-brcast" style="margin:1rem">
+      <div class="result-title" id="brcast-title">—</div>
+      <div class="result-body" id="brcast-body">—</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:var(--warn)"></div>
+      <h2>Análise 1 — Função Renal (Cockcroft-Gault)</h2>
+    </div>
+    <div class="metric-grid mg2">
+      <div class="metric"><div class="metric-label">ClCr</div><div class="metric-value" id="m-clcr">—<small>mL/min</small></div></div>
+      <div class="metric"><div class="metric-label">Categoria renal</div><div class="metric-value" id="m-renal" style="font-size:13px;padding-top:2px">—</div></div>
+    </div>
+    <div class="result-box" id="box-renal">
+      <div class="result-title">Aguardando dados</div>
+      <div class="result-body" id="txt-renal">Preencha sexo, idade, peso e creatinina para calcular o ClCr.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:var(--accent2)"></div>
+      <h2>Análise 2 — Adequação da Dose · AUC₂₄/MIC 400–600</h2>
+    </div>
+    <div class="metric-grid mg3">
+      <div class="metric">
+        <div class="metric-label">Dose de Ataque (25 mg/kg)</div>
+        <div class="metric-value" id="m-ataque">—<small>mg</small></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Dose Teórica</div>
+        <div class="metric-value" id="m-teorica">—<small>mg</small></div>
+      </div>
+      <div class="metric c-green">
+        <div class="metric-label">Dose Prática (arred. 250 mg)</div>
+        <div class="metric-value" id="m-pratica">—<small>mg</small></div>
+      </div>
+    </div>
+    <div class="result-box" id="box-auc">
+      <div class="result-title">Aguardando cálculo</div>
+      <div class="result-body" id="txt-auc">Preencha os dados do paciente.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:#0369A1"></div>
+      <h2>Análise 3 — Segurança e Preparo</h2>
+    </div>
+    <div class="metric-grid mg2">
+      <div class="metric c-blue">
+        <div class="metric-label">Volume SF 0,9% sugerido</div>
+        <div class="metric-value" id="m-vol">—<small>mL</small></div>
+      </div>
+      <div class="metric c-blue">
+        <div class="metric-label">Tempo de infusão sugerido</div>
+        <div class="metric-value" id="m-tinf" style="font-size:15px">—</div>
+      </div>
+    </div>
+    <div class="result-box" id="box-seg">
+      <div class="result-title">Aguardando cálculo</div>
+      <div class="result-body" id="txt-seg">—</div>
+    </div>
+
+    <button class="chart-btn" id="btn-chart" onclick="toggleChart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Gerar gráfico de decaimento sérico
+    </button>
+    <div class="chart-wrap" id="chart-wrap">
+      <canvas id="decay-chart"></canvas>
+    </div>
+
+    <button class="detail-toggle" id="btn-det" onclick="toggleDetail()">▼ Detalhamento do cálculo</button>
+    <div class="detail-table" id="det-wrap">
+      <table class="det">
+        <tr><td>ClCr calculado</td><td id="d-clcr">—</td></tr>
+        <tr><td>Vd (0,7 L/kg)</td><td id="d-vd">—</td></tr>
+        <tr><td>ClVanco (ClCr × 0,06)</td><td id="d-clv">—</td></tr>
+        <tr><td>Ke (ClVanco / Vd)</td><td id="d-ke">—</td></tr>
+        <tr><td>T½ ajustada</td><td id="d-t12">—</td></tr>
+        <tr><td>Cpeak ss</td><td id="d-cpeak">—</td></tr>
+        <tr><td>Ctrough ss</td><td id="d-ctrough">—</td></tr>
+        <tr><td>AUC₂₄ Calculada</td><td id="d-auc24">—</td></tr>
+        <tr><td>AUC/MIC Ratio</td><td id="d-auc-ratio">—</td></tr>
+        <tr><td>Dose Teórica (AUC 500)</td><td id="d-teorica">—</td></tr>
+        <tr><td>Volume de Diluição</td><td id="d-vol">—</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+let chartInstance = null;
+let lastChart     = null;
+
+const BRCAST = {
+  'MRSA':          {s:2,   r:2,   grupo:'Staphylococcus aureus (MRSA)',    nota:'S ≤ 2 / R > 2 mg/L. MIC ≥ 2 → alta taxa de falha mesmo com AUC otimizada. EUCAST v14.0.'},
+  'MSSA':          {s:2,   r:2,   grupo:'Staphylococcus aureus (MSSA)',    nota:'S ≤ 2 / R > 2 mg/L. Para MSSA, preferir oxacilina ou cefazolina. EUCAST v14.0.'},
+  'S. epidermidis':{s:2,   r:2,   grupo:'Staphylococcus epidermidis',      nota:'S ≤ 2 / R > 2 mg/L. EUCAST v14.0.'},
+  'E. faecalis':   {s:4,   r:4,   grupo:'Enterococcus faecalis',           nota:'S ≤ 4 / R > 4 mg/L. Monoterapia pode ser insuficiente. EUCAST v14.0.'},
+  'S. pneumoniae': {s:2,   r:2,   grupo:'Streptococcus pneumoniae',        nota:'S ≤ 2 / R > 2 mg/L. EUCAST v14.0.'},
+};
+
+function getBrcast(mic, bacteria){
+  const bp = BRCAST[bacteria];
+  if(!bp) return null;
+  return mic<=bp.s ? {cat:'Sensível (S)', classe:'ok'} : {cat:'Resistente (R)', classe:'danger'};
+}
+
+function calcular(){
+  const sexo     = document.getElementById('sexo').value;
+  const idade    = parseFloat(document.getElementById('idade').value);
+  const peso     = parseFloat(document.getElementById('peso').value);
+  const creat    = parseFloat(document.getElementById('creat').value);
+  const mic      = parseFloat(document.getElementById('mic').value);
+  const dose     = parseFloat(document.getElementById('dose').value);
+  const tau      = parseFloat(document.getElementById('intervalo').value);
+  const tinfH    = parseFloat(document.getElementById('tempo').value);
+  const bacteria = document.getElementById('bacteria').value;
+  const pill     = document.getElementById('status-pill');
+
+  const mb = document.getElementById('mic-badge');
+  if(!isNaN(mic)){
+    mb.innerHTML = mic<=1
+      ? '<span class="mic-badge s">✓ Sensível — AUC/MIC viável</span>'
+      : '<span class="mic-badge r">✗ MIC 2 mg/L — Resistente · Reavaliar antibiótico</span>';
+  }
+
+  const panelBR = document.getElementById('panel-brcast');
+  if(bacteria && BRCAST[bacteria]){
+    panelBR.style.display = 'block';
+    const bp = BRCAST[bacteria];
+    const interp = getBrcast(mic, bacteria);
+    const boxB  = document.getElementById('box-brcast');
+    const bT    = document.getElementById('brcast-title');
+    const bB    = document.getElementById('brcast-body');
+    boxB.className='result-box '+interp.classe; bT.className='result-title '+interp.classe;
+    bT.textContent = bp.grupo+' — '+interp.cat+' (S ≤'+bp.s+' R >'+bp.r+')';
+    bB.textContent = bp.nota;
+  } else {
+    panelBR.style.display = 'none';
+  }
+
+  const temDados = sexo && !isNaN(idade) && !isNaN(peso) && !isNaN(creat) && creat>0;
+  let clcr = null;
+
+  if(temDados){
+    clcr = ((140-idade)*peso)/(72*creat);
+    if(sexo==='F') clcr *= 0.85;
+    const clcrR = Math.round(clcr);
+    let a1Class = clcr>=50?'ok':'warn';
+    if(clcr<10) a1Class='danger';
+
+    document.getElementById('m-clcr').innerHTML = clcrR+'<small>mL/min</small>';
+    const br = document.getElementById('box-renal');
+    br.className = 'result-box '+a1Class;
+    br.querySelector('.result-title').textContent = 'Análise Renal';
+    document.getElementById('txt-renal').textContent = `ClCr ${clcrR} mL/min. Avaliar dose de acordo com a função renal.`;
+    document.getElementById('d-clcr').textContent  = clcrR+' mL/min';
+  }
+
+  if(!temDados || isNaN(mic)) return;
+
+  const vd  = 0.7 * peso;
+  const clv = clcr * 0.06;
+  const ke  = clv / vd;
+  const t12 = Math.LN2 / ke;
+
+  const cpeak   = (dose*(1 - Math.exp(-ke*tinfH))) / (tinfH * vd * ke * (1 - Math.exp(-ke*tau)));
+  const ctrough = cpeak * Math.exp(-ke*(tau - tinfH));
+  const auc24   = (dose * (24/tau)) / clv;
+
+  const aucAlvo  = 500 * mic;
+  const doseTeo  = aucAlvo * clv * (tau/24);
+  const dosePrat = Math.round(doseTeo/250)*250;
+  const doseAtq = Math.min(Math.round(25*peso/250)*250, 3000);
+
+  const vol     = Math.max(Math.ceil(dosePrat/5/50)*50, 200);
+  const concSol = (dosePrat/vol).toFixed(2);
+  const tinfStr = dosePrat<=1000 ? '60 min' : dosePrat<=1500 ? '90 min' : '120 min';
+
+  document.getElementById('m-vd').innerHTML     = vd.toFixed(1)+'<small>L</small>';
+  document.getElementById('m-clv').innerHTML    = clv.toFixed(3)+'<small>L/h</small>';
+  document.getElementById('m-ke').innerHTML     = ke.toFixed(4)+'<small>h⁻¹</small>';
+  document.getElementById('m-t12').innerHTML    = t12.toFixed(2)+'<small>h</small>';
+  document.getElementById('m-auc').innerHTML    = auc24.toFixed(0)+'<small>mg·h/L</small>';
+  document.getElementById('m-cpeak').innerHTML  = cpeak.toFixed(1)+'<small>mg/L</small>';
+  document.getElementById('m-ctrough').innerHTML= ctrough.toFixed(1)+'<small>mg/L</small>';
+  document.getElementById('m-ataque').innerHTML  = doseAtq+'<small>mg</small>';
+  document.getElementById('m-teorica').innerHTML = doseTeo.toFixed(0)+'<small>mg</small>';
+  document.getElementById('m-pratica').innerHTML = dosePrat+'<small>mg</small>';
+  document.getElementById('m-vol').innerHTML     = vol+'<small>mL</small>';
+  document.getElementById('m-tinf').textContent  = tinfStr;
+
+  let aucClass = (auc24>=400 && auc24<=600)?'ok': (auc24>600?'warn':'danger');
+  if(mic>=2) aucClass='danger';
+  const ba = document.getElementById('box-auc');
+  ba.className = 'result-box '+aucClass;
+  ba.querySelector('.result-title').textContent = 'Análise AUC₂₄/MIC';
+  document.getElementById('txt-auc').textContent = `AUC/MIC atual: ${(auc24/mic).toFixed(0)}. Sugestão: ${dosePrat}mg cada ${tau}h.`;
+
+  const bs = document.getElementById('box-seg');
+  let segClass = parseFloat(concSol)>5?'danger':'ok';
+  bs.className = 'result-box '+segClass;
+  document.getElementById('txt-seg').textContent = `Dose em ${vol}mL SF 0,9% (${concSol} mg/mL). Infundir em ${tinfStr}.`;
+
+  pill.className='status-pill '+(aucClass==='ok'?'ok':'warn');
+  pill.textContent = aucClass==='ok'?'Parâmetros Adequados':'Revisar Ajuste';
+
+  document.getElementById('d-vd').textContent       = vd.toFixed(1)+' L';
+  document.getElementById('d-clv').textContent      = clv.toFixed(4)+' L/h';
+  document.getElementById('d-ke').textContent       = ke.toFixed(4)+' h⁻¹';
+  document.getElementById('d-auc24').textContent    = auc24.toFixed(1)+' mg·h/L';
+  document.getElementById('d-auc-ratio').textContent= (auc24/mic).toFixed(1);
+  document.getElementById('d-teorica').textContent  = doseTeo.toFixed(0)+' mg';
+  document.getElementById('d-vol').textContent      = vol+' mL';
+
+  lastChart = {ke, tau, tinfH, cpeak, ctrough, mic, auc24};
+  if(document.getElementById('chart-wrap').classList.contains('open')) drawChart(lastChart);
+}
+
+function toggleChart(){
+  const wrap = document.getElementById('chart-wrap');
+  wrap.classList.toggle('open');
+  if(wrap.classList.contains('open') && lastChart) drawChart(lastChart);
+}
+
+function drawChart(d){
+  const {ke, tau, tinfH, cpeak, ctrough, mic, auc24} = d;
+  const labels=[], serum=[];
+  for(let i=0; i<=tau; i++){
+    labels.push(i+'h');
+    let c = i<=tinfH ? (cpeak/tinfH)*i : cpeak * Math.exp(-ke*(i-tinfH));
+    serum.push(parseFloat(c.toFixed(2)));
+  }
+  if(chartInstance) chartInstance.destroy();
+  const ctx = document.getElementById('decay-chart').getContext('2d');
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Concentração (mg/L)',
+        data: serum,
+        borderColor: '#6B21A8',
+        backgroundColor: 'rgba(107,33,168,0.1)',
+        fill: true, tension: 0.3
+      }]
+    },
+    options: { responsive: true, scales: { y: { min: 0 } } }
+  });
+}
+
+function toggleDetail(){
+  document.getElementById('det-wrap').classList.toggle('open');
+}
+
+function gerarPDF(){ window.print(); }
+
+function resetar(){
+  location.reload();
+}
+
+calcular();
+</script>
+</body>
+</html>
