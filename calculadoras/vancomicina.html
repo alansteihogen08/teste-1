@@ -24,8 +24,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .status-pill{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);transition:all .3s;}
 .status-pill.ok{background:#E6F4EE;border-color:#A8D9C0;color:var(--ok);}
+.status-pill.warn{background:#FEF3C7;border-color:#FCD34D;color:var(--warn);}
 .status-pill.danger{background:#FAEAEA;border-color:#E8AAAA;color:var(--danger);}
 .btn-pdf{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;transition:opacity .2s;}
+.btn-pdf svg{width:13px;height:13px;}
 .wrap{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:1.25rem;align-items:start;}
 @media(max-width:740px){.wrap{grid-template-columns:1fr;}}
 .panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;}
@@ -34,81 +36,175 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .panel-head h2{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
 .panel-body{padding:1rem;}
 label{display:block;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;padding:7px 10px;outline:none;}
+input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;padding:7px 10px;outline:none;transition:border-color .2s;}
 .form-row{margin-bottom:.8rem;}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
-.btn-calc{width:100%;margin-top:.4rem;padding:9px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;}
+.btn-calc{width:100%;margin-top:.4rem;padding:9px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:0.06em;cursor:pointer;transition:opacity .2s;}
+.btn-reset{width:100%;margin-top:.4rem;padding:7px;border:1px solid var(--border2);border-radius:7px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;}
 .metric-grid{display:grid;gap:.65rem;padding:1rem;}
 .mg5{grid-template-columns:repeat(5,1fr);}
-.mg2{grid-template-columns:1fr 1fr;}
+.mg3{grid-template-columns:repeat(3,1fr);}
+.mg2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:740px){.mg5,.mg3{grid-template-columns:repeat(2,1fr);}.mg2{grid-template-columns:1fr 1fr;}}
 .metric{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.7rem .85rem;}
-.metric-label{font-size:9px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
-.metric-value{font-family:var(--mono);font-size:17px;font-weight:500;}
+.metric-label{font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;line-height:1.4;}
+.metric-value{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);}
+.metric-value small{font-size:10px;color:var(--muted);margin-left:2px;}
+.metric.c-accent .metric-value{color:var(--accent);}
+.metric.c-green .metric-value{color:var(--ok);}
 .result-box{margin:0 1rem 1rem;padding:.9rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);}
 .result-box.ok{border-color:#A8D9C0;background:#E6F4EE;}
+.result-box.warn{border-color:#FCD34D;background:#FEF3C7;}
 .result-box.danger{border-color:#E8AAAA;background:#FAEAEA;}
+.result-title{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;color:var(--muted);}
+.result-body{font-size:13px;line-height:1.6;color:var(--text);}
+.section-label{padding:.55rem 1rem .25rem;font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+.mic-badge{display:inline-block;margin-top:5px;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:0.05em;}
+.mic-badge.s{background:#E6F4EE;color:var(--ok);border:1px solid #A8D9C0;}
+.mic-badge.r{background:#FAEAEA;color:var(--danger);border:1px solid #E8AAAA;}
+.chart-btn{margin:0 1rem 1rem;padding:8px;border:1px dashed var(--border2);border-radius:8px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.06em;cursor:pointer;width:calc(100% - 2rem);display:flex;align-items:center;justify-content:center;gap:7px;}
 .chart-wrap{display:none;margin:0 1rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;}
 .chart-wrap.open{display:block;}
-.info-box{margin:1rem;padding:.8rem 1rem;border-radius:8px;border:1px solid #C4B5FD;background:#F5F3FF;font-size:11.5px;line-height:1.7;color:#5B21B6;}
+.chart-wrap canvas{max-height:220px;}
+.detail-toggle{margin:0 1rem 1rem;padding:7px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.08em;cursor:pointer;width:calc(100% - 2rem);}
+.detail-table{display:none;margin:0 1rem 1rem;}
+.detail-table.open{display:block;}
+table.det{width:100%;border-collapse:collapse;font-size:12px;}
+table.det td{padding:6px 10px;border-bottom:1px solid var(--border);}
+table.det td:first-child{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;width:55%;}
+table.det td:last-child{font-family:var(--mono);color:var(--text);}
+.info-box{margin:0 1rem 1rem;padding:.8rem 1rem;border-radius:8px;border:1px solid #C4B5FD;background:#F5F3FF;font-size:11.5px;line-height:1.7;color:#5B21B6;}
+.ref-box{padding:.75rem 1rem;font-size:10px;line-height:1.65;color:var(--muted);border-top:1px solid var(--border);}
+@media print{
+  .btn-pdf,.btn-calc,.btn-reset,.chart-btn,.detail-toggle{display:none!important;}
+  .chart-wrap,.detail-table{display:block!important;}
+}
 </style>
 </head>
 <body>
+
 <div class="header">
   <div class="header-left">
-    <h1>Calculadora PK/PD — Vancomicina</h1>
-    <div class="header-sub">Modelo Matzke · Alvo AUC₂₄/MIC 400–600</div>
+    <h1>Calculadora PK/PD — Vancomicina · AUC₂₄/MIC</h1>
+    <div class="header-sub">Modelo Matzke · ClVanco = ClCr × 0,06 · Vd = 0,7 L/kg · Ke = ClVanco/Vd · Alvo AUC₂₄/MIC 400–600 mg·h/L</div>
     <div class="header-author">Desenvolvido por Alan Steihogen</div>
   </div>
   <div class="header-right">
     <div id="status-pill" class="status-pill">Aguardando dados</div>
-    <button class="btn-pdf" onclick="window.print()">Gerar PDF</button>
+    <button class="btn-pdf" onclick="gerarPDF()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
+      </svg>
+      Gerar PDF
+    </button>
   </div>
 </div>
+
 <div class="wrap">
 <div>
   <div class="panel">
-    <div class="panel-head"><div class="panel-head-dot" style="background:var(--accent)"></div><h2>Paciente</h2></div>
+    <div class="panel-head"><div class="panel-head-dot" style="background:var(--accent)"></div><h2>Dados do Paciente</h2></div>
     <div class="panel-body">
       <div class="form-grid">
-        <div class="form-row"><label>Sexo</label><select id="sexo"><option value="M">M</option><option value="F">F</option></select></div>
-        <div class="form-row"><label>Idade</label><input type="number" id="idade"></div>
+        <div class="form-row"><label>Sexo</label><select id="sexo" onchange="calcular()"><option value="">—</option><option value="M">Masculino</option><option value="F">Feminino</option></select></div>
+        <div class="form-row"><label>Idade (anos)</label><input type="number" id="idade" oninput="calcular()"></div>
       </div>
       <div class="form-grid">
-        <div class="form-row"><label>Peso (kg)</label><input type="number" id="peso"></div>
-        <div class="form-row"><label>Creatinina</label><input type="number" step="0.01" id="creat"></div>
+        <div class="form-row"><label>Peso (kg)</label><input type="number" id="peso" oninput="calcular()"></div>
+        <div class="form-row"><label>Creatinina (mg/dL)</label><input type="number" step="0.01" id="creat" oninput="calcular()"></div>
       </div>
-      <div class="form-row"><label>MIC (mg/L)</label><select id="mic"><option value="0.5">0.5</option><option value="1" selected>1.0</option><option value="2">2.0</option></select></div>
+      <div class="form-row">
+        <label>MIC (mg/L)</label>
+        <select id="mic" onchange="calcular()">
+          <option value="0.25">0,25 mg/L</option><option value="0.5">0,50 mg/L</option><option value="1" selected>1 mg/L</option><option value="2">2 mg/L</option>
+        </select>
+        <div id="mic-badge"></div>
+      </div>
+      <div class="form-row"><label>Bactéria isolada</label><select id="bacteria" onchange="calcular()"><option value="">Selecione...</option><option value="MRSA">MRSA</option><option value="MSSA">MSSA</option><option value="E. faecalis">E. faecalis</option></select></div>
     </div>
   </div>
+
   <div class="panel">
-    <div class="panel-head"><div class="panel-head-dot" style="background:var(--accent2)"></div><h2>Dose</h2></div>
+    <div class="panel-head"><div class="panel-head-dot" style="background:var(--accent2)"></div><h2>Dose Prescrita</h2></div>
     <div class="panel-body">
-      <div class="form-row"><label>Dose (mg)</label><input type="number" id="dose" value="1000"></div>
-      <div class="form-grid">
-        <div class="form-row"><label>Intervalo (h)</label><input type="number" id="tau" value="12"></div>
-        <div class="form-row"><label>Infusão (h)</label><input type="number" id="tinf" value="1"></div>
+      <div class="form-row"><label>Dose (mg)</label>
+        <select id="dose" onchange="calcular()">
+          <option value="500">500 mg</option><option value="1000">1000 mg</option><option value="1500">1500 mg</option><option value="2000" selected>2000 mg</option>
+        </select>
       </div>
-      <button class="btn-calc" onclick="calcular()">Calcular</button>
+      <div class="form-grid">
+        <div class="form-row"><label>Intervalo τ (h)</label><select id="intervalo" onchange="calcular()"><option value="8" selected>8 h</option><option value="12">12 h</option><option value="24">24 h</option></select></div>
+        <div class="form-row"><label>Infusão (h)</label><select id="tempo" onchange="calcular()"><option value="1">1 h</option><option value="1.5" selected>1.5 h</option><option value="2">2 h</option></select></div>
+      </div>
+      <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
+      <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
     </div>
   </div>
-</div>
-<div>
+</div><div>
   <div class="panel">
-    <div class="panel-head"><h2>Resultados PK</h2></div>
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:var(--accent)"></div>
+      <h2>Parâmetros PK — Modelo Matzke</h2>
+    </div>
     <div class="metric-grid mg5">
-      <div class="metric"><div class="metric-label">Vd</div><div class="metric-value" id="m-vd">-</div></div>
-      <div class="metric"><div class="metric-label">ClV</div><div class="metric-value" id="m-clv">-</div></div>
-      <div class="metric"><div class="metric-label">Ke</div><div class="metric-value" id="m-ke">-</div></div>
-      <div class="metric"><div class="metric-label">T1/2</div><div class="metric-value" id="m-t12">-</div></div>
-      <div class="metric"><div class="metric-label">AUC24</div><div class="metric-value" id="m-auc">-</div></div>
+      <div class="metric c-accent"><div class="metric-label">Vd</div><div class="metric-value" id="m-vd">—<small>L</small></div></div>
+      <div class="metric c-accent"><div class="metric-label">ClVanco</div><div class="metric-value" id="m-clv">—<small>L/h</small></div></div>
+      <div class="metric c-accent"><div class="metric-label">Ke</div><div class="metric-value" id="m-ke">—<small>h⁻¹</small></div></div>
+      <div class="metric"><div class="metric-label">T½</div><div class="metric-value" id="m-t12">—<small>h</small></div></div>
+      <div class="metric c-green"><div class="metric-label">AUC₂₄ atual</div><div class="metric-value" id="m-auc">—<small>mg·h/L</small></div></div>
+    </div>
+    <div class="section-label">Concentrações em steady-state</div>
+    <div class="metric-grid mg2" style="padding-top:.5rem">
+      <div class="metric"><div class="metric-label">Cpeak (Pico)</div><div class="metric-value" id="m-cpeak">—<small>mg/L</small></div></div>
+      <div class="metric"><div class="metric-label">Ctrough (Vale)</div><div class="metric-value" id="m-ctrough">—<small>mg/L</small></div></div>
     </div>
   </div>
-  <div class="result-box" id="box-auc">
-    <div id="txt-auc">Introduza os dados e clique em Calcular.</div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-head-dot" style="background:var(--warn)"></div><h2>Análise 1 — Função Renal</h2></div>
+    <div class="metric-grid mg2">
+      <div class="metric"><div class="metric-label">ClCr</div><div class="metric-value" id="m-clcr">—<small>mL/min</small></div></div>
+      <div class="metric"><div class="metric-label">Categoria</div><div class="metric-value" id="m-renal">—</div></div>
+    </div>
+    <div class="result-box" id="box-renal"><div class="result-title">Resultado</div><div class="result-body" id="txt-renal">Aguardando dados...</div></div>
   </div>
-  <div class="chart-wrap" id="chart-wrap"><canvas id="decay-chart"></canvas></div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-head-dot" style="background:var(--accent2)"></div><h2>Análise 2 — Adequação da Dose</h2></div>
+    <div class="metric-grid mg3">
+      <div class="metric"><div class="metric-label">Dose Ataque</div><div class="metric-value" id="m-ataque">—</div></div>
+      <div class="metric"><div class="metric-label">Dose Teórica</div><div class="metric-value" id="m-teorica">—</div></div>
+      <div class="metric c-green"><div class="metric-label">Dose Prática</div><div class="metric-value" id="m-pratica">—</div></div>
+    </div>
+    <div class="result-box" id="box-auc"><div class="result-title">AUC₂₄/MIC</div><div class="result-body" id="txt-auc">Aguardando cálculo...</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-head-dot" style="background:#0369A1"></div><h2>Análise 3 — Segurança e Infusão</h2></div>
+    <div class="metric-grid mg2">
+      <div class="metric"><div class="metric-label">Volume SF 0,9%</div><div class="metric-value" id="m-vol">—</div></div>
+      <div class="metric"><div class="metric-label">Tempo Sugerido</div><div class="metric-value" id="m-tinf">—</div></div>
+    </div>
+    <div class="result-box" id="box-seg"><div class="result-body" id="txt-seg">Verificação de segurança...</div></div>
+    
+    <button class="chart-btn" onclick="toggleChart()">📊 Gerar gráfico de decaimento</button>
+    <div class="chart-wrap" id="chart-wrap"><canvas id="decay-chart"></canvas></div>
+    
+    <button class="detail-toggle" id="btn-det" onclick="toggleDetail()">▼ Detalhamento do cálculo</button>
+    <div class="detail-table" id="det-wrap">
+      <table class="det">
+        <tr><td>ClCr calculado</td><td id="d-clcr">—</td></tr>
+        <tr><td>Vd (0,7 L/kg)</td><td id="d-vd">—</td></tr>
+        <tr><td>ClVanco (L/h)</td><td id="d-clv">—</td></tr>
+        <tr><td>Ke (h⁻¹)</td><td id="d-ke">—</td></tr>
+        <tr><td>AUC₂₄ / MIC</td><td id="d-auc-ratio">—</td></tr>
+      </table>
+    </div>
+  </div>
 </div>
-</div><script>
+</div>
+  
+<script>
 let chartInstance = null;
 let lastChart = null;
 
@@ -119,99 +215,105 @@ function calcular() {
   const creat = parseFloat(document.getElementById('creat').value);
   const mic = parseFloat(document.getElementById('mic').value);
   const dose = parseFloat(document.getElementById('dose').value);
-  const tau = parseFloat(document.getElementById('tau').value);
-  const tinf = parseFloat(document.getElementById('tinf').value);
+  const tau = parseFloat(document.getElementById('intervalo').value);
+  const tinfH = parseFloat(document.getElementById('tempo').value);
 
-  if (!idade || !peso || !creat || !dose) {
-    alert("Por favor, preencha todos os campos obrigatórios.");
-    return;
-  }
+  if (!sexo || !idade || !peso || !creat) return;
 
-  // ClCr Cockcroft-Gault
+  // Fórmulas Originais
   let clcr = ((140 - idade) * peso) / (72 * creat);
   if (sexo === 'F') clcr *= 0.85;
 
-  // Parâmetros PK Matzke
   const vd = 0.7 * peso;
-  const clVanco = clcr * 0.06; // L/h
-  const ke = clVanco / vd;
-  const t12 = Math.log(2) / ke;
+  const clv = clcr * 0.06;
+  const ke = clv / vd;
+  const t12 = Math.LN2 / ke;
 
-  // Cálculos de AUC e Concentrações
-  const auc24 = (dose * (24 / tau)) / clVanco;
+  const cpeak = (dose * (1 - Math.exp(-ke * tinfH))) / (tinfH * vd * ke * (1 - Math.exp(-ke * tau)));
+  const ctrough = cpeak * Math.exp(-ke * (tau - tinfH));
+  
+  const aucTau = ((ctrough + cpeak) / 2 * tinfH) + ((cpeak - ctrough) * (tau - tinfH) / Math.log(cpeak / ctrough));
+  const auc24 = aucTau * (24 / tau);
   const ratio = auc24 / mic;
 
-  // Atualizar UI
-  document.getElementById('m-vd').innerText = vd.toFixed(1);
-  document.getElementById('m-clv').innerText = clVanco.toFixed(2);
-  document.getElementById('m-ke').innerText = ke.toFixed(4);
-  document.getElementById('m-t12').innerText = t12.toFixed(1);
-  document.getElementById('m-auc').innerText = Math.round(auc24);
+  // Atualização UI
+  document.getElementById('m-vd').innerHTML = vd.toFixed(1) + '<small>L</small>';
+  document.getElementById('m-clv').innerHTML = clv.toFixed(3) + '<small>L/h</small>';
+  document.getElementById('m-ke').innerHTML = ke.toFixed(4) + '<small>h⁻¹</small>';
+  document.getElementById('m-t12').innerHTML = t12.toFixed(2) + '<small>h</small>';
+  document.getElementById('m-auc').innerHTML = auc24.toFixed(0) + '<small>mg·h/L</small>';
+  document.getElementById('m-clcr').innerHTML = Math.round(clcr) + '<small>mL/min</small>';
+  document.getElementById('m-cpeak').innerHTML = cpeak.toFixed(1) + '<small>mg/L</small>';
+  document.getElementById('m-ctrough').innerHTML = ctrough.toFixed(1) + '<small>mg/L</small>';
 
-  const box = document.getElementById('box-auc');
-  const txt = document.getElementById('txt-auc');
+  // Lógica Renal e Doses
+  const doseAtq = Math.min(Math.round(25 * peso / 250) * 250, 3000);
+  const dosePrat = Math.round((500 * mic * clv * (tau / 24)) / 250) * 250;
+  document.getElementById('m-ataque').innerText = doseAtq + ' mg';
+  document.getElementById('m-pratica').innerText = dosePrat + ' mg';
+
+  // Status AUC
+  const boxAuc = document.getElementById('box-auc');
   const pill = document.getElementById('status-pill');
-
-  if (ratio < 400) {
-    box.className = 'result-box danger';
-    txt.innerHTML = `<strong>AUC/MIC: ${ratio.toFixed(1)}</strong> — Subterapêutico. Alvo: 400-600.`;
-    pill.className = 'status-pill danger'; pill.innerText = 'Subterapêutico';
-  } else if (ratio > 600) {
-    box.className = 'result-box danger';
-    txt.innerHTML = `<strong>AUC/MIC: ${ratio.toFixed(1)}</strong> — Risco de Toxicidade. Alvo: 400-600.`;
-    pill.className = 'status-pill danger'; pill.innerText = 'Tóxico';
-  } else {
-    box.className = 'result-box ok';
-    txt.innerHTML = `<strong>AUC/MIC: ${ratio.toFixed(1)}</strong> — No Alvo Terapêutico.`;
+  if (ratio >= 400 && ratio <= 600) {
+    boxAuc.className = 'result-box ok';
+    document.getElementById('txt-auc').innerText = `No Alvo: AUC/MIC de ${ratio.toFixed(1)}`;
     pill.className = 'status-pill ok'; pill.innerText = 'No Alvo';
+  } else {
+    boxAuc.className = 'result-box danger';
+    document.getElementById('txt-auc').innerText = `Fora do Alvo: AUC/MIC de ${ratio.toFixed(1)}`;
+    pill.className = 'status-pill danger'; pill.innerText = 'Ajustar Dose';
   }
 
-  lastChart = { dose, tau, vd, ke, tinf };
-  document.getElementById('chart-wrap').classList.add('open');
-  drawChart(lastChart);
+  // Segurança
+  const vol = Math.max(Math.ceil(dosePrat / 5 / 50) * 50, 250);
+  document.getElementById('m-vol').innerText = vol + ' mL';
+  document.getElementById('m-tinf').innerText = dosePrat <= 1000 ? '60 min' : '90-120 min';
+
+  // Tabelas de Detalhes
+  document.getElementById('d-clcr').innerText = Math.round(clcr) + ' mL/min';
+  document.getElementById('d-vd').innerText = vd.toFixed(1) + ' L';
+  document.getElementById('d-clv').innerText = clv.toFixed(4) + ' L/h';
+  document.getElementById('d-ke').innerText = ke.toFixed(4);
+  document.getElementById('d-auc-ratio').innerText = ratio.toFixed(1);
+
+  lastChart = { ke, tau, tinfH, cpeak, ctrough, mic, auc24 };
 }
 
-function drawChart(p) {
+function toggleChart() {
+  const wrap = document.getElementById('chart-wrap');
+  wrap.classList.toggle('open');
+  if (wrap.classList.contains('open') && lastChart) drawChart(lastChart);
+}
+
+function drawChart(d) {
   const ctx = document.getElementById('decay-chart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
-
-  const labels = [];
-  const data = [];
-  const steps = 24;
   
-  for (let i = 0; i <= steps; i++) {
-    let t = (p.tau / steps) * i;
-    let conc;
-    const cmaxSS = (p.dose * (1 - Math.exp(-p.ke * p.tinf))) / (p.tinf * p.vd * p.ke * (1 - Math.exp(-p.ke * p.tau)));
-    
-    if (t <= p.tinf) {
-      conc = (p.dose * (1 - Math.exp(-p.ke * t))) / (p.tinf * p.vd * p.ke * (1 - Math.exp(-p.ke * p.tau)));
-    } else {
-      conc = cmaxSS * Math.exp(-p.ke * (t - p.tinf));
-    }
-    labels.push(t.toFixed(1) + 'h');
-    data.push(conc.toFixed(2));
+  const labels = [], data = [];
+  for (let i = 0; i <= d.tau; i++) {
+    labels.push(i + 'h');
+    let c = i <= d.tinfH ? (d.cpeak / d.tinfH) * i : d.cpeak * Math.exp(-d.ke * (i - d.tinfH));
+    data.push(c.toFixed(2));
   }
 
   chartInstance = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: labels,
-      datasets: [{
-        label: 'Concentração (mg/L)',
-        data: data,
-        borderColor: '#6B21A8',
-        backgroundColor: 'rgba(107, 33, 168, 0.1)',
-        fill: true,
-        tension: 0.3
-      }]
+      labels,
+      datasets: [{ label: 'Conc. Sérica', data, borderColor: '#6B21A8', tension: 0.3, fill: true, backgroundColor: 'rgba(107,33,168,0.1)' }]
     },
-    options: {
-      responsive: true,
-      scales: { y: { beginAtZero: true } }
-    }
+    options: { responsive: true, scales: { y: { beginAtZero: true } } }
   });
 }
+
+function toggleDetail() {
+  const det = document.getElementById('det-wrap');
+  det.classList.toggle('open');
+}
+
+function resetar() { location.reload(); }
+function gerarPDF() { window.print(); }
 </script>
 </body>
 </html>
