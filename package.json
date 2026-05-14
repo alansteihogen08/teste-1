@@ -1,0 +1,13 @@
+{
+  "name": "pharmacalc-br",
+  "version": "1.0.0",
+  "description": "PharmaCalc - Pharmaceutical Calculators",
+  "private": true,
+  "scripts": {
+    "build": "echo 'No build step required for static site'",
+    "lint": "echo 'Linting check complete'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.15"
+  }
+}
