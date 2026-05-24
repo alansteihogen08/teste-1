@@ -9,7 +9,8 @@ const ASSETS = [
   'icons/icon-512.png',
   'calculadoras/meropenem.html',
   'calculadoras/amicacina.html',
-  'calculadoras/vancomicina.html'
+  'calculadoras/vancomicina.html',
+  '/calculadoras/peso.html'
 ];
  
 // Instalação: cacheia todos os assets
