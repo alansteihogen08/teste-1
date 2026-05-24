@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#B45309">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="../manifest.json">
+<title>Calculadora de Peso — PharmaCalc</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4F8;--surface:#FFFFFF;--surface2:#F7FAFC;
+  --border:#D9E2EC;--border2:#BCCCDC;
+  --accent:#B45309;--accent-dark:#92400E;--accent-light:#FEF3C7;
+  --ok:#1A6B4A;--warn:#B45309;--danger:#C0392B;
+  --text:#1A202C;--muted:#627D98;
+  --font:'Syne',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem 1rem 3rem;}
+
+.back-link{display:inline-flex;align-items:center;font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;padding:4px 0;opacity:.75;transition:opacity .2s;margin-bottom:.4rem;}
+.back-link:hover{opacity:1;}
+
+.header{max-width:980px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+.header-left h1{font-size:clamp(15px,2.2vw,20px);font-weight:800;letter-spacing:-0.02em;color:var(--accent);}
+.header-sub{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.05em;}
+.header-author{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:.04em;}
+.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.status-pill{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);transition:all .3s;}
+.status-pill.ok{background:#E6F4EE;border-color:#A8D9C0;color:var(--ok);}
+.status-pill.warn{background:#FEF3C7;border-color:#FCD34D;color:var(--warn);}
+.status-pill.danger{background:#FAEAEA;border-color:#E8AAAA;color:var(--danger);}
+.btn-pdf{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;transition:opacity .2s;}
+.btn-pdf:hover{opacity:.85;}
+.btn-pdf svg{width:13px;height:13px;}
+
+.wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:1.25rem;align-items:start;}
+@media(max-width:680px){.wrap{grid-template-columns:1fr;}}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;}
+.panel:last-child{margin-bottom:0;}
+.panel-head{padding:.65rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--surface2);}
+.panel-head-dot{width:7px;height:7px;border-radius:50%;}
+.panel-head h2{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.panel-body{padding:1rem;}
+
+label{display:block;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;padding:7px 10px;outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--accent);}
+.form-row{margin-bottom:.8rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+
+.btn-calc{width:100%;margin-top:.4rem;padding:9px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:opacity .2s;}
+.btn-calc:hover{opacity:.88;}
+.btn-reset{width:100%;margin-top:.4rem;padding:7px;border:1px solid var(--border2);border-radius:7px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-reset:hover{border-color:var(--muted);color:var(--text);}
+
+.metric-grid{display:grid;gap:.65rem;padding:1rem;}
+.mg4{grid-template-columns:repeat(4,1fr);}
+.mg2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:680px){.mg4{grid-template-columns:repeat(2,1fr);}}
+.metric{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.7rem .85rem;transition:all .3s;}
+.metric.highlight{border-color:#FCD34D;background:var(--accent-light);box-shadow:0 0 0 2px rgba(180,83,9,0.15);}
+.metric.highlight .metric-value{color:var(--accent);}
+.metric-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;line-height:1.4;}
+.metric-value{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);}
+.metric-value small{font-size:10px;color:var(--muted);margin-left:2px;}
+.metric-badge{font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:3px;padding:2px 6px;border-radius:8px;display:inline-block;}
+.badge-ok{background:#E6F4EE;color:var(--ok);}
+.badge-warn{background:#FEF3C7;color:var(--warn);}
+.badge-danger{background:#FAEAEA;color:var(--danger);}
+.badge-info{background:#E6F4FA;color:#0A7EA4;}
+
+.result-box{margin:0 1rem 1rem;padding:.9rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);}
+.result-box.ok{border-color:#A8D9C0;background:#E6F4EE;}
+.result-box.warn{border-color:#FCD34D;background:#FEF3C7;}
+.result-box.danger{border-color:#E8AAAA;background:#FAEAEA;}
+.result-box.accent{border-color:#FCD34D;background:#FEF3C7;}
+.result-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;color:var(--muted);}
+.result-title.ok{color:var(--ok);}
+.result-title.warn{color:var(--warn);}
+.result-title.danger{color:var(--danger);}
+.result-title.accent{color:var(--accent);}
+.result-body{font-size:13px;line-height:1.6;color:var(--text);}
+
+.section-label{padding:.55rem 1rem .25rem;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+
+/* BOTÃO USAR PESO */
+.btn-usar{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:calc(100% - 2rem);margin:0 1rem 1rem;
+  padding:10px;border:none;border-radius:8px;
+  background:var(--accent);color:#fff;
+  font-family:var(--font);font-size:12px;font-weight:700;
+  letter-spacing:.06em;cursor:pointer;transition:opacity .2s;
+}
+.btn-usar:hover{opacity:.88;}
+.btn-usar:disabled{opacity:.4;cursor:not-allowed;}
+.btn-usar svg{width:14px;height:14px;}
+
+/* CONFIRMAÇÃO */
+.saved-confirm{
+  display:none;margin:0 1rem 1rem;padding:.7rem 1rem;
+  border-radius:8px;border:1px solid #A8D9C0;background:#E6F4EE;
+  font-size:12px;font-weight:700;color:var(--ok);text-align:center;
+}
+.saved-confirm.show{display:block;}
+
+/* DETAIL TABLE */
+.detail-toggle{margin:0 1rem 1rem;padding:7px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.08em;cursor:pointer;width:calc(100% - 2rem);transition:all .2s;}
+.detail-toggle:hover{border-color:var(--muted);}
+.detail-table{display:none;margin:0 1rem 1rem;}
+.detail-table.open{display:block;}
+table.det{width:100%;border-collapse:collapse;font-size:12px;}
+table.det td{padding:6px 10px;border-bottom:1px solid var(--border);}
+table.det tr:last-child td{border-bottom:none;}
+table.det tr:hover td{background:var(--surface2);}
+table.det td:first-child{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;width:55%;}
+table.det td:last-child{font-family:var(--mono);color:var(--text);}
+
+/* IMC BAR */
+.imc-bar-wrap{margin:0 1rem 1rem;}
+.imc-bar-track{height:10px;border-radius:5px;background:linear-gradient(to right,#3B82F6 0%,#10B981 18.5%,#F59E0B 25%,#EF4444 30%,#7C3AED 100%);position:relative;margin-bottom:.4rem;}
+.imc-marker{position:absolute;top:-4px;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid white;transform:translateX(-50%);transition:left .4s;box-shadow:0 1px 4px rgba(0,0,0,0.25);}
+.imc-labels{display:flex;justify-content:space-between;font-size:8.5px;color:var(--muted);font-family:var(--mono);}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .btn-pdf,.btn-calc,.btn-reset,.btn-usar,.detail-toggle{display:none!important;}
+  .wrap{display:block;}
+  .panel{break-inside:avoid;margin-bottom:1rem;}
+}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← PharmaCalc</a>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Calculadora de Peso Farmacêutico</h1>
+    <div class="header-sub">IBW · Peso Ajustado · IMC · Superfície Corporal</div>
+    <div class="header-author">Desenvolvido por Alan Steihogen</div>
+  </div>
+  <div class="header-right">
+    <div id="status-pill" class="status-pill">Aguardando dados</div>
+    <button class="btn-pdf" onclick="gerarPDF()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      Gerar PDF
+    </button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- LEFT -->
+  <div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent)"></div>
+        <h2>Dados do Paciente</h2>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid">
+          <div class="form-row"><label>Sexo</label>
+            <select id="sexo" onchange="calcular()">
+              <option value="">—</option>
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select>
+          </div>
+          <div class="form-row"><label>Idade (anos)</label>
+            <input type="number" id="idade" placeholder="Ex: 45" oninput="calcular()">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Peso real (kg)</label>
+            <input type="number" id="peso" placeholder="Ex: 95" oninput="calcular()">
+          </div>
+          <div class="form-row"><label>Altura (cm)</label>
+            <input type="number" id="altura" placeholder="Ex: 170" oninput="calcular()">
+          </div>
+        </div>
+        <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
+        <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
+      </div>
+    </div>
+
+    <!-- INFO CLÍNICA -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:#0A7EA4"></div>
+        <h2>Quando usar cada peso</h2>
+      </div>
+      <div class="panel-body" style="font-size:11.5px;line-height:1.8;color:#2D3748;">
+        <div style="margin-bottom:.6rem"><strong style="color:var(--accent)">Peso real</strong><br>Cockcroft-Gault (ClCr), heparina, corticosteróides</div>
+        <div style="margin-bottom:.6rem"><strong style="color:#1A6B4A">Peso ideal (IBW)</strong><br>Volume corrente (ventilação mecânica), aminoglicosídeos em eutróficos</div>
+        <div style="margin-bottom:.6rem"><strong style="color:#6D28D9">Peso ajustado (AdjBW)</strong><br>Amicacina, vancomicina e ciprofloxacino em <strong>obesos (IMC ≥ 30)</strong></div>
+        <div><strong style="color:#0891B2">Superfície corporal (SC)</strong><br>Quimioterápicos, alguns antivirais</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div>
+
+    <!-- IMC -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent)"></div>
+        <h2>IMC — Índice de Massa Corporal</h2>
+      </div>
+      <div class="metric-grid mg2">
+        <div class="metric" id="m-imc-box">
+          <div class="metric-label">IMC</div>
+          <div class="metric-value" id="m-imc">—<small>kg/m²</small></div>
+          <div id="m-imc-badge"></div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Classificação OMS</div>
+          <div class="metric-value" id="m-imc-class" style="font-size:13px;padding-top:4px">—</div>
+        </div>
+      </div>
+      <div class="imc-bar-wrap" id="imc-bar-wrap" style="display:none">
+        <div class="imc-bar-track">
+          <div class="imc-marker" id="imc-marker" style="left:0%"></div>
+        </div>
+        <div class="imc-labels">
+          <span>16</span><span>18,5</span><span>25</span><span>30</span><span>40+</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESOS -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:#1A6B4A"></div>
+        <h2>Pesos Farmacêuticos — Fórmula Devine</h2>
+      </div>
+      <div class="metric-grid mg4" style="padding-bottom:.5rem">
+        <div class="metric" id="box-real">
+          <div class="metric-label">Peso real</div>
+          <div class="metric-value" id="m-real">—<small>kg</small></div>
+          <div id="badge-real"></div>
+        </div>
+        <div class="metric" id="box-ibw">
+          <div class="metric-label">Peso ideal (IBW)</div>
+          <div class="metric-value" id="m-ibw">—<small>kg</small></div>
+          <div id="badge-ibw"></div>
+        </div>
+        <div class="metric" id="box-adj">
+          <div class="metric-label">Peso ajustado</div>
+          <div class="metric-value" id="m-adj">—<small>kg</small></div>
+          <div id="badge-adj"></div>
+        </div>
+        <div class="metric" id="box-sc">
+          <div class="metric-label">Sup. corporal (SC)</div>
+          <div class="metric-value" id="m-sc">—<small>m²</small></div>
+          <div id="badge-sc" style="font-size:8.5px;color:var(--muted);margin-top:3px">DuBois</div>
+        </div>
+      </div>
+
+      <!-- Recomendação principal -->
+      <div class="result-box" id="box-rec">
+        <div class="result-title">Aguardando dados</div>
+        <div class="result-body" id="txt-rec">Preencha sexo, peso e altura para calcular.</div>
+      </div>
+
+      <!-- Botão usar este peso -->
+      <button class="btn-usar" id="btn-usar" onclick="usarPeso()" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Usar este peso nas calculadoras
+      </button>
+      <div class="saved-confirm" id="saved-confirm">
+        ✅ Peso salvo! Será preenchido automaticamente em Amicacina, Vancomicina e Meropenem.
+      </div>
+
+      <!-- Superfície corporal detalhe -->
+      <div class="section-label">Referência — Superfície Corporal</div>
+      <div class="result-box" id="box-sc-detail">
+        <div class="result-title">Superfície Corporal — DuBois</div>
+        <div class="result-body" id="txt-sc">Aguardando dados.</div>
+      </div>
+
+      <!-- Detalhamento -->
+      <button class="detail-toggle" id="btn-det" onclick="toggleDetail()">▼ Detalhamento do cálculo</button>
+      <div class="detail-table" id="det-wrap">
+        <table class="det">
+          <tr><td>Fórmula IBW (Devine)</td><td>H: 50 + 2,3×(cm−152)/2,54 / M: 45,5 + 2,3×(cm−152)/2,54</td></tr>
+          <tr><td>Fórmula AdjBW</td><td>IBW + 0,4 × (Peso real − IBW)</td></tr>
+          <tr><td>Fórmula SC (DuBois)</td><td>0,007184 × Altura⁰·⁷²⁵ × Peso⁰·⁴²⁵</td></tr>
+          <tr><td>Fórmula IMC</td><td>Peso / Altura²</td></tr>
+          <tr><td>Sexo</td><td id="d-sexo">—</td></tr>
+          <tr><td>Idade</td><td id="d-idade">—</td></tr>
+          <tr><td>Peso real</td><td id="d-peso">—</td></tr>
+          <tr><td>Altura</td><td id="d-altura">—</td></tr>
+          <tr><td>IMC calculado</td><td id="d-imc">—</td></tr>
+          <tr><td>Classificação OMS</td><td id="d-class">—</td></tr>
+          <tr><td>Peso ideal (IBW)</td><td id="d-ibw">—</td></tr>
+          <tr><td>Excesso de peso</td><td id="d-excesso">—</td></tr>
+          <tr><td>Peso ajustado (AdjBW)</td><td id="d-adj">—</td></tr>
+          <tr><td>Superfície corporal</td><td id="d-sc">—</td></tr>
+          <tr><td>Peso recomendado para dose</td><td id="d-rec">—</td></tr>
+          <tr><td>Peso salvo (localStorage)</td><td id="d-saved">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let pesoRecomendado = null;
+
+function getImcClass(imc){
+  if(imc < 16)   return {label:'Magreza grave',    cls:'danger', badgeCls:'badge-danger'};
+  if(imc < 17)   return {label:'Magreza moderada', cls:'danger', badgeCls:'badge-danger'};
+  if(imc < 18.5) return {label:'Magreza leve',     cls:'warn',   badgeCls:'badge-warn'};
+  if(imc < 25)   return {label:'Eutrófico',         cls:'ok',     badgeCls:'badge-ok'};
+  if(imc < 30)   return {label:'Sobrepeso',         cls:'warn',   badgeCls:'badge-warn'};
+  if(imc < 35)   return {label:'Obesidade grau I',  cls:'warn',   badgeCls:'badge-warn'};
+  if(imc < 40)   return {label:'Obesidade grau II', cls:'danger', badgeCls:'badge-danger'};
+  return              {label:'Obesidade grau III',  cls:'danger', badgeCls:'badge-danger'};
+}
+
+function imcToPercent(imc){
+  const min = 16, max = 45;
+  return Math.min(Math.max(((imc - min) / (max - min)) * 100, 2), 98);
+}
+
+function calcular(){
+  const sexo   = document.getElementById('sexo').value;
+  const idade  = parseFloat(document.getElementById('idade').value);
+  const peso   = parseFloat(document.getElementById('peso').value);
+  const altura = parseFloat(document.getElementById('altura').value);
+  const pill   = document.getElementById('status-pill');
+
+  const temDados = sexo && !isNaN(peso) && !isNaN(altura) && altura > 100;
+
+  if(!temDados){
+    pill.className = 'status-pill';
+    pill.textContent = 'Aguardando dados';
+    document.getElementById('btn-usar').disabled = true;
+    return;
+  }
+
+  // ── IMC
+  const altM = altura / 100;
+  const imc  = peso / (altM * altM);
+  const imcC = getImcClass(imc);
+
+  document.getElementById('m-imc').innerHTML      = imc.toFixed(1) + '<small>kg/m²</small>';
+  document.getElementById('m-imc-class').textContent = imcC.label;
+  document.getElementById('m-imc-badge').innerHTML   = `<span class="metric-badge ${imcC.badgeCls}">${imcC.label}</span>`;
+
+  const imcBox = document.getElementById('m-imc-box');
+  imcBox.className = 'metric ' + (imc >= 30 ? 'highlight' : '');
+
+  // barra IMC
+  document.getElementById('imc-bar-wrap').style.display = 'block';
+  document.getElementById('imc-marker').style.left = imcToPercent(imc) + '%';
+
+  // ── IBW (Devine)
+  const polegadasAcima = (altura - 152.4) / 2.54;
+  const ibw = sexo === 'M'
+    ? 50   + 2.3 * polegadasAcima
+    : 45.5 + 2.3 * polegadasAcima;
+  const ibwF = Math.max(ibw, 30);
+
+  // ── AdjBW
+  const excesso = peso - ibwF;
+  const adj = ibwF + 0.4 * excesso;
+
+  // ── SC (DuBois)
+  const sc = 0.007184 * Math.pow(altura, 0.725) * Math.pow(peso, 0.425);
+
+  document.getElementById('m-real').innerHTML = peso.toFixed(1) + '<small>kg</small>';
+  document.getElementById('m-ibw').innerHTML  = ibwF.toFixed(1) + '<small>kg</small>';
+  document.getElementById('m-adj').innerHTML  = adj.toFixed(1)  + '<small>kg</small>';
+  document.getElementById('m-sc').innerHTML   = sc.toFixed(2)   + '<small>m²</small>';
+
+  // ── limpar highlights
+  ['box-real','box-ibw','box-adj'].forEach(id => {
+    document.getElementById(id).classList.remove('highlight');
+    document.getElementById('badge-' + id.replace('box-','')).innerHTML = '';
+  });
+
+  // ── Recomendação e highlight
+  let recClass, recTitle, recMsg, pesoRec, pesoRecLabel;
+
+  if(imc < 18.5){
+    // Abaixo do peso — usar IBW
+    pesoRec = ibwF; pesoRecLabel = 'Peso ideal (IBW)';
+    recClass = 'warn';
+    recTitle = '⚠️ Abaixo do peso — usar Peso Ideal (IBW)';
+    recMsg   = `IMC ${imc.toFixed(1)} kg/m² — ${imcC.label}. Para dose de antimicrobianos, use o peso ideal (IBW) de ${ibwF.toFixed(1)} kg. Não use o peso real (${peso.toFixed(1)} kg) — pode subestimar o Vd.`;
+    document.getElementById('box-ibw').classList.add('highlight');
+    document.getElementById('badge-ibw').innerHTML = '<span class="metric-badge badge-warn">✓ Usar para dose</span>';
+  } else if(imc < 30){
+    // Eutrófico ou sobrepeso — usar peso real
+    pesoRec = peso; pesoRecLabel = 'Peso real';
+    recClass = 'ok';
+    recTitle = '✅ Eutrófico — usar Peso Real';
+    recMsg   = `IMC ${imc.toFixed(1)} kg/m² — ${imcC.label}. Use o peso real (${peso.toFixed(1)} kg) para cálculo de doses de antimicrobianos.`;
+    document.getElementById('box-real').classList.add('highlight');
+    document.getElementById('badge-real').innerHTML = '<span class="metric-badge badge-ok">✓ Usar para dose</span>';
+  } else if(imc < 40){
+    // Obeso — usar AdjBW
+    pesoRec = adj; pesoRecLabel = 'Peso ajustado (AdjBW)';
+    recClass = 'warn';
+    recTitle = '⚠️ Obeso — usar Peso Ajustado (AdjBW)';
+    recMsg   = `IMC ${imc.toFixed(1)} kg/m² — ${imcC.label}. Use o peso ajustado (AdjBW) de ${adj.toFixed(1)} kg para amicacina, vancomicina e ciprofloxacino. IBW = ${ibwF.toFixed(1)} kg · Excesso = ${excesso.toFixed(1)} kg.`;
+    document.getElementById('box-adj').classList.add('highlight');
+    document.getElementById('badge-adj').innerHTML = '<span class="metric-badge badge-warn">✓ Usar para dose</span>';
+  } else {
+    // Obesidade grau III
+    pesoRec = adj; pesoRecLabel = 'Peso ajustado (AdjBW)';
+    recClass = 'danger';
+    recTitle = '🛑 Obesidade grau III — usar Peso Ajustado (AdjBW) com cautela';
+    recMsg   = `IMC ${imc.toFixed(1)} kg/m² — ${imcC.label}. Use o peso ajustado (AdjBW) de ${adj.toFixed(1)} kg. Monitorar TDM obrigatório — variabilidade PK elevada nesta faixa. IBW = ${ibwF.toFixed(1)} kg · Excesso = ${excesso.toFixed(1)} kg.`;
+    document.getElementById('box-adj').classList.add('highlight');
+    document.getElementById('badge-adj').innerHTML = '<span class="metric-badge badge-danger">✓ Usar para dose</span>';
+  }
+
+  const br = document.getElementById('box-rec');
+  br.className = 'result-box ' + recClass;
+  br.querySelector('.result-title').className = 'result-title ' + recClass;
+  br.querySelector('.result-title').textContent = recClass === 'ok' ? '✅ Recomendação de Peso para Dose' : recTitle;
+  document.getElementById('txt-rec').textContent = recMsg;
+
+  // SC detalhe
+  const scBox = document.getElementById('box-sc-detail');
+  scBox.className = 'result-box';
+  scBox.querySelector('.result-title').textContent = 'Superfície Corporal — DuBois';
+  document.getElementById('txt-sc').textContent =
+    `SC = 0,007184 × ${altura}⁰·⁷²⁵ × ${peso}⁰·⁴²⁵ = ${sc.toFixed(2)} m². `
+    + `Referência adulto: 1,73 m². `
+    + (sc < 1.5 ? 'SC baixa — atentar para quimioterápicos com dose/m².' :
+       sc > 2.2 ? 'SC elevada — avaliar dose máxima absoluta em quimioterapia.' :
+       'SC dentro da faixa de referência usual.');
+
+  // Status pill
+  if(imc >= 18.5 && imc < 25){
+    pill.className = 'status-pill ok'; pill.textContent = 'Eutrófico';
+  } else if(imc >= 25 && imc < 30){
+    pill.className = 'status-pill warn'; pill.textContent = 'Sobrepeso';
+  } else if(imc >= 30){
+    pill.className = 'status-pill danger'; pill.textContent = 'Obeso — usar AdjBW';
+  } else {
+    pill.className = 'status-pill warn'; pill.textContent = 'Abaixo do peso';
+  }
+
+  // Detalhamento
+  document.getElementById('d-sexo').textContent    = sexo === 'M' ? 'Masculino' : 'Feminino';
+  document.getElementById('d-idade').textContent   = !isNaN(idade) ? idade + ' anos' : '—';
+  document.getElementById('d-peso').textContent    = peso.toFixed(1) + ' kg';
+  document.getElementById('d-altura').textContent  = altura + ' cm';
+  document.getElementById('d-imc').textContent     = imc.toFixed(2) + ' kg/m²';
+  document.getElementById('d-class').textContent   = imcC.label;
+  document.getElementById('d-ibw').textContent     = ibwF.toFixed(2) + ' kg';
+  document.getElementById('d-excesso').textContent = excesso.toFixed(2) + ' kg';
+  document.getElementById('d-adj').textContent     = adj.toFixed(2) + ' kg';
+  document.getElementById('d-sc').textContent      = sc.toFixed(4) + ' m²';
+  document.getElementById('d-rec').textContent     = pesoRecLabel + ' = ' + pesoRec.toFixed(1) + ' kg';
+
+  const saved = localStorage.getItem('pharmacalc_peso');
+  document.getElementById('d-saved').textContent = saved ? saved + ' kg (salvo)' : 'Nenhum';
+
+  pesoRecomendado = pesoRec;
+  document.getElementById('btn-usar').disabled = false;
+  document.getElementById('btn-usar').textContent = '';
+  document.getElementById('btn-usar').innerHTML =
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="14" height="14"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    Usar ${pesoRecLabel} (${pesoRec.toFixed(1)} kg) nas calculadoras`;
+}
+
+function usarPeso(){
+  if(pesoRecomendado === null) return;
+  localStorage.setItem('pharmacalc_peso', pesoRecomendado.toFixed(1));
+  document.getElementById('d-saved').textContent = pesoRecomendado.toFixed(1) + ' kg (salvo)';
+  const conf = document.getElementById('saved-confirm');
+  conf.classList.add('show');
+  setTimeout(() => conf.classList.remove('show'), 4000);
+}
+
+function toggleDetail(){
+  const det = document.getElementById('det-wrap');
+  const btn = document.getElementById('btn-det');
+  det.classList.toggle('open');
+  btn.textContent = det.classList.contains('open') ? '▲ Fechar detalhamento' : '▼ Detalhamento do cálculo';
+}
+
+function gerarPDF(){
+  const det = document.getElementById('det-wrap');
+  const wd  = det.classList.contains('open');
+  if(!wd) det.classList.add('open');
+  setTimeout(()=>{
+    window.print();
+    if(!wd) det.classList.remove('open');
+  }, 300);
+}
+
+function resetar(){
+  ['sexo'].forEach(id => document.getElementById(id).value = '');
+  ['idade','peso','altura'].forEach(id => document.getElementById(id).value = '');
+  pesoRecomendado = null;
+  document.getElementById('btn-usar').disabled = true;
+  document.getElementById('btn-usar').innerHTML =
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="14" height="14"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    Usar este peso nas calculadoras`;
+  document.getElementById('saved-confirm').classList.remove('show');
+  document.getElementById('imc-bar-wrap').style.display = 'none';
+  document.getElementById('det-wrap').classList.remove('open');
+  calcular();
+}
+
+calcular();
+</script>
+</body>
+</html>
