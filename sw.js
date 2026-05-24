@@ -1,15 +1,15 @@
 const CACHE = 'pharmacalc-v2';
  
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/guia.html',
-  '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/calculadoras/meropenem.html',
-  '/calculadoras/amicacina.html',
-  '/calculadoras/vancomicina.html'
+  './',
+  'index.html',
+  'guia.html',
+  'manifest.json',
+  'icons/icon-192.png',
+  'icons/icon-512.png',
+  'calculadoras/meropenem.html',
+  'calculadoras/amicacina.html',
+  'calculadoras/vancomicina.html'
 ];
  
 // Instalação: cacheia todos os assets
@@ -53,7 +53,7 @@ self.addEventListener('fetch', e => {
             return res;
           })
           .catch(() => {
-            // Fallback offline: retorna index.html para navegação
+            // Fallback offline: corrigido para GitHub Pages
             if (e.request.mode === 'navigate') {
               return caches.match('/index.html');
             }
