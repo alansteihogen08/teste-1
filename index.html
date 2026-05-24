@@ -1032,7 +1032,7 @@ function showSobre(){document.getElementById('modal-overlay').classList.add('sho
 function closeSobre(evt){if(!evt||evt.target===document.getElementById('modal-overlay'))document.getElementById('modal-overlay').classList.remove('show');}
 
 // ── SERVICE WORKER ────────────────────────────
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
 </html>
