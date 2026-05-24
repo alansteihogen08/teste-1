@@ -504,6 +504,14 @@ const BRCAST = {
 // CÁLCULO PRINCIPAL
 // ══════════════════════════════════════════════
 function calcular(){
+  // ─── INÍCIO DO REMENDO (PATCH) ───
+  // Lê o peso salvo pela calculadora de peso farmacêutico se o campo estiver vazio
+  const pesoSalvo = localStorage.getItem('pharmacalc_peso');
+  const campoPeso = document.getElementById('peso');
+  if (pesoSalvo && campoPeso && !campoPeso.value) {
+    campoPeso.value = pesoSalvo;
+  }
+  // ─── FIM DO REMENDO ───
   const sexo     = document.getElementById('sexo').value;
   const idade    = parseFloat(document.getElementById('idade').value);
   const peso     = parseFloat(document.getElementById('peso').value);
