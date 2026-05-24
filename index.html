@@ -969,6 +969,15 @@ function goTab(id,idx){
   document.getElementById('scr-'+id).classList.add('on');
   tl.style.left=(W*idx)+'%';
   document.querySelector('.content').scrollTo({top:0,behavior:'smooth'});
+  // ─── REMENDO PARA EXIBIR O RODAPÉ APENAS NA ABA CALC ───
+  const footer = document.getElementById('footer-contato');
+  if (footer) {
+    if (id === 'calc') {
+      footer.style.display = 'block';
+    } else {
+      footer.style.display = 'none';
+    }
+  }
 }
 
 // ── ANTIMICROBIANOS INNER TABS ────────────────
