@@ -276,6 +276,9 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       <div class="saved-confirm" id="saved-confirm">
         ✅ Peso salvo! Será preenchido automaticamente em Amicacina, Vancomicina e Meropenem.
       </div>
+      <button class="btn-reset" id="btn-limpar-salvo" onclick="limparPesoSalvo()" style="width:calc(100% - 2rem);margin:0 1rem .75rem;display:none;">
+        🗑 Limpar peso salvo das calculadoras
+      </button>
 
       <!-- Superfície corporal detalhe -->
       <div class="section-label">Referência — Superfície Corporal</div>
@@ -482,7 +485,27 @@ function usarPeso(){
   document.getElementById('d-saved').textContent = pesoRecomendado.toFixed(1) + ' kg (salvo)';
   const conf = document.getElementById('saved-confirm');
   conf.classList.add('show');
+  document.getElementById('btn-limpar-salvo').style.display = 'block';
   setTimeout(() => conf.classList.remove('show'), 4000);
+}
+
+function limparPesoSalvo(){
+  localStorage.removeItem('pharmacalc_peso');
+  document.getElementById('d-saved').textContent = 'Nenhum';
+  document.getElementById('btn-limpar-salvo').style.display = 'none';
+  const conf = document.getElementById('saved-confirm');
+  conf.style.background = '#FAEAEA';
+  conf.style.borderColor = '#E8AAAA';
+  conf.style.color = '#C0392B';
+  conf.textContent = '🗑 Peso removido. As calculadoras não preencherão automaticamente.';
+  conf.classList.add('show');
+  setTimeout(() => {
+    conf.classList.remove('show');
+    conf.style.background = '';
+    conf.style.borderColor = '';
+    conf.style.color = '';
+    conf.textContent = '✅ Peso salvo! Será preenchido automaticamente em Amicacina, Vancomicina e Meropenem.';
+  }, 3500);
 }
 
 function toggleDetail(){
@@ -503,19 +526,60 @@ function gerarPDF(){
 }
 
 function resetar(){
-  ['sexo'].forEach(id => document.getElementById(id).value = '');
+  // Limpar campos
+  document.getElementById('sexo').value = '';
   ['idade','peso','altura'].forEach(id => document.getElementById(id).value = '');
+
+  // Limpar métricas exibidas
+  document.getElementById('m-imc').innerHTML      = '—<small>kg/m²</small>';
+  document.getElementById('m-imc-class').textContent = '—';
+  document.getElementById('m-imc-badge').innerHTML = '';
+  document.getElementById('m-imc-box').className  = 'metric';
+  document.getElementById('m-real').innerHTML = '—<small>kg</small>';
+  document.getElementById('m-ibw').innerHTML  = '—<small>kg</small>';
+  document.getElementById('m-adj').innerHTML  = '—<small>kg</small>';
+  document.getElementById('m-sc').innerHTML   = '—<small>m²</small>';
+  ['box-real','box-ibw','box-adj'].forEach(id => {
+    document.getElementById(id).classList.remove('highlight');
+  });
+  ['badge-real','badge-ibw','badge-adj'].forEach(id => {
+    document.getElementById(id).innerHTML = '';
+  });
+
+  // Limpar caixas de resultado
+  const br = document.getElementById('box-rec');
+  br.className = 'result-box';
+  br.querySelector('.result-title').className = 'result-title';
+  br.querySelector('.result-title').textContent = 'Aguardando dados';
+  document.getElementById('txt-rec').textContent = 'Preencha sexo, peso e altura para calcular.';
+  document.getElementById('txt-sc').textContent  = 'Aguardando dados.';
+
+  // Limpar status pill
+  const pill = document.getElementById('status-pill');
+  pill.className = 'status-pill';
+  pill.textContent = 'Aguardando dados';
+
+  // Resetar botão usar
   pesoRecomendado = null;
   document.getElementById('btn-usar').disabled = true;
   document.getElementById('btn-usar').innerHTML =
     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="14" height="14"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
     Usar este peso nas calculadoras`;
+
+  // Esconder barra IMC e confirmação
   document.getElementById('saved-confirm').classList.remove('show');
   document.getElementById('imc-bar-wrap').style.display = 'none';
   document.getElementById('det-wrap').classList.remove('open');
-  calcular();
+  document.getElementById('btn-det').textContent = '▼ Detalhamento do cálculo';
+  document.getElementById('d-saved').textContent = localStorage.getItem('pharmacalc_peso')
+    ? localStorage.getItem('pharmacalc_peso') + ' kg (salvo)'
+    : 'Nenhum';
 }
 
+// Mostrar botão limpar se já houver peso salvo
+if(localStorage.getItem('pharmacalc_peso')){
+  document.getElementById('btn-limpar-salvo').style.display = 'block';
+}
 calcular();
 </script>
 </body>
