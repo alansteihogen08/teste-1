@@ -183,6 +183,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       <h2>Dados do Paciente</h2>
     </div>
     <div class="panel-body">
+      
       <div class="form-grid">
         <div class="form-row"><label>Sexo</label>
           <select id="sexo" onchange="calcular()">
@@ -194,6 +195,8 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         <div class="form-row"><label>Idade (anos)</label>
           <input type="number" id="idade" placeholder="Ex: 45" oninput="calcular()">
         </div>
+        </div>
+      
       <div class="form-grid">
         <div class="form-row"><label>Peso (kg)</label>
           <input type="number" id="peso" placeholder="Ex: 70" oninput="if(this.value !== localStorage.getItem('pharmacalc_peso')){ document.getElementById('peso-tag').style.display='none'; } calcular();">
@@ -208,7 +211,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       </div>
 
         <div class="form-row">
-      <!-- Bactéria + BrCAST inline -->
+      <!-- Bactéria + BrCAST online -->
         <label>Bactéria isolada (opcional)</label>
         <select id="bacteria" onchange="calcular()">
           <option value="">Selecione...</option>
@@ -222,14 +225,12 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
           <option value="S. viridans">Streptococcus do grupo viridans</option>
           <option value="Outro">Outro Gram-positivo</option>
         </select>
-        <!-- BrCAST aparece abaixo da bactéria -->
-        <div class="brcast-inline" id="brcast-inline">
+        <div class="brcast-online" id="brcast-online">
           <div class="brcast-title" id="brcast-title">—</div>
           <div class="brcast-body" id="brcast-body">—</div>
         </div>
       </div>
 
-      <!-- MIC -->
       <div class="form-row">
         <label>MIC (mg/L)</label>
         <select id="mic" onchange="calcular()">
@@ -240,16 +241,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         </select>
         <div id="mic-badge"></div>
       </div>
-    </div>
-  </div>
-
-  <!-- Dose Prescrita -->
-  <div class="panel">
-    <div class="panel-head">
-      <div class="panel-head-dot" style="background:var(--accent2)"></div>
-      <h2>Dose Prescrita</h2>
-    </div>
-    <div class="panel-body">
+      
       <div class="form-row"><label>Dose por intervalo (mg)</label>
         <select id="dose" onchange="calcular()">
           <option value="500">500 mg</option>
@@ -263,6 +255,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
           <option value="3000">3000 mg</option>
         </select>
       </div>
+      
       <div class="form-grid">
         <div class="form-row"><label>Intervalo τ (h)</label>
           <select id="intervalo" onchange="calcular()">
@@ -282,10 +275,13 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
           </select>
         </div>
       </div>
+      
       <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
       <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
+
     </div>
   </div>
+</div>
 
   <!-- Meta Terapêutica -->
   <div class="panel">
