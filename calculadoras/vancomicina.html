@@ -210,6 +210,26 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       </div>
 
       <div class="form-row">
+        <label>Bactéria isolada (opcional)</label>
+        <select id="bacteria" onchange="calcular()">
+          <option value="">Selecione...</option>
+          <option value="MRSA">Staphylococcus aureus (MRSA)</option>
+          <option value="MSSA">Staphylococcus aureus (MSSA)</option>
+          <option value="S. epidermidis">Staphylococcus epidermidis</option>
+          <option value="E. faecalis">Enterococcus faecalis</option>
+          <option value="E. faecium">Enterococcus faecium (sensível)</option>
+          <option value="E. faecium VRE">Enterococcus faecium VRE</option>
+          <option value="S. pneumoniae">Streptococcus pneumoniae</option>
+          <option value="S. viridans">Streptococcus do grupo viridans</option>
+          <option value="Outro">Outro Gram-positivo</option>
+        </select>
+        <div class="brcast-inline" id="brcast-inline">
+          <div class="brcast-title" id="brcast-title">—</div>
+          <div class="brcast-body" id="brcast-body">—</div>
+        </div>
+      </div>
+
+      <div class="form-row">
         <label>MIC (mg/L)</label>
         <select id="mic" onchange="calcular()">
           <option value="0.25">0,25 mg/L</option>
@@ -219,7 +239,17 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         </select>
         <div id="mic-badge"></div>
       </div>
-      
+
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-dot" style="background:var(--accent2)"></div>
+      <h2>Dose Prescrita</h2>
+    </div>
+    <div class="panel-body">
+
       <div class="form-row"><label>Dose por intervalo (mg)</label>
         <select id="dose" onchange="calcular()">
           <option value="500">500 mg</option>
@@ -233,7 +263,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
           <option value="3000">3000 mg</option>
         </select>
       </div>
-      
+
       <div class="form-grid">
         <div class="form-row"><label>Intervalo τ (h)</label>
           <select id="intervalo" onchange="calcular()">
@@ -254,26 +284,6 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         </div>
       </div>
 
-      <div class="form-row">
-        <label>Bactéria isolada (opcional)</label>
-        <select id="bacteria" onchange="calcular()">
-          <option value="">Selecione...</option>
-          <option value="MRSA">Staphylococcus aureus (MRSA)</option>
-          <option value="MSSA">Staphylococcus aureus (MSSA)</option>
-          <option value="S. epidermidis">Staphylococcus epidermidis</option>
-          <option value="E. faecalis">Enterococcus faecalis</option>
-          <option value="E. faecium">Enterococcus faecium (sensível)</option>
-          <option value="E. faecium VRE">Enterococcus faecium VRE</option>
-          <option value="S. pneumoniae">Streptococcus pneumoniae</option>
-          <option value="S. viridans">Streptococcus do grupo viridans</option>
-          <option value="Outro">Outro Gram-positivo</option>
-        </select>
-        <div class="brcast-inline" id="brcast-inline">
-          <div class="brcast-title" id="brcast-title">—</div>
-          <div class="brcast-body" id="brcast-body">—</div>
-        </div>
-      </div>
-      
       <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
       <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
 
@@ -295,6 +305,8 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
   </div>
 
 </div>```
+
+Substituindo por este, voltamos ao estado seguro original: o `/div>` some, o layout fica alinhado e o motor volta a calcular instantaneamente porque tudo está exatamente onde o script espera!
 <!-- ══════════ RIGHT ══════════ -->
 <div>
 
