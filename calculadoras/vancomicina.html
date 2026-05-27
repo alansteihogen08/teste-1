@@ -176,7 +176,6 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
 <!-- ══════════ LEFT ══════════ -->
 <div>
 
-  <!-- Dados do Paciente -->
   <div class="panel">
     <div class="panel-head">
       <div class="panel-head-dot" style="background:var(--accent)"></div>
@@ -195,7 +194,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         <div class="form-row"><label>Idade (anos)</label>
           <input type="number" id="idade" placeholder="Ex: 45" oninput="calcular()">
         </div>
-        </div>
+      </div>
       
       <div class="form-grid">
         <div class="form-row"><label>Peso (kg)</label>
@@ -207,27 +206,6 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         </div>
         <div class="form-row"><label>Creatinina (mg/dL)</label>
           <input type="number" step="0.01" id="creat" placeholder="Ex: 1.2" oninput="calcular()">
-        </div>
-      </div>
-
-        <div class="form-row">
-      <!-- Bactéria + BrCAST online -->
-        <label>Bactéria isolada (opcional)</label>
-        <select id="bacteria" onchange="calcular()">
-          <option value="">Selecione...</option>
-          <option value="MRSA">Staphylococcus aureus (MRSA)</option>
-          <option value="MSSA">Staphylococcus aureus (MSSA)</option>
-          <option value="S. epidermidis">Staphylococcus epidermidis</option>
-          <option value="E. faecalis">Enterococcus faecalis</option>
-          <option value="E. faecium">Enterococcus faecium (sensível)</option>
-          <option value="E. faecium VRE">Enterococcus faecium VRE</option>
-          <option value="S. pneumoniae">Streptococcus pneumoniae</option>
-          <option value="S. viridans">Streptococcus do grupo viridans</option>
-          <option value="Outro">Outro Gram-positivo</option>
-        </select>
-        <div class="brcast-inline" id="brcast-inline">
-          <div class="brcast-title" id="brcast-title">—</div>
-          <div class="brcast-body" id="brcast-body">—</div>
         </div>
       </div>
 
@@ -275,15 +253,33 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
           </select>
         </div>
       </div>
+
+      <div class="form-row">
+        <label>Bactéria isolada (opcional)</label>
+        <select id="bacteria" onchange="calcular()">
+          <option value="">Selecione...</option>
+          <option value="MRSA">Staphylococcus aureus (MRSA)</option>
+          <option value="MSSA">Staphylococcus aureus (MSSA)</option>
+          <option value="S. epidermidis">Staphylococcus epidermidis</option>
+          <option value="E. faecalis">Enterococcus faecalis</option>
+          <option value="E. faecium">Enterococcus faecium (sensível)</option>
+          <option value="E. faecium VRE">Enterococcus faecium VRE</option>
+          <option value="S. pneumoniae">Streptococcus pneumoniae</option>
+          <option value="S. viridans">Streptococcus do grupo viridans</option>
+          <option value="Outro">Outro Gram-positivo</option>
+        </select>
+        <div class="brcast-inline" id="brcast-inline">
+          <div class="brcast-title" id="brcast-title">—</div>
+          <div class="brcast-body" id="brcast-body">—</div>
+        </div>
+      </div>
       
       <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
       <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
 
     </div>
   </div>
-</div>
 
-  <!-- Meta Terapêutica -->
   <div class="panel">
     <div class="panel-head">
       <div class="panel-head-dot" style="background:#7C3AED"></div>
@@ -298,8 +294,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
     </div>
   </div>
 
-</div><!-- /left -->
-
+</div>```
 <!-- ══════════ RIGHT ══════════ -->
 <div>
 
