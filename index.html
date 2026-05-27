@@ -200,6 +200,27 @@ table.brc tr:last-child td{border-bottom:none;}
 .ref-li:last-child{border-bottom:none;}
 .ref-li a{color:var(--ac);text-decoration:none;}
 .rn{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--ac);margin-right:.3rem;}
+    /* Painéis */
+.sheet-panel { display: none; }
+.sheet-panel.active { display: block; }
+
+/* Dots */
+.sheet-dots { display:flex; justify-content:center; gap:8px; margin:6px 0 14px; }
+.dot { width:8px; height:8px; border-radius:50%; background:#ccc; cursor:pointer; transition:background .2s; }
+.dot.active { background:#1a3a5c; }
+
+/* Navegação */
+.sheet-nav { display:flex; justify-content:space-between; margin-top:16px; }
+.nav-btn { background:none; border:1px solid #ddd; border-radius:50%; width:36px; height:36px; font-size:20px; color:#1a3a5c; cursor:pointer; line-height:1; }
+
+/* Abas internas de referências */
+.ref-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+.ref-tab { font-size:11px; padding:4px 10px; border-radius:20px; border:1px solid #1a3a5c; background:none; color:#1a3a5c; cursor:pointer; }
+.ref-tab.active { background:#1a3a5c; color:#fff; }
+
+/* Corpo das abas */
+.ref-body { display:none; }
+.ref-body.active { display:block; }
 </style>
 </head>
 <body>
