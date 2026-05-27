@@ -1,4 +1,4 @@
-const CACHE = 'pharmacalc-v5';
+const CACHE = 'pharmacalc-v6';
  
 const ASSETS = [
   './',
