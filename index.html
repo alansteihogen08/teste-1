@@ -1099,33 +1099,69 @@ table.brc tr:last-child td{border-bottom:none;}
   </div>
 
   <!-- PAINEL 2 — Referências -->
-  <div class="sheet-panel" id="panel-1">
-    <div class="a-sec">
-      <h4>Referências</h4>
-      <div class="ref-tabs">
-        <button class="ref-tab active" onclick="goRef(this,'ref-geral')">Geral</button>
-        <button class="ref-tab" onclick="goRef(this,'ref-merp')">Meropenem</button>
-        <button class="ref-tab" onclick="goRef(this,'ref-ami')">Amicacina</button>
-        <button class="ref-tab" onclick="goRef(this,'ref-vanco')">Vancomicina</button>
-        <button class="ref-tab" onclick="goRef(this,'ref-antro')">Antro</button>
-      </div>
-      <div class="ref-body active" id="ref-geral">
-        <!-- suas refs gerais aqui -->
-      </div>
-      <div class="ref-body" id="ref-merp">
-        <!-- suas refs meropenem aqui -->
-      </div>
-      <div class="ref-body" id="ref-ami">
-        <!-- suas refs amicacina aqui -->
-      </div>
-      <div class="ref-body" id="ref-vanco">
-        <!-- suas refs vancomicina aqui -->
-      </div>
-      <div class="ref-body" id="ref-antro">
-        <!-- suas refs antropométrico aqui -->
-      </div>
+<div class="sheet-panel" id="panel-1">
+  <div class="a-sec">
+    <h4>Referências</h4>
+    <div class="ref-tabs">
+      <button class="ref-tab active" onclick="goRef(this,'ref-merp')">Meropenem</button>
+      <button class="ref-tab" onclick="goRef(this,'ref-ami')">Amicacina</button>
+      <button class="ref-tab" onclick="goRef(this,'ref-vanco')">Vancomicina</button>
+      <button class="ref-tab" onclick="goRef(this,'ref-peso')">Peso/Renal</button>
+      <button class="ref-tab" onclick="goRef(this,'ref-outros')">Outros</button>
     </div>
+
+    <div class="ref-body active" id="ref-merp">
+      <div class="ref-li"><span class="rn">[1]</span>Nicolau DP. Pharmacokinetic and pharmacodynamic properties of meropenem. <em>Clin Infect Dis.</em> 2008;47(Suppl 1):S32–S40. <a href="https://doi.org/10.1086/590064" target="_blank">doi:10.1086/590064</a></div>
+      <div class="ref-li"><span class="rn">[2]</span>Drusano GL. Antimicrobial pharmacodynamics: critical interactions of 'bug and drug'. <em>Nat Rev Microbiol.</em> 2004;2(4):289–300.</div>
+      <div class="ref-li"><span class="rn">[3]</span>Nicasio AM, Crandon JL, Nicolau DP. In vivo pharmacodynamic profile of meropenem against KPC-producing <em>Klebsiella pneumoniae</em>. <em>Clin Ther.</em> 2016;38(7):1576–1586. <a href="https://doi.org/10.1016/j.clinthera.2016.06.015" target="_blank">doi:10.1016/j.clinthera.2016.06.015</a></div>
+      <div class="ref-li"><span class="rn">[4]</span>Minichmayr IK et al. Model-informed translation of short-, prolonged- and continuous-infusion meropenem vs <em>P. aeruginosa.</em> <em>Antibiotics.</em> 2022;11(8):1036. <a href="https://doi.org/10.3390/antibiotics11081036" target="_blank">doi:10.3390/antibiotics11081036</a></div>
+      <div class="ref-li"><span class="rn">[5]</span>Patel N et al. Precision dosing of aminoglycosides and carbapenems in critically ill patients. <em>Antibiotics.</em> 2025;14(1):92. <a href="https://doi.org/10.3390/antibiotics14010092" target="_blank">doi:10.3390/antibiotics14010092</a></div>
+      <div class="ref-li"><span class="rn">[6]</span>Chihara S et al. Extended meropenem regimen and aggressive PK/PD in CRRT for septic AKI. <em>Antibiotics.</em> 2024;13(8):755. <a href="https://doi.org/10.3390/antibiotics13080755" target="_blank">doi:10.3390/antibiotics13080755</a></div>
+      <div class="ref-li"><span class="rn">[7]</span>Lefeuver S et al. Optimization of treatment with beta-lactam antibiotics in critically ill patients — guidelines SFPT/SFAR. <em>Critical Care.</em> 2019;23(1):1–20. <a href="https://doi.org/10.1186/s13054-019-2378-9" target="_blank">doi:10.1186/s13054-019-2378-9</a></div>
+      <div class="ref-li"><span class="rn">[8]</span>PK/PD target attainment analyses for meropenem in critically ill adult and elderly ICU patients. <em>Front Pharmacol.</em> 2025. <a href="https://doi.org/10.3389/fphar.2025.1643553" target="_blank">doi:10.3389/fphar.2025.1643553</a></div>
+    </div>
+
+    <div class="ref-body" id="ref-ami">
+      <div class="ref-li"><span class="rn">[1]</span>Hull JH, Sarubbi FA. Gentamicin serum concentrations: pharmacokinetic predictions. <em>Ann Intern Med.</em> 1976;85(2):183–189.</div>
+      <div class="ref-li"><span class="rn">[2]</span>Bartal C et al. Pharmacokinetic dosing of aminoglycosides: a controlled study. <em>Am J Med.</em> 2003;114(3):194–198.</div>
+      <div class="ref-li"><span class="rn">[3]</span>TDM-based population pharmacokinetics of amikacin in patients at a teaching hospital in southern Brazil. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8541462/" target="_blank">PMC8541462</a>. 2021.</div>
+      <div class="ref-li"><span class="rn">[4]</span>Patel N et al. Precision dosing of aminoglycosides and carbapenems in critically ill patients. <em>Antibiotics.</em> 2025;14(1):92. <a href="https://doi.org/10.3390/antibiotics14010092" target="_blank">doi:10.3390/antibiotics14010092</a></div>
+      <div class="ref-li"><span class="rn">[5]</span>Steffens NA et al. TDM-based population pharmacokinetics of amikacin — updated cohort, UFSM. <em>Antibiotics.</em> 2025;14(6):531. <a href="https://doi.org/10.3390/antibiotics14060531" target="_blank">doi:10.3390/antibiotics14060531</a></div>
+      <div class="ref-li"><span class="rn">[6]</span>Stanford Medicine Antimicrobial Stewardship Program. Aminoglycoside Dosing Protocol. <a href="https://med.stanford.edu/bugsanddrugs" target="_blank">med.stanford.edu/bugsanddrugs</a></div>
+      <div class="ref-li"><span class="rn">[7]</span>Souza LM et al. Monitorização terapêutica e manejo de aminoglicosídeos baseado em PK/PD: uma revisão de escopo. <em>Revista JRG.</em> 2026;9(20). <a href="https://doi.org/10.55892/jrg.v9i20.3159" target="_blank">doi:10.55892/jrg.v9i20.3159</a></div>
+    </div>
+
+    <div class="ref-body" id="ref-vanco">
+      <div class="ref-li"><span class="rn">[1]</span>Rybak MJ et al. Therapeutic monitoring of vancomycin for serious MRSA infections — revised consensus guideline. ASHP/IDSA/PIDSA/SIDP. <em>AJHP.</em> 2020;77(11):835–864. <a href="https://doi.org/10.1093/ajhp/zxaa036" target="_blank">doi:10.1093/ajhp/zxaa036</a></div>
+      <div class="ref-li"><span class="rn">[2]</span>Matzke GR et al. Pharmacokinetics of vancomycin in patients with various degrees of renal function. <em>AAC.</em> 1984;25(4):433–437.</div>
+      <div class="ref-li"><span class="rn">[3]</span>Kane SP. ClinCalc Vancomycin Calculator. <a href="https://clincalc.com" target="_blank">ClinCalc.com</a>, 2025.</div>
+      <div class="ref-li"><span class="rn">[4]</span>Macedo VABS. Monitorização terapêutica da vancomicina em pacientes críticos. Dissertação de Mestrado. USP, 2017.</div>
+      <div class="ref-li"><span class="rn">[5]</span>Aljutayli A et al. Pharmacokinetic equations versus Bayesian guided vancomycin monitoring. <em>Clin Transl Sci.</em> 2022. <a href="https://doi.org/10.1111/CTS.13210" target="_blank">doi:10.1111/CTS.13210</a></div>
+      <div class="ref-li"><span class="rn">[6]</span>Model-informed precision dosing improves outcomes in patients receiving vancomycin for Gram-positive infections. <em>Open Forum Infect Dis.</em> 2022. <a href="https://doi.org/10.1093/ofid/ofac626" target="_blank">doi:10.1093/ofid/ofac626</a></div>
+      <div class="ref-li"><span class="rn">[7]</span>Vancomycin TDM and improved outcomes in critically ill patients receiving RRT. <em>Front Pharmacol.</em> 2025. <a href="https://doi.org/10.3389/fphar.2025.1715023" target="_blank">doi:10.3389/fphar.2025.1715023</a></div>
+    </div>
+
+    <div class="ref-body" id="ref-peso">
+      <div class="ref-li"><span class="rn">[1]</span>Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum creatinine. <em>Nephron.</em> 1976;16:31–41.</div>
+      <div class="ref-li"><span class="rn">[2]</span>Devine BJ. Gentamicin therapy. <em>Drug Intell Clin Pharm.</em> 1974;8:650–655.</div>
+      <div class="ref-li"><span class="rn">[3]</span>DuBois D, DuBois EF. A formula to estimate the approximate surface area if height and weight are known. <em>Arch Intern Med.</em> 1916;17:863–871.</div>
+      <div class="ref-li"><span class="rn">[4]</span>Pharmacy Times. Moving beyond Cockcroft-Gault when estimating kidney function. 2025. <a href="https://www.pharmacytimes.com" target="_blank">pharmacytimes.com</a></div>
+    </div>
+
+    <div class="ref-body" id="ref-outros">
+      <div class="ref-li" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:none;padding-bottom:2px">Breakpoints</div>
+      <div class="ref-li"><span class="rn">[1]</span>BrCAST. Tabela de Pontos de Corte Clínicos — BrCAST-EUCAST v14.0, abril 2024. <a href="https://brcast.org.br" target="_blank">brcast.org.br</a></div>
+      <div class="ref-li"><span class="rn">[2]</span>EUCAST. Breakpoint tables for interpretation of MICs and zone diameters, v14.0, 2024. <a href="http://www.eucast.org" target="_blank">eucast.org</a></div>
+      <div class="ref-li" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:none;padding-bottom:2px;margin-top:6px">Resistência bacteriana</div>
+      <div class="ref-li"><span class="rn">[1]</span>Blair JMA et al. Molecular mechanisms of antibiotic resistance. <em>Nat Rev Microbiol.</em> 2015;13(1):42–51.</div>
+      <div class="ref-li"><span class="rn">[2]</span>Munita JM, Arias CA. Mechanisms of antibiotic resistance. <em>Microbiol Spectr.</em> 2016;4(2):VMBF-0016-2015.</div>
+      <div class="ref-li" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:none;padding-bottom:2px;margin-top:6px">Stewardship / TDM</div>
+      <div class="ref-li"><span class="rn">[1]</span>Barlam TF et al. Implementing an antibiotic stewardship program — IDSA/SHEA guidelines. <em>Clin Infect Dis.</em> 2016;62(10):e51–e77.</div>
+      <div class="ref-li"><span class="rn">[2]</span>Abdul-Aziz MH et al. Antimicrobial TDM in critically ill adult patients — position paper. <em>Intensive Care Med.</em> 2020;46(6):1127–1153.</div>
+    </div>
+
   </div>
+</div>
 
   <!-- PAINEL 3 — Aviso -->
   <div class="sheet-panel" id="panel-2">
