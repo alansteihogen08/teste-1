@@ -950,28 +950,79 @@ table.brc tr:last-child td{border-bottom:none;}
 <!-- SOBRE MODAL -->
 <div class="overlay" id="modal-overlay" onclick="closeSobre(event)">
   <div class="sheet" onclick="event.stopPropagation()">
-    <div class="sheet-handle"></div>
-    <button class="sheet-close" onclick="closeSobre()">×</button>
-    <h2>PharmaCalc</h2>
+  <div class="sheet-handle"></div>
+  <button class="sheet-close" onclick="closeSobre()">×</button>
+  <h2>PharmaCalc</h2>
+
+  <div class="sheet-dots">
+    <span class="dot active" onclick="goPanel(0)"></span>
+    <span class="dot" onclick="goPanel(1)"></span>
+    <span class="dot" onclick="goPanel(2)"></span>
+  </div>
+
+  <!-- PAINEL 1 — Resumo -->
+  <div class="sheet-panel active" id="panel-0">
     <div class="a-sec">
-      <h4>App</h4>
-      <div class="a-row"><span class="a-lbl">Versão</span><span class="a-val">1.0.0</span></div>
-      <div class="a-row"><span class="a-lbl">Desenvolvedor</span><span class="a-val">Alan Steihogen</span></div>
-      <div class="a-row"><span class="a-lbl">Breakpoints</span><span class="a-val">BrCAST-EUCAST v14.0</span></div>
-      <div class="a-row"><span class="a-lbl">ke amicacina</span><span class="a-val">(ClCr×0,0028)+0,01</span></div>
-      <div class="a-row"><span class="a-lbl">ClCr</span><span class="a-val">Cockcroft-Gault</span></div>
+      <div class="ref-li" style="border:none;font-size:13px;line-height:1.7">
+        PharmaCalc é uma ferramenta de suporte à decisão clínica desenvolvida para farmacêuticos hospitalares, reunindo calculadoras de farmacocinética/farmacodinâmica (PK/PD) de antimicrobianos em uma única plataforma web progressiva (PWA), gratuita e com suporte offline.
+      </div>
+      <div style="margin-top:10px;font-size:12.5px;color:var(--mu);line-height:1.9;padding:0 4px">
+        <strong style="color:var(--tx)">Calculadoras disponíveis:</strong><br>
+        · Meropenem — %T&gt;MIC<br>
+        · Amicacina — Cmax/MIC<br>
+        · Vancomicina — AUC/MIC<br>
+        · Parâmetros antropométricos — PIB, PAj, IMC, SCQ
+      </div>
+      <div class="ref-li" style="border:none;font-size:12px;line-height:1.7;margin-top:10px">
+        Utiliza os pontos de corte <strong>BrCAST-EUCAST v14.0</strong> e equações PK validadas na literatura.
+      </div>
     </div>
+  </div>
+
+  <!-- PAINEL 2 — Referências -->
+  <div class="sheet-panel" id="panel-1">
     <div class="a-sec">
       <h4>Referências</h4>
-      <div class="ref-li"><span class="rn">[1]</span>Nicasio AM et al. <em>Clin Ther</em> 2016. <a href="https://doi.org/10.1016/j.clinthera.2016.06.015" target="_blank">doi:10.1016/j.clinthera.2016.06.015</a></div>
-      <div class="ref-li"><span class="rn">[2]</span>Patel N et al. <em>Antibiotics</em> 2025, 14(1). <a href="https://doi.org/10.3390/antibiotics14010092" target="_blank">doi:10.3390/antibiotics14010092</a></div>
-      <div class="ref-li"><span class="rn">[3]</span>TDM-based PK Amikacin. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8541462/" target="_blank">PMC8541462</a></div>
-      <div class="ref-li"><span class="rn">[4]</span>Antifungal mechanisms review. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10215229/" target="_blank">PMC10215229</a></div>
-      <div class="ref-li"><span class="rn">[5]</span>BrCAST Tabela v14.0. <a href="https://brcast.org.br" target="_blank">brcast.org.br</a></div>
-      <div class="ref-li"><span class="rn">[6]</span>ASHP/IDSA Vancomycin Guidelines 2020.</div>
+      <div class="ref-tabs">
+        <button class="ref-tab active" onclick="goRef(this,'ref-geral')">Geral</button>
+        <button class="ref-tab" onclick="goRef(this,'ref-merp')">Meropenem</button>
+        <button class="ref-tab" onclick="goRef(this,'ref-ami')">Amicacina</button>
+        <button class="ref-tab" onclick="goRef(this,'ref-vanco')">Vancomicina</button>
+        <button class="ref-tab" onclick="goRef(this,'ref-antro')">Antro</button>
+      </div>
+      <div class="ref-body active" id="ref-geral">
+        <!-- suas refs gerais aqui -->
+      </div>
+      <div class="ref-body" id="ref-merp">
+        <!-- suas refs meropenem aqui -->
+      </div>
+      <div class="ref-body" id="ref-ami">
+        <!-- suas refs amicacina aqui -->
+      </div>
+      <div class="ref-body" id="ref-vanco">
+        <!-- suas refs vancomicina aqui -->
+      </div>
+      <div class="ref-body" id="ref-antro">
+        <!-- suas refs antropométrico aqui -->
+      </div>
     </div>
-    <div class="a-sec"><h4>Aviso</h4><div class="ref-li" style="border:none;font-size:11.5px;line-height:1.7">Ferramenta de suporte à decisão clínica para profissionais de saúde. Não substitui julgamento clínico, protocolos institucionais ou literatura científica atualizada.</div></div>
   </div>
+
+  <!-- PAINEL 3 — Aviso -->
+  <div class="sheet-panel" id="panel-2">
+    <div class="a-sec">
+      <h4>Aviso</h4>
+      <div class="ref-li" style="border:none;font-size:11.5px;line-height:1.7">
+        Ferramenta de suporte à decisão clínica para profissionais de saúde. Não substitui julgamento clínico, protocolos institucionais ou literatura científica atualizada.
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-nav">
+    <button class="nav-btn" id="btn-prev" onclick="stepPanel(-1)" style="visibility:hidden">‹</button>
+    <button class="nav-btn" id="btn-next" onclick="stepPanel(1)">›</button>
+  </div>
+</div>
 </div>
 
 <script>
@@ -1085,9 +1136,35 @@ document.addEventListener('click',()=>{
 });
 
 // ── SOBRE MODAL ───────────────────────────────
-function showSobre(){document.getElementById('modal-overlay').classList.add('show');}
-function closeSobre(evt){if(!evt||evt.target===document.getElementById('modal-overlay'))document.getElementById('modal-overlay').classList.remove('show');}
+function showSobre(){
+  document.getElementById('modal-overlay').classList.add('show');
+  goPanel(0); // sempre abre no painel 1
+}
+function closeSobre(evt){
+  if(!evt||evt.target===document.getElementById('modal-overlay'))
+    document.getElementById('modal-overlay').classList.remove('show');
+}
 
+// ── PAINÉIS DO SOBRE ──────────────────────────
+let _panel=0;
+function goPanel(n){
+  const panels=document.querySelectorAll('.sheet-panel');
+  const dots=document.querySelectorAll('.dot');
+  panels.forEach(p=>p.classList.remove('active'));
+  dots.forEach(d=>d.classList.remove('active'));
+  panels[n].classList.add('active');
+  dots[n].classList.add('active');
+  _panel=n;
+  document.getElementById('btn-prev').style.visibility=n===0?'hidden':'visible';
+  document.getElementById('btn-next').style.visibility=n===panels.length-1?'hidden':'visible';
+}
+function stepPanel(dir){goPanel(Math.max(0,Math.min(2,_panel+dir)));}
+function goRef(btn,id){
+  btn.closest('.a-sec').querySelectorAll('.ref-tab').forEach(b=>b.classList.remove('active'));
+  btn.closest('.a-sec').querySelectorAll('.ref-body').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
 // ── SERVICE WORKER ────────────────────────────
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
