@@ -913,38 +913,157 @@ table.brc tr:last-child td{border-bottom:none;}
 
 <!-- ═══ ABA 4: PK/PD ═══ -->
 <div class="scr" id="scr-pkpd">
-  <div class="pkpd-sec">
-    <h3>O que é PK/PD?</h3>
-    <p><strong>Farmacocinética (PK)</strong> é o que o organismo faz com o fármaco — absorção, distribuição, metabolismo e eliminação. <strong>Farmacodinâmica (PD)</strong> é o que o fármaco faz com o microrganismo.</p>
-    <div class="callout bl"><div class="callout-t">Integração PK/PD</div><p>Permite definir regimes que maximizam eficácia e minimizam toxicidade — base do <strong>Antimicrobial Stewardship</strong> e da individualização posológica em UTI.</p></div>
-  </div>
-  <div class="pkpd-sec">
-    <h3>Os três índices PK/PD</h3>
-    <table class="idx-t">
-      <thead><tr><th>Índice</th><th>Tipo</th><th>Classes</th><th>Alvo</th></tr></thead>
-      <tbody>
-        <tr><td><strong>%T&gt;MIC</strong></td><td><span class="pill p-bl" style="font-size:9px">Tempo</span></td><td>Beta-lactâmicos, Carbapenêmicos</td><td>40–100%</td></tr>
-        <tr><td><strong>Cmax/MIC</strong></td><td><span class="pill p-gr" style="font-size:9px">Conc.</span></td><td>Aminoglicosídeos, Daptomicina</td><td>≥ 8–10</td></tr>
-        <tr><td><strong>AUC/MIC</strong></td><td><span class="pill p-am" style="font-size:9px">Expos.</span></td><td>Vancomicina, Quinolonas, Azóis</td><td>400–600 (vanco)</td></tr>
-      </tbody>
-    </table>
-    <div class="callout bl"><div class="callout-t">%T&gt;MIC — Meropenem</div><p>Infusão prolongada (180 min) aumenta o tempo acima da MIC — essencial para MIC 4–8 mg/L (categoria I BrCAST).</p></div>
-    <div class="callout gr"><div class="callout-t">Cmax/MIC — Amicacina</div><p>Dose única diária (15–20 mg/kg): maximiza pico, explora efeito pós-antibiótico, mantém vale &lt;5 mg/L — reduz nefrotoxicidade.</p></div>
-  </div>
-  <div class="pkpd-sec">
-    <h3>Categorias BrCAST-EUCAST v14.0</h3>
-    <div class="tags" style="margin-bottom:.6rem"><span class="pill p-gr">S — Dose padrão</span><span class="pill p-am">I — Exposição aumentada</span><span class="pill p-re">R — Resistente</span></div>
-    <div class="brc-mini"><div class="brc-h"><p>Meropenem — BrCAST v14.0</p></div><table class="brc"><thead><tr><th>Organismo</th><th>S ≤</th><th>I</th><th>R &gt;</th></tr></thead><tbody><tr><td>Enterobacterales</td><td>2 mg/L</td><td>4–8</td><td>8</td></tr><tr><td>Pseudomonas spp.</td><td>2 mg/L</td><td>4–8</td><td>8</td></tr><tr><td>Acinetobacter spp.</td><td>2 mg/L</td><td>4–8</td><td>8</td></tr></tbody></table></div>
-    <div class="brc-mini"><div class="brc-h"><p>Amicacina — BrCAST v14.0 (ECOFF)</p></div><table class="brc"><thead><tr><th>Organismo</th><th>S ≤</th><th>R &gt;</th></tr></thead><tbody><tr><td>Enterobacterales</td><td>(8) mg/L</td><td>(8)</td></tr><tr><td>Pseudomonas spp.</td><td>(16) mg/L</td><td>(16)</td></tr></tbody></table></div>
-  </div>
-  <div class="pkpd-sec">
-    <h3>Fórmulas PK essenciais</h3>
-    <div class="callout bl"><div class="callout-t">Cockcroft-Gault</div><p>ClCr = [(140−idade)×peso] / (72×creatinina) × 0,85 (se feminino)</p></div>
-    <div class="callout gr"><div class="callout-t">ke e T½</div><p>ke = 0,693 / T½ &nbsp;·&nbsp; T½ = 0,693 / ke &nbsp;·&nbsp; Amicacina: ke = (ClCr × 0,0028) + 0,01</p></div>
-    <div class="callout am"><div class="callout-t">Cmax IV</div><p>Ocorre exatamente no término da infusão. Cmax ≈ Dose/Vd (bolus). Vd ≈ 0,25 L/kg.</p></div>
-  </div>
-</div>
 
+  <!-- BLOCO 1: Segurança e adequação de dose -->
+  <div class="pkpd-sec">
+    <h3>Dose certa, no momento certo</h3>
+    <div class="callout bl">
+      <p style="font-size:12px;line-height:1.8">
+        A prescrição de um antimicrobiano não termina na escolha do agente — termina quando a concentração no sítio de infecção supera a MIC do patógeno pelo tempo e magnitude necessários. Uma dose subterapêutica seleciona resistência sem eliminar o micro-organismo; uma dose excessiva expõe o paciente a toxicidade renal, auditiva ou neurológica sem benefício adicional. A janela terapêutica é estreita, e variáveis como função renal, peso corporal e gravidade da doença a deslocam continuamente.
+      </p>
+    </div>
+    <div class="callout gr">
+      <p style="font-size:12px;line-height:1.8">
+        Cada classe antimicrobiana tem um índice que prediz eficácia: %T&gt;MIC para β-lactâmicos, Cmax/MIC para aminoglicosídeos e AUC/MIC para vancomicina e fluoroquinolonas. Atingir esse alvo não é opcional — é o critério que separa tratamento adequado de falha terapêutica. O PharmaCalc traduz os parâmetros individuais do paciente nesses índices, tornando visível o que a prescrição empírica não consegue garantir.
+      </p>
+    </div>
+  </div>
+
+  <!-- BLOCO 2: Tipos de atividade -->
+  <div class="pkpd-sec">
+    <h3>Tipos de atividade antimicrobiana</h3>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+
+      <div style="border-radius:10px;padding:.75rem .9rem;border:1px solid var(--bd);background:var(--s2)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="font-size:15px">⏱</span>
+          <strong style="font-size:12.5px;color:#0A7EA4">Tempo-dependente</strong>
+          <span class="pill p-bl" style="margin-left:auto">%T&gt;MIC</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--mu);line-height:1.6">
+          β-lactâmicos, carbapenems. A eficácia depende do <em>tempo</em> em que a concentração livre supera a MIC. Infusão prolongada maximiza o índice.
+        </div>
+      </div>
+
+      <div style="border-radius:10px;padding:.75rem .9rem;border:1px solid var(--bd);background:var(--s2)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="font-size:15px">📈</span>
+          <strong style="font-size:12.5px;color:#1A6B4A">Concentração-dependente</strong>
+          <span class="pill p-gr" style="margin-left:auto">Cmax/MIC</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--mu);line-height:1.6">
+          Aminoglicosídeos. A eficácia depende do <em>pico</em> sérico em relação à MIC. Dose única diária maximiza Cmax/MIC e reduz nefrotoxicidade.
+        </div>
+      </div>
+
+      <div style="border-radius:10px;padding:.75rem .9rem;border:1px solid var(--bd);background:var(--s2)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="font-size:15px">📊</span>
+          <strong style="font-size:12.5px;color:#6D28D9">Exposição-dependente</strong>
+          <span class="pill p-pu" style="margin-left:auto">AUC/MIC</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--mu);line-height:1.6">
+          Vancomicina, fluoroquinolonas. A eficácia depende da <em>exposição total</em> ao longo do tempo. Alvo vancomicina: AUC&#8320;&#8324;/MIC 400–600 mg·h/L.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BLOCO 3: Tabela de índices -->
+  <div class="pkpd-sec">
+    <h3>Índices PK/PD por antimicrobiano</h3>
+    <div style="overflow-x:auto">
+      <table class="idx-t">
+        <thead>
+          <tr>
+            <th>Fármaco</th>
+            <th>Índice</th>
+            <th>Alvo eficácia</th>
+            <th>Limiar toxicidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Amicacina</td>
+            <td><span class="pill p-gr" style="font-size:9px">Cmax/MIC</span></td>
+            <td style="color:#1A6B4A;font-weight:600">≥ 8–10</td>
+            <td style="color:#B45309">Cmin &gt; 5 mg/L</td>
+          </tr>
+          <tr>
+            <td>Gentamicina/<br>Tobramicina</td>
+            <td><span class="pill p-gr" style="font-size:9px">Cmax/MIC</span></td>
+            <td style="color:#1A6B4A;font-weight:600">≥ 8–10</td>
+            <td style="color:#B45309">Cmin &gt; 1 mg/L</td>
+          </tr>
+          <tr>
+            <td>Carbapenems</td>
+            <td><span class="pill p-bl" style="font-size:9px">%fT&gt;MIC</span></td>
+            <td style="color:#0A7EA4;font-weight:600">50–100%</td>
+            <td style="color:#B45309">Cmin &gt; 44,5 mg/L</td>
+          </tr>
+          <tr>
+            <td>Cefalosporinas</td>
+            <td><span class="pill p-bl" style="font-size:9px">%fT&gt;MIC</span></td>
+            <td style="color:#0A7EA4;font-weight:600">45–100%</td>
+            <td style="color:#B45309">Cmin &gt; 20 mg/L</td>
+          </tr>
+          <tr>
+            <td>Penicilinas</td>
+            <td><span class="pill p-bl" style="font-size:9px">%fT&gt;MIC</span></td>
+            <td style="color:#0A7EA4;font-weight:600">50–100%</td>
+            <td style="color:#B45309">Cmin &gt; 361 mg/L</td>
+          </tr>
+          <tr>
+            <td>Vancomicina</td>
+            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
+            <td style="color:#6D28D9;font-weight:600">400–600 mg·h/L</td>
+            <td style="color:#B45309">AUC &gt; 700 mg·h/L</td>
+          </tr>
+          <tr>
+            <td>Fluoroquinolonas</td>
+            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
+            <td style="color:#6D28D9;font-weight:600">125–250 mg·h/L</td>
+            <td style="color:var(--mu)">Incerto</td>
+          </tr>
+          <tr>
+            <td>Daptomicina</td>
+            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
+            <td style="color:#6D28D9;font-weight:600">≥ 666 mg·h/L</td>
+            <td style="color:#B45309">Cmin &gt; 24 mg/L</td>
+          </tr>
+          <tr>
+            <td>Linezolida</td>
+            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
+            <td style="color:#6D28D9;font-weight:600">80–120 mg·h/L</td>
+            <td style="color:#B45309">AUC &gt; 300 mg·h/L</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:10px;color:var(--mu);margin-top:8px;line-height:1.5">
+      Fonte: Abdul-Aziz MH et al. <em>Intensive Care Med.</em> 2020;46(6):1127–1153.
+    </div>
+  </div>
+
+  <!-- BLOCO 4: Aplicação prática -->
+  <div class="pkpd-sec">
+    <h3>Aplicação prática</h3>
+    <div class="callout bl">
+      <div class="callout-t">Meropenem em infusão prolongada</div>
+      <p>Estender a infusão de 30 min para 3 h mantém a concentração acima da MIC por mais tempo no intervalo, aumentando o %T&gt;MIC sem aumentar a dose total. Essencial para MIC 4–8 mg/L (categoria I BrCAST).</p>
+    </div>
+    <div class="callout gr">
+      <div class="callout-t">Amicacina em dose única diária</div>
+      <p>Concentrar toda a dose em uma única administração maximiza o pico (Cmax/MIC ≥ 8–10) e permite que o vale caia abaixo de 5 mg/L antes da próxima dose, reduzindo acúmulo renal e ototoxicidade.</p>
+    </div>
+    <div class="callout pu">
+      <div class="callout-t">Vancomicina guiada por AUC</div>
+      <p>Monitorizar pelo AUC/MIC (alvo 400–600 mg·h/L) em vez do vale isolado reduz nefrotoxicidade e identifica com mais precisão exposição insuficiente. Diretriz ASHP/IDSA 2020 recomenda essa abordagem como padrão.</p>
+    </div>
+  </div>
+
+</div>
 </div><!-- /content -->
 
 <!-- SOBRE MODAL -->
