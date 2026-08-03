@@ -1,0 +1,173 @@
+{
+  "ampicilina_sulbactam": {
+    "nome": "Ampicilina sódica + Sulbactam sódico (proporção 2:1)",
+    "sinonimos": "Unasyn® (referência, Pfizer/Wyeth); Compactan® (Bergamo); Sulbacter® (Cellofarm); genéricos Mylan/Viatris, Blau, Eurofarma; associação penicilina + inibidor de beta-lactamase",
+    "mecanismo_acao": "Associação de aminopenicilina (ampicilina) com inibidor irreversível de beta-lactamases (sulbactam) na proporção fixa 2:1. A ampicilina é o componente bactericida, atuando por inibição da síntese da parede celular mucopeptídica em organismos sensíveis durante a fase de multiplicação ativa (ligação às PBPs), de forma análoga às benzilpenicilinas. O sulbactam tem atividade antibacteriana intrínseca limitada (relevante apenas para Neisseriaceae), mas protege a ampicilina da hidrólise pela maioria das beta-lactamases plasmidiais relevantes em organismos penicilino-resistentes, restaurando a atividade frente a cepas produtoras dessas enzimas. Adicionalmente, o sulbactam se liga a algumas PBPs, conferindo efeito sinérgico direto contra certas cepas (mecanismo próprio, independente da proteção da ampicilina) — isso é particularmente relevante para Acinetobacter baumannii, patógeno frente ao qual o sulbactam é o componente ativo, sem sinergia relevante da ampicilina.",
+    "espectro": {
+      "cobertura": [
+        "Gram-positivos: Staphylococcus aureus e S. epidermidis (incluindo cepas penicilino-resistentes produtoras de beta-lactamase e algumas meticilino-resistentes, conforme bula — extrapolação de dados anteriores à disseminação atual do MRSA), Streptococcus pneumoniae, Streptococcus faecalis (Enterococcus faecalis) e outros Streptococcus spp.",
+        "Gram-negativos: Haemophilus influenzae e parainfluenzae (cepas produtoras e não produtoras de beta-lactamase), Moraxella (Branhamella) catarrhalis, Escherichia coli, Klebsiella spp., Proteus spp. (indol-positivos e indol-negativos), Morganella morganii, Citrobacter spp., Enterobacter spp., Neisseria meningitidis, Neisseria gonorrhoeae",
+        "Anaeróbios: Bacteroides fragilis e espécies relacionadas",
+        "Acinetobacter baumannii (incluindo cepas resistentes a carbapenêmicos/CRAB) — não constante na bula nacional, mas amplamente respaldado por literatura internacional e pela diretriz IDSA 2023/2024 de infecções por Gram-negativos resistentes; o componente ativo é o sulbactam, sem contribuição relevante da ampicilina"
+      ],
+      "sem_atividade": [
+        "Pseudomonas aeruginosa — sem cobertura (diferente de piperacilina-tazobactam)",
+        "MRSA (cepas atuais, hospitalares) — a bula cita 'algumas cepas meticilino-resistentes' como sensíveis, mas isso reflete dados históricos pré-disseminação do MRSA clonal moderno; não deve ser considerado opção terapêutica para MRSA na prática atual",
+        "Enterobactérias produtoras de ESBL ou AmpC — sulbactam não protege de forma confiável contra essas beta-lactamases de espectro estendido/classe C",
+        "Stenotrophomonas maltophilia, Klebsiella pneumoniae carbapenemase (KPC)-produtoras — sem atividade"
+      ],
+      "observacao": "Diferencial clínico mais relevante para o contexto de UTI/onco-hematologia: em doses padrão (bula, máx. 4 g sulbactam/dia), ampicilina-sulbactam é indicado para infecções polimicrobianas intra-abdominais, ginecológicas, de pele/partes moles e profilaxia cirúrgica — sem papel contra Pseudomonas nem CRAB. Já em ALTA DOSE (sulbactam 6-9 g/dia, fora da bula brasileira), passa a ser opção de combinação para CRAB conforme diretriz IDSA — ver discrepância bula-vs-diretriz em 'dose_adulto' e 'referências'."
+    },
+    "pkpd": {
+      "tipo": "Bactericida tempo-dependente (beta-lactâmico) — eficácia correlaciona com %fT>MIC tanto para ampicilina quanto para sulbactam",
+      "alvo_farmacodinamico": "Não padronizado na bula nacional. Literatura internacional (PK/PD murino e clínico) define, para tratamento geral, meta de 50% T>MIC para ampicilina e 50% T>0,5xMIC para sulbactam; para A. baumannii, meta mais exigente de 60% T>MIC para sulbactam, dado que este é o componente ativo isolado contra esse patógeno.",
+      "vale_alvo": "Sem threshold de toxicidade/TDM estabelecido na bula. Não há neurotoxicidade dose-dependente classe-definidora descrita como a de cefepima; a bula menciona apenas risco teórico de convulsão por altas concentrações liquóricas de beta-lactâmicos em superdose.",
+      "meia_vida": "Aproximadamente 1 hora tanto para ampicilina quanto para sulbactam em adultos com função renal normal (bula). Prolongada em recém-nascidos (particularmente prematuros) e em insuficiência renal, de forma proporcional e similar entre os dois componentes, mantendo razão plasmática constante mesmo em ClCr ≤30 mL/min (bula).",
+      "ligacao_proteica": "Não quantificada na bula nacional — [A PREENCHER: dado ausente na bula consultada; literatura internacional refere ligação proteica baixa a moderada e variável entre ampicilina e sulbactam].",
+      "volume_distribuicao": "Difusão rápida na maioria dos tecidos e fluidos corporais (bula). Penetração no SNC/LCR é baixa, exceto quando há inflamação meníngea — diferente de ceftriaxona, que atinge concentrações liquóricas proporcionalmente maiores mesmo em meninges não inflamadas.",
+      "metabolizacao": "Não descrita como relevante na bula — perfil predominantemente renal, sem menção a metabolização hepática significativa.",
+      "excrecao": "Maior parte de ambos os componentes é excretada inalterada na urina (bula), por via renal — diferente do perfil misto renal/biliar da ceftriaxona.",
+      "alerta": "Extensão de intervalo posológico (não redução de dose unitária) é a estratégia recomendada pela bula em disfunção renal, análoga à prática usual para ampicilina isolada — mas a bula NÃO fornece tabela quantitativa por faixa de ClCr (ver 'ajuste_renal'). No contexto de infecção por CRAB, o alvo de %T>MIC exige otimização por infusão prolongada (4h) e doses muito superiores às aprovadas em bula — ponto central de discrepância bula-vs-guideline neste fármaco."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Infecção leve (bula)",
+        "via": "IV ou IM",
+        "dose": "1,5 a 3,0 g/dia (0,5+1,0 a 1,0+2,0 g), divididos a cada 12h"
+      },
+      {
+        "indicacao": "Infecção moderada (bula)",
+        "via": "IV ou IM",
+        "dose": "até 6,0 g/dia (2,0+4,0 g), divididos a cada 6-8h"
+      },
+      {
+        "indicacao": "Infecção grave (bula)",
+        "via": "IV ou IM",
+        "dose": "até 12,0 g/dia (4,0+8,0 g), divididos a cada 6-8h — dose máxima diária de 4 g de sulbactam conforme bula nacional"
+      },
+      {
+        "indicacao": "Gonorreia não complicada",
+        "via": "IM, dose única",
+        "dose": "1,5 g + probenecida 1,0 g VO concomitante (para prolongar níveis plasmáticos) — bula"
+      },
+      {
+        "indicacao": "Profilaxia cirúrgica (cirurgia pélvica/abdominal com risco de contaminação peritoneal)",
+        "via": "IV ou IM",
+        "dose": "1,5 a 3,0 g no início da anestesia; pode repetir a cada 6-8h; geralmente suspenso em 24h pós-operatórias — bula"
+      },
+      {
+        "indicacao": "Acinetobacter baumannii resistente a carbapenêmico (CRAB), como parte de terapia combinada — FORA DA BULA NACIONAL, conforme diretriz IDSA 2023/2024",
+        "via": "IV, infusão prolongada",
+        "dose": "Sulbactam em alta dose, total diário de 6-9 g (equivalente a ampicilina-sulbactam 9 g a cada 8h, infundido em 4h, totalizando 27 g/dia do produto combinado) — sempre associado a pelo menos um segundo agente ativo; usar quando sulbactam-durlobactam não estiver disponível"
+      },
+      {
+        "duracao": "Bula: tratamento mantido normalmente até 48h após desaparecimento da febre e sintomas anormais; duração usual de 5-14 dias, podendo ser estendida em casos graves."
+      },
+      {
+        "alerta_discrepancia": "DISCREPÂNCIA BULA-VS-DIRETRIZ: a bula nacional limita a dose máxima diária a 4 g de sulbactam (dose total do produto até 12 g/dia), enquanto a diretriz IDSA (Tratamento de Infecções por Gram-negativos Resistentes, 2023/2024 update) recomenda 6-9 g/dia de sulbactam — 1,5 a 2,25x acima do limite da bula — para CRAB, sempre em combinação. Essa alta dose está fora de bula (uso off-label) no Brasil e deve ser respaldada por protocolo institucional, discussão com CCIH/stewardship e ajuste cuidadoso à função renal, dado o volume de sódio e líquido envolvidos na infusão prolongada."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "indicacao": "Maioria das infecções em RN, lactentes e crianças (bula)",
+        "via": "IV ou IM",
+        "dose": "150 mg/kg/dia (correspondente a 50 mg/kg/dia de sulbactam + 100 mg/kg/dia de ampicilina), a cada 6-8h"
+      },
+      {
+        "indicacao": "RN durante a primeira semana de vida, especialmente prematuros (bula)",
+        "via": "IV ou IM",
+        "dose": "75 mg/kg/dia (25 mg/kg/dia sulbactam + 50 mg/kg/dia ampicilina), a cada 12h"
+      },
+      {
+        "indicacao": "Infecções de pele/estruturas dérmicas pediátricas (estudo citado em bula)",
+        "via": "IV",
+        "dose": "Referência de eficácia comparável à cefuroxima; dose não padronizada explicitamente neste trecho da bula — usar esquema geral de 150 mg/kg/dia"
+      },
+      {
+        "indicacao": "Epiglotite aguda, 15 meses-7 anos (estudo citado em bula)",
+        "via": "IV",
+        "dose": "200 mg/kg/dia de ampicilina + 30 mg/kg/dia de sulbactam, 4x/dia — taxa de resposta de 96% no estudo aberto referenciado"
+      },
+      {
+        "alerta": "Bula não define esquema específico de ajuste renal pediátrico nem contraindicação análoga à de ceftriaxona quanto a soluções cálcicas — mas recomenda observação periódica de função renal, hepática e hematopoiética durante terapia prolongada, particularmente em neonatos prematuros e lactentes."
+      }
+    ],
+    "ajuste_renal": {
+      "formula_recomendada": "A bula NÃO fornece tabela quantitativa de ajuste por faixa de ClCr — orienta apenas que, em insuficiência renal grave (ClCr ≤30 mL/min), a cinética de eliminação de sulbactam e ampicilina é afetada de forma similar (razão plasmática mantida constante), devendo a dose ser administrada com MENOR FREQUÊNCIA (extensão de intervalo, não necessariamente redução de dose unitária), 'de acordo com a prática usual para ampicilina'.",
+      "tabela": [
+        {
+          "clcr": "ClCr >30 mL/min",
+          "dose_ajustada": "Sem ajuste — manter intervalo padrão (6-8h) conforme gravidade da infecção"
+        },
+        {
+          "clcr": "ClCr ≤30 mL/min",
+          "dose_ajustada": "[A PREENCHER] — bula não especifica novo intervalo numérico; orienta apenas maior espaçamento entre doses, extrapolando a prática usual para ampicilina isolada. Recomenda-se consultar nomograma institucional validado (ex. Sanford Guide, Lexicomp) para faixas específicas de ClCr antes de definir o intervalo, já que a bula não é fonte suficiente para esse detalhamento."
+        }
+      ],
+      "alerta": "Diferente de ceftriaxona (que dispensa ajuste na maioria dos cenários), ampicilina-sulbactam tem eliminação predominantemente renal e EXIGE extensão de intervalo em disfunção renal — mas a bula não fornece a tabela numérica necessária para prescrição segura, o que é uma limitação relevante desta fonte para uso em protocolo de stewardship."
+    },
+    "dialise": {
+      "hemodialise": "Ampicilina e sulbactam SÃO removidos por hemodiálise (bula, item Superdose) — a HD pode aumentar a eliminação do fármaco em caso de superdosagem em paciente com insuficiência renal. A bula não fornece esquema de dose suplementar pós-HD para uso terapêutico de rotina — [A PREENCHER: dose suplementar pós-sessão não descrita na fonte autorizada].",
+      "dialise_peritoneal": "Não descrita na bula consultada — [A PREENCHER].",
+      "crrt": "Bula não traz regime específico para TRS contínua (CRRT) — [A PREENCHER]. Dado o perfil predominantemente renal de eliminação (diferente de ceftriaxona), é esperado impacto relevante da CRRT na depuração, mas sem dado quantitativo na fonte autorizada.",
+      "referencia": "Bula sulbactam sódico/ampicilina sódica (Mylan/Viatris), item 10 — Superdose; item 8 — Posologia (Uso em Pacientes com Insuficiência Renal)"
+    },
+    "gestacao_lactacao": {
+      "fda": "B",
+      "gestacao": "Sulbactam e ampicilina atravessam a barreira placentária. Estudos de reprodução em camundongos e ratos com sultamicilina (pró-fármaco oral) não revelaram evidência de fertilidade prejudicada ou danos ao feto em doses acima da dose humana; a segurança em humanos não foi formalmente estabelecida — usar na gravidez somente se os benefícios superarem os riscos.",
+      "lactacao": {
+        "classificacao": "Pode ser usado com cautela",
+        "observacao": "Baixas concentrações de sulbactam (~0,13-2,8 mg/L) e ampicilina (~0,11-3 mg/L) são excretadas no leite materno (bula). Pode levar a efeitos adversos como diarreia no lactente. Uso permitido durante a lactação se os benefícios superarem os riscos potenciais."
+      },
+      "referencia": "Bula sulbactam sódico/ampicilina sódica (Mylan/Viatris), item 5 — Advertências e Precauções (Fertilidade, Gravidez e Lactação)"
+    },
+    "monitorizacao": [
+      "Sinais de hipersensibilidade/anafilaxia, especialmente em pacientes com história de alergia a penicilinas, cefalosporinas ou múltiplos alérgenos — risco de reações graves e ocasionalmente fatais",
+      "Sinais de reações cutâneas graves (NET, SSJ, dermatite esfoliativa, eritema multiforme, AGEP) — descontinuar imediatamente se ocorrerem",
+      "Função hepática — risco de hepatite colestática e icterícia associadas ao uso de ampicilina/sulbactam; orientar paciente a comunicar sinais de doença hepática",
+      "Diarreia associada a Clostridioides difficile — pode surgir até 2 meses após término do tratamento; histórico médico cuidadoso é necessário",
+      "Hemograma completo em terapia prolongada — risco de anemia, trombocitopenia, eosinofilia, neutropenia/leucopenia (comuns a incomuns) e agranulocitose/anemia hemolítica (raras)",
+      "Função renal, hepática e hematopoiética com observação periódica em terapia prolongada, particularmente relevante em neonatos prematuros e lactentes (bula)",
+      "Sinais de superinfecção por organismos não suscetíveis, incluindo fungos",
+      "Em uso de alta dose off-label para CRAB: função renal e sinais de sobrecarga de sódio/volume, dado o grande volume de infusão prolongada (4h) e a quantidade significativa de sódio por grama do produto"
+    ],
+    "efeitos_adversos": [
+      "Hematológico: anemia (comum), trombocitopenia (comum), eosinofilia (comum), neutropenia/leucopenia (incomuns); agranulocitose, anemia hemolítica, púrpura trombocitopênica (raras/não conhecidas)",
+      "Imunológico: hipersensibilidade (incomum); choque anafilático/anafilactoide, reação anafilática/anafilactoide, síndrome de Kounis (raras/não conhecidas)",
+      "SNC: cefaleia, tontura, sonolência, sedação (incomuns); convulsão (raro/não conhecida)",
+      "Vascular: flebite (incomum)",
+      "Respiratório: dispneia (rara/não conhecida)",
+      "Gastrintestinal: diarreia (comum); vômito, dor abdominal, náusea, glossite (incomuns); colite pseudomembranosa, enterocolite, melena, dispepsia, estomatite, descoloração da língua (raras/não conhecidas)",
+      "Hepatobiliar: hiperbilirrubinemia (incomum); hepatite colestática, colestase, icterícia, função hepática anormal (raras/não conhecidas)",
+      "Cutâneo: rash, prurido (comuns/incomuns); NET, SSJ, dermatite esfoliativa, eritema multiforme, AGEP, angioedema, urticária, dermatite (raras/não conhecidas)",
+      "Renal: nefrite do túbulo intersticial (rara/não conhecida)",
+      "Local de administração/gerais: dor no local da injeção (comum); fadiga, indisposição, reação no local da injeção (incomuns/raras)",
+      "Laboratorial: ALT/AST aumentadas; glicosúria falso-positiva (reagentes de Benedict, Fehling, Clinitest™); redução transitória de estriol/estrona/estradiol conjugados em gestantes"
+    ],
+    "interacoes": [
+      "Alopurinol — aumento substancial da incidência de rash cutâneo quando associado a ampicilina, comparado ao uso isolado desta",
+      "Aminoglicosídeos — inativação mútua substancial in vitro; administrar em sítios diferentes com intervalo mínimo de 1 hora; NUNCA misturar no mesmo frasco/equipo (incompatibilidade física)",
+      "Anticoagulantes — penicilinas parenterais podem alterar agregação plaquetária e testes de coagulação; efeito pode ser potencializado com uso concomitante de anticoagulantes",
+      "Agentes bacteriostáticos (cloranfenicol, eritromicina, sulfonamidas, tetraciclinas) — podem antagonizar o efeito bactericida das penicilinas; evitar associação",
+      "Contraceptivos orais com estrogênio — relatos de redução de eficácia contraceptiva com ampicilina, resultando em gravidez não planejada (associação fraca); orientar método contraceptivo alternativo/adicional",
+      "Metotrexato — diminuição do clearance e aumento de toxicidade do metotrexato; monitorar de perto e considerar ajuste de leucovorina",
+      "Probenecida — reduz a secreção tubular renal de ampicilina e sulbactam, aumentando concentrações séricas, prolongando meia-vida e o risco de toxicidade (uso proposital nesse sentido na gonorreia, para prolongar níveis terapêuticos)",
+      "Soluções com glicose/carboidratos — menor estabilidade da ampicilina nesses diluentes; usar preferencialmente água para injetáveis ou SF 0,9%",
+      "Produtos derivados de sangue ou proteínas hidrolisadas — não devem ser misturados com a solução reconstituída"
+    ],
+    "contraindicacoes": [
+      "Hipersensibilidade conhecida a qualquer penicilina ou a qualquer componente da fórmula",
+      "Atenção a hipersensibilidade cruzada com cefalosporinas — relatos de reações graves em pacientes com história de alergia a penicilinas tratados posteriormente com cefalosporinas",
+      "Mononucleose infecciosa — não deve ser utilizado (origem viral); alta porcentagem de pacientes com mononucleose tratados com ampicilina desenvolve rash cutâneo",
+      "Diluente de lidocaína (uso IM, quando aplicável) — contraindicações à lidocaína devem ser excluídas antes do uso IM"
+    ],
+    "preparo_administracao": "IV: reconstituir com água para injetáveis ou solução isotônica de cloreto de sódio. Frasco de 1,5 g: adicionar 3,2 mL de diluente (volume final reconstituído de 4 mL; concentração final máxima 125 mg sulbactam + 250 mg ampicilina/mL). Frasco de 3,0 g: adicionar 6,4 mL de diluente (volume final de 8 mL; mesma concentração final máxima). Aguardar dissipação da espuma antes de inspecionar visualmente. Administrar em bolus IV em no mínimo 3 minutos OU como infusão IV em diluições maiores, durante 15-30 minutos (esquema padrão de bula); para uso off-label em alta dose contra CRAB, a literatura internacional preconiza infusão prolongada de 4 horas. IM: pode-se usar solução de cloridrato de lidocaína anidro 0,5% para reduzir dor local, quando não há contraindicação à lidocaína; solução concentrada IM deve ser usada em até 1 hora após reconstituição. Estabilidade da solução para infusão IV: água para injetáveis ou SF 0,9% — 8h em temperatura ambiente (25°C) ou 48h refrigerada (4°C); após esses períodos, descartar a solução não utilizada. INCOMPATIBILIDADE: não misturar/reconstituir no mesmo recipiente com aminoglicosídeos (inativação mútua) nem com soluções contendo glicose/carboidratos, produtos derivados de sangue ou proteínas hidrolisadas. Recomenda-se uso de agulha calibre 21 (0,8 mm) na reconstituição, para reduzir risco de carreamento de fragmentos de rolha para dentro do frasco.",
+    "referencias": [
+      "Bula do sulbactam sódico/ampicilina sódica — Mylan Laboratórios Ltda. (Viatris), pó para solução injetável 0,5g/1,0g e 1,0g/2,0g, versão AR.04.03.21, com base na Bula Padrão Unasyn® (Wyeth) publicada no Bulário Eletrônico ANVISA em 08/12/2020",
+      "Infectious Diseases Society of America (IDSA). Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections, 2023/2024 update — recomendação de sulbactam em alta dose (6-9 g/dia) em combinação para Acinetobacter baumannii resistente a carbapenêmico",
+      "Wenzler E et al. Ampicillin-sulbactam against Acinetobacter baumannii infections: pharmacokinetic/pharmacodynamic appraisal of current susceptibility breakpoints and dosing recommendations. J Antimicrob Chemother. 2024;79(9):2227- (análise de PK/PD estabelecendo metas de %T>MIC para sulbactam em modelo murino de pneumonia)"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}

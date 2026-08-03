@@ -1,0 +1,155 @@
+{
+  "amoxicilina_clavulanato_iv": {
+    "nome": "Amoxicilina sódica + Clavulanato de potássio (uso EXCLUSIVAMENTE intravenoso)",
+    "sinonimos": "Clavulin® IV (referência, GSK); genéricos Eurofarma, Blau; associação de aminopenicilina + inibidor de beta-lactamase; ATC J01CR02",
+    "mecanismo_acao": "Associação de amoxicilina (aminopenicilina semissintética, bactericida, derivada do ácido 6-aminopenicilânico) com ácido clavulânico (inibidor irreversível de beta-lactamases, produzido por fermentação de Streptomyces clavuligerus). O ácido clavulânico tem atividade antibacteriana intrínseca baixa quando isolado, mas protege a amoxicilina da hidrólise por beta-lactamases plasmidiais comumente encontradas em organismos resistentes a penicilinas e cefalosporinas, restaurando a sensibilidade desses organismos à rápida ação bactericida da amoxicilina (inibição da síntese da parede celular via ligação às PBPs). Diferente de ampicilina-sulbactam, o clavulanato tem boa atividade específica contra o plasmídeo mediador de beta-lactamases clinicamente relevante para transferência de resistência.",
+    "espectro": {
+      "cobertura": [
+        "Gram-positivos aeróbios: Staphylococcus aureus (sensível à meticilina), Staphylococcus coagulase-negativo (sensível à meticilina), Staphylococcus saprophyticus (sensível à meticilina), Enterococcus faecalis, Streptococcus pneumoniae, Streptococcus pyogenes, Streptococcus viridans, Streptococcus agalactiae, outros Streptococcus beta-hemolíticos, Bacillus anthracis, Listeria monocytogenes, Gardnerella vaginalis, Nocardia asteroides",
+        "Gram-positivos anaeróbios: Clostridium spp., Peptostreptococcus spp., Peptococcus niger",
+        "Gram-negativos aeróbios: Haemophilus influenzae, Moraxella catarrhalis, Neisseria gonorrhoeae, Bordetella pertussis, Vibrio cholerae, Pasteurella multocida, Helicobacter pylori, Haemophilus parainfluenzae",
+        "Gram-negativos anaeróbios: Bacteroides spp. (incluindo B. fragilis), Fusobacterium spp., Capnocytophaga spp., Eikenella corrodens, Porphyromonas spp., Prevotella spp.",
+        "Outros: Borrelia burgdorferi, Leptospira icterohaemorrhagiae, Treponema pallidum",
+        "Espécies com resistência adquirida variável (bula): Escherichia coli, Klebsiella oxytoca, Klebsiella pneumoniae, Proteus mirabilis, Proteus vulgaris, Salmonella spp., Shigella spp., Enterococcus faecium, Corynebacterium spp. — cobertura não confiável, testar sensibilidade sempre que possível"
+      ],
+      "sem_atividade": [
+        "Organismos inerentemente resistentes (bula): Acinetobacter spp., Citrobacter freundii, Enterobacter spp., Hafnia alvei, Legionella pneumophila, Morganella morganii, Providencia spp., Pseudomonas spp., Serratia spp., Stenotrophomonas maltophilia, Yersinia enterocolitica",
+        "Atípicos: Chlamydia spp., Coxiella burnetii, Mycoplasma spp. — sem atividade, classe beta-lactâmica não atua em organismos sem parede celular clássica",
+        "MRSA — resistência de classe (alteração de PBP2a, não mediada por beta-lactamase, não revertida pelo clavulanato)",
+        "Enterobactérias produtoras de AmpC ou ESBL de alto nível — clavulanato não protege de forma confiável contra essas beta-lactamases"
+      ],
+      "observacao": "Diferencial frente a ampicilina-sulbactam: espectro de cobertura Gram-negativa e de anaeróbios é muito similar (ambos são aminopenicilina + inibidor de beta-lactamase), mas a amoxicilina-clavulanato tem uso consagrado tanto IV quanto VO com boa biodisponibilidade oral, permitindo terapia sequencial (switch IV→VO) mais robusta que ampicilina-sulbactam. Diferencial frente a piperacilina-tazobactam e cefepima: SEM cobertura de Pseudomonas aeruginosa nem de Acinetobacter — inadequada como escalada empírica quando esses patógenos são suspeitos, cenário relevante em UTI/onco-hematologia."
+    },
+    "pkpd": {
+      "tipo": "Bactericida tempo-dependente (beta-lactâmico) — eficácia correlaciona com %fT>MIC de ambos os componentes",
+      "alvo_farmacodinamico": "Não padronizado numericamente na bula nacional. Estudos de PK populacional em pacientes críticos adultos utilizam meta de 50% fT>MIC com CIM-alvo de 8 mg/L para dosagem padrão (infusão de 30 min, 1 g 4x/dia ou 2 g 3x/dia), suficiente para a maioria dos pacientes, EXCETO aqueles com clearance de creatinina >190 mL/min (clearance renal aumentado/ARC), que podem necessitar de doses maiores ou intervalos mais curtos.",
+      "meia_vida": "Amoxicilina: aproximadamente 1,3h (bula); clavulanato: aproximadamente 1,0h (bula) — meias-vidas curtas e próximas entre os dois componentes, exigindo fracionamento em múltiplas doses diárias (a cada 6-8h) para manter %T>MIC adequado.",
+      "ligacao_proteica": "Baixa para ambos os componentes — aproximadamente 13-20% do fármaco plasmático total é ligado a proteínas (bula); cerca de 70% permanecem livres no soro, o que favorece boa penetração tecidual da fração livre.",
+      "volume_distribuicao": "Após administração IV, concentrações terapêuticas de amoxicilina e ácido clavulânico são detectadas em tecidos e fluidos intersticiais, vesícula biliar, tecidos abdominais, pele, tecido adiposo, muscular, fluidos sinovial e peritoneal, bile e pus (bula). NÃO atinge concentrações terapêuticas relevantes no SNC/líquor em meninges não inflamadas — diferente de ceftriaxona e de penicilina cristalina em altas doses, o que a torna inadequada para meningite.",
+      "metabolizacao": "Amoxicilina é parcialmente excretada como ácido peniciloico inativo (10-25% da dose). Ácido clavulânico é extensivamente metabolizado a 2,5-dihidro-4-(2-hidroxietil)-5-oxo-1H-pirrol-3-ácido carboxílico e a 1-amino-4-hidroxibuta-2-ona, eliminados na urina, fezes e como CO2 expirado — perfil metabólico mais complexo que o da amoxicilina isolada.",
+      "excrecao": "Amoxicilina: eliminação predominantemente renal (60-70% inalterada na urina nas primeiras 6h pós-dose). Clavulanato: eliminação mista, renal e não-renal (40-65% inalterado na urina nas primeiras 6h) — por isso a dissociação farmacocinética entre os dois componentes pode se acentuar em disfunção renal (ver ajuste_renal).",
+      "alerta": "A duplicação da dose pode aumentar os níveis séricos de forma proporcionalmente mais alta (bula) — achado citado como propriedade farmacológica notável. Em pacientes críticos com clearance renal aumentado (ARC), risco de subexposição já foi demonstrado tanto em adultos quanto em crianças (pós-cirurgia cardíaca pediátrica), sustentando a necessidade de encurtar o intervalo posológico (ex. 4/4h) nesses cenários, e não apenas ajustar por peso."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Infecções gerais em adultos e crianças >12 anos — dose usual (bula)",
+        "via": "IV, injeção lenta em bolus (3-4 min) OU infusão intermitente (30-40 min)",
+        "dose": "1,2 g (1 g amoxicilina + 200 mg clavulanato) a cada 8h"
+      },
+      {
+        "indicacao": "Infecções graves em adultos",
+        "via": "IV",
+        "dose": "1,2 g a cada 6h (diminuir o intervalo, não aumentar a dose unitária) — bula"
+      },
+      {
+        "indicacao": "Profilaxia cirúrgica, procedimento <1h",
+        "via": "IV, dose única na indução anestésica",
+        "dose": "1,2 g na indução da anestesia"
+      },
+      {
+        "indicacao": "Profilaxia cirúrgica, procedimento mais longo ou com risco aumentado de infecção",
+        "via": "IV",
+        "dose": "1,2 g repetidos a intervalos de 0, 8, 16 (e 24h) — até 4 doses em 24h; esquema pode ser mantido por vários dias se o procedimento aumentar significativamente o risco de infecção"
+      },
+      {
+        "duracao": "O tratamento não deve ser prolongado além de 14 dias sem revisão clínica (bula). Terapia pode iniciar por via parenteral e continuar com preparação oral (switch IV→VO)."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "indicacao": "Crianças de 3 meses a 12 anos, dose usual",
+        "via": "IV",
+        "dose": "30 mg/kg (fornece 25 mg amoxicilina + 5 mg clavulanato por kg) a cada 8h"
+      },
+      {
+        "indicacao": "Crianças de 3 meses a 12 anos, infecções graves",
+        "via": "IV",
+        "dose": "30 mg/kg a cada 6h (encurtar intervalo, aumentando o número de doses diárias)"
+      },
+      {
+        "indicacao": "Recém-nascidos prematuros e a termo no período perinatal (0-3 meses)",
+        "via": "IV",
+        "dose": "30 mg/kg a cada 12h, podendo passar para intervalos de 8/8h posteriormente conforme maturação"
+      },
+      {
+        "alerta_pkpd": "Em crianças críticas com clearance aumentado (ex. pós-cirurgia cardíaca), estudo de PK populacional (De Cock et al./estudo NCT02456974) demonstrou que, na ausência de vasopressores, é necessário encurtar o intervalo para 4/4h para atingir meta de 50% fT>MIC de 8 mg/L; apenas em pacientes recebendo vasopressores (que reduzem o clearance em cerca de um terço) o esquema padrão de 6/6h permaneceu suficiente — achado FORA da bula nacional, relevante para individualização em UTI pediátrica/onco-hematológica."
+      }
+    ],
+    "ajuste_renal": {
+      "tabela": [
+        {
+          "clcr": "ClCr >30 mL/min (insuficiência leve)",
+          "dose_ajustada": "Sem alteração de posologia"
+        },
+        {
+          "clcr": "ClCr 10-30 mL/min (insuficiência moderada)",
+          "dose_ajustada": "1,2 g IV (dose de ataque) seguidos de 600 mg (500 mg amoxicilina + 100 mg clavulanato) IV a cada 12h"
+        },
+        {
+          "clcr": "ClCr <10 mL/min (insuficiência grave)",
+          "dose_ajustada": "1,2 g IV (dose de ataque) seguidos de 600 mg IV a cada 24h"
+        }
+      ],
+      "pediatria": "Reduções proporcionais similares às do adulto devem ser aplicadas em crianças com insuficiência renal (bula não fornece tabela numérica pediátrica específica).",
+      "alerta": "Diferente de ampicilina-sulbactam (cuja bula nacional carece de tabela quantitativa), a bula de Clavulin® IV fornece uma tabela numérica clara e utilizável por faixa de ClCr — uma das fontes mais completas desta série de fichas nesse quesito. Atenção ao conteúdo de sódio (aprox. 3,1 mmol por frasco de 1,2 g) e potássio (aprox. 1,0 mmol por frasco de 1,2 g) em pacientes com restrição hidrossalina ou hipercalemia."
+    },
+    "dialise": {
+      "hemodialise": "O clavulanato (e, por extensão, o antibiótico combinado) É removido por hemodiálise, com redução das concentrações séricas — bula recomenda dose ADICIONAL de 600 mg (500 mg + 100 mg) IV durante e ao final da sessão de HD, além do esquema de manutenção para ClCr <10 mL/min.",
+      "dialise_peritoneal": "Não descrita explicitamente na bula consultada — [A PREENCHER: dado ausente na fonte autorizada; extrapolar com cautela do perfil de remoção por HD, ajustando ao regime de insuficiência grave]",
+      "crrt": "Bula não traz regime específico para TRS contínua (CRRT) — [A PREENCHER]. Dado o perfil de eliminação predominantemente renal da amoxicilina e misto do clavulanato, espera-se necessidade de ajuste guiado por função renal residual e modalidade de CRRT; consultar nomograma institucional validado.",
+      "referencia": "Bula Clavulin® Injetável (GSK), item 8 — Posologia e Modo de Usar (Posologia para Insuficiência Renal); item 10 — Superdose"
+    },
+    "gestacao_lactacao": {
+      "fda": "B",
+      "gestacao": "Estudos de reprodução em animais (camundongos e ratos), com administração oral e parenteral, não demonstraram efeitos teratogênicos. Estudo único em mulheres pré-termo com ruptura precoce de bolsa amniótica relatou possível associação entre profilaxia com amoxicilina-clavulanato e aumento do risco de enterocolite necrotizante em neonatos. Evitar uso na gravidez, especialmente no primeiro trimestre, a menos que considerado essencial pelo médico.",
+      "lactacao": {
+        "classificacao": "Pode ser usado durante a lactação",
+        "observacao": "Amoxicilina pode ser detectada no leite materno; traços de clavulanato também podem ser detectados. Exceto pelo risco de sensibilização, não há efeitos nocivos conhecidos para o lactente."
+      },
+      "referencia": "Bula Clavulin® Injetável (GSK), item 5 — Advertências e Precauções (Gravidez e Lactação)"
+    },
+    "monitorizacao": [
+      "Sinais de hipersensibilidade/anafilaxia — triagem cuidadosa de alergia prévia a penicilinas, cefalosporinas ou outros alérgenos; reações anafiláticas graves requerem tratamento emergencial imediato com adrenalina",
+      "Função hepática — mudanças na função hepática já observadas; usar com cautela em disfunção hepática grave; hepatite/icterícia colestática podem surgir até várias semanas após o término do tratamento, predominantemente em homens e idosos com tratamento prolongado",
+      "Função renal, hepática e hematopoiética com avaliação periódica em tratamentos prolongados",
+      "Sinais de colite associada a antibióticos (incluindo pseudomembranosa e hemorrágica) — menos prováveis pela via parenteral, mas possíveis; investigar diarreia prolongada/significativa ou cólicas abdominais",
+      "Balanço hidroeletrolítico e conteúdo de sódio em pacientes com dieta restrita em sal recebendo altas doses parenterais",
+      "Diurese e hidratação adequadas durante altas doses, para minimizar risco de cristalúria (mais descrita com amoxicilina isolada, mas pode ocorrer com a associação, predominantemente com terapia parenteral) — checar cateter vesical regularmente se em uso, pelo risco de precipitação de amoxicilina",
+      "Tempo de protrombina/INR em uso concomitante com anticoagulantes orais (acenocumarol, varfarina) — ajuste de dose do anticoagulante pode ser necessário",
+      "Resultado falso-positivo no teste de Coombs, decorrente de ligação não específica de IgG e albumina à membrana de hemácias pelo ácido clavulânico — informar ao laboratório"
+    ],
+    "efeitos_adversos": [
+      "Comuns (≥1/100 e <1/10): candidíase mucocutânea, diarreia",
+      "Incomuns (≥1/1.000 e <1/100): tontura, cefaleia; náusea, vômito, dispepsia; aumento moderado de AST/ALT; rash, prurido, urticária",
+      "Raras (≥1/10.000 e <1/1.000): leucopenia reversível (incluindo neutropenia) e trombocitopenia; tromboflebite no sítio de administração; eritema multiforme",
+      "Muito raras (<1/10.000): agranulocitose reversível e anemia hemolítica, prolongamento do tempo de sangramento e de protrombina; edema angioneurótico, anafilaxia, síndrome semelhante à doença do soro, vasculite de hipersensibilidade; convulsões (mais prováveis em disfunção renal ou altas doses); agitação, ansiedade, insônia, confusão mental; colite associada a antibióticos (incluindo pseudomembranosa/hemorrágica); hepatite e icterícia colestática; SSJ, NET, dermatite esfoliativa bolhosa, exantema pustuloso generalizado agudo, DRESS; nefrite intersticial, cristalúria; meningite asséptica"
+    ],
+    "interacoes": [
+      "Probenecida — retarda a excreção renal da amoxicilina (mas não do clavulanato), resultando em aumento e prolongamento do nível sanguíneo de amoxicilina de forma desproporcional entre os componentes; associação NÃO recomendada",
+      "Alopurinol — aumento considerável da incidência de rash cutâneo quando associado à amoxicilina, comparado ao uso isolado desta; sem dados específicos sobre a associação com o produto combinado",
+      "Dissulfiram — NÃO deve ser administrado concomitantemente com amoxicilina-clavulanato (contraindicação explícita de bula)",
+      "Contraceptivos orais combinados — possível redução da eficácia contraceptiva por alteração da flora intestinal e menor reabsorção de estrogênios",
+      "Anticoagulantes orais (acenocumarol, varfarina) — relatos raros de aumento do INR; monitorar tempo de protrombina/INR cuidadosamente ao iniciar ou suspender o antibiótico",
+      "Micofenolato de mofetila — redução de aproximadamente 50% na concentração do metabólito ativo (ácido micofenólico) relatada após início de amoxicilina + ácido clavulânico oral; relevância clínica da alteração pré-dose incerta",
+      "Aminoglicosídeos — NÃO misturar na mesma seringa, frasco de infusão IV ou equipo, pelo risco de perda de atividade do aminoglicosídeo por inativação físico-química",
+      "Soluções com glicose, dextrano ou bicarbonato — Clavulin® IV é MENOS ESTÁVEL nessas infusões; não adicionar a essas soluções (pode ser injetado no tubo gotejador durante 3-4 min como alternativa)",
+      "Derivados de sangue, proteínas hidrolisadas, emulsões lipídicas IV — não misturar com a solução reconstituída"
+    ],
+    "contraindicacoes": [
+      "História de reações alérgicas/hipersensibilidade a penicilinas",
+      "Disfunção hepática ou icterícia previamente associada ao uso de amoxicilina-clavulanato ou de outras penicilinas",
+      "Atenção à possível sensibilidade cruzada com outros beta-lactâmicos, como cefalosporinas",
+      "Suspeita de mononucleose infecciosa — evitar uso, pelo risco de rash cutâneo morbiliforme associado à amoxicilina nessa condição"
+    ],
+    "preparo_administracao": "Reconstituição: frasco 500 mg+100 mg — dissolver em 10 mL de água para injetáveis (volume final 10,5 mL); frasco 1 g+200 mg — dissolver em 20 mL de água para injetáveis (volume final 20,9 mL). Pode surgir coloração rósea transitória durante a reconstituição (normal); solução reconstituída final é incolor a esbranquiçada/amarelada. Injeção IV: usar IMEDIATAMENTE após reconstituição (dentro de 20 min), administrar por injeção intravenosa LENTA durante 3-4 minutos, direto na veia ou através de equipo. Infusão IV intermitente (alternativa): diluir o frasco de 500+100 mg em 50 mL, ou o de 1+0,2 g em 100 mL, de água para injetáveis ou SF 0,9%; infundir durante 30-40 minutos. Estabilidade da solução para infusão a 25°C: 4h em água para injetáveis, SF 0,9% ou Ringer lactato (3h em soluções de Ringer/Ringer lactato/cloreto de sódio+potássio); a 5°C (bolsa pré-refrigerada): até 8h. NÃO CONGELAR. NÃO diluir em soluções contendo glicose, dextrano ou bicarbonato (menor estabilidade). NÃO administrar por via intramuscular — o produto é formulado exclusivamente para uso IV. NÃO misturar no mesmo frasco/seringa/equipo com aminoglicosídeos, derivados de sangue, proteínas hidrolisadas ou emulsões lipídicas IV. Tratamento pode iniciar IV e completar por via oral (terapia sequencial); não prolongar além de 14 dias sem revisão.",
+    "referencias": [
+      "Bula Clavulin® Injetável (amoxicilina + clavulanato de potássio), pó para solução injetável 500 mg+100 mg e 1 g+200 mg — GlaxoSmithKline Brasil Ltda., aprovada pela ANVISA em 24/08/2019",
+      "Lohsiriwat D, et al. Efficacy and Safety of Parenteral Amoxycillin/Clavulanate for Prevention of Surgical Site Infection Following Abdominal Surgery. J Med Assoc Thai. 2009;92(9):1167-70 (citado na própria bula)",
+      "Pareek A, et al. Comparative evaluation of efficacy and safety of cefotaxime-sulbactam with amoxicillin-clavulanic acid in children with lower respiratory tract infections. Expert Opin Pharmacother. 2008;9(16):2751-2757 (citado na própria bula)",
+      "Asín-Prieto E, et al. Population pharmacokinetics and dosing simulations of amoxicillin/clavulanic acid in critically ill patients. J Antimicrob Chemother. 2013;68(11):2600 (base para meta de 50% fT>MIC de 8 mg/L e limitação em ClCr >190 mL/min, fora da bula nacional)",
+      "De Cock PA, et al. Individualised amoxicillin-clavulanate dosing recommendations for critically ill children with augmented clearance after cardiac surgery. (PubMed ID 40239747) — base para recomendação de encurtamento de intervalo para 4/4h em ARC pediátrico, fora da bula nacional"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "levofloxacino": {
+    "nome": "Levofloxacino hemi-hidratado (uso intravenoso)",
+    "sinonimos": "Levotac® (Cristália); genéricos Eurofarma, Halex Istar; isômero levógiro (isômero-L) do racemato ofloxacino; fluoroquinolona de 3ª geração; código ATC J01MA12",
+    "mecanismo_acao": "Agente antibacteriano quinolônico sintético de amplo espectro. É o isômero-L do racemato ofloxacino — a atividade antibacteriana da ofloxacina deve-se basicamente a esse isômero, que produz mais ligações de hidrogênio e complexos mais estáveis com a DNA-girase que o isômero-D, traduzindo-se em atividade antibacteriana 25 a 40 vezes maior que a do isômero-D (bula). Mecanismo de ação envolve inibição da Topoisomerase IV bacteriana e da DNA-girase (ambas topoisomerases tipo II), enzimas necessárias para replicação, transcrição, reparo e recombinação do DNA — mesmo mecanismo de classe do ciprofloxacino (já documentado nesta série), com atividade bactericida rápida, frequentemente próxima à CIM.",
+    "espectro": {
+      "cobertura": [
+        "Gram-negativos aeróbios: Escherichia coli, Klebsiella pneumoniae, Klebsiella oxytoca, Enterobacter cloacae, Citrobacter freundii, Proteus mirabilis, Haemophilus influenzae, Haemophilus parainfluenzae, Moraxella catarrhalis, Legionella pneumophila, Pseudomonas aeruginosa (atividade presente, porém MENOS POTENTE que ciprofloxacino — ver observação)",
+        "Gram-positivos aeróbios (diferencial frente ao ciprofloxacino): Streptococcus pneumoniae, Staphylococcus aureus (sensível à meticilina), Streptococcus agalactiae, Streptococcus pyogenes, Staphylococcus epidermidis, Staphylococcus saprophyticus, Enterococcus faecalis — cobertura Gram-positiva mais robusta que a do ciprofloxacino, justificando seu uso preferencial em pneumonia adquirida na comunidade (PAC) por S. pneumoniae, cenário em que o ciprofloxacino não é recomendado",
+        "Atípicos: Chlamydia pneumoniae, Mycoplasma pneumoniae — cobertura relevante para PAC, ausente na ficha de ciprofloxacino desta série",
+        "Ativo contra cepas produtoras de beta-lactamase dos microrganismos listados",
+        "Anaeróbios: Bacteroides fragilis, Bacteroides distasonis, Peptostreptococcus spp., Clostridium spp. (exceto C. difficile) — cobertura de anaeróbios mais ampla na bula que a documentada para ciprofloxacino"
+      ],
+      "sem_atividade": [
+        "Treponema pallidum — sem atividade",
+        "Mutação espontânea in vitro conferindo resistência é fenômeno raro (bula), mas resistência cruzada com outras fluoroquinolonas é possível quando surge por mutação — mesmo mecanismo de classe do ciprofloxacino"
+      ],
+      "observacao": "Diferencial central frente ao ciprofloxacino (nesta série): levofloxacino tem cobertura Gram-positiva e contra atípicos SUPERIOR (por isso é droga de escolha em PAC/pneumonia, junto às 'quinolonas respiratórias'), mas é CONSISTENTEMENTE MENOS POTENTE contra Gram-negativos, especialmente Pseudomonas aeruginosa e certas Enterobacterales, conforme revisão de Ziganshina & Titarenko (Cochrane) e da literatura de PK/PD (revisão de fatores de eficácia de classe, PMC2873754). Estudo recente de Salam & Jeffres (Open Forum Infect Dis, 2026) identificou subgrupo de Enterobacterales com discordância de sensibilidade — levofloxacino-sensível porém ciprofloxacino-não-sensível — reforçando que a escolha entre os dois não deve ser automática e idealmente deve ser guiada por antibiograma específico de cada fluoroquinolona, não apenas por 'classe'. Para escalada empírica contra Gram-negativos multirresistentes em UTI/onco-hematologia, ciprofloxacino permanece a opção de maior espectro/potência desta classe nesta série; levofloxacino é preferencial quando há suspeita de pneumonia com componente atípico/pneumocócico associado."
+    },
+    "pkpd": {
+      "tipo": "Bactericida concentração-dependente com componente de AUC/CIM — mesmo perfil farmacodinâmico de classe do ciprofloxacino",
+      "alvo_farmacodinamico": "Meta clássica: AUC24/CIM ≥100-125 para eficácia máxima e supressão de resistência, especialmente relevante na dose de 750 mg (mais alta) usada para PAC grave/infecções complicadas em UTI, citada na bula (Anderson & Perry, 2008) como bem estabelecida em estudos randomizados.",
+      "farmacocinetica_linear": "Linear e previsível após doses únicas e múltiplas. Estado de equilíbrio atingido em 48h após 500 mg em esquemas de 1 ou 2 doses diárias.",
+      "ligacao_proteica": "Aproximadamente 24-38% (faixa de 1-10 mcg/mL), ligação principalmente à albumina sérica — similar à baixa ligação proteica do ciprofloxacino (20-30%), favorecendo ampla fração livre disponível.",
+      "volume_distribuicao": "74 a 112 litros após doses únicas ou múltiplas de 500 mg ou 750 mg — ampla distribuição tecidual. Penetração rápida e completa na pele; penetração rápida no tecido ósseo (cabeça do fêmur e porção distal) — propriedade relevante para a indicação em osteomielite desta ficha.",
+      "metabolizacao": "Estereoquimicamente estável no plasma e na urina; NÃO se converte metabolicamente no seu enantiômero (dofloxacino). Biotransformação limitada — menos de 5% da dose é recuperada na urina como metabólitos desmetil e N-óxido, sem atividade farmacológica relevante — perfil metabólico mais simples que o do ciprofloxacino (que gera 4 metabólitos ativos in vitro).",
+      "excrecao": "Basicamente excretado inalterado na urina — perfil predominantemente RENAL, mais dependente da função renal que o ciprofloxacino (que tem via extrarrenal mais expressiva). Meia-vida de eliminação plasmática terminal: 6-8 horas (mais longa que a do ciprofloxacino). Depuração total aparente média: 144-226 mL/min; depuração renal: 96-142 mL/min — depuração renal além da taxa de filtração glomerular sugere secreção tubular ativa adicional à filtração.",
+      "alerta": "Cimetidina ou probenecida reduzem a depuração renal do levofloxacino em aproximadamente 24% e 36%, respectivamente, confirmando secreção no túbulo renal proximal — interação farmacocinética que exige ajuste de dose baseado na função renal quando associados. Diferente do ciprofloxacino, não há necessidade de ajuste hepático citada na bula do levofloxacino nem contraindicação hepática específica — ambos compartilham essa característica de classe (eliminação predominantemente não-hepática)."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Exacerbação de bronquite crônica",
+        "via": "IV",
+        "dose": "500 mg a cada 24h, por 5-7 dias"
+      },
+      {
+        "indicacao": "Pneumonia (adquirida na comunidade ou nosocomial)",
+        "via": "IV",
+        "dose": "500 mg a cada 24h, por 7-14 dias; esquema de 750 mg 1x/dia por 5 dias também bem estabelecido para PAC grave/UTI (Anderson & Perry, 2008, citado na bula)"
+      },
+      {
+        "indicacao": "Sinusite",
+        "via": "IV",
+        "dose": "500 mg a cada 24h, por 10-14 dias"
+      },
+      {
+        "indicacao": "Infecção não complicada de pele e tecido subcutâneo",
+        "via": "IV",
+        "dose": "500 mg a cada 24h, por 7-10 dias"
+      },
+      {
+        "indicacao": "Infecção complicada de pele e tecido subcutâneo",
+        "via": "IV",
+        "dose": "750 mg a cada 24h, por 7-14 dias"
+      },
+      {
+        "indicacao": "Infecção complicada do trato urinário e pielonefrite aguda",
+        "via": "IV",
+        "dose": "250 mg a cada 24h, por 10 dias"
+      },
+      {
+        "indicacao": "Infecção não complicada do trato urinário",
+        "via": "IV",
+        "dose": "250 mg a cada 24h, por 3 dias"
+      },
+      {
+        "indicacao": "Osteomielite",
+        "via": "IV",
+        "dose": "500 mg a cada 24h, por 6-12 dias"
+      },
+      {
+        "regra_infusao": "Infusão IV lenta obrigatória — mínimo 60 minutos para doses de 250 ou 500 mg, e 90 minutos para dose de 750 mg. Injeção IV rápida/bolus pode causar hipotensão (bula) — mesma precaução de infusão lenta do ciprofloxacino, porém com tempo mínimo maior."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "alerta": "Segurança e eficácia em crianças e adolescentes em fase de crescimento NÃO foram estabelecidas (bula). Uso NÃO é recomendado nessa faixa etária, dado o risco de erosão em articulações que suportam peso e outros sinais de artropatia demonstrados em animais jovens — postura mais restritiva que a do ciprofloxacino, que ao menos tem indicação formal aprovada para fibrose cística pediátrica (5-17 anos)."
+      }
+    ],
+    "ajuste_renal": {
+      "tabela_padrao": [
+        {"clcr": "ClCr >50 mL/min (função renal normal)", "dose_ajustada": "Sem ajuste — doses da tabela padrão por indicação"},
+        {"clcr": "ClCr 50-80 mL/min — infecções respiratórias/pele não complicada/osteomielite/pneumonia/sinusite (esquema base 500 mg)", "dose_ajustada": "Dose inicial 500 mg, depois 250 mg a cada 24h"},
+        {"clcr": "ClCr 20-49 mL/min — mesmo grupo (esquema base 500 mg)", "dose_ajustada": "Dose inicial 500 mg, depois 250 mg a cada 48h"},
+        {"clcr": "ClCr 10-19 mL/min — mesmo grupo (esquema base 500 mg)", "dose_ajustada": "Dose inicial 500 mg, depois 250 mg a cada 48h"},
+        {"clcr": "Hemodiálise ou CAPD — mesmo grupo (esquema base 500 mg)", "dose_ajustada": "Dose inicial 500 mg, depois 250 mg a cada 48h"},
+        {"clcr": "ClCr 20-49 mL/min — infecção complicada de pele/pneumonia/sinusite (esquema base 750 mg)", "dose_ajustada": "Dose inicial 750 mg, depois 750 mg a cada 48h"},
+        {"clcr": "ClCr 10-19 mL/min — mesmo grupo (esquema base 750 mg)", "dose_ajustada": "Dose inicial 750 mg, depois 500 mg a cada 48h"},
+        {"clcr": "Hemodiálise ou CAPD — mesmo grupo (esquema base 750 mg)", "dose_ajustada": "Dose inicial 750 mg, depois 500 mg a cada 48h"},
+        {"clcr": "ClCr ≥20 mL/min — infecção complicada do trato urinário/pielonefrite aguda", "dose_ajustada": "Sem ajuste necessário"},
+        {"clcr": "ClCr 10-19 mL/min — mesma indicação", "dose_ajustada": "Dose inicial 250 mg, depois 250 mg a cada 48h"},
+        {"clcr": "Qualquer ClCr — infecção urinária não complicada", "dose_ajustada": "Sem ajuste necessário"}
+      ],
+      "alerta": "Tabela de ajuste renal da bula é EXTREMAMENTE detalhada e estratificada por tipo de infecção e faixa de ClCr — a mais completa e granular desta série de fichas até o momento, superando inclusive a do ciprofloxacino. Diferente do ciprofloxacino, mioclonia foi relatada especificamente com risco aumentado em idosos e em insuficiência renal quando a dose NÃO é ajustada ao ClCr — reforça a importância crítica do ajuste correto neste fármaco de eliminação predominantemente renal."
+    },
+    "dialise": {
+      "hemodialise": "Levofloxacino NÃO é removido de maneira eficiente por hemodiálise (bula) — diferente do ciprofloxacino (também pouco removido, <10%, mas ao menos quantificado), aqui a bula apenas afirma ineficiência de remoção sem fornecer percentual; dose de manutenção pós-HD segue a tabela de ajuste renal específica para esse cenário (ver acima).",
+      "dialise_peritoneal": "Também NÃO é removido eficientemente por diálise peritoneal, incluindo CAPD (diálise peritoneal ambulatorial contínua) — mesma limitação da hemodiálise; dose de manutenção segue tabela específica.",
+      "crrt": "Bula não traz regime específico para TRS contínua (CRRT) — [A PREENCHER]. Dado o perfil de eliminação predominantemente renal por filtração E secreção tubular ativa, espera-se impacto relevante da CRRT na depuração, ainda que a hemodiálise intermitente convencional seja pouco eficiente na remoção — consultar nomograma institucional validado.",
+      "referencia": "Bula Levofloxacino Eurofarma/Halex Istar, item 8 — Posologia e Modo de Usar (Pacientes com Insuficiência Renal); item 10 — Superdose"
+    },
+    "gestacao_lactacao": {
+      "fda": "C — bula reforça: não usar em gestantes sem orientação médica",
+      "gestacao": "Não foram realizados estudos controlados em gestantes — usar apenas se o benefício esperado superar o risco potencial para o feto. Postura mais cautelosa (ausência de dados humanos) comparada à do ciprofloxacino, cuja bula ao menos cita dados humanos sem sinal de malformação.",
+      "lactacao": {
+        "classificacao": "Decisão individualizada",
+        "observacao": "Devido ao potencial de reações adversas graves em lactentes de mães em tratamento, deve-se decidir entre interromper a amamentação ou o tratamento, considerando a importância do medicamento para a mãe — mesma cautela de classe compartilhada com o ciprofloxacino."
+      },
+      "referencia": "Bula Levofloxacino, item 5 — Advertências e Precauções (Gravidez e Lactação)"
+    },
+    "monitorizacao": [
+      "Sinais de reação anafilática/hipersensibilidade grave — pode ocorrer após primeira dose, com colapso cardiovascular, hipotensão/choque, convulsões, angioedema; interromper imediatamente",
+      "Sinais de reações cutâneas graves (NET, SSJ, DRESS) — síndrome DRESS inclui febre, erupção cutânea, alterações hematológicas e testes hepáticos anormais; se houver reação grave prévia (NET/SSJ/DRESS), o tratamento NÃO deve ser reiniciado no paciente em nenhuma hipótese (alerta mais explícito que o do ciprofloxacino)",
+      "Hemograma completo — risco de falência medular (leucopenia, neutropenia, pancitopenia, anemia hemolítica/aplásica, agranulocitose); cautela redobrada em deficiência de G6PD, pelo risco de reação hemolítica",
+      "Sinais súbitos de dor abdominal, torácica ou nas costas — mesmo alerta de aneurisma/dissecção de aorta do ciprofloxacino, particularmente em idosos",
+      "Sinais de convulsão e psicose tóxica — quinolonas podem aumentar pressão intracraniana; cautela em distúrbios de SNC preexistentes (arteriosclerose cerebral grave, epilepsia) ou fatores predisponentes (disfunção renal, outros fármacos)",
+      "Mioclonia — risco aumentado em idosos e em insuficiência renal sem ajuste adequado de dose; descontinuar imediatamente ao primeiro sinal",
+      "Sinais de colite pseudomembranosa (C. difficile) — considerar em qualquer paciente com diarreia após uso do antibiótico",
+      "Intervalo QT/ECG — mesmo alerta de classe do ciprofloxacino; evitar uso com outros prolongadores de QT ou em hipocalemia/bradicardia significante/cardiomiopatia",
+      "Sinais de tendinite/ruptura de tendão (ombro, mão, Aquiles) — risco aumentado com corticosteroides concomitantes, especialmente em idosos",
+      "Glicemia em diabéticos — mesmo risco de disglicemia (hipo/hiperglicemia) do ciprofloxacino, com estudo específico citado (Chou HW et al., Clin Infect Dis 2013, sobre disglicemia grave com fluoroquinolonas em diabéticos)",
+      "Fotossensibilidade — mesmo alerta do ciprofloxacino, porém bula cita incidência baixa (0,03%, Croom & Goa 2003)"
+    ],
+    "efeitos_adversos": [
+      "Muito comuns/comuns (estudos clínicos, frequência ≥1%): náusea, diarreia, constipação, dor abdominal, dispepsia, vômito, flatulência; cefaleia, tontura, alteração do paladar; insônia; reação/dor/inflamação no local da aplicação; dor, fadiga, dor nas costas; eritema, prurido; vaginite",
+      "Incomuns (pós-comercialização): rash cutâneo, urticária, hiperidrose; leucopenia, eosinofilia",
+      "Raras: DRESS, erupção medicamentosa fixa; trombocitopenia, neutropenia",
+      "Muito raras: distúrbios do tendão (incluindo ruptura), tendinite, artralgia, mialgia, aumento de CPK, rabdomiólise; vasodilatação, vasculite alérgica; convulsões, parestesia, tremor, disfonia, encefalopatia, EEG anormal; visão anormal, tinido, audição reduzida, parosmia; confusão, ansiedade, alucinação, agitação, depressão, psicose, pesadelo, reação paranoica, tentativa/ideação suicida; colite pseudomembranosa por C. difficile; função hepática anormal, hepatite, icterícia, insuficiência hepática; hipoglicemia e hiperglicemia; taquicardia, palpitação, QT prolongado, Torsades de Pointes, taquicardia ventricular; pneumonite alérgica; reação anafilactoide/alérgica, febre, choque anafilático, falência de múltiplos órgãos, doença do soro; reações no local de aplicação",
+      "Frequência desconhecida: mioclonia, mania, NET, SSJ, eritema multiforme, reação de fotossensibilidade, vasculite leucocitoclástica, estomatite, hiperpigmentação cutânea, insuficiência/falência renal aguda, nefrite intersticial, falência medular (anemia aplásica, pancitopenia, agranulocitose, anemia hemolítica)"
+    ],
+    "interacoes": [
+      "Cátions multivalentes IV (magnésio) — NUNCA administrar simultaneamente na mesma linha intravenosa que o levofloxacino",
+      "Teofilina — pode prolongar a meia-vida da teofilina e elevar seus níveis séricos, aumentando risco de reações adversas; monitorar cuidadosamente (mesma interação de classe do ciprofloxacino)",
+      "Varfarina, digoxina, ciclosporina — administração concomitante NÃO exige modificação de dose desses fármacos (diferente do ciprofloxacino, que recomenda cautela mais explícita com varfarina); ainda assim, monitorar tempo de protrombina (varfarina) e níveis de digoxina",
+      "Probenecida e cimetidina — podem ser administrados com segurança, DESDE QUE a dose do levofloxacino seja ajustada com base na função renal, pois ambos reduzem a depuração renal e prolongam a meia-vida do levofloxacino (24% e 36%, respectivamente)",
+      "AINEs — administração concomitante pode aumentar risco de estimulação do SNC e convulsões (mesmo mecanismo de classe do ciprofloxacino)",
+      "Agentes antidiabéticos — alterações de glicemia (hiper/hipoglicemia) relatadas; monitorar cuidadosamente",
+      "Zidovudina — sem necessidade de ajuste de dose do levofloxacino; absorção e biodisponibilidade semelhantes em pacientes HIV+ com ou sem zidovudina concomitante"
+    ],
+    "contraindicacoes": [
+      "Hipersensibilidade ao levofloxacino, a outros agentes antimicrobianos derivados das quinolonas ou a qualquer componente da fórmula",
+      "Atenção: contém glicose/açúcar na formulação — usar com cautela em pacientes diabéticos"
+    ],
+    "preparo_administracao": "Administrar SOMENTE por via intravenosa — NÃO administrar por via intramuscular, intraperitoneal ou subcutânea. Evitar injeção IV rápida ou em bolus (risco de hipotensão); infundir lentamente por no mínimo 60 minutos (doses de 250 ou 500 mg) ou 90 minutos (dose de 750 mg). Produto disponível em bolsas de 100 mL (500 mg) ou 150 mL (750 mg) de solução diluída pronta para uso em glicose 5% — NÃO necessita diluição adicional. NÃO misturar aditivos ou outros medicamentos na mesma solução ou linha de infusão do levofloxacino; se o mesmo equipo for reutilizado para outro fármaco, enxaguar antes e depois com solução compatível com ambos. Sistema fechado — NÃO usar embalagens primárias em conexões em série (risco de embolia gasosa) nem perfurar a embalagem. Solução límpida, de coloração amarela clara a amarela, livre de partículas; produto isento de conservantes/agentes bacteriostáticos — usar técnica asséptica. Bolsas de uso único — descartar sobra após administração. Conservar em temperatura ambiente (15-30°C), protegido da luz na embalagem original; pode ficar fora do envoltório fotoprotetor por até 90 minutos (ou 180 minutos conforme a apresentação/fabricante). Validade de 24 meses a partir da fabricação.",
+    "referencias": [
+      "Bula Levofloxacino hemi-hidratado Solução Injetável 5 mg/mL — Eurofarma Laboratórios S.A., atualizada conforme Bula Padrão ANVISA em 18/03/2025",
+      "Bula Levofloxacino hemi-hidratado — Halex Istar, versão profissional de saúde",
+      "Anderson VR, Perry CM. Levofloxacin: a review of its use as a high-dose, short-course treatment for bacterial infection. Drugs. 2008;68(4):535-565 (citado na própria bula — base do esquema de 750 mg/dia por 5 dias)",
+      "Croom KF, Goa KL. Levofloxacin: a review of its use in the treatment of bacterial infections in the United States. Drugs. 2003;63(24):2769-2802 (citado na própria bula)",
+      "Yadav K, Sarker A, et al. Navigating fluoroquinolone resistance in Gram-negative bacteria: a comprehensive evaluation. JAC-Antimicrob Resist. 2024;6(4):dlae127 — comparação de potência ciprofloxacino vs. levofloxacino contra Gram-negativos multirresistentes",
+      "Salam M, Jeffres MN. Efficacy of Levofloxacin for Levofloxacin-Susceptible, Ciprofloxacin-Nonsusceptible Enterobacterales. Open Forum Infect Dis. 2026;ofaf695.1519",
+      "Chou HW, Wang JL, Chang CH, et al. Risk of severe dysglycemia among diabetic patients receiving levofloxacin, ciprofloxacin, or moxifloxacin in Taiwan. Clin Infect Dis. 2013;57(7):971-980 (citado na própria bula)"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}

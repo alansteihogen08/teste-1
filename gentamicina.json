@@ -1,0 +1,120 @@
+{
+  "gentamicina": {
+    "nome": "Sulfato de Gentamicina",
+    "sinonimos": "Garamicina® (referência, Mantecorp); Gentamicin® (Fresenius Kabi); Santisa; aminoglicosídeo natural produzido por Micromonospora purpurea",
+    "mecanismo_acao": "Antibiótico aminoglicosídeo bactericida, com ação concentração-dependente. Atua por ligação irreversível à subunidade ribossômica 30S bacteriana, provocando leitura incorreta do código genético e síntese de proteínas não funcionais, com consequente inibição da síntese proteica bacteriana — mecanismo idêntico ao da amicacina (classe). Diferente da amicacina (semissintética, resistente à maioria das enzimas modificadoras de aminoglicosídeo), a gentamicina é aminoglicosídeo NATURAL, mais suscetível à inativação por enzimas bacterianas (acetiltransferases, fosforiltransferases, nucleotidiltransferases) disseminadas em ambiente hospitalar — isso explica taxas de resistência mais altas à gentamicina do que à amicacina em muitos cenários de UTI/onco-hematologia.",
+    "espectro": {
+      "cobertura": [
+        "Gram-negativos: Escherichia coli, Proteus sp. (indol-positivo e indol-negativo, incluindo P. mirabilis, P. morganii, P. vulgaris), Pseudomonas aeruginosa, grupo Klebsiella-Enterobacter-Serratia, Citrobacter sp., Providencia sp. (incluindo P. rettgeri)",
+        "Gram-positivos: Staphylococcus sp. (coagulase-positivo e coagulase-negativo)",
+        "Outros: Neisseria gonorrhoeae, Salmonella e Shigella (bula)",
+        "Pode ser ativa contra isolados clínicos de bactérias resistentes a outros aminoglicosídeos, em casos específicos (bula) — embora, na prática atual, o padrão de resistência cruzada dentro da classe torne a amicacina mais confiável como agente de escalada"
+      ],
+      "sem_atividade": [
+        "Streptococcus pyogenes, enterococos e Streptococcus pneumoniae — mesma limitação de classe da amicacina; aminoglicosídeos isolados têm atividade reduzida contra Gram-positivos estreptocócicos",
+        "Anaeróbios — sem cobertura relevante, mesmo mecanismo dependente de transporte ativo oxigênio-dependente ausente em anaeróbios estritos",
+        "Cepas produtoras de enzimas modificadoras de aminoglicosídeo mais comuns em ambiente hospitalar — gentamicina é mais vulnerável a essas enzimas que amicacina, sendo frequentemente a primeira a perder atividade num perfil de resistência progressiva"
+      ],
+      "observacao": "Diferencial frente à amicacina (nesta série): a gentamicina é droga de PRIMEIRA LINHA para sinergismo em endocardite estreptocócica/enterocócica (associada a beta-lactâmico ou vancomicina) e para infecções por Gram-negativos com perfil de sensibilidade local preservado — mais barata e amplamente disponível. A troca para amicacina é indicada quando há resistência documentada ou suspeita a gentamicina (perfil local de UTI/onco-hematologia), ou quando o patógeno-alvo (ex. Acinetobacter, Pseudomonas MDR) tem padrão de sensibilidade preferencial à amicacina — decisão que deve ser guiada por antibiograma e epidemiologia local, não por preferência empírica isolada."
+    },
+    "pkpd": {
+      "tipo": "Bactericida concentração-dependente — eficácia correlaciona com Cmax/CIM e AUC/CIM, com efeito pós-antibiótico relevante (mesmo perfil de classe da amicacina), sustentando estratégia de dose única diária (extended-interval dosing)",
+      "alvo_farmacodinamico": "Meta clássica: relação pico/CIM ≥8-10:1. Bula orienta, no esquema convencional de 2-3 doses diárias, picos séricos (30 min-1h pós-dose) na faixa de 4-6 µg/mL; picos transitoriamente mais altos podem ocorrer com dose única diária. Em qualquer esquema, evitar concentrações acima de 12 µg/mL por períodos prolongados e vales acima de 2 µg/mL imediatamente antes da próxima dose (bula). Literatura de dosagem estendida (Hartford Nomogram) preconiza dose de 7 mg/kg para infecções graves (Pseudomonas, pneumonia, osteomielite, meningite, sepse) buscando picos de 20 mg/L, ou 5 mg/kg para infecções menos graves (ITU, profilaxia cirúrgica, infecção de ferida, pielonefrite, infecção intra-abdominal/pélvica).",
+      "vale_alvo": "Vale-alvo <2 µg/mL no esquema convencional (bula) ou <1 µg/mL na dosagem estendida de intervalo único (nomogramas Hartford/Urban-Craig), garantindo janela livre de droga para minimizar acúmulo tubular renal — mesmo racional da amicacina.",
+      "meia_vida": "Curta, da ordem de 2-3h em adultos com função renal normal — perfil típico de aminoglicosídeo, exigindo fracionamento em múltiplas doses diárias no esquema convencional ou dose única com intervalo estendido guiado por função renal.",
+      "ligacao_proteica": "Baixa (propriedade de classe) — ampla fração livre disponível tanto para atividade bactericida quanto para filtração glomerular e captação tubular proximal (mecanismo de nefrotoxicidade de classe).",
+      "volume_distribuicao": "Confinado predominantemente ao fluido extracelular, com penetração tecidual/celular limitada (classe). Alta concentração na urina e no tecido renal — propriedade explorada na indicação de dose única para ITU crônica/recorrente sem insuficiência renal.",
+      "excrecao": "Predominantemente renal, por filtração glomerular, de forma inalterada — mesmo perfil da amicacina; disfunção renal prolonga proporcionalmente a meia-vida sérica.",
+      "alerta": "Assim como a amicacina, a nefro/ototoxicidade da gentamicina é cumulativa e exige monitorização sérica e clínica ativa, não apenas ajuste inicial por peso e função renal. A bula reforça que os esquemas posológicos fornecidos não são recomendações rígidas, mas auxiliares na estimativa da dose quando não é possível obter dosagem sérica — na prática de stewardship, a dosagem sérica (pico/vale ou nível único pós-dose pelo nomograma) deve ser priorizada sempre que disponível."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Infecções graves por Gram-negativos, função renal normal (esquema convencional)",
+        "via": "IM ou IV",
+        "dose": "3 mg/kg/dia, divididos a cada 8h (1 mg/kg a cada 8h) — esquema-base de bula para a maioria das infecções; pode chegar a 5 mg/kg/dia divididos a cada 8h em infecções com risco de vida, reduzindo para 3 mg/kg/dia assim que clinicamente indicado"
+      },
+      {
+        "indicacao": "Infecção urinária crônica/recorrente, SEM evidência de insuficiência renal",
+        "via": "IM",
+        "dose": "160 mg em dose única diária, por 7-10 dias; para adultos <50 kg, 3,0 mg/kg/dia em dose única"
+      },
+      {
+        "indicacao": "Uretrite gonocócica (incluindo cepas resistentes à penicilina e outros antibióticos)",
+        "via": "IM, dose única",
+        "dose": "240 a 280 mg — comprovadamente eficaz conforme dados de bula"
+      },
+      {
+        "duracao": "Duração habitual de 7-10 dias; em infecções graves/complicadas, tratamento pode ser prolongado conforme resposta clínica e monitorização de toxicidade."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "indicacao": "Crianças, esquema geral",
+        "via": "IM ou IV",
+        "dose": "6 a 7,5 mg/kg/dia, divididos a cada 8h (2,0 a 2,5 mg/kg a cada 8h)"
+      },
+      {
+        "alerta": "Dosagem deve ser ajustada em pacientes com insuficiência renal, com determinação de concentrações séricas sempre que possível — bula não fornece tabela numérica pediátrica específica por faixa de ClCr."
+      }
+    ],
+    "ajuste_renal": {
+      "formula_recomendada": "Bula consultada (modelo Santisa/Fresenius/Mantecorp) NÃO fornece fórmula numérica explícita equivalente à da amicacina (multiplicação da creatinina sérica por fator fixo) — orienta apenas ajuste qualitativo com monitorização sérica sempre que possível. [A PREENCHER: para uso institucional, aplicar nomograma validado — ex. Hartford, Sanford Guide ou Lexicomp — já que a bula nacional não detalha tabela quantitativa por faixa de ClCr].",
+      "tabela": [
+        {"clcr": "Função renal normal", "dose_ajustada": "Esquema convencional (3-5 mg/kg/dia, 8/8h) ou dose única diária estendida"},
+        {"clcr": "Insuficiência renal (qualquer grau)", "dose_ajustada": "[A PREENCHER] — bula orienta 'a dosagem deve ser ajustada em pacientes com insuficiência renal' sem tabela numérica; consultar nomograma institucional validado e priorizar monitorização sérica de pico/vale antes de definir dose e intervalo"}
+      ],
+      "alerta": "Mesma limitação de fonte relevante para stewardship: diferente da amicacina (cuja bula ao menos fornece fórmula de cálculo do intervalo), a bula de gentamicina consultada é mais qualitativa neste ponto — reforça a necessidade de nomograma validado (ex. Hartford) e monitorização sérica ativa antes de qualquer prescrição em disfunção renal."
+    },
+    "dialise": {
+      "hemodialise": "Gentamicina é removida por hemodiálise (propriedade de classe compartilhada com amicacina) — dose suplementar pós-sessão geralmente necessária, idealmente guiada por nível sérico; a bula consultada não fornece esquema numérico fixo — [A PREENCHER: confirmar com protocolo institucional].",
+      "dialise_peritoneal": "Removida parcialmente por diálise peritoneal — [A PREENCHER: dado quantitativo não detalhado na bula consultada].",
+      "crrt": "Bula não traz regime específico para TRS contínua — [A PREENCHER]. Como na amicacina, a eliminação exclusivamente renal torna a CRRT determinante da depuração; monitorização sérica é essencial.",
+      "referencia": "Bula Sulfato de Gentamicina (Santisa/Fresenius Kabi/Mantecorp), item 8 — Posologia e Modo de Usar"
+    },
+    "gestacao_lactacao": {
+      "fda": "D — mesma classificação de classe da amicacina; aminoglicosídeos podem causar dano fetal (nefro/ototoxicidade fetal)",
+      "gestacao": "Atravessa a barreira placentária (propriedade de classe). Usar apenas se claramente necessário, sem alternativa mais segura disponível, considerando o risco de ototoxicidade/nefrotoxicidade fetal.",
+      "lactacao": {
+        "classificacao": "Usar com cautela",
+        "observacao": "Excretada em pequenas quantidades no leite materno; baixa absorção oral pelo lactente reduz, mas não exclui, o risco teórico — mesma cautela da amicacina."
+      },
+      "referencia": "Bula Sulfato de Gentamicina, item 5 — Advertências e Precauções"
+    },
+    "monitorizacao": [
+      "Concentrações séricas máximas e residuais (pico/vale), sempre que possível — evitar picos >12 µg/mL sustentados e vales >2 µg/mL pré-dose no esquema convencional; no esquema de dose única diária, aplicar nomograma validado (Hartford) com nível único pós-dose",
+      "Função renal (ureia, creatinina, diurese) antes e durante todo o tratamento",
+      "Função vestibular e auditiva (audiometria) — mesmo risco de ototoxicidade auditiva/vestibular da classe, mais provável em disfunção renal, idade avançada, desidratação e tratamento prolongado",
+      "Sinais de bloqueio neuromuscular — risco compartilhado de classe com uso concomitante de anestésicos/bloqueadores neuromusculares",
+      "Eletrólitos (magnésio, potássio, cálcio) em tratamento prolongado — perda tubular renal induzida por aminoglicosídeo pode causar hipomagnesemia",
+      "Sinais de superinfecção por organismos não sensíveis durante tratamento prolongado"
+    ],
+    "efeitos_adversos": [
+      "Renal: nefrotoxicidade dose/exposição-dependente (mesmo perfil de classe da amicacina) — elevação de ureia/creatinina, proteinúria, cilindrúria",
+      "Ótico: ototoxicidade auditiva e vestibular, potencialmente irreversível",
+      "Neuromuscular: bloqueio neuromuscular com risco de paralisia respiratória; parestesia, tremor",
+      "Hipersensibilidade: reações alérgicas, incluindo ao metabissulfito de sódio (excipiente em algumas apresentações), com risco de sintomas anafiláticos em indivíduos sensíveis",
+      "Outros: febre, cefaleia, náusea, erupção cutânea; hipomagnesemia em uso prolongado"
+    ],
+    "interacoes": [
+      "Outros aminoglicosídeos e demais nefro/ototóxicos (anfotericina B, vancomicina, cisplatina, polimixina B, colistina) — risco aditivo; evitar associação concomitante ou sequencial",
+      "Diuréticos potentes (furosemida, ácido etacrínico) — podem, por si só, causar ototoxicidade e potencializar níveis séricos/teciduais do aminoglicosídeo quando administrados IV; evitar associação",
+      "Beta-lactâmicos (penicilinas, cefalosporinas) — inativação físico-química mútua quando misturados na mesma seringa/solução; administrar sempre separadamente, embora a associação terapêutica por vias distintas seja sinérgica e frequentemente desejável (ex. endocardite)",
+      "Anestésicos ou bloqueadores neuromusculares — risco de bloqueio neuromuscular e paralisia respiratória, revertido por sais de cálcio"
+    ],
+    "contraindicacoes": [
+      "Hipersensibilidade conhecida à gentamicina ou a outros aminoglicosídeos",
+      "Uso cauteloso extremo em miastenia gravis e parkinsonismo, pelo risco de agravamento de fraqueza muscular (mesmo alerta de classe da amicacina)"
+    ],
+    "preparo_administracao": "IM: injeção profunda; se usada a apresentação de 40 mg/mL em volume maior, recomenda-se dividir a dose entre duas regiões glúteas ('botoques'). IV: diluir a dose em solução compatível e infundir lentamente (30-60 min) — infusão rápida aumenta risco de bloqueio neuromuscular. NÃO misturar com outros medicamentos na mesma seringa/solução — aplicar separadamente, conforme via e esquema recomendados. Solução original estéril, límpida, incolor a levemente amarelada; após diluição, torna-se límpida e incolor, sem formação de espuma. Conservar entre 15-30°C, proteger da luz.",
+    "referencias": [
+      "Bula Sulfato de Gentamicina — Santisa Indústria e Comércio Ltda. (Solução Injetável)",
+      "Bula Gentamicin® — Fresenius Kabi Brasil Ltda.",
+      "Bula Garamicina® Injetável (sulfato de gentamicina) — Mantecorp Farmasa",
+      "Nicolau DP, Freeman CD, Belliveau PP, et al. Experience with a once-daily aminoglycoside program administered to 2.184 adult patients. Antimicrob Agents Chemother. 1995;39(3):650-655 (estudo fundador do Hartford Nomogram, aplicável a gentamicina/tobramicina/amicacina)",
+      "Bailey TC, Little JR, Littenberg B, et al. A meta-analysis of extended-interval dosing versus multiple daily dosing of aminoglycosides. Clin Infect Dis. 1997;24:786-95",
+      "Freeman CD, Nicolau DP, Belliveau PP, Nightingale CH. Once-daily dosing of aminoglycosides: review and recommendations for clinical practice. J Antimicrob Chemother. 1997;39(6):677-686"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}

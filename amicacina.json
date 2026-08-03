@@ -1,0 +1,135 @@
+{
+  "amicacina": {
+    "nome": "Sulfato de Amicacina",
+    "sinonimos": "Amicilon® (Blau); Novamin® (histórico); genéricos Teuto, Fresenius Kabi; aminoglicosídeo semissintético derivado da canamicina A",
+    "mecanismo_acao": "Antibiótico aminoglicosídeo bactericida, com ação concentração-dependente. Atua por ligação irreversível à subunidade ribossômica 30S bacteriana, causando leitura incorreta do código genético (mRNA), com produção de proteínas não funcionais/aberrantes e bloqueio da síntese proteica bacteriana — mecanismo de classe compartilhado com gentamicina, porém a amicacina é derivado semissintético da canamicina A com radical lateral que a torna RESISTENTE à degradação pela maioria das enzimas inativadoras de aminoglicosídeos (acetiltransferases, fosforiltransferases, nucleotidiltransferases) que afetam gentamicina, tobramicina e canamicina — diferencial estrutural central desta ficha frente à gentamicina.",
+    "espectro": {
+      "cobertura": [
+        "Gram-negativos: Pseudomonas aeruginosa, Escherichia coli, Proteus sp. (indol-positivo e indol-negativo), Providencia sp., grupo Klebsiella-Enterobacter-Serratia, Acinetobacter sp. (antigo Mima-Herellea), Citrobacter freundii",
+        "Muitas cepas destes organismos RESISTENTES a outros aminoglicosídeos (gentamicina, tobramicina, canamicina) são sensíveis à amicacina in vitro — vantagem central de espectro desta ficha",
+        "Gram-positivos: estafilococos produtores ou não de penicilinase, incluindo cepas resistentes à meticilina (atividade in vitro), embora não seja fármaco de escolha para MRSA na prática clínica",
+        "Sinergismo in vitro com antibiótico beta-lactâmico contra vários organismos Gram-negativos clinicamente relevantes",
+        "Efeito pós-antibiótico: supressão persistente do crescimento bacteriano de muitos Gram-negativos após exposição in vitro, mesmo após queda da concentração abaixo da CIM — propriedade farmacodinâmica que sustenta a estratégia de dose única diária"
+      ],
+      "sem_atividade": [
+        "Streptococcus pyogenes, enterococos e Streptococcus pneumoniae — aminoglicosídeos em geral (incluindo amicacina) têm atividade reduzida contra Gram-positivos estreptocócicos, mesmo padrão de classe",
+        "Anaeróbios — sem cobertura relevante (mecanismo de captação do aminoglicosídeo é dependente de transporte ativo oxigênio-dependente, ausente em anaeróbios estritos)",
+        "Não indicada em episódios iniciais não complicados de infecção urinária, a menos que o patógeno seja resistente a outros agentes menos tóxicos (bula)"
+      ],
+      "observacao": "Diferencial central frente à gentamicina: a amicacina é reservada para organismos resistentes a outros aminoglicosídeos ou como agente de escalada em Gram-negativos multirresistentes (incluindo Acinetobacter e Pseudomonas produtores de enzimas modificadoras de aminoglicosídeo), sendo geralmente a opção de maior espectro/potência residual dentro da classe. A gentamicina, mais antiga e mais barata, permanece de primeira linha quando o perfil de sensibilidade local permite, reservando a amicacina para stewardship de escalada — relevante para a lógica de escolha entre os dois fármacos nesta série."
+    },
+    "pkpd": {
+      "tipo": "Bactericida concentração-dependente — eficácia correlaciona com Cmax/CIM (pico) e AUC/CIM, e NÃO com %T>MIC como os beta-lactâmicos desta série; possui efeito pós-antibiótico relevante que sustenta a estratégia de dose única diária (extended-interval dosing)",
+      "alvo_farmacodinamico": "Meta clássica de eficácia: relação pico sérico/CIM ≥8-10:1. Bula orienta evitar picos (30-90 min pós-dose) superiores a 35 µg/mL e concentrações mínimas (vale, pré-dose) acima de 10 µg/mL. Literatura de dosagem estendida (Hartford nomogram) preconiza picos de 20-30 µg/mL para a maioria das infecções graves ou até 30-35 µg/mL em quadros mais graves (ex. meningite, fibrose cística), com meta de vale <1 µg/mL para garantir 'janela livre de droga' e minimizar acúmulo tubular renal.",
+      "vale_alvo": "Vale-alvo <10 µg/mL (bula, esquema convencional 2-3x/dia) ou <1 µg/mL (janela livre de droga, esquema de dose única diária/extended-interval, conforme nomogramas de Hartford/Urban-Craig) — quanto menor o vale sustentado, menor o risco de acúmulo cortical renal e nefrotoxicidade.",
+      "meia_vida": "Aproximadamente 2h em adultos com função renal normal; prolongada proporcionalmente à redução da filtração glomerular. Meia-vida sérica fetal de aproximadamente 3,7h vs. 2h materna (bula) — a droga atravessa a barreira placentária e atinge concentrações significativas no líquido amniótico, com pico sérico fetal de cerca de 16% do pico sérico materno.",
+      "ligacao_proteica": "Baixa (aminoglicosídeos como classe têm ligação proteica mínima) — favorece ampla disponibilidade da fração livre para distribuição tecidual, mas também favorece filtração glomerular livre e captação tubular proximal (mecanismo de nefrotoxicidade de classe).",
+      "volume_distribuicao": "Confinado predominantemente ao fluido extracelular; penetração tecidual e celular limitada (propriedade de classe) — após dose recomendada, atinge níveis terapêuticos em ossos, coração, bexiga, parênquima pulmonar, além de concentrações significativas em urina, bile, escarro, secreção brônquica e líquidos intersticial, pleural e sinovial (bula). Penetração no SNC é baixa mesmo com meninges inflamadas, limitando monoterapia em meningite.",
+      "excrecao": "Excretada fundamentalmente por filtração glomerular, de forma inalterada. Pacientes com função renal reduzida excretam a droga muito mais lentamente, prolongando efetivamente a meia-vida sérica — todo o ajuste posológico desta classe gira em torno desse parâmetro (ver ajuste_renal).",
+      "alerta": "Diferente dos beta-lactâmicos desta série, a toxicidade da amicacina (nefro e ototoxicidade) é dose/exposição-cumulativa e não apenas dependente de pico isolado — por isso a bula desaconselha DOSE FIXA e exige cálculo individualizado por peso corporal e função renal, com monitorização sérica sempre que possível."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Infecções graves por Gram-negativos, função renal normal (esquema convencional)",
+        "via": "IM ou IV",
+        "dose": "15 mg/kg/dia, dividida em 2-3 tomadas: 7,5 mg/kg a cada 12h OU 5 mg/kg a cada 8h"
+      },
+      {
+        "indicacao": "Função renal normal — esquema de dose única diária (extended-interval)",
+        "via": "IM ou IV",
+        "dose": "15-20 mg/kg em dose única diária — permitido em pacientes com função renal normal; concentrações máximas podem, transitoriamente, exceder 35 µg/mL sem implicar toxicidade, dado o perfil farmacodinâmico concentração-dependente"
+      },
+      {
+        "indicacao": "Infecção urinária não complicada",
+        "via": "IM ou IV",
+        "dose": "500 mg/dia, divididos em 2 tomadas (250 mg 2x/dia) OU em dose única diária, por 7-10 dias"
+      },
+      {
+        "alerta_peso": "Dose para pacientes com excesso de peso não deve exceder aquela calculada pelo peso corporal ideal, acrescido de correção pelo peso adiposo, quando aplicável (bula) — usar peso ajustado em obesidade, conforme prática padrão de aminoglicosídeos."
+      },
+      {
+        "duracao": "Duração habitual do tratamento de 7 a 10 dias. A dose diária total, por qualquer via, não deve exceder 15 mg/kg/dia (uso convencional) — bula cita também até 15-20 mg/kg/dia como faixa terapêutica global, dependendo da apresentação/fabricante consultado; em infecções com risco de vida, doses podem chegar a 1,5 g/dia (dose máxima absoluta, não excedida mesmo com maior peso corporal)."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "indicacao": "Prematuros",
+        "via": "IM ou IV",
+        "dose": "7,5 mg/kg a cada 12h"
+      },
+      {
+        "indicacao": "Recém-nascidos a termo",
+        "via": "IM ou IV",
+        "dose": "Dose de ataque de 10 mg/kg, seguida de 7,5 mg/kg a cada 12h"
+      },
+      {
+        "indicacao": "Crianças e lactentes >2 semanas",
+        "via": "IM ou IV",
+        "dose": "7,5 mg/kg a cada 12h OU 5 mg/kg a cada 8h"
+      }
+    ],
+    "ajuste_renal": {
+      "formula_recomendada": "Método de Doses Normais a Intervalos Prolongados: o intervalo (em horas) necessário para uma dose de 7,5 mg/kg (esquema 2x/dia) em paciente com função renal normal é obtido multiplicando-se a creatinina sérica (mg/100 mL) por 9. Exemplo (bula): creatinina sérica de 2 mg/100 mL → dose de 7,5 mg/kg a cada 18h.",
+      "tabela": [
+        {"clcr": "≥60 mL/min", "dose_ajustada": "Administrar a cada 24h; ajustar dose/intervalo conforme níveis séricos"},
+        {"clcr": "40 a <60 mL/min", "dose_ajustada": "Administrar a cada 36h; ajustar dose/intervalo conforme níveis séricos"},
+        {"clcr": "20 a <40 mL/min", "dose_ajustada": "Administrar a cada 48h; ajustar dose/intervalo conforme níveis séricos"},
+        {"clcr": "<20 mL/min", "dose_ajustada": "Administrar a dose usual uma única vez; determinar dose/intervalo subsequentes com base em níveis séricos — alguns protocolos publicados recomendam dosagem convencional/tradicional (múltiplas doses menores) nesses pacientes, em vez de dose única diária"}
+      ],
+      "alerta": "Bula desaconselha explicitamente o esquema de dose única diária em ClCr <50 mL/min, pelo maior tempo de exposição a concentrações mínimas elevadas — diferente do perfil de segurança do esquema estendido em função renal normal. Método alternativo de 'Doses Reduzidas a Intervalos Fixos' pode ser usado quando se deseja manter intervalo fixo, reduzindo a dose unitária proporcionalmente — sempre com monitorização sérica sempre que disponível."
+    },
+    "dialise": {
+      "hemodialise": "Amicacina é removida por hemodiálise — dose suplementar geralmente necessária após a sessão, guiada por nível sérico quando disponível; a bula consultada não fornece esquema numérico fixo de reposição pós-HD — [A PREENCHER: confirmar com protocolo institucional/farmacocinética clínica]",
+      "dialise_peritoneal": "Removida parcialmente por diálise peritoneal, em menor extensão que pela hemodiálise — [A PREENCHER: dado quantitativo não detalhado na bula consultada]",
+      "crrt": "Bula não traz regime específico para TRS contínua (CRRT) — [A PREENCHER]. Dado o perfil de eliminação exclusivamente por filtração glomerular, a CRRT tem impacto direto e proporcional na depuração; monitorização sérica é MANDATÓRIA nesse cenário, mais do que em qualquer outro fármaco desta série.",
+      "referencia": "Bula Amicilon®/genéricos de sulfato de amicacina, item 8 — Posologia (Administração para Pacientes com Disfunção Renal)"
+    },
+    "gestacao_lactacao": {
+      "fda": "D — aminoglicosídeos como classe podem causar dano fetal (ototoxicidade/nefrotoxicidade fetal) quando administrados a gestantes",
+      "gestacao": "Atravessa a barreira placentária, atingindo concentrações significativas no líquido amniótico (pico fetal ~16% do pico sérico materno). Usar apenas se claramente necessário e sem alternativa mais segura, avaliando risco-benefício — mesma cautela de classe aplicada à gentamicina.",
+      "lactacao": {
+        "classificacao": "Usar com cautela",
+        "observacao": "Aminoglicosídeos são excretados em pequenas quantidades no leite materno; baixa absorção oral pelo lactente limita, mas não exclui, risco teórico. Avaliar caso a caso."
+      },
+      "referencia": "Bula de sulfato de amicacina, item 5 — Advertências e Precauções"
+    },
+    "monitorizacao": [
+      "Concentrações séricas de pico (30-90 min pós-dose) e vale (imediatamente pré-dose), sempre que possível — evitar picos >35 µg/mL e vales >10 µg/mL no esquema convencional; no esquema de dose única diária, aplicar nomograma validado (Hartford) com nível único 6-14h pós-início da infusão",
+      "Função renal (ureia, creatinina, diurese) antes e durante todo o tratamento — suspender ou modificar posologia se houver sinais de nefrotoxicidade",
+      "Função vestibular e auditiva (audiometria) — risco de ototoxicidade AUDITIVA e VESTIBULAR, mais provável em disfunção renal, idade avançada, desidratação e tratamento prolongado (>5-7 dias); considerar audiometria seriada em tratamentos >2 semanas",
+      "Sinais de bloqueio neuromuscular e paralisia respiratória — risco aumentado com uso concomitante de anestésicos ou bloqueadores neuromusculares; sais de cálcio podem reverter o bloqueio",
+      "Sinais de reação alérgica/anafilática ao metabissulfito de sódio (excipiente) — risco em pacientes sensíveis a sulfitos, incluindo episódios asmáticos",
+      "Diarreia associada a Clostridioides difficile — pode variar de leve a colite fatal; descontinuar se suspeita",
+      "Fraqueza muscular em pacientes com miastenia gravis ou parkinsonismo — pode ser agravada pelo aminoglicosídeo"
+    ],
+    "efeitos_adversos": [
+      "Renal: nefrotoxicidade dose/exposição-dependente — elevação de ureia/creatinina, oligúria, proteinúria, cilindrúria; mais frequente com tratamento prolongado, desidratação, uso concomitante de outros nefrotóxicos ou idade avançada",
+      "Ótico: ototoxicidade auditiva (perda auditiva para altas frequências, geralmente irreversível, detectável inicialmente apenas por audiometria) e vestibular (tontura, vertigem, ataxia, nistagmo)",
+      "Neuromuscular: bloqueio neuromuscular com possível paralisia respiratória (mais provável com infusão rápida ou uso concomitante de anestésicos/bloqueadores neuromusculares); parestesia, tremor, espasmos musculares, dormência, convulsão (neurotoxicidade)",
+      "Hipersensibilidade: reações alérgicas ao metabissulfito de sódio (excipiente), incluindo sintomas anafiláticos e crises de asma em indivíduos sensíveis; febre medicamentosa",
+      "Outros: cefaleia; erupção cutânea; eosinofilia; hipomagnesemia em uso prolongado (mecanismo de classe por perda tubular renal)"
+    ],
+    "interacoes": [
+      "Outros aminoglicosídeos, e demais agentes neuro/nefrotóxicos (bacitracina, cisplatina, anfotericina B, cefaloridina, paromomicina, viomicina, polimixina B, colistina, vancomicina) — risco aditivo de nefro/ototoxicidade; evitar uso concomitante ou sequencial",
+      "Diuréticos potentes (furosemida, ácido etacrínico) — podem, por si só, causar ototoxicidade; administração IV de diuréticos aumenta as concentrações do antibiótico no soro e nos tecidos, potencializando o risco — evitar associação",
+      "Beta-lactâmicos (penicilinas, cefalosporinas) — inativação mútua significativa quando misturados na mesma seringa/solução ou administrados por acesso comum; administrar SEMPRE separadamente, mesmo havendo sinergismo terapêutico desejável contra Gram-negativos quando administrados por vias distintas",
+      "Anestésicos ou bloqueadores neuromusculares — risco de bloqueio neuromuscular e paralisia respiratória; sais de cálcio podem reverter esse fenômeno",
+      "Transfusões de sangue citratado maciças — podem potencializar bloqueio neuromuscular por hipocalcemia associada"
+    ],
+    "contraindicacoes": [
+      "Hipersensibilidade conhecida à amicacina ou a outros aminoglicosídeos",
+      "Hipersensibilidade ao metabissulfito de sódio (excipiente) em pacientes sulfito-sensíveis, pelo risco de reações anafiláticas/asmáticas graves",
+      "Uso cauteloso extremo (não contraindicação absoluta, mas alerta de bula) em miastenia gravis e parkinsonismo, pelo risco de agravamento da fraqueza muscular"
+    ],
+    "preparo_administracao": "IM: aplicação profunda, bem tolerada localmente, absorção rápida. IV: diluir a dose desejada em solução compatível (SF 0,9%, SG 5%, Ringer lactato, conforme protocolo institucional) e infundir lentamente ao longo de 30-60 minutos — infusão rápida aumenta risco de bloqueio neuromuscular. Solução original é estéril, límpida e incolor; pode eventualmente tornar-se amarelo-pálida sem perda de potência. NÃO pré-misturar com outros medicamentos — administrar separadamente conforme via e esquema recomendados; aminoglicosídeos NUNCA devem ser misturados fisicamente com beta-lactâmicos (penicilinas/cefalosporinas) pelo risco de inativação mútua. Apresentação de dose única — desprezar sobra não utilizada. Inspecionar visualmente antes da administração quanto a alterações de cor ou partículas.",
+    "referencias": [
+      "Bula Amicilon® (sulfato de amicacina) — Blau Farmacêutica S.A., Modelo de Bula do Profissional de Saúde RDC 47/09",
+      "Bula Sulfato de Amicacina — Laboratório Teuto Brasileiro S/A e Fresenius Kabi Brasil Ltda., conforme bulário eletrônico ANVISA",
+      "Nicolau DP, Freeman CD, Belliveau PP, et al. Experience with a once-daily aminoglycoside program administered to 2.184 adult patients. Antimicrob Agents Chemother. 1995;39(3):650-655 (estudo-base do Hartford Nomogram, dosagem estendida de aminoglicosídeos)",
+      "Asempa TE, Nicolau DP, Kuti JL. Application of the Hartford Hospital Aminoglycoside Dosing Nomogram for extended-interval dosing selection in serious Gram-negative infections. Clin Ther. 2019;41(8):1453-1462 (validação do nomograma para otimização de intervalo em infecções por Enterobacterales resistentes)",
+      "Bailey TC, Little JR, Littenberg B, et al. A meta-analysis of extended-interval dosing versus multiple daily dosing of aminoglycosides. Clin Infect Dis. 1997;24:786-95"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}
