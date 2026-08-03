@@ -1,0 +1,149 @@
+{
+  "ampicilina": {
+    "nome": "Ampicilina sódica (injetável, uso isolado — sem inibidor de beta-lactamase)",
+    "sinonimos": "Cilinon® (Blau); Amplacilina® (Eurofarma/Momenta); ácido 6-[D(-)-alfa-aminofenilacetamido] penicilânico; aminopenicilina de primeira geração",
+    "mecanismo_acao": "Antibiótico bactericida semissintético, derivado do núcleo fundamental das penicilinas (ácido 6-aminopenicilânico). Atua por inibição da síntese do mucopeptídeo (peptideoglicano) da parede celular bacteriana durante a fase de multiplicação ativa dos microrganismos sensíveis, via ligação às PBPs — mecanismo idêntico ao das demais penicilinas desta série de fichas. Diferente de ampicilina-sulbactam e amoxicilina-clavulanato, a ampicilina ISOLADA não possui proteção contra beta-lactamases: é rapidamente hidrolisada e inativada por cepas produtoras dessa enzima, o que restringe seu espectro útil a organismos genuinamente sensíveis (não produtores de penicilinase/beta-lactamase).",
+    "espectro": {
+      "cobertura": [
+        "Gram-positivos: estreptococos alfa e beta-hemolíticos, Streptococcus pneumoniae, estafilococos NÃO produtores de penicilinase (minoria relevante dos isolados atuais), Bacillus anthracis, Clostridia spp., Corynebacterium xerosis, a maioria das cepas de Enterococcus spp.",
+        "Gram-negativos: Haemophilus influenzae, Proteus mirabilis, muitas cepas de Salmonella (incluindo S. typhosa/Typhi), Shigella spp., Escherichia coli (cepas sensíveis, sem produção de beta-lactamase), Neisseria gonorrhoeae, Neisseria meningitidis (bula de indicações, Amplacilina®)"
+      ],
+      "sem_atividade": [
+        "Estafilococos produtores de penicilinase — resistência de classe; hoje maioria dos isolados hospitalares de S. aureus (produtores de penicilinase e todo o espectro MRSA)",
+        "Pseudomonas aeruginosa e Acinetobacter spp. — sem cobertura, mesmo perfil das demais penicilinas naturais/aminopenicilinas desta série",
+        "Klebsiella spp. — resistência intrínseca por produção cromossômica de beta-lactamase (diferente de E. coli e Proteus mirabilis, que podem ser sensíveis quando não produtoras de beta-lactamase adquirida)",
+        "Enterobactérias produtoras de ESBL ou AmpC — sem cobertura, já que não há inibidor de beta-lactamase associado nesta formulação"
+      ],
+      "observacao": "Diferencial central desta ficha em relação a ampicilina-sulbactam (já documentada nesta série): a ampicilina ISOLADA depende inteiramente da ausência de produção de beta-lactamase pelo patógeno-alvo. Com a disseminação atual de cepas produtoras de beta-lactamase em E. coli, H. influenzae e estafilococos, o uso empírico de ampicilina isolada em infecções hospitalares/UTI é hoje limitado; seu papel permanece relevante principalmente contra Enterococcus spp. sensível (ex. endocardite enterocócica, frequentemente em associação com aminoglicosídeo) e Listeria monocytogenes (não citada explicitamente nesta bula, mas classicamente sensível como classe), além de infecções por patógenos confirmadamente sensíveis por antibiograma."
+    },
+    "pkpd": {
+      "tipo": "Bactericida tempo-dependente (beta-lactâmico) — eficácia correlaciona com %fT>MIC",
+      "alvo_farmacodinamico": "Não padronizado numericamente na bula nacional — sem tabela de %T>MIC explícita, diferente de fármacos mais recentes desta série (ex. cefepima). Meia-vida curta impõe fracionamento a cada 6h (ou 4-8h conforme gravidade) para sustentar exposição adequada.",
+      "ligacao_proteica": "De todas as penicilinas, a ampicilina é a que se fixa em MENOR grau às proteínas plasmáticas (bula) — achado farmacocinético diferencial explícito da fonte consultada, relevante por favorecer maior fração livre disponível para ação bactericida.",
+      "volume_distribuicao": "Difunde-se rapidamente na maioria dos tecidos e fluidos do organismo. A penetração no líquor e no cérebro SOMENTE ocorre na presença de inflamação meníngea — mesmo perfil de dependência inflamatória descrito para ampicilina-sulbactam nesta série; por isso a dose de meningite é maior e mais frequente que a dose-padrão.",
+      "niveis_sericos": "Níveis séricos pós-IM são proporcionais à dose administrada: aproximadamente 40,0 mcg/mL alcançados 30 minutos após injeção IM de 1.000 mg em adultos. Níveis mais elevados podem ser obtidos pela via IV, dependendo da dose e velocidade de infusão.",
+      "excrecao": "Amplamente excretada sob forma ativa na urina — perfil predominantemente renal, mesmo padrão das demais aminopenicilinas desta série (diferente do perfil misto renal/biliar da ceftriaxona).",
+      "alerta": "Risco de acúmulo em pacientes com comprometimento intenso da função renal (ClCr <30 mL/min) — bula recomenda maior espaçamento das doses (a cada 12 ou 16h) para infecções sistêmicas nesses casos, mantendo doses usuais apenas para infecções do trato urinário. O principal risco de toxicidade é neurológico (convulsões/ataque epileptiforme) por efeito irritante direto de altas concentrações de beta-lactâmico no SNC, agravado por infusão IV rápida ou por acúmulo renal — mecanismo compartilhado com ampicilina-sulbactam nesta série."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Infecções de vias respiratórias (amigdalites, sinusites, pneumonias)",
+        "via": "IV ou IM",
+        "dose": "200-500 mg a cada 6h"
+      },
+      {
+        "indicacao": "Infecções do trato gastrintestinal",
+        "via": "IV ou IM",
+        "dose": "500 mg a cada 6h"
+      },
+      {
+        "indicacao": "Infecções geniturinárias (infecções urinárias)",
+        "via": "IV ou IM",
+        "dose": "500 mg a cada 6h"
+      },
+      {
+        "indicacao": "Meningite bacteriana",
+        "via": "IV",
+        "dose": "8 a 14 g a cada 24h (dose diária total, fracionada — bula não detalha o intervalo de fracionamento desta dose diária; prática clínica usual de 4/4h)"
+      },
+      {
+        "indicacao": "Infecção por Neisseria gonorrhoeae (uretral, cervical, retal, faríngea)",
+        "via": "IV/IM, dose única",
+        "dose": "3,5 g de ampicilina + 1,0 g de probenecida VO, administradas simultaneamente — esquema histórico da bula nacional; considerar que diretrizes internacionais atuais (CDC) não usam mais este esquema como primeira linha, devido à resistência disseminada de N. gonorrhoeae às penicilinas"
+      },
+      {
+        "duracao": "Manter tratamento por, no mínimo, 48-72h após cessarem todos os sintomas ou negativação de culturas. Infecções por estreptococos hemolíticos exigem mínimo de 10 dias, para evitar febre reumática ou glomerulonefrite. Em infecções graves, o tratamento pode ser prolongado por várias semanas, com doses mais elevadas se necessário."
+      },
+      {
+        "alerta_espacamento": "Bula sugere maior espaçamento das doses (a cada 12 ou 16h) para tratamento de infecções SISTÊMICAS graves em pacientes com insuficiência renal, embora doses usuais possam ser mantidas para infecção do trato urinário isolada — ver 'ajuste_renal'."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "indicacao": "Infecções de vias respiratórias (amigdalites, sinusites, pneumonias)",
+        "via": "IV ou IM",
+        "dose": "25-50 mg/kg/dia, em doses iguais a cada 6-8h"
+      },
+      {
+        "indicacao": "Infecções do trato gastrintestinal",
+        "via": "IV ou IM",
+        "dose": "50-100 mg/kg/dia, em doses iguais a cada 6-8h"
+      },
+      {
+        "indicacao": "Infecções geniturinárias",
+        "via": "IV ou IM",
+        "dose": "50-100 mg/kg/dia, em doses iguais a cada 6-8h"
+      },
+      {
+        "indicacao": "Meningite bacteriana",
+        "via": "IV",
+        "dose": "100 a 200 mg/kg/dia"
+      },
+      {
+        "alerta": "Doses pediátricas recomendadas destinam-se a crianças cujo peso não resulte em dose maior que a de adultos — nesse caso, aplicar o esquema de adulto. Doses menores que as recomendadas na tabela da bula NÃO devem ser utilizadas."
+      }
+    ],
+    "ajuste_renal": {
+      "formula_recomendada": "A bula NÃO fornece tabela quantitativa por faixa de ClCr — orienta qualitativamente que pode haver acúmulo em comprometimento renal intenso (ClCr <30 mL/min) e sugere maior espaçamento das doses (a cada 12 ou 16h) para infecções sistêmicas nesse cenário, mantendo dose usual para ITU.",
+      "tabela": [
+        {
+          "clcr": "ClCr ≥30 mL/min",
+          "dose_ajustada": "Sem ajuste — manter esquema padrão conforme indicação e gravidade"
+        },
+        {
+          "clcr": "ClCr <30 mL/min",
+          "dose_ajustada": "[A PREENCHER] — bula orienta apenas espaçamento qualitativo (a cada 12-16h) para infecções sistêmicas graves, sem tabela numérica por faixa de ClCr. Consultar nomograma institucional validado (Sanford Guide/Lexicomp) antes de prescrever em disfunção renal significativa, especialmente em doses de meningite (8-14 g/dia)."
+        }
+      ],
+      "alerta": "Mesma limitação de fonte já observada para ampicilina-sulbactam nesta série: ausência de tabela quantitativa de ajuste renal na bula nacional. Risco de convulsão por acúmulo é a principal preocupação clínica em disfunção renal não corrigida, sobretudo em doses altas (meningite)."
+    },
+    "dialise": {
+      "hemodialise": "A ampicilina PODE ser removida por hemodiálise (bula) — considerar dose suplementar pós-sessão em terapia prolongada, embora a bula não especifique esquema numérico exato — [A PREENCHER: dose suplementar pós-HD não detalhada na fonte autorizada].",
+      "dialise_peritoneal": "A ampicilina NÃO é removida por diálise peritoneal (bula) — diferente da hemodiálise, sem necessidade de dose suplementar por esta via.",
+      "crrt": "Bula não traz regime específico para TRS contínua (CRRT) — [A PREENCHER]. Dado o perfil predominantemente renal de eliminação, espera-se impacto relevante da CRRT na depuração; consultar nomograma institucional.",
+      "referencia": "Bula Cilinon® (ampicilina sódica), item 10 — Superdose"
+    },
+    "gestacao_lactacao": {
+      "fda": "B",
+      "gestacao": "Não deve ser utilizada por mulheres grávidas sem orientação médica ou do cirurgião-dentista (bula). Associada a redução na excreção urinária de estrógenos endógenos em gestantes (ver interações — relevância para contracepção hormonal concomitante).",
+      "lactacao": {
+        "classificacao": "Usar com cautela",
+        "observacao": "Pequenas concentrações de ampicilina são detectadas no leite materno. Efeitos para o lactente, caso existam, não são conhecidos. Uso durante a lactação depende de avaliação e acompanhamento médico."
+      },
+      "referencia": "Bula Cilinon® (ampicilina sódica), item 5 — Advertências e Precauções (Gravidez e Lactação)"
+    },
+    "monitorizacao": [
+      "Sinais de hipersensibilidade/anafilaxia — anamnese criteriosa sobre alergia prévia a penicilinas, cefalosporinas ou outros alérgenos antes de iniciar terapia; reações anafiláticas intensas requerem tratamento de emergência com adrenalina, oxigênio, corticosteroides IV e suporte respiratório",
+      "Avaliações periódicas de função renal, hepática e hematopoiética durante tratamentos prolongados",
+      "Sinais de superinfecção por patógenos micóticos ou bacterianos durante uso prolongado",
+      "Sinais neurológicos de irritação do SNC/periférico (confusão, convulsões) em altas doses parenterais, especialmente em disfunção renal — administrar IV lentamente conforme tempo de infusão recomendado",
+      "Eletrólitos séricos (sódio) em pacientes com tendência a hipernatremia, dado o conteúdo de sódio da formulação injetável (29,6 mg de sódio por 500 mg; 59,3 mg por 1000 mg)",
+      "Necessidade de culturas de seguimento ao término do tratamento de infecções estreptocócicas e em infecções crônicas geniturinárias/gastrintestinais",
+      "Sinais de exacerbação de miastenia gravis (reação rara descrita na bula) em pacientes com essa condição de base"
+    ],
+    "efeitos_adversos": [
+      "Comuns (>1/100 e <1/10): cefaleia; estomatite por Candida, náusea, vômito, diarreia; vulvovaginite por Candida",
+      "Incomuns (>1/1.000 e <1/100): hipotensão arterial; erupção cutânea generalizada, prurido, urticária, reações de hipersensibilidade, reações semelhantes à doença do soro; edema por retenção hídrica; dispneia; dor epigástrica",
+      "Raras (>1/10.000 e <1/1.000): trombose venosa, tromboflebite; doença hepática, colite pseudomembranosa; nefrite intersticial, insuficiência renal aguda, cristalúria; NET, eritema multiforme, SSJ; confusão mental, convulsões, febre; hipopotassemia; anemia hemolítica, hipoplasia medular, distúrbio de coagulação, trombocitopenia, agranulocitose, leucopenia, eosinofilia, púrpura trombocitopênica; anafilaxia; exacerbação de miastenia gravis; sintomas no local de aplicação"
+    ],
+    "interacoes": [
+      "Alopurinol — pacientes em uso concomitante parecem predispostos ao desenvolvimento de erupções cutâneas induzidas pela ampicilina",
+      "Contraceptivos orais — ampicilina associada a redução da excreção urinária de estrógenos endógenos em gestantes e a casos isolados de irregularidade menstrual e gravidez não planejada em usuárias de contraceptivo oral",
+      "Probenecida — diminui a excreção das penicilinas, prolongando e aumentando os níveis séricos (mecanismo compartilhado com as demais penicilinas desta série; usado propositalmente em alguns esquemas, ex. gonorreia)",
+      "Aminoglicosídeos — NÃO misturar na mesma seringa nem no mesmo fluido de infusão, pelo risco de inativação física mútua; administrar separadamente",
+      "Interferência laboratorial: falso-resultado (positivo ou negativo) na glicosúria pelo método do sulfato de cobre; não ocorre com o método da glicose-oxidase"
+    ],
+    "contraindicacoes": [
+      "História de reações de hipersensibilidade às penicilinas ou a qualquer componente da formulação",
+      "Hipersensibilidade a cefalosporinas — contraindicado pelo risco de reação alérgica cruzada"
+    ],
+    "preparo_administracao": "Reconstituição: frascos-ampola de 500 mg ou 1000 mg — reconstituir com 3 mL de diluente (água para injetáveis); volume final após reconstituição de 3,4 mL, para ambas as apresentações. Usar agulha de calibre máximo 0,8 mm na reconstituição, perfurando a tampa em posição vertical, no máximo 4 vezes na área marcada, para evitar coring (partículas de borracha). Administração IM: injeção profunda no quadrante superior externo da região glútea; usar imediatamente após reconstituição. Administração IV direta: injetar LENTAMENTE — 3 a 5 minutos para a dose de 500 mg, e 10 a 15 minutos para a dose de 1000 mg; administrações mais rápidas podem causar convulsões. NÃO misturar com aminoglicosídeos na mesma seringa ou fluido de infusão (inativação física mútua). Agulhas recomendadas: 22G-25G (25-38 mm) para IM/SC; 20G-22G (25-30 mm) para IV. Solução reconstituída: límpida, incolor a levemente amarelada, isenta de partículas visíveis — usar imediatamente após reconstituição, não reutilizar frascos abertos. Conservar em temperatura ambiente (15-30°C), protegido da umidade; validade 24 meses a partir da fabricação.",
+    "referencias": [
+      "Bula Cilinon® (ampicilina sódica), pó para solução injetável 500 mg e 1000 mg — Blau Farmacêutica S.A., atualizada conforme Bula Padrão ANVISA em 13/05/2025",
+      "Overturf GD, Steinberg EA, Underman AE, et al. Comparative trial of carbenicillin and ampicillin therapy for purulent meningitis. Antimicrob Agents Chemother. 1977;11(3):420-6 (citado na própria bula — ampicilina equivalente à carbenicilina para meningite bacteriana, com menor positividade de cultura liquórica em D1 no grupo H. influenzae tratado com ampicilina)",
+      "Kabir I, Butler T, Khanam A. Comparative efficacies of single intravenous doses of ceftriaxone and ampicillin for shigellosis in a placebo-controlled trial. Antimicrob Agents Chemother. 1986;29(4):645-8 (citado na própria bula — ampicilina IV em dose única superior à ceftriaxona na eliminação fecal de Shigella sp., embora ambos reduzam duração de febre/evacuações vs. placebo)"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}

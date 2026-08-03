@@ -1,0 +1,180 @@
+{
+  "ciprofloxacino": {
+    "nome": "Cloridrato de Ciprofloxacino (uso intravenoso)",
+    "sinonimos": "Cipro® (referência, Bayer); genéricos Fresenius Kabi, Eurofarma, EMS, Geolab; fluoroquinolona de 2ª geração; código ATC J01MA02",
+    "mecanismo_acao": "Agente antibacteriano quinolônico sintético, bactericida, com amplo espectro de ação contra Gram-positivos e Gram-negativos. Atua por inibição da topoisomerase bacteriana tipo II (DNA-girase) e da topoisomerase IV, enzimas necessárias para replicação, transcrição, reparo e recombinação do DNA bacteriano — mecanismo de classe distinto dos beta-lactâmicos e aminoglicosídeos desta série. Este fármaco NÃO interage com penicilinas, cefalosporinas nem aminoglicosídeos, e microrganismos resistentes a essas classes geralmente não são resistentes ao ciprofloxacino (dado citado na própria bula) — propriedade relevante para escalada terapêutica em multirresistência quando a resistência de origem não envolve mutação de topoisomerase.",
+    "espectro": {
+      "cobertura": [
+        "Gram-negativos aeróbios (alta potência, diferencial central desta ficha frente ao levofloxacino): Pseudomonas aeruginosa, Pseudomonas fluorescens, Escherichia coli, Klebsiella pneumoniae, Klebsiella oxytoca, Enterobacter aerogenes, Enterobacter cloacae, Citrobacter freundii, Serratia marcescens, Proteus mirabilis, Proteus vulgaris, Morganella morganii, Providencia spp., Haemophilus influenzae, Moraxella catarrhalis, Neisseria gonorrhoeae, Shigella spp., Campylobacter spp., Burkholderia cepacia",
+        "Gram-positivos aeróbios: Staphylococcus aureus (isolados sensíveis à meticilina), Staphylococcus saprophyticus, Bacillus anthracis, Enterococcus faecalis (muitas cepas apenas moderadamente sensíveis), Streptococcus pneumoniae (atividade presente, mas NÃO é fármaco de primeira escolha)",
+        "Ativo contra Bacillus anthracis tanto in vitro quanto por marcador sucedâneo de nível sérico — base da indicação em antraz por inalação"
+      ],
+      "sem_atividade": [
+        "Staphylococcus aureus resistente à meticilina (MRSA) e Stenotrophomonas maltophilia — intrinsecamente resistentes (bula)",
+        "Streptococcus pneumoniae — eficácia limitada; ciprofloxacino NÃO é medicamento de primeira escolha para pneumonia pneumocócica ambulatorial (bula)",
+        "Treponema pallidum — sem atividade",
+        "Anaeróbios — cobertura clinicamente insuficiente como monoterapia; bula recomenda associação a antibiótico apropriado em infecções por anaeróbios ou infecções graves por Staphylococcus"
+      ],
+      "observacao": "Diferencial central frente ao levofloxacino (nesta série): o ciprofloxacino é reconhecidamente MAIS POTENTE contra Gram-negativos, especialmente Pseudomonas aeruginosa e Enterobacterales, sendo historicamente a fluoroquinolona de escolha para escalada empírica contra Gram-negativos em UTI/onco-hematologia. Revisão recente (Yadav & Sarker, JAC-Antimicrob Resist 2024) confirma que ciprofloxacino e levofloxacino mostram taxas de resposta reduzidas frente a Gram-negativos com resistência disseminada (E. coli, K. pneumoniae, A. baumannii, P. aeruginosa) por mutações de topoisomerase e superexpressão de bombas de efluxo (AcrA/AcrB), mas MANTÉM potência superior à do levofloxacino nesse cenário. Resistência cruzada dentro da classe das fluoroquinolonas é a regra quando surge por mutação, mas mutações únicas podem apenas reduzir sensibilidade sem produzir resistência clínica plena — a suscetibilidade deve ser sempre confirmada por antibiograma local."
+    },
+    "pkpd": {
+      "tipo": "Bactericida concentração-dependente com componente de AUC/CIM relevante — diferente dos beta-lactâmicos (%T>MIC) e mais próximo do perfil de aminoglicosídeos, embora com meia-vida mais longa que a destes",
+      "alvo_farmacodinamico": "Meta clássica de eficácia contra Gram-negativos: AUC24/CIM ≥125 (infecções graves) e Cmax/CIM ≥8-10. A concentração bactericida mínima (CBM) geralmente não excede a concentração inibitória mínima (CIM) em mais que o dobro (bula) — indicativo de ação bactericida rápida e previsível.",
+      "farmacocinetica_linear": "Linear dentro do intervalo posológico, até 400 mg IV — concentrações séricas máximas médias são atingidas ao final da infusão.",
+      "ligacao_proteica": "Baixa (20-30%) — substância no plasma encontra-se fundamentalmente sob forma não ionizada, o que favorece difusão livre para o espaço extravascular.",
+      "volume_distribuicao": "Grande volume de distribuição no estado de equilíbrio, de 2-3 L/kg de peso corpóreo — penetra amplamente nos tecidos, atingindo concentrações que claramente excedem os valores séricos correspondentes (bula). Concentração sérica máxima média em estado de equilíbrio: 4,56 mcg/mL após 400 mg IV a cada 12h (vs. 2,97 mcg/mL após 500 mg VO a cada 12h) — reforça a maior exposição obtida pela via IV.",
+      "metabolizacao": "4 metabólitos identificados (desetilenociprofloxacino M1, sulfociprofloxacino M2, oxociprofloxacino M3, formilciprofloxacino M4), em pequenas concentrações; M1-M3 têm atividade antibacteriana comparável ou inferior ao ácido nalidíxico, e M4 (o de menor quantidade) tem atividade quase equivalente à do norfloxacino.",
+      "excrecao": "Amplamente excretado sob forma inalterada pelos rins e, em menor extensão, por via extrarrenal — perfil misto, diferente da eliminação predominantemente renal do levofloxacino.",
+      "meia_vida_pediatrica": "Em crianças, a meia-vida média esperada é de aproximadamente 4-5 horas (análise farmacocinética populacional pediátrica); Cmáx e AUC não são dependentes da idade e não aumentam de forma notável com doses múltiplas.",
+      "alerta": "É um inibidor moderado das enzimas do CYP450 1A2 — relevante para múltiplas interações medicamentosas desta ficha (teofilina, tizanidina, cafeína, duloxetina, ropinirol, clozapina, olanzapina). Diferente do levofloxacino, não há necessidade de correlacionar com penetração renal ampliada, pois ambos compartilham perfil predominantemente renal, mas o ciprofloxacino tem via extrarrenal mais expressiva."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Infecções do trato respiratório (dependendo da gravidade e do microrganismo)",
+        "via": "IV",
+        "dose": "200-400 mg a cada 12h"
+      },
+      {
+        "indicacao": "Infecção urinária aguda não complicada",
+        "via": "IV",
+        "dose": "100 mg a cada 12h"
+      },
+      {
+        "indicacao": "Cistite em mulheres pré-menopausa",
+        "via": "IV, dose única",
+        "dose": "100 mg"
+      },
+      {
+        "indicacao": "Infecção urinária complicada",
+        "via": "IV",
+        "dose": "200 mg a cada 12h"
+      },
+      {
+        "indicacao": "Gonorreia extragenital",
+        "via": "IV",
+        "dose": "100 mg a cada 12h"
+      },
+      {
+        "indicacao": "Gonorreia aguda não complicada",
+        "via": "IV, dose única",
+        "dose": "100 mg"
+      },
+      {
+        "indicacao": "Diarreia infecciosa",
+        "via": "IV",
+        "dose": "200 mg a cada 12h"
+      },
+      {
+        "indicacao": "Outras infecções (geral)",
+        "via": "IV",
+        "dose": "200-400 mg a cada 12h"
+      },
+      {
+        "indicacao": "Infecções graves com risco de vida — principalmente por Pseudomonas, Staphylococcus ou Streptococcus; pneumonia estreptocócica; infecções recorrentes em fibrose cística; infecções ósseas/articulares; septicemia; peritonite",
+        "via": "IV",
+        "dose": "400 mg a cada 8h"
+      },
+      {
+        "indicacao": "Antraz por inalação (após exposição), adultos",
+        "via": "IV",
+        "dose": "400 mg a cada 12h, por 60 dias"
+      },
+      {
+        "alerta_idosos": "Pacientes idosos devem receber doses tão reduzidas quanto possível, dependendo da gravidade da doença e da depuração de creatinina (bula)."
+      },
+      {
+        "duracao": "Manter tratamento pelo menos 3 dias após desaparecimento da febre e sintomas clínicos. Durações médias: 1 dia (gonorreia/cistite não complicadas); até 7 dias (infecção renal, trato urinário, cavidade abdominal); todo o período neutropênico em imunocomprometidos; máximo 2 meses (osteomielite); 7-14 dias (demais infecções); mínimo 10 dias (infecções estreptocócicas e por Chlamydia spp., pelo risco de complicações posteriores)."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "indicacao": "Fibrose cística, exacerbação pulmonar aguda por Pseudomonas aeruginosa, 5-17 anos — ÚNICA indicação pediátrica formal da bula, além de antraz",
+        "via": "IV",
+        "dose": "10 mg/kg a cada 8h (dose máxima diária de 1200 mg), por 10-14 dias"
+      },
+      {
+        "indicacao": "Antraz por inalação (após exposição)",
+        "via": "IV",
+        "dose": "10 mg/kg a cada 12h, não excedendo 400 mg por dose (dose diária máxima de 800 mg), por 60 dias"
+      },
+      {
+        "alerta": "Bula reforça que o uso de ciprofloxacino em outras indicações pediátricas fora da fibrose cística e antraz NÃO é recomendado, pelo risco de artropatia em articulações que suportam peso (efeito de classe das fluoroquinolonas em animais imaturos); a experiência clínica em outras indicações pediátricas é limitada."
+      }
+    ],
+    "ajuste_renal": {
+      "tabela": [
+        {"clcr": "ClCr 30-50 mL/min/1,73m² (moderada) ou creatinina sérica 1,4-1,9 mg/100 mL", "dose_ajustada": "Dose máxima diária IV de 800 mg/dia"},
+        {"clcr": "ClCr <30 mL/min/1,73m² (grave) ou creatinina sérica ≥2,0 mg/100 mL", "dose_ajustada": "Dose máxima diária IV de 400 mg/dia"},
+        {"clcr": "Insuficiência renal + hemodiálise, ClCr 30-50", "dose_ajustada": "Dose máxima diária IV de 800 mg/dia"},
+        {"clcr": "Insuficiência renal + hemodiálise, ClCr <30", "dose_ajustada": "Dose máxima diária IV de 400 mg/dia, nos dias de diálise, administrada APÓS o procedimento"},
+        {"clcr": "Insuficiência renal + DPAC (diálise peritoneal ambulatorial contínua)", "dose_ajustada": "Adicionar ciprofloxacino ao dialisado (via intraperitoneal): 50 mg/litro de dialisado, 4x/dia, a cada 6h"}
+      ],
+      "hepatica": "Não há necessidade de ajuste de dose em insuficiência hepática isolada (bula) — diferencial relevante frente a outros fármacos desta série; em insuficiência renal E hepática combinadas, aplicar a mesma tabela de ajuste renal isolado.",
+      "alerta": "Tabela de ajuste renal da bula nacional é uma das mais completas e quantitativas desta série de fichas, incluindo esquema específico para DPAC — superior em detalhamento à disponibilidade encontrada para aminoglicosídeos e várias penicilinas já documentadas."
+    },
+    "dialise": {
+      "hemodialise": "Apenas pequena quantidade (menos de 10%) do ciprofloxacino é eliminada por hemodiálise (bula) — remoção clinicamente pouco relevante; ainda assim, a bula orienta administrar a dose máxima ajustada (400 ou 800 mg/dia conforme função renal basal) APÓS a sessão de HD, nos dias de diálise.",
+      "dialise_peritoneal": "Também removido em pequena quantidade (<10%) por diálise peritoneal convencional (bula). Para pacientes em DPAC, esquema específico de adição ao dialisado está descrito (ver ajuste_renal) — abordagem diferente da hemodiálise intermitente.",
+      "crrt": "Bula não traz regime específico para TRS contínua (CRRT) — [A PREENCHER]. Dado o perfil de eliminação misto (renal + extrarrenal), o impacto da CRRT tende a ser menor que em fármacos de eliminação exclusivamente renal (ex. aminoglicosídeos, ampicilina); ainda assim, recomenda-se nomograma institucional validado.",
+      "referencia": "Bula Ciprofloxacino Fresenius Kabi/Eurofarma, item 10 — Superdose; item 8 — Posologia (Insuficiência Renal e Hepática)"
+    },
+    "gestacao_lactacao": {
+      "fda": "C — bula reforça: não usar em gestantes sem orientação médica",
+      "gestacao": "Dados disponíveis do uso em gestantes NÃO indicam malformação nem toxicidade fetal/neonatal; estudos em animais não indicaram toxicidade reprodutiva nem efeitos teratogênicos. Contudo, com base em estudos animais, não se pode excluir dano à cartilagem articular no organismo fetal imaturo — por isso o uso NÃO é recomendado durante a gravidez, apesar da ausência de sinal de malformação.",
+      "lactacao": {
+        "classificacao": "Não recomendado",
+        "observacao": "Ciprofloxacino é excretado no leite materno. Devido ao potencial risco de dano articular ao lactente (mesmo mecanismo de classe da artropatia fetal), o uso NÃO é recomendado durante a amamentação — postura mais restritiva que a de outros beta-lactâmicos desta série."
+      },
+      "referencia": "Bula Ciprofloxacino, item 5 — Advertências e Precauções (Gravidez e Lactação)"
+    },
+    "monitorizacao": [
+      "Intervalo QT/ECG em pacientes com fatores de risco (síndrome de QT longo congênito, distúrbio eletrolítico não corrigido, hipocalemia/hipomagnesemia, insuficiência cardíaca, infarto do miocárdio, bradicardia) — mulheres e idosos podem ser mais sensíveis ao prolongamento de QTc",
+      "Sinais de tendinite/ruptura de tendão (predominantemente Aquiles) — pode ocorrer já nas primeiras 48h de tratamento ou meses após a suspensão; risco aumentado em idosos e em uso concomitante de corticosteroides; suspender ao primeiro sinal (distensão dolorosa, inflamação) e manter repouso da extremidade",
+      "Sinais neuropsiquiátricos — confusão, ansiedade, alucinações, depressão, ideação suicida; podem ocorrer após a primeira dose; descontinuar imediatamente se surgirem",
+      "Sinais de neuropatia periférica (dor, queimação, formigamento, dormência, fraqueza) — orientar paciente a comunicar precocemente",
+      "Limiar convulsivo — cautela extrema em epilepsia, redução do fluxo sanguíneo cerebral, lesão cerebral ou AVC prévio; risco de estado de mal epiléptico relatado",
+      "Função renal, hepática e hematopoiética em tratamentos prolongados; sinais de hepatite/necrose hepática (anorexia, icterícia, urina escura, prurido)",
+      "Fotossensibilidade — orientar paciente a evitar exposição solar direta/UV; descontinuar se surgir reação tipo queimadura solar",
+      "Reações no local de infusão (mais frequentes com tempo de infusão ≤30 min) — não contraindica readministração, salvo reação recorrente ou agravada",
+      "Glicemia em diabéticos, especialmente em uso concomitante de hipoglicemiante oral ou insulina — risco de disglicemia grave (hipo ou hiperglicemia)",
+      "INR/tempo de protrombina em uso concomitante de antagonistas de vitamina K",
+      "Sinais súbitos de dor abdominal, torácica ou nas costas — risco aumentado de aneurisma/dissecção de aorta, especialmente em idosos ou com fatores de risco vascular predisponentes"
+    ],
+    "efeitos_adversos": [
+      "Comuns: náusea, diarreia; reação no local da injeção",
+      "Incomuns: eosinofilia; apetite/ingestão alimentar diminuídos; hiperatividade psicomotora/agitação; cefaleia, tontura, distúrbios do sono, alterações do paladar; vômito, dores gastrintestinais/abdominais, dispepsia, flatulência; exantema, prurido, urticária; artralgia; disfunção renal; aumento de transaminases/bilirrubina; dor inespecífica, mal-estar, febre; aumento de fosfatase alcalina",
+      "Raras: leucopenia, anemia, neutropenia, leucocitose, trombocitopenia, plaquetose; reação alérgica, edema alérgico/angioedema; hiperglicemia, hipoglicemia; confusão, desorientação, ansiedade, depressão (podendo culminar em ideação/comportamento suicida), alucinações; parestesia, disestesia, hipoestesia, tremores, convulsões (incluindo estado epilético), vertigem; distúrbios visuais; zumbido, perda de audição; taquicardia; vasodilatação, hipotensão, síncope; dispneia; disfunção hepática, icterícia, hepatite não infecciosa; fotossensibilidade, vesículas; mialgia, artrite, aumento do tônus muscular, cãibras; insuficiência renal, hematúria, cristalúria, nefrite túbulo-intersticial; edema, sudorese; nível anormal de protrombina, aumento de amilase",
+      "Muito raras: anemia hemolítica, agranulocitose, pancitopenia (risco de vida), depressão medular (risco de vida); reação anafilática, choque anafilático (risco de vida), doença do soro; reações psicóticas (podendo culminar em suicídio); enxaqueca, distúrbios de coordenação/olfato, hiperestesia, hipertensão intracraniana; distorção visual de cores; alteração da audição; QT prolongado, arritmia ventricular, Torsades de Pointes (frequência desconhecida); vasculite; pancreatite; necrose hepática (podendo evoluir para insuficiência hepática fatal); petéquias, eritema multiforme/nodoso, SSJ, NET; PEGA (frequência desconhecida); fraqueza muscular, tendinite, ruptura de tendão, exacerbação de miastenia grave; alteração da marcha",
+      "Frequência desconhecida: neuropatia periférica, polineuropatia; aumento de INR (com antagonistas de vitamina K)"
+    ],
+    "interacoes": [
+      "Tizanidina — CONTRAINDICADA (bula): aumento de até 7x na Cmax e 10x na AUC da tizanidina, com potencialização de efeito hipotensivo e sedativo",
+      "Medicamentos que prolongam QT (antiarrítmicos classe IA/III, antidepressivos tricíclicos, macrolídeos, antipsicóticos) — usar com cautela extrema, risco aditivo de Torsades de Pointes",
+      "Probenecida — interfere na secreção renal do ciprofloxacino, aumentando sua concentração sérica",
+      "Teofilina e outros derivados de xantina (cafeína, pentoxifilina) — ciprofloxacino é inibidor moderado do CYP450 1A2; pode elevar níveis séricos de teofilina a ponto de causar efeitos indesejáveis potencialmente fatais; monitorar e ajustar dose",
+      "Fenitoína — nível sérico alterado (aumentado ou diminuído); monitorar cuidadosamente durante e após coadministração",
+      "Metotrexato — inibição do transporte tubular renal, com possível aumento de níveis plasmáticos e risco de toxicidade; monitorar cuidadosamente",
+      "AINEs (exceto AAS) — associação com altas doses de quinolona pode provocar convulsões (dados em animais)",
+      "Ciclosporina — aumento transitório de creatinina sérica; monitorar 2x/semana",
+      "Antagonistas de vitamina K (varfarina, acenocumarol) — pode aumentar efeito anticoagulante; monitorar INR frequentemente",
+      "Antidiabéticos orais (sulfonilureias) — risco de hipoglicemia por potencialização do efeito hipoglicemiante",
+      "Duloxetina, ropinirol, clozapina, olanzapina, lidocaína, sildenafila — aumento de concentração sérica por inibição do CYP450 1A2/outras vias; monitorar efeitos adversos e ajustar dose conforme necessário",
+      "Interferência em cultura de Mycobacterium tuberculosis — pode causar resultado falso-negativo por supressão do crescimento micobacteriano"
+    ],
+    "contraindicacoes": [
+      "Hipersensibilidade ao ciprofloxacino, a outro derivado quinolônico ou a qualquer componente da fórmula",
+      "Administração concomitante com tizanidina — contraindicação explícita de bula"
+    ],
+    "preparo_administracao": "Administrar por via IV, por no mínimo 60 minutos, em infusão LENTA, em veia de grande calibre, para minimizar desconforto e reduzir risco de irritação venosa. Usar apenas solução límpida — pela fotossensibilidade, retirar o frasco da embalagem externa somente no momento do uso. Evitar refrigeração (pode causar precipitação, que se redissolve em temperatura ambiente). Solução límpida, incolor a levemente amarelada, isenta de partículas; pH 3,5-4,6; isenta de PVC e látex. NÃO pré-misturar com aminoglicosídeos, penicilinas ou cefalosporinas na mesma solução — administrar separadamente, embora não haja interação farmacológica relevante entre essas classes quando administradas por vias distintas. Terapia sequencial IV→VO é possível assim que clinicamente indicado. Conservar em temperatura ambiente (15-30°C); validade 24 meses a partir da fabricação.",
+    "referencias": [
+      "Bula Ciprofloxacino Solução Injetável 2 mg/mL — Fresenius Kabi Brasil Ltda., Registro ANVISA 1.0041.0153",
+      "Bula Ciprofloxacino Solução para Infusão — Eurofarma Laboratórios S.A., atualizada conforme Bula Padrão ANVISA em 27/02/2026",
+      "Schonwald S, et al. Ciprofloxacin in the treatment of severe meningitis (200 mg IV a cada 12h por 12 dias, taxa de cura 90%) — citado na própria bula",
+      "Gallis HA, et al. Comparative trial ciprofloxacino vs. ceftazidima em infecções diversas — citado na própria bula",
+      "Yadav K, Sarker A, et al. Navigating fluoroquinolone resistance in Gram-negative bacteria: a comprehensive evaluation. JAC-Antimicrob Resist. 2024;6(4):dlae127 — mecanismos de resistência (bombas de efluxo AcrA/AcrB, mutações gyrA/parC) e comparação de eficácia ciprofloxacino vs. levofloxacino vs. carbapenêmicos em Gram-negativos multirresistentes",
+      "Salam M, Jeffres MN. Efficacy of Levofloxacin for Levofloxacin-Susceptible, Ciprofloxacin-Nonsusceptible Enterobacterales. Open Forum Infect Dis. 2026;ofaf695.1519 — discordância de sensibilidade entre as duas fluoroquinolonas em Enterobacterales, com implicação direta para escolha entre os dois fármacos desta série"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}

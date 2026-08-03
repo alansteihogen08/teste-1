@@ -1,0 +1,112 @@
+{
+  "claritromicina": {
+    "nome": "Claritromicina (uso intravenoso — Klaricid I.V., pó liofilizado para solução injetável)",
+    "sinonimos": "Klaricid® I.V. (referência, Abbott); macrolídeo semissintético (14-hidroxi-eritromicina, derivado metoxi da eritromicina A); código ATC J01FA09",
+    "mecanismo_acao": "Antibiótico macrolídeo semissintético, mecanismo de ação IDÊNTICO ao da azitromicina já documentada nesta série: exerce ação antibacteriana por inibição da síntese proteica bacteriana, ligando-se à subunidade ribossômica 50S e bloqueando a etapa de transpeptidação/translocação. Diferente da azitromicina (azalídeo, com nitrogênio inserido no anel lactônico), a claritromicina é um macrolídeo CLÁSSICO obtido pela metoxilação da eritromicina A na posição 6, o que confere maior estabilidade em meio ácido que a eritromicina original, mas MENOR meia-vida tecidual e MAIOR potencial de interação medicamentosa via CYP450 3A4 que a azitromicina — diferenciais farmacocinéticos centrais desta ficha frente à anterior.",
+    "espectro": {
+      "cobertura": [
+        "Vias respiratórias superiores e inferiores: faringite, sinusite, bronquite, pneumonia — causadas por todos os microrganismos sensíveis à claritromicina (bula, indicação ampla e pouco detalhada por espécie na peça consultada)",
+        "Pele e tecidos moles: foliculite, celulite, erisipela",
+        "Micobactérias: infecções disseminadas ou localizadas causadas por Mycobacterium avium ou Mycobacterium intracellulare (complexo MAC — indicação de destaque, compartilhada com a claritromicina oral em profilaxia/tratamento em pacientes HIV+/imunocomprometidos); infecções localizadas por Mycobacterium chelonae, Mycobacterium fortuitum ou Mycobacterium kansasii",
+        "Helicobacter pylori — indicação consagrada da forma ORAL (terapia de erradicação, não abordada nesta ficha específica de formulação IV)",
+        "Espectro geral de Gram-positivos e atípicos comparável ao da azitromicina (Streptococcus, Staphylococcus sensível à meticilina, Mycoplasma, Chlamydia, Legionella)"
+      ],
+      "sem_atividade": [
+        "Enterobacterales e Pseudomonas aeruginosa — sem cobertura clinicamente confiável, mesma limitação de classe da azitromicina frente aos Gram-negativos 'clássicos' já documentados nesta série",
+        "MRSA e Enterococcus spp. — sem cobertura confiável"
+      ],
+      "observacao": "Diferencial frente à azitromicina (mesma classe, ficha anterior desta série): a bula nacional de Klaricid® I.V. tem indicações formais MAIS AMPLAS e menos detalhadas por patógeno específico que a bula de azitromicina IV (que restringe a via IV a apenas 2 indicações formais: PAC com suspeita de Legionella e DIP). A claritromicina IV inclui explicitamente a indicação para infecções micobacterianas (MAC e outras micobactérias não-tuberculosas), papel não compartilhado pela azitromicina IV nesta série. Em contrapartida, a claritromicina tem MAIOR potencial de interação medicamentosa (CYP450 3A4) e exige ajuste renal explícito (ausente na bula de azitromicina) — tornando a escolha entre as duas dependente não apenas do espectro, mas do perfil de comorbidade/polifarmácia do paciente."
+    },
+    "pkpd": {
+      "tipo": "Predominantemente bacteriostático, podendo ser bactericida contra certos patógenos em altas concentrações — mesmo perfil farmacodinâmico geral da classe macrolídeo/azalídeo já discutido para azitromicina",
+      "concentracao_reconstituida": "Cada mL do produto reconstituído contém 50 mg de claritromicina IV (bula) — menor concentração por mL que a azitromicina reconstituída (100 mg/mL), refletindo diferença de formulação/excipiente (ácido lactobiônico como agente solubilizante na claritromicina).",
+      "metabolizacao": "Extensa metabolização hepática pelo sistema CYP450, PRINCIPALMENTE pela isoenzima 3A4 — diferencial farmacocinético central frente à azitromicina (que tem menor metabolização por essa via). Essa metabolização extensa é a base fisiopatológica do grande número de interações medicamentosas clinicamente relevantes desta ficha (ver interações), sendo a claritromicina um INIBIDOR POTENTE do CYP450 3A4, comparável em intensidade a outros inibidores potentes desta via.",
+      "eletrofisiologia_cardiaca": "Mesma classe de risco de prolongamento de QT/Torsades de Pointes já discutida para a azitromicina (mecanismo de bloqueio de canais de potássio cardíacos, efeito de classe dos macrolídeos) — bula reforça contraindicação explícita em pacientes com histórico de prolongamento de QT ou arritmia ventricular, incluindo Torsades de Pointes, E em hipocalemia (risco potencializado por esse distúrbio eletrolítico).",
+      "excrecao": "Diferente da azitromicina (predominantemente biliar/fecal), a claritromicina e seu principal metabólito ativo (14-hidroxi-claritromicina) têm eliminação com componente RENAL relevante — perfil misto que exige ajuste de dose em disfunção renal significativa, ao contrário da azitromicina.",
+      "alerta": "A combinação de metabolização hepática extensa (CYP450 3A4) COM eliminação renal relevante do metabólito ativo torna a claritromicina um fármaco de maior complexidade de manejo em polifarmácia e em disfunção de múltiplos órgãos — cenário comum no paciente onco-hematológico crítico do HFSE — exigindo revisão cuidadosa de interações antes de cada prescrição, mais do que a azitromicina."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Todas as indicações formais da via IV (infecções respiratórias, pele/tecidos moles, micobacterianas) — dose única de bula, sem distinção numérica por indicação",
+        "via": "IV, infusão ≥60 min",
+        "dose": "1 grama ao dia, dividido em 2 doses iguais (500 mg a cada 12h), infundidas gota a gota através de solução IV, durante pelo menos 60 minutos, após diluição prévia adequada"
+      },
+      {
+        "dose_maxima": "A dose diária máxima do medicamento é de 1 g (bula) — teto explícito, diferente da flexibilidade de dose vista em outros fármacos desta série."
+      },
+      {
+        "alerta_administracao": "Klaricid I.V. NÃO deve ser administrado em bolus nem por via intramuscular — administrar SOMENTE por infusão intravenosa lenta, mesma regra de segurança já estabelecida para vancomicina, azitromicina e outros fármacos desta série com risco de reação relacionada à infusão rápida."
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "alerta": "Até o momento, NÃO há dados que suportem o uso de Klaricid I.V. em pacientes pediátricos (bula) — mesma limitação já observada para a azitromicina IV nesta série; a formulação IV de ambos os macrolídeos documentados aqui é reservada para uso adulto."
+      },
+      {
+        "alerta_imunocomprometidos": "Embora não haja informações específicas sobre uso de claritromicina IV em pacientes imunocomprometidos, há estudos sobre uso de claritromicina ORAL em pacientes com HIV/infecção micobacteriana (bula) — relevante para extrapolação cautelosa ao contexto onco-hematológico, mas sem dado direto para a via IV."
+      }
+    ],
+    "ajuste_renal": {
+      "alerta_bula": "Bula consultada recomenda PRECAUÇÃO em pacientes com insuficiência renal SEVERA — mas, assim como observado para outros fármacos desta série (ampicilina-sulbactam, vancomicina), NÃO fornece tabela numérica quantitativa por faixa de ClCr na peça específica de Klaricid I.V. consultada. [A PREENCHER: para uso institucional, a literatura internacional de claritromicina oral (mesma molécula) recomenda tipicamente redução de 50% da dose ou aumento do intervalo em ClCr <30 mL/min — extrapolar com cautela para a via IV e confirmar com bula completa/farmacêutico clínico antes de aplicar ao protocolo institucional].",
+      "alerta": "Diferencial claro frente à azitromicina (que dispensa ajuste renal na maioria dos cenários, TFG 10-80 mL/min): a claritromicina tem eliminação com componente renal relevante do metabólito ativo, exigindo essa cautela adicional — ponto de atenção direta para escolha entre as duas em paciente com função renal comprometida."
+    },
+    "dialise": {
+      "hemodialise": "Bula consultada não fornece dado quantitativo específico sobre remoção por hemodiálise para a formulação IV — [A PREENCHER]. Dado o componente de eliminação renal do metabólito ativo (14-hidroxi-claritromicina), diferente da azitromicina, é plausível esperar alguma remoção por HD, mas sem confirmação quantitativa na fonte consultada; consultar farmacocinética específica da molécula antes de definir esquema de reposição pós-sessão.",
+      "dialise_peritoneal": "Não detalhada na bula consultada — [A PREENCHER].",
+      "crrt": "Bula não traz regime específico para TRS contínua — [A PREENCHER]. Dado o componente renal de eliminação (diferente da azitromicina), a CRRT pode ter impacto mais relevante sobre a farmacocinética da claritromicina do que sobre a azitromicina — consultar nomograma/farmacêutico clínico institucional.",
+      "referencia": "Bula Klaricid® I.V. (Abbott), item 8 — Posologia (Precauções em Insuficiência Renal Severa)"
+    },
+    "gestacao_lactacao": {
+      "fda": "Bula nacional não especifica categoria numérica na peça consultada; literatura internacional histórica classificava como categoria C (dados de estudos animais mostraram achados adversos em algumas espécies, diferente do perfil mais tranquilizador da azitromicina já documentado nesta série)",
+      "gestacao": "Bula consultada não detalha dados extensos de segurança gestacional para a formulação IV especificamente — [A PREENCHER: literatura internacional recomenda evitar claritromicina na gestação quando alternativa mais estudada (ex. azitromicina) estiver disponível, dado perfil de dados humanos mais robusto para esta última].",
+      "lactacao": {
+        "classificacao": "Cautela",
+        "observacao": "Bula não detalha dados quantitativos de excreção em leite materno na peça de Klaricid I.V. consultada — avaliação individualizada de risco-benefício, preferindo azitromicina quando ambas forem clinicamente equivalentes para a indicação."
+      },
+      "referencia": "Bula Klaricid® I.V., item 5 — Advertências e Precauções"
+    },
+    "monitorizacao": [
+      "Intervalo QT/ECG — CONTRAINDICADO em histórico de prolongamento de QT ou arritmia ventricular (incluindo Torsades de Pointes) e em hipocalemia; monitorar eletrólitos (potássio, magnésio) antes e durante o tratamento em pacientes de risco",
+      "Função hepática — disfunção hepática, incluindo aumento de enzimas hepáticas e hepatite colestática e/ou hepatocelular, com ou sem icterícia, tem sido relatada; casos de transaminases intensamente anormais associados a contagem anormalmente baixa de plaquetas e leucócitos foram descritos na bula da suspensão pediátrica (extrapolável como alerta de classe/molécula)",
+      "Hemograma completo — trombocitopenia e leucopenia descritas (ver acima), relevante para monitorização redobrada no paciente onco-hematológico já em risco basal de citopenias",
+      "Revisão CRITERIOSA de todas as medicações concomitantes antes de cada prescrição — dado o extenso perfil de interação via CYP450 3A4 (ver interações), esta é a etapa de monitorização mais crítica desta ficha, mais relevante aqui que em qualquer outro fármaco desta série",
+      "Sinais de miopatia/rabdomiólise em uso concomitante de estatinas metabolizadas por CYP3A4 (sinvastatina, lovastatina — ver interações)",
+      "Sinais de hipoglicemia em uso concomitante de antidiabéticos (mecanismo de interação por inibição do CYP450)"
+    ],
+    "efeitos_adversos": [
+      "Cardiovascular: prolongamento de QTc, arritmias ventriculares (incluindo Torsades de Pointes) — mesmo alerta de classe da azitromicina, com contraindicação explícita mais forte na bula deste produto",
+      "Hepático: aumento de enzimas hepáticas, hepatite colestática e/ou hepatocelular, com ou sem icterícia",
+      "Hematológico: trombocitopenia, leucopenia (descritas em uso de altas doses, conforme bula da suspensão pediátrica, extrapolável como alerta de molécula)",
+      "Gastrintestinal: mesmo perfil de classe dos macrolídeos (náusea, diarreia, dor abdominal), historicamente melhor tolerado que a eritromicina, mas potencialmente mais frequente que com a azitromicina",
+      "Local de administração: dor/irritação no local da infusão IV, mais provável se administrada rapidamente ou pouco diluída"
+    ],
+    "interacoes": [
+      "Astemizol, cisaprida, pimozida, terfenadina — CONTRAINDICAÇÃO ABSOLUTA (bula): risco de arritmias cardíacas graves por inibição do metabolismo desses fármacos via CYP450 3A4, com prolongamento de QT",
+      "Ergotamina/derivados do ergot — CONTRAINDICADO, mesmo alerta de classe já citado para azitromicina, mas com risco farmacocinético adicional pela inibição do CYP450 3A4 (ergotismo agudo potencializado)",
+      "Rifabutina — administração concomitante resulta em AUMENTO dos níveis de rifabutina e DIMINUIÇÃO dos níveis séricos de claritromicina (interação bidirecional, citada explicitamente na bula)",
+      "Benzodiazepínicos (alprazolam, midazolam, triazolam) — quando midazolam é coadministrado (via oral ou IV) com claritromicina, há potencialização significativa do efeito sedativo/depressor respiratório por inibição do CYP450 3A4; ajustar dose ou evitar associação",
+      "Saquinavir — NÃO é necessário ajuste de dose quando os dois medicamentos são coadministrados por período limitado; ATENÇÃO especial quando saquinavir é coadministrado COM ritonavir, pelos potenciais efeitos do ritonavir na terapia com claritromicina (interação tripla)",
+      "Estatinas metabolizadas por CYP3A4 (sinvastatina, lovastatina) — risco AUMENTADO de miopatia/rabdomiólise por elevação dos níveis da estatina; evitar associação ou suspender temporariamente a estatina durante o tratamento",
+      "Varfarina — potencialização do efeito anticoagulante mais pronunciada que com azitromicina (maior interação CYP450); monitorar INR de perto",
+      "Antidiabéticos orais e insulina — risco de HIPOGLICEMIA por inibição do metabolismo desses fármacos",
+      "Teofilina, carbamazepina, fenitoína, ciclosporina, tacrolimo — todos com potencial de AUMENTO de níveis séricos por inibição do CYP450 3A4; monitorar níveis/toxicidade quando aplicável",
+      "Colchicina — risco de toxicidade grave por colchicina (incluindo casos fatais descritos na literatura internacional, especialmente em disfunção renal concomitante) por inibição do CYP3A4/P-glicoproteína; evitar associação, especialmente em idosos ou insuficiência renal"
+    ],
+    "contraindicacoes": [
+      "Hipersensibilidade conhecida a antibióticos macrolídeos ou a qualquer componente da fórmula",
+      "Uso concomitante com astemizol, cisaprida, pimozida, terfenadina — contraindicação absoluta de bula",
+      "Histórico de prolongamento de intervalo QT ou arritmia ventricular cardíaca, incluindo Torsades de Pointes",
+      "Hipocalemia — contraindicação explícita, diferente do alerta mais geral (não contraindicação formal) associado à azitromicina nesta série"
+    ],
+    "preparo_administracao": "Reconstituição: usar SOMENTE água estéril para injeção — outros diluentes podem causar PRECIPITAÇÃO durante a reconstituição; NÃO usar água destilada nem diluentes contendo conservantes ou sais inorgânicos. Quando reconstituído como indicado, a solução resultante contém um conservante antimicrobiano ativo, e cada mL do produto reconstituído contém 50 mg de claritromicina IV — agitar até completa solubilização. Estabilidade do produto reconstituído: 48 horas a 5°C ou 24 horas a 25°C (do ponto de vista químico/físico); do ponto de vista microbiológico, usar IMEDIATAMENTE. Administração: infundir gota a gota através de solução IV, durante NO MÍNIMO 60 minutos, após diluição adequada em veia de grande calibre — NÃO administrar em bolus nem por via IM. Solução reconstituída: límpida, livre de partículas — inspecionar visualmente antes do uso; produto liofilizado é branco a quase branco, com odor leve aromático.",
+    "referencias": [
+      "Bula Klaricid® I.V. (claritromicina) Pó Liofilizado para Solução Injetável 500 mg — Abbott Laboratórios do Brasil Ltda., versão profissional de saúde (BU 07/BU 18)",
+      "Bula Klaricid® suspensão pediátrica — Abbott Laboratórios do Brasil Ltda. (referência para alerta hematológico/hepático de altas doses, aprovada pela ANVISA em 28/03/2013)",
+      "van Heeckeren AM, et al. (citado em revisões sobre segurança de macrolídeos IV em terapia intensiva) — perfil comparativo de eventos cardiovasculares entre macrolídeos",
+      "Jain H, Marsool MDM, Abbasi HQ, et al. Association Between Fluoroquinolones and Major Adverse Cardiovascular Events: A Systematic Review. Cardiology in Review. 2024 (contexto comparativo de risco cardiovascular entre classes de antimicrobianos, incluindo macrolídeos)",
+      "Farmakis I, Minopoulou I, Giannakoulas G, Boutou A. Cardiotoxicity of Azithromycin in COVID-19: An Overall Proportion Meta-Analysis. Adv Respir Med. 2022 (referência comparativa de classe, aplicável ao entendimento do risco compartilhado de macrolídeos)"
+    ],
+    "ultima_atualizacao": "04/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}

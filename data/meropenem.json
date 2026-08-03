@@ -1,0 +1,186 @@
+{
+  "meropenem": {
+    "nome": "Meropeném (tri-hidratado)",
+    "sinonimos": "Meronem® I.V. (referência, Pfizer); carbapenêmico",
+    "mecanismo_acao": "Carbapenêmico bactericida por inibição da síntese da parede celular bacteriana via ligação a múltiplas PBPs. Estável à hidrólise pela deidropeptidase-I humana (DHP-I), diferente do imipeném — não requer coadministração de inibidor de DHP-I. Alto nível de estabilidade frente à maioria das serinas-betalactamases, incluindo cepas produtoras de ESBL, o que amplia seu espectro em comparação a cefalosporinas de 3ª/4ª geração. Resistência bacteriana decorre de redução de porinas, alteração de PBPs-alvo, bombas de efluxo ou produção de carbapenemases.",
+    "espectro": {
+      "cobertura": [
+        "Gram-positivos: Staphylococcus aureus (MSSA), S. epidermidis (meticilino-sensível), Streptococcus agalactiae, grupo S. milleri, S. pneumoniae, S. pyogenes, Enterococcus faecalis (suscetibilidade intermediária possível)",
+        "Gram-negativos: Citrobacter freundii/koseri, Enterobacter aerogenes/cloacae, E. coli, Haemophilus influenzae, Klebsiella oxytoca/pneumoniae, Morganella morganii, Neisseria meningitidis, Proteus mirabilis/vulgaris, Serratia marcescens",
+        "Anaeróbios Gram-positivos: Clostridium perfringens, Peptoniphilus asaccharolyticus, Peptostreptococcus spp.",
+        "Anaeróbios Gram-negativos: Bacteroides caccae/fragilis, Prevotella bivia/disiens",
+        "Pseudomonas aeruginosa e Acinetobacter spp. — cobertura relevante, porém resistência adquirida é preocupação frequente (CTI-DIP); testes de suscetibilidade regulares recomendados"
+      ],
+      "sem_atividade": [
+        "MRSA e estafilococos meticilino-resistentes — resistência de classe",
+        "Enterococcus faecium — suscetibilidade intermediária natural, resistência adquirida frequente",
+        "Stenotrophomonas maltophilia, Legionella spp. — resistência intrínseca",
+        "Chlamydophila spp., Coxiella burnetii, Mycoplasma pneumoniae — resistência intrínseca (ausência de parede celular/estrutura-alvo)",
+        "Burkholderia cepacia — resistência adquirida frequente"
+      ],
+      "observacao": "Diferencial frente a ceftriaxona/cefepima: meropeném cobre de forma confiável Pseudomonas aeruginosa e produtores de ESBL, sendo droga de escolha para escalada empírica em sepse grave/neutropenia febril no CTI-DIP e onco-hematologia. Indicado também para meningite bacteriana e infecções polimicrobianas graves (cobertura anaeróbia integrada, sem necessidade de metronidazol associado)."
+    },
+    "pkpd": {
+      "tipo": "Bactericida tempo-dependente (carbapenêmico) — eficácia correlaciona com %T>MIC (tempo de concentração livre acima da CIM)",
+      "alvo_farmacodinamico": "40% T>MIC é o alvo clássico bacteriostático/eficácia básica (modelos murinos); 100% T>MIC é o alvo recomendado para pacientes críticos com farmacocinética alterada (Guilhaumou 2019; Abdul-Aziz 2020). Alvos mais agressivos (40% e 100% T>4xMIC) aceleram a morte bacteriana e suprimem emergência de resistência, sendo especialmente relevantes para patógenos com CIM elevada ou pacientes graves. Estudo retrospectivo em 205 pacientes críticos (Liao et al. 2026) identificou Cmin ≥5,3 mg/L e Cmax ≥39,4 mg/L como preditores independentes de eficácia clínica (AUC Cmin 0,63); para infecção de corrente sanguínea, os limiares sobem para Cmin ≥7,3 mg/L e Cmax ≥49,1 mg/L.",
+      "vale_alvo": "Toxicidade dose-dependente: risco de neurotoxicidade com Cmin >64,2 mg/L e de nefrotoxicidade com Cmin >44,5 mg/L (Imani 2017, citado em Peng et al. 2022). Nenhum desses limiares consta em bula — extrapolação de estudos de TDM retrospectivos.",
+      "meia_vida": "Aproximadamente 1 hora em adultos saudáveis com função renal normal; sem acúmulo com doses repetidas a cada 8h em função renal normal. Prolongada em neonatos (meia-vida média 2,9h) e proporcionalmente ao grau de disfunção renal — aumento de até 10x da AUC em pacientes anúricos/hemodiálise. Em CRRT (Peng et al. 2022), clearance endógeno não-trauma de 3,03 L/h (vs. 15,5 L/h em saudáveis), fortemente reduzido pela AKI subjacente; pacientes trauma apresentam clearance endógeno ~20x maior (ARC).",
+      "ligacao_proteica": "~2%, independente da concentração — ligação proteica desprezível, praticamente toda a droga circula na forma livre (diferente de ceftriaxona, que satura ~95% de ligação).",
+      "volume_distribuicao": "~0,25 L/kg (bula) em voluntários sadios; até 27 L em infecção intra-abdominal pós-cirúrgica (maior Vd por capillary leak). Em pacientes críticos em CRRT, Vd total ~28,8 L (19,6–35,2 L), cerca de 34% maior que em saudáveis, atribuído a síndrome de extravasamento capilar e sobrecarga hídrica de tratamento. Boa penetração tecidual: pulmões, secreções brônquicas, bile, líquor (~20% do nível plasmático em meningite), tecidos ginecológicos, pele, fáscia, músculo, exsudato peritoneal.",
+      "metabolizacao": "Hidrólise do anel beta-lactâmico gerando metabólito microbiologicamente inativo; suscetibilidade reduzida à DHP-I comparado ao imipeném, dispensando coadministração de inibidor.",
+      "excrecao": "Primariamente renal e inalterada: 50-75% excretada inalterada na urina em 12h; >28% recuperado como metabólito inativo. Eliminação fecal apenas ~2%. Sofre filtração glomerular E secreção tubular ativa (interação com probenecida). Hemodiálise remove meropeném com clearance ~4x maior que em pacientes anúricos — necessária redose pós-HD.",
+      "alerta": "Ajuste renal obrigatório a partir de ClCr <51 mL/min (diferente de ceftriaxona). Em CRRT, contribuição da CLCRRT ao clearance total é de ~34% em pacientes não-trauma — dose deve considerar tanto clearance endógeno residual quanto extracorpóreo. Risco de convulsões aumentado em disfunção renal não ajustada, lesões de SNC ou meningite bacteriana."
+    },
+    "dose_adulto": [
+      {
+        "indicacao": "Infecções gerais (respiratórias, ITU complicada, intra-abdominal, ginecológica, pele/anexos, septicemia) — dose usual (bula)",
+        "via": "IV (bolus ~5 min ou infusão 15-30 min)",
+        "dose": "500 mg a 1 g a cada 8h; faixa total 1,5-6,0 g/dia dividido em 3 doses"
+      },
+      {
+        "indicacao": "Febre em paciente neutropênico (bula)",
+        "via": "IV",
+        "dose": "1 g a cada 8h"
+      },
+      {
+        "indicacao": "Meningite / fibrose cística (bula)",
+        "via": "IV",
+        "dose": "2 g a cada 8h"
+      },
+      {
+        "indicacao": "Infecção confirmada/suspeita por Pseudomonas aeruginosa (bula)",
+        "via": "IV",
+        "dose": "Mínimo 1 g a cada 8h (dose máxima aprovada 6 g/dia); testes de suscetibilidade regulares recomendados"
+      },
+      {
+        "indicacao": "Paciente crítico com alvo 100% T>MIC, ClCr 90-130 mL/min, patógeno sensível (Liao et al. 2026 / Peng et al. 2022)",
+        "via": "IV, infusão prolongada preferencial",
+        "dose": "1-2 g a cada 8h; considerar infusão ≥2h — associada a maior Cmin e maior eficácia clínica (58,3% vs 42,1% com infusão padrão de 1h, sob regime 1g q8h)"
+      },
+      {
+        "indicacao": "Paciente crítico com augmented renal clearance (ClCr >130 mL/min)",
+        "via": "IV, infusão prolongada/contínua recomendada",
+        "dose": "1 g a cada 6h atinge apenas alvo 40% T>MIC; para alvos mais agressivos (100% T>MIC), considerar dose de ataque + infusão contínua e TDM precoce — risco elevado de subexposição"
+      },
+      {
+        "indicacao": "Alvo TDM-guiado — meta de Cmin/Cmax para eficácia clínica geral",
+        "via": "IV",
+        "dose": "Cmin ≥5,3 mg/L e Cmax ≥39,4 mg/L (limiares ROC, Liao et al. 2026); para infecção de corrente sanguínea, Cmin ≥7,3 mg/L e Cmax ≥49,1 mg/L; para clareamento bacteriano, Cmin ≥8 mg/L"
+      },
+      {
+        "duracao": "Variável conforme foco infeccioso e resposta clínica; ajustar conforme dados de TDM e reavaliação a cada 48-72h"
+      }
+    ],
+    "dose_pediatrica": [
+      {
+        "indicacao": "Acima de 3 meses até 12 anos, geral (bula)",
+        "via": "IV",
+        "dose": "10-40 mg/kg a cada 8h, conforme tipo/gravidade da infecção"
+      },
+      {
+        "indicacao": "Febre em paciente neutropênico pediátrico (bula)",
+        "via": "IV",
+        "dose": "20 mg/kg a cada 8h"
+      },
+      {
+        "indicacao": "Meningite / fibrose cística pediátrica (bula)",
+        "via": "IV",
+        "dose": "40 mg/kg a cada 8h"
+      },
+      {
+        "indicacao": "Infecção por Pseudomonas aeruginosa pediátrica (bula)",
+        "via": "IV",
+        "dose": "Mínimo 20 mg/kg a cada 8h (dose máx. aprovada 120 mg/kg/dia)"
+      },
+      {
+        "indicacao": "Peso >50 kg",
+        "via": "IV",
+        "dose": "Aplicar posologia de adulto"
+      },
+      {
+        "alerta": "Eficácia e segurança não estabelecidas em neonatos <3 meses — uso não recomendado nesta faixa etária (bula). Sem experiência em crianças com função renal alterada. Simulação de Monte Carlo em neonatos: 20 mg/kg a cada 8h atinge 60% T>CIM para P. aeruginosa em 95% dos prematuros e 91% dos neonatos a termo."
+      }
+    ],
+    "ajuste_renal": {
+      "formula_recomendada": "ClCr — ajuste obrigatório a partir de ClCr <51 mL/min (bula); Cockcroft-Gault utilizado nos estudos de PK/PD (Liao et al. 2026)",
+      "tabela": [
+        {
+          "clcr": "26-50 mL/min",
+          "dose_ajustada": "1 unidade de dose (500 mg-2 g, conforme indicação) a cada 12h"
+        },
+        {
+          "clcr": "10-25 mL/min",
+          "dose_ajustada": "1/2 unidade de dose a cada 12h"
+        },
+        {
+          "clcr": "<10 mL/min",
+          "dose_ajustada": "1/2 unidade de dose a cada 24h"
+        }
+      ],
+      "alerta": "Idosos com função renal normal ou ClCr >50 mL/min não requerem ajuste. Insuficiência hepática NÃO requer ajuste (cirrose alcoólica não alterou PK). Recomenda-se ajuste também em idade avançada e/ou ClCr ≤50 mL/min pelo risco aumentado de convulsões."
+    },
+    "dialise": {
+      "hemodialise": "Meropeném É removido por hemodiálise e hemofiltração, com clearance ~4x maior que em pacientes anúricos — ao final da sessão de HD, reinstituir a dose efetiva conforme tipo/gravidade da infecção.",
+      "dialise_peritoneal": "Sem experiência clínica documentada em bula.",
+      "crrt": "Clearance endógeno não-trauma reduzido (3,03 L/h; faixa 1,27-4,15 L/h) vs. saudáveis (15,5 L/h) — reflete AKI subjacente. Contribuição mediana da CLCRRT ao clearance total: ~34% (IQR 20,1-46,7%) em não-trauma; <1% em pacientes trauma (clearance endógeno dramaticamente aumentado por hiperfiltração renal/ARC). Regimes recomendados (Peng et al. 2022, meta-análise poblacional, 78 pacientes CRRT): 1 g a cada 6h infundido em 30 min, 1 g a cada 8h infundido em 3h, ou 2-4 g a cada 24h em infusão contínua — todos com risco de toxicidade desprezível e PTA adequada para CIM ≤4 mg/L. Dose de CRRT (25-50 mL/h/kg) tem impacto clinicamente irrelevante na PTA. Para pacientes trauma em CRRT, apenas 3-4 g a cada 24h em infusão contínua fornece PTA adequada, restrita a patógenos com CIM ≤0,5 mg/L. Regimes de 2g q6h e 6g q24h (contínua) apresentam risco de toxicidade inaceitável (>20-57%) independente da dose de CRRT.",
+      "referencia": "Peng Y, Cheng Z, Xie F. Population Pharmacokinetic Meta-Analysis and Dosing Recommendation for Meropenem in Critically Ill Patients Receiving CRRT. Antimicrob Agents Chemother. 2022;66(9):e00822-22"
+    },
+    "gestacao_lactacao": {
+      "fda": "B",
+      "gestacao": "Segurança em gravidez humana não estabelecida; estudos em animais não demonstraram efeitos adversos no feto em desenvolvimento. Não deve ser usado na gravidez a menos que benefício para a mãe justifique risco potencial para o feto.",
+      "lactacao": {
+        "classificacao": "Uso criterioso",
+        "observacao": "Relatados casos de excreção de meropeném no leite materno. Não deve ser usado durante amamentação a menos que benefícios justifiquem o risco potencial para o bebê; depende de avaliação médica individualizada."
+      },
+      "referencia": "Bula Meronem®, item 5 — Fertilidade, gravidez e lactação"
+    },
+    "monitorizacao": [
+      "Função hepática periódica — risco de hepatotoxicidade/lesão hepática induzida por medicamento (LHIM), incluindo em pacientes com alteração hepática preexistente",
+      "Sinais de rabdomiólise — descontinuar e iniciar terapia adequada se suspeita",
+      "Sinais de reações cutâneas graves (SSJ, NET, DRESS, EM, PEGA) — retirada imediata se suspeitos",
+      "Função renal e sinais neurológicos (convulsões, parestesia, confusão) em pacientes com ClCr ≤50 mL/min, lesão de SNC prévia ou meningite bacteriana",
+      "Coombs direto/indireto pode se apresentar positivo (interferência laboratorial)",
+      "TDM (Cmin/Cmax) recomendado em pacientes críticos, especialmente com ARC, CRRT ou infecção por patógeno de CIM elevada — meta Cmin ≥5,3 mg/L (≥7,3 mg/L se BSI) e Cmax ≥39,4 mg/L, evitando Cmin >44,5 mg/L (nefrotoxicidade) e >64,2 mg/L (neurotoxicidade)",
+      "Sinais de diarreia associada a C. difficile — colite pseudomembranosa raramente relatada",
+      "Nível sérico de ácido valproico se uso concomitante inevitável (ver interações) — risco de subterapêutica em 2 dias"
+    ],
+    "efeitos_adversos": [
+      "Hematológico: trombocitemia (comum); trombocitopenia, neutropenia, leucopenia, eosinofilia (incomuns); agranulocitose, anemia hemolítica (frequência não conhecida, pós-comercialização)",
+      "Sistema imune: manifestações de anafilaxia, angioedema (frequência não conhecida)",
+      "Metabolismo: hipocalemia (frequência não conhecida)",
+      "Psiquiátrico: alucinação, depressão (incomuns); delirium (raro)",
+      "SNC: cefaleia (comum); convulsões, parestesia, insônia, agitação, confusão, nervosismo, ansiedade (incomuns)",
+      "Cardiovascular: insuficiência/parada cardíaca, taquicardia, hipertensão, IAM, bradicardia, hipotensão, síncope (incomuns)",
+      "Respiratório: dispneia, asma, tosse, edema pulmonar, embolia pulmonar (incomuns)",
+      "Gastrointestinal: dor abdominal, diarreia, vômito, náusea (comuns); anorexia, flatulência, dispepsia, obstrução intestinal (incomuns); colite pseudomembranosa (frequência não conhecida)",
+      "Hepatobiliar: aumento de transaminases, FA e DHL (comuns); LHIM, aumento de bilirrubina e GGT (incomuns)",
+      "Cutâneo: rash (comum); prurido, urticária (incomuns); NET, SSJ, EM, DRESS, PEGA (frequência não conhecida, pós-comercialização)",
+      "Musculoesquelético: rabdomiólise (frequência não conhecida)",
+      "Renal/urinário: disúria, disfunção renal, incontinência urinária (incomuns)",
+      "Local de administração: inflamação (comum); tromboflebite, dor (incomuns)",
+      "Laboratorial: aumento de creatinina e ureia sanguíneas (incomuns)",
+      "Síndrome de Kounis (SCA associada à reação alérgica) relatada com outros beta-lactâmicos"
+    ],
+    "interacoes": [
+      "Ácido valproico/valproato de sódio — CONTRAINDICADO uso concomitante: meropeném reduz níveis séricos de valproato em 60-100% em ~2 dias, risco de nível subterapêutico e perda de controle de crises; interação rápida e não gerenciável, deve ser evitada",
+      "Probenecida — compete pela secreção tubular ativa, aumentando meia-vida e concentração plasmática de meropeném; coadministração não recomendada (potência/duração já adequadas sem probenecida)",
+      "Anticoagulantes/varfarina — extrapolação de classe (beta-lactâmicos); monitorar coagulação se uso concomitante",
+      "Sem interação relevante esperada por ligação proteica (~2%) — mecanismo de deslocamento proteico não se aplica",
+      "Administrado concomitantemente com muitos medicamentos sem interações adversas aparentes; não foram conduzidos estudos de interação específicos além de probenecida"
+    ],
+    "contraindicacoes": [
+      "Hipersensibilidade conhecida ao meropeném",
+      "História de hipersensibilidade a carbapenêmicos, penicilinas ou outros beta-lactâmicos — risco de reação cruzada (reações graves e ocasionalmente fatais já relatadas)",
+      "Uso concomitante com ácido valproico/valproato de sódio (ver interações)",
+      "Neonatos <3 meses — segurança/eficácia não estabelecidas, uso não recomendado"
+    ],
+    "preparo_administracao": "Injeção IV em bolus: reconstituir em água estéril para injeção (10 mL/500 mg; 20 mL/1 g), concentração final ~50 mg/mL, administrar em ~5 min (dados limitados de segurança para bolus de 2 g/40 mg/kg). Infusão IV: reconstituir em SF 0,9% ou SG 5%, concentração final 1-20 mg/mL, infundir em 15-30 min. Estabilidade pós-reconstituição: bolus em água — 3h a 25°C ou 16h refrigerado (2-8°C); infusão em SF 0,9% — 3h a 25°C ou 15h refrigerado; infusão em SG 5% — usar imediatamente. Não congelar após reconstituição. Agitar a solução reconstituída antes do uso. NÃO misturar ou adicionar a soluções contendo outros fármacos. Soluções reconstituídas claras a amarelo-pálidas.",
+    "referencias": [
+      "Bula Meronem® I.V. (meropeném) — Pfizer Brasil Ltda., aprovada pela Anvisa em 28/11/2025 (MERPOI_21)",
+      "Liao J, Li C, Liu J, Wu W, Huang X, Mao Y, Li L. Enhancing meropenem therapy in critical care: A retrospective study of PK/PD target attainment and therapeutic drug monitoring. Int J Antimicrob Agents. 2026;67:107697",
+      "Peng Y, Cheng Z, Xie F. Population Pharmacokinetic Meta-Analysis and Dosing Recommendation for Meropenem in Critically Ill Patients Receiving Continuous Renal Replacement Therapy. Antimicrob Agents Chemother. 2022;66(9):e00822-22"
+    ],
+    "ultima_atualizacao": "02/07/2026",
+    "autor": "Alan Steihogen — CRF-RJ 35250"
+  }
+}
