@@ -97,7 +97,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--tx);display:flex;f
 .cc-b p{font-size:10.5px;color:var(--mu);line-height:1.5;}
 .cc-a{color:var(--b2);font-size:17px;}
 
-/* ACCORDION */
+/* ACCORDION (índice de classe) */
 .abx-list{display:flex;flex-direction:column;gap:.55rem;}
 .abx-card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .abx-head{padding:.8rem .95rem;display:flex;align-items:center;gap:.65rem;}
@@ -114,6 +114,53 @@ body{font-family:var(--font);background:var(--bg);color:var(--tx);display:flex;f
 .fl{font-size:8.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-bottom:.22rem;}
 .ft{font-size:12px;line-height:1.7;color:#2D3748;}
 
+/* DRUG LIST (dentro do índice de classe, lista de representantes) */
+.drug-list{display:flex;flex-direction:column;gap:.5rem;padding:.15rem 0 .25rem;}
+.drug-item{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:.7rem .85rem;display:flex;align-items:center;gap:.6rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.drug-item:active{opacity:.8;}
+.drug-item-inf{flex:1;}
+.drug-item-inf h4{font-size:12.5px;font-weight:700;}
+.drug-item-inf span{font-size:10px;color:var(--mu);}
+.drug-item-ch{color:var(--mu);font-size:14px;flex-shrink:0;}
+
+/* HIERARQUIA: subclasse e geração (ex: Beta-lactâmicos > Cefalosporinas > 4ª geração > droga) */
+.subclass-group{margin-bottom:.7rem;}
+.subclass-group:last-child{margin-bottom:0;}
+.subclass-h{font-size:11.5px;font-weight:800;color:var(--tx);padding:.3rem 0 .35rem;border-bottom:1px solid var(--bd);margin-bottom:.45rem;}
+.geracao-group{margin-bottom:.55rem;padding-left:.15rem;}
+.geracao-group:last-child{margin-bottom:0;}
+.geracao-h{font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;}
+
+/* DRUG DETAIL SCREEN */
+.drug-screen{position:fixed;inset:0;background:var(--bg);z-index:50;display:none;flex-direction:column;}
+.drug-screen.on{display:flex;}
+.drug-hdr{height:var(--hh);background:var(--navy);display:flex;align-items:center;padding:0 .9rem;gap:.6rem;flex-shrink:0;}
+.drug-back{background:transparent;border:none;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:.3rem;cursor:pointer;font-family:var(--font);padding:.3rem .2rem;-webkit-tap-highlight-color:transparent;}
+.drug-back svg{width:17px;height:17px;}
+.drug-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:.9rem .9rem 2rem;}
+.drug-title{margin-bottom:1rem;}
+.drug-title h2{font-size:19px;font-weight:800;margin-bottom:.15rem;}
+.drug-title p{font-size:11.5px;color:var(--mu);}
+.dsec{background:var(--sf);border:1px solid var(--bd);border-radius:12px;margin-bottom:.65rem;overflow:hidden;}
+.dsec-h{padding:.6rem .9rem;background:var(--s2);font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);}
+.dsec-b{padding:.85rem .9rem;}
+.dsec-b p{font-size:12.5px;line-height:1.7;color:#2D3748;}
+.dsec-b ul{padding-left:1.1rem;}
+.dsec-b li{font-size:12.5px;line-height:1.7;color:#2D3748;margin-bottom:.25rem;}
+.dsub{font-size:10.5px;font-weight:700;color:var(--mu);margin:.5rem 0 .25rem;}
+.dsub:first-child{margin-top:0;}
+.drow{display:flex;justify-content:space-between;gap:.8rem;padding:.45rem 0;border-bottom:1px solid var(--bd);font-size:12px;}
+.drow:last-child{border-bottom:none;}
+.drow-l{color:var(--mu);flex-shrink:0;min-width:38%;}
+.drow-r{color:var(--tx);text-align:right;font-weight:600;}
+.dcase{border:1px solid var(--bd);border-radius:10px;padding:.75rem .85rem;margin-bottom:.6rem;}
+.dcase:last-child{margin-bottom:0;}
+.dcase-t{font-size:12.5px;font-weight:700;color:var(--ac);margin-bottom:.4rem;}
+.dref{font-size:11.5px;line-height:1.6;color:#2D3748;padding:.5rem 0;border-bottom:1px solid var(--bd);}
+.dref:last-child{border-bottom:none;}
+.dmeta{font-size:10px;color:var(--mu);text-align:center;margin-top:.5rem;}
+.placeholder{color:var(--am);font-style:italic;}
+
 /* PATHOGENS */
 .bact-filter{display:flex;gap:.35rem;margin-bottom:.8rem;flex-wrap:wrap;}
 .bact-btn{font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;border:1px solid var(--bd);background:var(--sf);color:var(--mu);cursor:pointer;transition:all .15s;}
@@ -127,6 +174,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--tx);display:flex;f
 .gfun{background:#EDE9FE;color:var(--pu);}
 .gana{background:#FEF3C7;color:var(--am);}
 .gaty{background:#CCFBF1;color:var(--tl);}
+.gvir{background:#DBEAFE;color:#1E40AF;}
 .bact-inf{flex:1;}
 .bact-inf h3{font-size:12.5px;font-weight:700;font-style:italic;}
 .bact-inf span{font-size:10px;color:var(--mu);}
@@ -228,21 +276,19 @@ table.brc tr:last-child td{border-bottom:none;}
 <!-- HEADER -->
 <div class="hdr">
   <svg class="hdr-logo" viewBox="0 0 100 100">
-    <ellipse cx="50" cy="54" rx="22" ry="32" fill="rgba(255,255,255,.92)"/>
-    <line x1="50" y1="22" x2="42" y2="8" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>
-    <line x1="50" y1="22" x2="58" y2="8" stroke="rgba(255,255,255,.55)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="50" y1="86" x2="42" y2="98" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>
-    <line x1="50" y1="86" x2="58" y2="98" stroke="rgba(255,255,255,.55)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="28" y1="44" x2="12" y2="40" stroke="rgba(255,255,255,.65)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="28" y1="56" x2="12" y2="58" stroke="rgba(255,255,255,.65)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="72" y1="44" x2="88" y2="40" stroke="rgba(255,255,255,.65)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="72" y1="56" x2="88" y2="58" stroke="rgba(255,255,255,.65)" stroke-width="2.5" stroke-linecap="round"/>
-    <text x="50" y="59" font-family="'Syne',sans-serif" font-size="18" font-weight="800" fill="#0B1F3A" text-anchor="middle" dominant-baseline="middle">PC</text>
+    <circle cx="50" cy="50" r="47" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+    <g transform="rotate(-45 50 50)">
+      <rect x="18" y="34" width="64" height="32" rx="16" fill="#0A7EA4"/>
+      <path d="M50,34 a16,16 0 0 0 0,32 Z" fill="#fff"/>
+      <line x1="50" y1="34" x2="50" y2="66" stroke="#0B1F3A" stroke-width="1.5"/>
+    </g>
+    <circle cx="50" cy="50" r="6" fill="#fff" opacity=".9"/>
+    <path d="M50 44v12M44 50h12" stroke="#0A7EA4" stroke-width="2" stroke-linecap="round"/>
   </svg>
   <div class="hdr-ti"><h1>PharmaCalc</h1><p>Guia PK/PD &amp; Antimicrobianos</p></div>
   <div class="hdr-right">
     <button class="hdr-sobre" onclick="showSobre()">sobre</button>
-    <div class="hdr-v">v1.0</div>
+    <button class="hdr-v" style="border:none;cursor:default" title="TARV — em breve">TARV</button>
   </div>
 </div>
 
@@ -309,12 +355,12 @@ table.brc tr:last-child td{border-bottom:none;}
 </a>
   </div>
 </div>
-<a 
 <!-- ═══ ABA 2: ANTIMICROBIANOS ═══ -->
 <div class="scr" id="scr-abx">
   <div class="itabs">
     <button class="itab on" onclick="setAbxTab('bact',this)">Bactérias</button>
     <button class="itab" onclick="setAbxTab('fungi',this)">Antifúngicos</button>
+    <button class="itab" onclick="setAbxTab('viral',this)">Antivirais</button>
   </div>
 
   <!-- ── SUB: BACTÉRIAS ── -->
@@ -443,122 +489,219 @@ table.brc tr:last-child td{border-bottom:none;}
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#0A7EA4"></div><div class="abx-inf"><h3>Beta-lactâmicos</h3><span>Penicilinas · Cefalosporinas · Carbapenêmicos</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligação covalente às <strong>PBPs</strong> → bloqueio da transpeptidação do peptidoglicano. Bactericida tempo-dependente (%T&gt;MIC). Inibidores de β-lactamase (clavulanato, sulbactam, tazobactam, avibactam) ampliam espectro.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-bl">%T&gt;MIC 40–100%</span><span class="pill p-gy">Tempo-dependente</span></div></div>
-          <div class="fb"><div class="fl">Espectro por subclasse</div><div class="ft"><strong>Penicilinas:</strong> Gram+ e Gram– (ampliado com IBL).<br><strong>Cefalosporinas G1→G5:</strong> espectro crescente Gram–; G5 cobre MRSA.<br><strong>Carbapenêmicos:</strong> Gram+, Gram– (incluindo Pseudomonas exceto ertapenem), anaeróbios.<br><strong>Monobactâmico (aztreonam):</strong> Gram– aeróbios exclusivo.</div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">ESBL</span><span class="pill p-re">KPC / NDM / OXA</span><span class="pill p-re">AmpC</span><span class="pill p-re">Alteração PBP (MRSA)</span></div></div>
-          <div class="fb"><div class="fl">Clínica</div><div class="ft">Infusão prolongada (EIP) maximiza %T&gt;MIC para MIC elevada (categoria I BrCAST). Ajuste renal obrigatório (meropenem, pip-tazo).</div></div>
+          <div class="subclass-group">
+            <div class="subclass-h">Penicilinas</div>
+            <div class="drug-list">
+              <div class="drug-item" onclick="openDrug(event,'beta_lactamicos','amoxicilina')"><div class="drug-item-inf"><h4>Amoxicilina</h4><span>Amoxil, Velamox</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'ampicilina','ampicilina')"><div class="drug-item-inf"><h4>Ampicilina</h4><span>Cilinon, Amplacilina</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'ampicilina_sulbactam','ampicilina_sulbactam')"><div class="drug-item-inf"><h4>Ampicilina + Sulbactam</h4><span>Unasyn, Compactan</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'amoxicilina_clavulanato_iv','amoxicilina_clavulanato_iv')"><div class="drug-item-inf"><h4>Amoxicilina + Clavulanato (IV)</h4><span>Clavulin IV</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'oxacilina','oxacilina')"><div class="drug-item-inf"><h4>Oxacilina</h4><span>Oxacilil, Staficilin-N</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'penicilinas','penicilina_cristalina')"><div class="drug-item-inf"><h4>Penicilina G Cristalina</h4><span>Cristacilina, Aricilina</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'penicilinas','penicilina_procaina')"><div class="drug-item-inf"><h4>Penicilina G Procaína</h4><span>Penkaron</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'penicilinas','penicilina_benzatina')"><div class="drug-item-inf"><h4>Penicilina G Benzatina</h4><span>Benzetacil</span></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'piperacilina_tazobactam','piperacilina_tazobactam')"><div class="drug-item-inf"><h4>Piperacilina + Tazobactam</h4><span>Tazocin, Tazopen</span></div><span class="drug-item-ch">›</span></div>
+            </div>
+          </div>
+
+          <div class="subclass-group">
+            <div class="subclass-h">Cefalosporinas</div>
+            <div class="geracao-group">
+              <div class="geracao-h">1ª geração</div>
+              <div class="drug-list">
+                <div class="drug-item" onclick="openDrug(event,'beta_lactamicos','cefazolina')"><div class="drug-item-inf"><h4>Cefazolina</h4></div><span class="drug-item-ch">›</span></div>
+              </div>
+            </div>
+            <div class="geracao-group">
+              <div class="geracao-h">2ª geração</div>
+              <div class="drug-list">
+                <div class="drug-item" onclick="openDrug(event,'beta_lactamicos','cefuroxima')"><div class="drug-item-inf"><h4>Cefuroxima</h4></div><span class="drug-item-ch">›</span></div>
+              </div>
+            </div>
+            <div class="geracao-group">
+              <div class="geracao-h">3ª geração</div>
+              <div class="drug-list">
+                <div class="drug-item" onclick="openDrug(event,'ceftriaxona','ceftriaxona')"><div class="drug-item-inf"><h4>Ceftriaxona</h4></div><span class="drug-item-ch">›</span></div>
+                <div class="drug-item" onclick="openDrug(event,'beta_lactamicos','ceftazidima')"><div class="drug-item-inf"><h4>Ceftazidima</h4></div><span class="drug-item-ch">›</span></div>
+                <div class="drug-item" onclick="openDrug(event,'ceftazidima_avibactam','ceftazidima_avibactam')"><div class="drug-item-inf"><h4>Ceftazidima-Avibactam</h4></div><span class="drug-item-ch">›</span></div>
+              </div>
+            </div>
+            <div class="geracao-group">
+              <div class="geracao-h">4ª geração</div>
+              <div class="drug-list">
+                <div class="drug-item" onclick="openDrug(event,'cefepima','cefepima')"><div class="drug-item-inf"><h4>Cefepima</h4><span>Maxcef®</span></div><span class="drug-item-ch">›</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subclass-group">
+            <div class="subclass-h">Carbapenêmicos</div>
+            <div class="drug-list">
+              <div class="drug-item" onclick="openDrug(event,'meropenem','meropenem')"><div class="drug-item-inf"><h4>Meropenem</h4></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'beta_lactamicos','imipenem_cilastatina')"><div class="drug-item-inf"><h4>Imipenem-Cilastatina</h4></div><span class="drug-item-ch">›</span></div>
+              <div class="drug-item" onclick="openDrug(event,'beta_lactamicos','ertapenem')"><div class="drug-item-inf"><h4>Ertapenem</h4></div><span class="drug-item-ch">›</span></div>
+            </div>
+          </div>
+
+          <div class="subclass-group">
+            <div class="subclass-h">Monobactâmicos</div>
+            <div class="drug-list">
+              <div class="drug-item" onclick="openDrug(event,'beta_lactamicos','aztreonam')"><div class="drug-item-inf"><h4>Aztreonam</h4></div><span class="drug-item-ch">›</span></div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#1A6B4A"></div><div class="abx-inf"><h3>Aminoglicosídeos</h3><span>Amicacina · Gentamicina · Tobramicina</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligação irreversível à <strong>30S</strong> → leitura errônea do mRNA → proteínas defeituosas. Efeito pós-antibiótico prolongado. Bactericida concentração-dependente.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-gr">Cmax/MIC ≥ 8–10</span><span class="pill p-am">Vale &lt; 5 mg/L</span><span class="pill p-gy">Dose única diária</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">Gram-negativos aeróbios (Enterobacterales, Pseudomonas). Amicacina: maior estabilidade frente a enzimas modificadoras. Sinérgicos com beta-lactâmicos.</div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">AAC/ANT/APH</span><span class="pill p-re">16S rRNA metilases</span><span class="pill p-re">Bombas de efluxo</span></div></div>
-          <div class="fb"><div class="fl">Toxicidade</div><div class="tags"><span class="pill p-re">Nefrotoxicidade</span><span class="pill p-re">Ototoxicidade</span><span class="pill p-am">Monitorar vale + ClCr</span></div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'amicacina','amicacina')">
+              <div class="drug-item-inf"><h4>Amicacina</h4><span>Amikacin · Novamin</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'gentamicina','gentamicina')">
+              <div class="drug-item-inf"><h4>Gentamicina</h4><span>Garamicina</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#B45309"></div><div class="abx-inf"><h3>Quinolonas / Fluoroquinolonas</h3><span>Ciprofloxacino · Levofloxacino · Moxifloxacino</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Inibem <strong>DNA girase (topo II) e topo IV</strong> → bloqueio da replicação e transcrição do DNA. Bactericida concentração-dependente.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-am">AUC₂₄/MIC ≥ 125</span><span class="pill p-am">Cmax/MIC ≥ 10</span></div></div>
-          <div class="fb"><div class="fl">Espectro por geração</div><div class="ft"><strong>Cipro (G2):</strong> Gram–, Pseudomonas. <strong>Levo (G3):</strong> + respiratório, S. pneumoniae. <strong>Moxi (G4):</strong> + anaeróbios; sem atividade urinária.</div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Mutação gyrA/parC</span><span class="pill p-re">Bombas de efluxo (MexAB, AcrAB)</span><span class="pill p-re">PMQR (plasmídeo)</span></div></div>
-          <div class="fb"><div class="fl">Clínica</div><div class="ft">Biodisponibilidade oral ~100% → switch iv/vo imediato. Risco: QT longo, tendinopatia, neurotoxicidade. Quelação com Mg²⁺/Ca²⁺.</div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'ciprofloxacino','ciprofloxacino')">
+              <div class="drug-item-inf"><h4>Ciprofloxacino</h4><span>Cipro®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'levofloxacino','levofloxacino')">
+              <div class="drug-item-inf"><h4>Levofloxacino</h4><span>Tavanic®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'quinolonas','moxifloxacino')">
+              <div class="drug-item-inf"><h4>Moxifloxacino</h4><span>Avalox®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#6D28D9"></div><div class="abx-inf"><h3>Glicopeptídeos</h3><span>Vancomicina · Teicoplanina</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligam-se ao <strong>D-ala-D-ala</strong> dos precursores de peptidoglicano → bloqueio da transglicosilação e transpeptidação. Gram-positivos exclusivo.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-pu">AUC₂₄/MIC 400–600</span><span class="pill p-pu">TDM obrigatório</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">MRSA, VRE (parcial), Streptococcus, SCN, C. difficile (vancomicina oral). Droga de escolha para MRSA invasivo.</div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">VRE (vanA, vanB)</span><span class="pill p-re">VISA / hVISA</span><span class="pill p-re">Espessamento parede</span></div></div>
-          <div class="fb"><div class="fl">TDM</div><div class="ft">Alvo AUC₂₄/MIC 400–600 (ASHP/IDSA 2020). Nefrotoxicidade aumentada com aminoglicosídeos ou pip-tazo.</div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'glicopeptideos','vancomicina')">
+              <div class="drug-item-inf"><h4>Vancomicina</h4><span>Vancocina®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'glicopeptideos','teicoplanina')">
+              <div class="drug-item-inf"><h4>Teicoplanina</h4><span>Glicopeptídeo</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#0891B2"></div><div class="abx-inf"><h3>Sulfametoxazol-Trimetoprima</h3><span>SMX-TMP · Bactrim®</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Dupla inibição da síntese de folato: <strong>SMX</strong> bloqueia DHPS (PABA→DHP) e <strong>TMP</strong> bloqueia DHFR (DHF→THF) → bloqueio de purinas e DNA. Sinergia bactericida.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-cy">AUC/MIC</span><span class="pill p-gy">Tempo-dependente (TMP)</span></div></div>
-          <div class="fb"><div class="fl">Indicações hospitalares</div><div class="ft">MRSA (partes moles), <strong>Stenotrophomonas maltophilia</strong> (1ª escolha), PCP, Nocardia, Toxoplasma gondii.</div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Mutações DHPS/DHFR</span><span class="pill p-re">Genes sul1/sul2</span></div></div>
-          <div class="fb"><div class="fl">Atenção</div><div class="ft">Hiperpotassemia em doses altas. Aumento de creatinina por competição tubular. CI: ClCr &lt;15, gravidez, sulfa-alergia.</div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'sulfametoxazol_trimetoprima','sulfametoxazol_trimetoprima')">
+              <div class="drug-item-inf"><h4>Sulfametoxazol-Trimetoprima</h4><span>Bactrim®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#C0392B"></div><div class="abx-inf"><h3>Polimixinas</h3><span>Polimixina B · Colistina (PME)</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Peptídeos catiônicos que se ligam ao <strong>LPS</strong> da membrana externa de Gram– → desestabilização → extravasamento do conteúdo celular → morte celular rápida.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-re">AUC/MIC</span><span class="pill p-re">Última linha MDR/XDR</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">Gram– MDR/XDR: A. baumannii, P. aeruginosa, K. pneumoniae produtoras de carbapenemase. Sem atividade Gram+.</div></div>
-          <div class="fb"><div class="fl">PMB vs Colistina</div><div class="ft"><strong>PMB:</strong> ativa, PK previsível. <strong>Colistina (CMS):</strong> pró-fármaco, concentrações variáveis.</div></div>
-          <div class="fb"><div class="fl">Toxicidade</div><div class="tags"><span class="pill p-re">Nefrotoxicidade grave</span><span class="pill p-re">Neurotoxicidade</span></div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Modificação LPS (PmrA/B)</span><span class="pill p-re">mcr-1 (plasmídeo)</span></div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'polimixina_b','polimixina_b')">
+              <div class="drug-item-inf"><h4>Polimixina B</h4></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'polimixinas','colistina')">
+              <div class="drug-item-inf"><h4>Colistina</h4><span>Polimixina E (PME)</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#0D9488"></div><div class="abx-inf"><h3>Macrolídeos</h3><span>Azitromicina · Claritromicina · Eritromicina</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligam-se ao <strong>RNA 23S da 50S</strong> → bloqueio do canal de saída do peptídeo nascente → inibição da síntese proteica. Bacteriostático (bactericida em altas concentrações).</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-am">AUC/MIC</span><span class="pill p-gy">Efeito pós-antibiótico prolongado</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">Gram+ (Streptococcus), atípicos (Mycoplasma, Chlamydia, Legionella), H. pylori. Azitromicina: atividade Gram– moderada.</div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">erm genes (metilação 23S)</span><span class="pill p-re">mef genes (efluxo)</span></div></div>
-          <div class="fb"><div class="fl">Atenção</div><div class="ft">Prolongamento QT (azitromicina). CYP3A4 (claritromicina — múltiplas interações). Excelente penetração tecidual e intracelular.</div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'azitromicina','azitromicina')">
+              <div class="drug-item-inf"><h4>Azitromicina</h4><span>Zitromax®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'claritromicina','claritromicina')">
+              <div class="drug-item-inf"><h4>Claritromicina</h4><span>Klaricid®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'macrolideos','eritromicina')">
+              <div class="drug-item-inf"><h4>Eritromicina</h4></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#7C5F00"></div><div class="abx-inf"><h3>Tetraciclinas</h3><span>Doxiciclina · Minociclina</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Ligação reversível à <strong>30S</strong> → bloqueio da ligação do aminoacil-tRNA ao sítio A → inibição da elongação peptídica. Bacteriostático.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-am">AUC/MIC</span><span class="pill p-gy">Bacteriostático</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">Gram+, Gram–, anaeróbios, atípicos (Rickettsia, Chlamydia, Mycoplasma). Minociclina: atividade em Stenotrophomonas e MRSA.</div></div>
-          <div class="fb"><div class="fl">Resistências</div><div class="tags"><span class="pill p-re">Bombas de efluxo (tet genes)</span><span class="pill p-re">Proteínas de proteção ribossomal</span></div></div>
-          <div class="fb"><div class="fl">Atenção</div><div class="ft">Quelação com Ca²⁺/Mg²⁺/Fe²⁺ → reduz absorção oral. Fotossensibilidade. CI: gestantes, &lt;8 anos.</div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'tetraciclinas','doxiciclina')">
+              <div class="drug-item-inf"><h4>Doxiciclina</h4><span>Vibramicina®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+            <div class="drug-item" onclick="openDrug(event,'tetraciclinas','minociclina')">
+              <div class="drug-item-inf"><h4>Minociclina</h4></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#92400E"></div><div class="abx-inf"><h3>Tigeciclina</h3><span>Glicilciclina · Derivada das tetraciclinas</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Glicilciclina semissintética. Liga-se ao <strong>sítio A da 30S</strong> com afinidade 5× maior → supera bombas de efluxo e proteção ribossomal clássicas. Bacteriostático de espectro ultrabroad.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-am">AUC/MIC</span><span class="pill p-gy">Espectro ultrabroad</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">MRSA, VRE, Enterobacterales (ESBL, KPC), A. baumannii, anaeróbios. <strong>Sem atividade:</strong> Pseudomonas (MexXY intrínseco) e Proteus spp.</div></div>
-          <div class="fb"><div class="fl">Limitações</div><div class="tags"><span class="pill p-re">Bacteriostático — evitar em bacteriemia</span><span class="pill p-re">Níveis plasmáticos baixos</span><span class="pill p-re">Sem atividade em Pseudomonas</span></div></div>
-          <div class="fb"><div class="fl">Indicações</div><div class="ft">Infecções intra-abdominais complexas, partes moles, pneumonia hospitalar MDR (em combinação), A. baumannii.</div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'tigeciclina','tigeciclina')">
+              <div class="drug-item-inf"><h4>Tigeciclina</h4><span>Tygacil®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#1E40AF"></div><div class="abx-inf"><h3>Daptomicina</h3><span>Lipopeptídeo cíclico · Gram+ exclusivo</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Insere-se na <strong>membrana citoplasmática de Gram+</strong> (Ca²⁺-dependente) → oligomerização → despolarização rápida → inibição de síntese de DNA/RNA/proteínas. Bactericida rápido.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-pu">Cmax/MIC</span><span class="pill p-pu">Gram+ exclusivo</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">MRSA, VISA, hVISA, VRE (E. faecium e faecalis), SCN. Sem atividade Gram–. <strong>Inativada pelo surfactante pulmonar — contraindicada em pneumonia.</strong></div></div>
-          <div class="fb"><div class="fl">Indicações</div><div class="ft">Bacteriemia por S. aureus (incluindo MRSA), endocardite câmaras direitas, infecções pele/partes moles por Gram+ resistentes.</div></div>
-          <div class="fb"><div class="fl">Toxicidade</div><div class="tags"><span class="pill p-re">Miopatia/rabdomiólise (monitorar CPK)</span><span class="pill p-re">Evitar com estatinas</span></div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'daptomicina','daptomicina')">
+              <div class="drug-item-inf"><h4>Daptomicina</h4><span>Cubicin®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#047857"></div><div class="abx-inf"><h3>Clindamicina</h3><span>Lincosamida · Gram+ e anaeróbios</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Liga-se ao <strong>sítio P da 50S (RNA 23S)</strong> → bloqueia transpeptidação e translocação do peptídeo. Bacteriostático. Mesma região dos macrolídeos → resistência cruzada possível.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-gr">AUC/MIC</span><span class="pill p-gy">Efeito pós-antibiótico</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft">Gram+ (MRSA sensível — verificar D-zone test), anaeróbios incluindo Bacteroides fragilis. Sem atividade Gram–.</div></div>
-          <div class="fb"><div class="fl">Indicações</div><div class="ft">Infecções pele/partes moles por MRSA, infecções intra-abdominais e ginecológicas (anaeróbios), osteomielite, infecções necrotizantes (inibe toxinas).</div></div>
-          <div class="fb"><div class="fl">Atenção crítica</div><div class="tags"><span class="pill p-re">Principal indutor de C. difficile (CDI)</span><span class="pill p-re">Teste D-zone antes de usar em MRSA</span></div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'clindamicina','clindamicina')">
+              <div class="drug-item-inf"><h4>Clindamicina</h4><span>Dalacin®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#5B21B6"></div><div class="abx-inf"><h3>Metronidazol</h3><span>Nitroimidazol · Anaeróbios e protozoários</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
-          <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Pró-fármaco ativado em ambiente redutor (anaeróbios): nitrorredutases convertem grupo nitro em <strong>radicais citotóxicos</strong> → quebras nas fitas de DNA → morte celular. Bactericida concentração-dependente.</div></div>
-          <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-pu">AUC/MIC</span><span class="pill p-pu">Anaeróbios exclusivo</span></div></div>
-          <div class="fb"><div class="fl">Espectro</div><div class="ft"><strong>Anaeróbios:</strong> B. fragilis, Clostridium spp. (incluindo C. difficile), Fusobacterium.<br><strong>Protozoários:</strong> Trichomonas, Giardia, Entamoeba histolytica.</div></div>
-          <div class="fb"><div class="fl">Indicações hospitalares</div><div class="ft">Infecções intra-abdominais (+ cobertura Gram–), CDI leve-moderada, vaginose bacteriana, abscesso cerebral, profilaxia cirúrgica coloretal.</div></div>
-          <div class="fb"><div class="fl">Atenção</div><div class="ft">Efeito antabuse (intolerância ao álcool). Neurotoxicidade em uso prolongado. Biodisponibilidade oral ~100% → switch imediato. Interação com varfarina.</div></div>
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'metronidazol','metronidazol')">
+              <div class="drug-item-inf"><h4>Metronidazol</h4><span>Flagyl®</span></div>
+              <span class="drug-item-ch">›</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -729,6 +872,14 @@ table.brc tr:last-child td{border-bottom:none;}
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#B45309"></div><div class="abx-inf"><h3>Azóis</h3><span>Fluconazol · Voriconazol · Posaconazol · Isavuconazol</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
+          <div class="subclass-h">Fichas individuais</div>
+          <div class="drug-list" style="margin-bottom:.85rem">
+            <div class="drug-item" onclick="openDrug(event,'azois','fluconazol')"><div class="drug-item-inf"><h4>Fluconazol</h4><span>Zoltec®</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'azois','voriconazol')"><div class="drug-item-inf"><h4>Voriconazol</h4><span>Vfend®</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'azois','itraconazol')"><div class="drug-item-inf"><h4>Itraconazol</h4><span>Sporanox®</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'azois','posaconazol')"><div class="drug-item-inf"><h4>Posaconazol</h4><span>Noxafil®</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'azois','isavuconazol')"><div class="drug-item-inf"><h4>Isavuconazol</h4><span>Cresemba®</span></div><span class="drug-item-ch">›</span></div>
+          </div>
           <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Inibição do <strong>CYP51 (lanosterol 14α-desmetilase)</strong> → bloqueio da conversão lanosterol → ergosterol → acúmulo de metilesteróis tóxicos → alteração da permeabilidade e fluidez da membrana. Fungistático (fungiicida para algumas espécies com voriconazol).</div></div>
           <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-am">AUC/MIC</span><span class="pill p-gy">Fungistático</span></div></div>
           <div class="fb"><div class="fl">Espectro por agente</div><div class="ft"><strong>Fluconazol:</strong> Candida spp. (exceto C. krusei e glabrata), Cryptococcus.<br><strong>Voriconazol:</strong> + Aspergillus, Fusarium. Droga de escolha para aspergilose invasiva.<br><strong>Posaconazol/Isavuconazol:</strong> + Mucorales (posaconazol/isavuconazol). Amplo espectro fúngico.</div></div>
@@ -739,6 +890,12 @@ table.brc tr:last-child td{border-bottom:none;}
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#047857"></div><div class="abx-inf"><h3>Equinocandinas</h3><span>Caspofungina · Micafungina · Anidulafungina</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
+          <div class="subclass-h">Fichas individuais</div>
+          <div class="drug-list" style="margin-bottom:.85rem">
+            <div class="drug-item" onclick="openDrug(event,'equinocandinas','caspofungina')"><div class="drug-item-inf"><h4>Caspofungina</h4><span>Cancidas®</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'equinocandinas','micafungina')"><div class="drug-item-inf"><h4>Micafungina</h4><span>Mycamine®</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'equinocandinas','anidulafungina')"><div class="drug-item-inf"><h4>Anidulafungina</h4><span>Eraxis®</span></div><span class="drug-item-ch">›</span></div>
+          </div>
           <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Inibição não-competitiva da <strong>β-1,3-glucana sintase (FKS1/FKS2)</strong> → bloqueio da síntese de β-glucana → fragilização da parede celular fúngica → lise osmótica. Fungicida para Candida, fungistático para Aspergillus.</div></div>
           <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-gr">AUC/MIC</span><span class="pill p-gr">Fungicida (Candida)</span></div></div>
           <div class="fb"><div class="fl">Espectro</div><div class="ft">Candida spp. (incluindo C. krusei e glabrata — vantagem sobre fluconazol), Aspergillus. Sem atividade em Cryptococcus, Mucorales, Fusarium (carecem de β-glucana na parede).</div></div>
@@ -750,6 +907,11 @@ table.brc tr:last-child td{border-bottom:none;}
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#9333EA"></div><div class="abx-inf"><h3>Anfotericina B</h3><span>Polieno · Anfotericina B deoxicolato e lipossomal</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
+          <div class="subclass-h">Fichas individuais</div>
+          <div class="drug-list" style="margin-bottom:.85rem">
+            <div class="drug-item" onclick="openDrug(event,'anfotericina_b','anfotericina_b_deoxicolato')"><div class="drug-item-inf"><h4>Anfotericina B deoxicolato</h4><span>Convencional</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'anfotericina_b','anfotericina_b_lipossomal')"><div class="drug-item-inf"><h4>Anfotericina B lipossomal</h4><span>AmBisome®</span></div><span class="drug-item-ch">›</span></div>
+          </div>
           <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Liga-se ao <strong>ergosterol</strong> da membrana fúngica → formação de poros → aumento da permeabilidade → extravasamento de K⁺, Mg²⁺ e outros íons → morte celular. Fungicida de amplo espectro com baixíssima resistência adquirida.</div></div>
           <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-pu">Cmax/MIC</span><span class="pill p-pu">Fungicida — espectro mais amplo</span></div></div>
           <div class="fb"><div class="fl">Espectro</div><div class="ft">Candida spp., Aspergillus, Cryptococcus neoformans, Mucorales, Fusarium, Histoplasma, Coccidioides, Sporothrix. Espectro mais amplo de todos os antifúngicos.</div></div>
@@ -761,6 +923,10 @@ table.brc tr:last-child td{border-bottom:none;}
       <div class="abx-card" onclick="toggleAbx(this)">
         <div class="abx-head"><div class="abx-dot" style="background:#0891B2"></div><div class="abx-inf"><h3>Flucitosina (5-FC)</h3><span>Pirimidina fluorada · Uso combinado</span></div><span class="abx-ch">›</span></div>
         <div class="abx-body">
+          <div class="subclass-h">Ficha individual</div>
+          <div class="drug-list" style="margin-bottom:.85rem">
+            <div class="drug-item" onclick="openDrug(event,'flucitosina','flucitosina')"><div class="drug-item-inf"><h4>Flucitosina</h4><span>Ancotil®</span></div><span class="drug-item-ch">›</span></div>
+          </div>
           <div class="fb"><div class="fl">Mecanismo</div><div class="ft">Pró-fármaco: citosina permeases transportam 5-FC para dentro da célula fúngica → convertida em <strong>5-fluorouracil (5-FU)</strong> pela citosina desaminase → inibe timidilato sintase (síntese de DNA) e incorpora-se ao RNA fúngico. Fungistático/fungicida.</div></div>
           <div class="fb"><div class="fl">Índice PK/PD</div><div class="tags"><span class="pill p-cy">AUC/MIC</span><span class="pill p-cy">Sempre em combinação</span></div></div>
           <div class="fb"><div class="fl">Espectro</div><div class="ft">Candida spp. e Cryptococcus neoformans. Atividade limitada em Aspergillus. Sem atividade em Mucorales.</div></div>
@@ -771,16 +937,48 @@ table.brc tr:last-child td{border-bottom:none;}
       </div>
     </div>
   </div>
+
+  <!-- ── SUB: ANTIVIRAIS ── -->
+  <div id="abx-viral" style="display:none">
+    <div class="slabel">Fichas por classe</div>
+    <div class="abx-list">
+      <div class="abx-card" onclick="toggleAbx(this)">
+        <div class="abx-head"><div class="abx-dot" style="background:#0A7EA4"></div><div class="abx-inf"><h3>Análogos de nucleosídeo</h3><span>Aciclovir · Valaciclovir · Herpesviridae</span></div><span class="abx-ch">›</span></div>
+        <div class="abx-body">
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'antivirais','aciclovir')"><div class="drug-item-inf"><h4>Aciclovir</h4><span>Zovirax®</span></div><span class="drug-item-ch">›</span></div>
+            <div class="drug-item" onclick="openDrug(event,'antivirais','valaciclovir')"><div class="drug-item-inf"><h4>Valaciclovir</h4><span>Valtrex®</span></div><span class="drug-item-ch">›</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="abx-card" onclick="toggleAbx(this)">
+        <div class="abx-head"><div class="abx-dot" style="background:#1A6B4A"></div><div class="abx-inf"><h3>Inibidores de neuraminidase</h3><span>Oseltamivir · Influenza</span></div><span class="abx-ch">›</span></div>
+        <div class="abx-body">
+          <div class="drug-list">
+            <div class="drug-item" onclick="openDrug(event,'antivirais','oseltamivir')"><div class="drug-item-inf"><h4>Oseltamivir</h4><span>Tamiflu®</span></div><span class="drug-item-ch">›</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ ABA 3: PATÓGENOS ═══ -->
 <div class="scr" id="scr-pat">
+  <div class="itabs">
+    <button class="itab on" onclick="setPatTab('bact',this)">Bactérias</button>
+    <button class="itab" onclick="setPatTab('fun',this)">Fungos</button>
+    <button class="itab" onclick="setPatTab('vir',this)">Vírus</button>
+  </div>
+
+  <!-- ── SUB: BACTÉRIAS ── -->
+  <div id="pat-bact">
+  <div class="pat-group">
   <div class="bact-filter">
     <button class="bact-btn on" onclick="filterPat('all',this)">Todos</button>
     <button class="bact-btn" onclick="filterPat('neg',this)">Gram–</button>
     <button class="bact-btn" onclick="filterPat('pos',this)">Gram+</button>
     <button class="bact-btn" onclick="filterPat('aty',this)">Atípicos</button>
-    <button class="bact-btn" onclick="filterPat('fun',this)">Fungos</button>
     <button class="bact-btn" onclick="filterPat('ana',this)">Anaeróbios</button>
   </div>
   <div class="bact-grid">
@@ -868,30 +1066,6 @@ table.brc tr:last-child td{border-bottom:none;}
         <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>1ª linha:</strong> Levofloxacino ou Azitromicina (5–10 dias). <strong>Alternativa:</strong> Doxiciclina. Beta-lactâmicos: sem atividade intracelular efetiva.</div></div>
       </div>
     </div>
-    <div class="bact-card" data-cat="fun" onclick="toggleBact(this)">
-      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Candida albicans / spp.</h3><span>Fungo leveduriforme · Dimórfico</span></div><span class="bact-ch">›</span></div>
-      <div class="bact-body">
-        <div class="fb"><div class="fl">Características</div><div class="ft">Fungo leveduriforme, dimórfico (levedura em condições normais, hifas em invasão tecidual). Microbiota normal da mucosa, pele e TGI. Candida albicans mais prevalente, mas C. glabrata, krusei, tropicalis e parapsilosis emergentes.</div></div>
-        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Candidemia (4ª causa de bacteriemia em UTI), candidíase invasiva em imunossuprimidos, candidíase mucocutânea, peritonite fúngica. C. auris: emergência global MDR.</div></div>
-        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Candidemia grave/UTI:</strong> Equinocandinas (1ª linha). <strong>Estável/oral:</strong> Fluconazol. <strong>C. krusei:</strong> equinocandinas ou voriconazol (resistência intrínseca ao fluconazol). <strong>C. auris:</strong> equinocandinas (monitorar).</div></div>
-      </div>
-    </div>
-    <div class="bact-card" data-cat="fun" onclick="toggleBact(this)">
-      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Aspergillus fumigatus</h3><span>Fungo filamentoso · Hialino</span></div><span class="bact-ch">›</span></div>
-      <div class="bact-body">
-        <div class="fb"><div class="fl">Características</div><div class="ft">Fungo filamentoso hialino ubíquo. Conídios inalados — infecção por via aérea. Principal causa de infecção fúngica invasiva grave em neutropênicos, transplantados e uso de corticosteróides prolongado.</div></div>
-        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Aspergilose invasiva pulmonar (AIP), traqueobronquite, aspergilose disseminada. Diagnóstico: galactomanana sérica, TC com sinal do halo, BAL. COVID-19: aspergilose pulmonar associada (CAPA).</div></div>
-        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>1ª linha:</strong> Voriconazol (TDM obrigatório) ou Isavuconazol. <strong>Alternativa:</strong> Anfotericina B lipossomal, Posaconazol. <strong>Salvamento:</strong> Equinocandina + azol.</div></div>
-      </div>
-    </div>
-    <div class="bact-card" data-cat="fun" onclick="toggleBact(this)">
-      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Cryptococcus neoformans</h3><span>Fungo encapsulado · Neurotropismo</span></div><span class="bact-ch">›</span></div>
-      <div class="bact-body">
-        <div class="fb"><div class="fl">Características</div><div class="ft">Fungo leveduriforme encapsulado, sem hifas verdadeiras. Cápsula polissacarídica (glucuronoxilomanana) — principal fator de virulência e imunoevasão. Neurotropismo acentuado.</div></div>
-        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Meningite criptocócica em HIV/AIDS (CD4 &lt;100), transplantados, uso de corticosteróides. Diagnóstico: antígeno criptocócico (CrAg) sérico e LCR, cultura.</div></div>
-        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Indução (2 sem):</strong> Anfotericina B lipossomal + Flucitosina. <strong>Consolidação (8 sem):</strong> Fluconazol 400 mg/dia. <strong>Manutenção:</strong> Fluconazol 200 mg/dia (HIV).</div></div>
-      </div>
-    </div>
     <div class="bact-card" data-cat="ana" onclick="toggleBact(this)">
       <div class="bact-head"><div class="gram-b gana">AN</div><div class="bact-inf"><h3>Bacteroides fragilis</h3><span>Anaeróbio · Gram-negativo</span></div><span class="bact-ch">›</span></div>
       <div class="bact-body">
@@ -908,6 +1082,102 @@ table.brc tr:last-child td{border-bottom:none;}
         <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Leve-moderado:</strong> Vancomicina oral 125 mg 4×/dia × 10 dias (preferível ao metronidazol). <strong>Grave:</strong> Vancomicina oral + Metronidazol IV. <strong>Recorrente:</strong> Fidaxomicina, Bezlotoxumab.</div></div>
       </div>
     </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- ── SUB: FUNGOS ── -->
+  <div id="pat-fun" style="display:none">
+  <div class="pat-group">
+  <div class="bact-filter">
+    <button class="bact-btn on" onclick="filterPat('all',this)">Todos</button>
+    <button class="bact-btn" onclick="filterPat('lev',this)">Leveduriformes</button>
+    <button class="bact-btn" onclick="filterPat('fil',this)">Filamentosos</button>
+    <button class="bact-btn" onclick="filterPat('aty',this)">Atípicos</button>
+  </div>
+  <div class="bact-grid">
+    <div class="bact-card" data-cat="lev" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Candida albicans / spp.</h3><span>Fungo leveduriforme · Dimórfico</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">Fungo leveduriforme, dimórfico (levedura em condições normais, hifas em invasão tecidual). Microbiota normal da mucosa, pele e TGI. Candida albicans mais prevalente, mas C. glabrata, krusei, tropicalis e parapsilosis emergentes.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Candidemia (4ª causa de bacteriemia em UTI), candidíase invasiva em imunossuprimidos, candidíase mucocutânea, peritonite fúngica. C. auris: emergência global MDR.</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Candidemia grave/UTI:</strong> Equinocandinas (1ª linha). <strong>Estável/oral:</strong> Fluconazol. <strong>C. krusei:</strong> equinocandinas ou voriconazol (resistência intrínseca ao fluconazol). <strong>C. auris:</strong> equinocandinas (monitorar).</div></div>
+        <div class="fb"><div class="fl">BrCAST / EUCAST-AFST</div><div class="tags"><span class="pill p-gy">[A PREENCHER]</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-cat="lev" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Cryptococcus neoformans</h3><span>Fungo encapsulado · Neurotropismo</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">Fungo leveduriforme encapsulado, sem hifas verdadeiras. Cápsula polissacarídica (glucuronoxilomanana) — principal fator de virulência e imunoevasão. Neurotropismo acentuado.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Meningite criptocócica em HIV/AIDS (CD4 &lt;100), transplantados, uso de corticosteróides. Diagnóstico: antígeno criptocócico (CrAg) sérico e LCR, cultura.</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Indução (2 sem):</strong> Anfotericina B lipossomal + Flucitosina. <strong>Consolidação (8 sem):</strong> Fluconazol 400 mg/dia. <strong>Manutenção:</strong> Fluconazol 200 mg/dia (HIV).</div></div>
+        <div class="fb"><div class="fl">BrCAST / EUCAST-AFST</div><div class="tags"><span class="pill p-gy">[A PREENCHER]</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-cat="fil" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Aspergillus fumigatus</h3><span>Fungo filamentoso · Hialino</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">Fungo filamentoso hialino ubíquo. Conídios inalados — infecção por via aérea. Principal causa de infecção fúngica invasiva grave em neutropênicos, transplantados e uso de corticosteróides prolongado.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Aspergilose invasiva pulmonar (AIP), traqueobronquite, aspergilose disseminada. Diagnóstico: galactomanana sérica, TC com sinal do halo, BAL. COVID-19: aspergilose pulmonar associada (CAPA).</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>1ª linha:</strong> Voriconazol (TDM obrigatório) ou Isavuconazol. <strong>Alternativa:</strong> Anfotericina B lipossomal, Posaconazol. <strong>Salvamento:</strong> Equinocandina + azol.</div></div>
+        <div class="fb"><div class="fl">BrCAST / EUCAST-AFST</div><div class="tags"><span class="pill p-gy">[A PREENCHER]</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-cat="fil" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Mucorales (Rhizopus / Mucor spp.)</h3><span>Fungo filamentoso não-septado · Angioinvasivo</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">Hifas largas, não septadas (cenocíticas), ramificação em ângulo reto. Ubíquos no ambiente (solo, matéria orgânica em decomposição). Angioinvasão rápida com necrose tecidual extensa.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Mucormicose rino-órbito-cerebral, pulmonar e cutânea. Fatores de risco: neutropenia prolongada, cetoacidose diabética, uso de deferoxamina, corticosteroide prolongado, TCTH.</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>1ª linha:</strong> Anfotericina B lipossomal em altas doses + debridamento cirúrgico precoce. <strong>Consolidação/alternativa:</strong> Posaconazol, Isavuconazol.</div></div>
+        <div class="fb"><div class="fl">Atenção</div><div class="tags"><span class="pill p-re">Sem atividade: equinocandinas</span><span class="pill p-re">Sem atividade: voriconazol</span><span class="pill p-re">Sem atividade: fluconazol</span></div></div>
+        <div class="fb"><div class="fl">BrCAST / EUCAST-AFST</div><div class="tags"><span class="pill p-gy">[A PREENCHER]</span></div></div>
+      </div>
+    </div>
+    <div class="bact-card" data-cat="aty" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gfun">FU</div><div class="bact-inf"><h3>Pneumocystis jirovecii</h3><span>Fungo atípico · Não cultivável em meio padrão</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">Fungo unicelular atípico, parede rica em β-1,3-glucana. Ausência de ergosterol relevante na membrana → baixa sensibilidade a azóis e polienos. Não cultivável por métodos convencionais — diagnóstico por PCR, imunofluorescência ou coloração especial em lavado broncoalveolar.</div></div>
+        <div class="fb"><div class="fl">Relevância hospitalar</div><div class="ft">Pneumonia por Pneumocystis (PCP) em HIV/AIDS (CD4 &lt;200), neutropenia prolongada, transplantados, uso crônico de corticosteroide/imunobiológicos. Profilaxia primária indicada em diversos protocolos oncohematológicos.</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>1ª linha (tratamento e profilaxia):</strong> SMX-TMP altas doses. <strong>Alternativas:</strong> Pentamidina IV, Atovaquona, Clindamicina + Primaquina (intolerância a sulfa).</div></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- ── SUB: VÍRUS ── -->
+  <div id="pat-vir" style="display:none">
+  <div class="pat-group">
+  <div class="bact-grid">
+    <div class="bact-card" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gvir">VI</div><div class="bact-inf"><h3>Herpes simplex vírus (HSV-1 / HSV-2)</h3><span>Herpesviridae · DNA vírus com envelope</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">DNA vírus de dupla fita, envelopado, família Herpesviridae. Estabelece latência em gânglios nervosos sensitivos (trigêmeo — HSV-1; sacral — HSV-2) com reativação recorrente.</div></div>
+        <div class="fb"><div class="fl">Relevância clínica</div><div class="ft">Gengivoestomatite e herpes labial (HSV-1), herpes genital (HSV-2), herpes neonatal, encefalite herpética, reativação grave/disseminada em imunossuprimidos (transplantados, oncohematológicos).</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Formas graves/encefalite/imunossuprimidos:</strong> Aciclovir IV. <strong>Formas mucocutâneas:</strong> Aciclovir ou Valaciclovir oral.</div></div>
+        <div class="fb"><div class="fl">Resistência</div><div class="ft">Rara em imunocompetentes; mais descrita em imunossuprimidos, geralmente por deficiência de timidina quinase viral. Alternativa nesses casos: Foscarnet.</div></div>
+      </div>
+    </div>
+    <div class="bact-card" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gvir">VI</div><div class="bact-inf"><h3>Varicela-zoster vírus (VZV)</h3><span>Herpesviridae · Latência em gânglios dorsais</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">DNA vírus envelopado da família Herpesviridae. Causa varicela na primoinfecção e herpes-zóster na reativação. Alta transmissibilidade respiratória/por contato na primoinfecção.</div></div>
+        <div class="fb"><div class="fl">Relevância clínica</div><div class="ft">Varicela em não imunes, herpes-zóster (incluindo forma disseminada em imunossuprimidos), pneumonite e encefalite em casos graves. Risco aumentado em oncohematológicos e transplantados.</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft"><strong>Formas graves/disseminadas/imunossuprimidos:</strong> Aciclovir IV. <strong>Herpes-zóster não complicado em imunocompetentes:</strong> Valaciclovir oral.</div></div>
+      </div>
+    </div>
+    <div class="bact-card" onclick="toggleBact(this)">
+      <div class="bact-head"><div class="gram-b gvir">VI</div><div class="bact-inf"><h3>Vírus Influenza (A e B)</h3><span>Orthomyxoviridae · RNA vírus segmentado</span></div><span class="bact-ch">›</span></div>
+      <div class="bact-body">
+        <div class="fb"><div class="fl">Características</div><div class="ft">RNA vírus segmentado, envelopado, com hemaglutinina (H) e neuraminidase (N) de superfície — sujeito a variação antigênica (drift/shift). Transmissão respiratória, sazonal.</div></div>
+        <div class="fb"><div class="fl">Relevância clínica</div><div class="ft">Síndrome gripal, pneumonia viral primária, pneumonia bacteriana secundária (S. aureus, S. pneumoniae), surtos hospitalares. Maior gravidade em idosos, imunossuprimidos e gestantes.</div></div>
+        <div class="fb"><div class="fl">Tratamento</div><div class="ft">Oseltamivir — ideal iniciar &lt;48h do início dos sintomas, mas benefício mantido em casos graves/hospitalizados mesmo tardio.</div></div>
+        <div class="fb"><div class="fl">Resistência</div><div class="ft">Mutação H275Y na neuraminidase (rara, mais descrita em H1N1).</div></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="ft" style="padding:.2rem .1rem 0;color:var(--mu);font-size:11px">Lista inicial — envie os demais vírus que quer incluir (ex.: CMV, EBV, hepatites) e eu monto as fichas.</div>
   </div>
 </div>
 
@@ -1213,13 +1483,24 @@ function setAbxTab(id,btn){
   btn.classList.add('on');
   document.getElementById('abx-bact').style.display = id==='bact'?'':'none';
   document.getElementById('abx-fungi').style.display = id==='fungi'?'':'none';
+  document.getElementById('abx-viral').style.display = id==='viral'?'':'none';
+}
+
+// ── PATHOGENS INNER TABS ───────────────────────
+function setPatTab(id,btn){
+  document.querySelectorAll('#scr-pat .itab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('pat-bact').style.display = id==='bact'?'':'none';
+  document.getElementById('pat-fun').style.display = id==='fun'?'':'none';
+  document.getElementById('pat-vir').style.display = id==='vir'?'':'none';
 }
 
 // ── PATHOGENS FILTER ──────────────────────────
 function filterPat(cat,btn){
-  document.querySelectorAll('.bact-btn').forEach(b=>b.classList.remove('on'));
+  const group = btn.closest('.pat-group');
+  group.querySelectorAll('.bact-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  document.querySelectorAll('.bact-card').forEach(c=>{
+  group.querySelectorAll('.bact-card').forEach(c=>{
     c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';
   });
 }
@@ -1235,6 +1516,321 @@ function toggleBact(card){
   document.querySelectorAll('.bact-card').forEach(c=>c.classList.remove('open'));
   if(!o)card.classList.add('open');
 }
+
+// ── FICHA DE DROGA (detalhe individual) ───────
+// Cache em memória: uma vez que o arquivo de uma classe é buscado, não busca de novo.
+const CLASS_DATA_CACHE = {};
+
+async function loadClassData(classeId){
+  if (CLASS_DATA_CACHE[classeId]) return CLASS_DATA_CACHE[classeId];
+  try {
+    // convenção: beta_lactamicos -> data/beta-lactamicos.json
+    const fileName = classeId.replace(/_/g, '-') + '.json';
+    const res = await fetch('data/' + fileName);
+    const json = await res.json();
+    CLASS_DATA_CACHE[classeId] = json;
+    return json;
+  } catch (e) {
+    console.error('Não foi possível carregar data/' + classeId + '.json', e);
+    return null;
+  }
+}
+
+// Acha uma droga dentro do JSON de uma classe. Suporta múltiplos formatos:
+// 1) {drogas:{id:{...}}}
+// 2) beta-lactâmicos: {subclasses:{...grupos/geracoes...>drogas:{id:{...}}}}
+// 3) ficha de droga única: {classeId:{...campos da própria droga...}} (classeId === drugId)
+// 4) classe com múltiplas drogas no mesmo nível: {classeId:{drugIdA:{...}, drugIdB:{...}}}
+function findDrugInClassData(classData, classeId, drugId){
+  if (!classData) return null;
+  const content = classData[classeId] || classData;
+  if (content.drogas && content.drogas[drugId]) {
+    return content.drogas[drugId];
+  }
+  if (content.subclasses) {
+    for (const subKey in content.subclasses) {
+      const sub = content.subclasses[subKey];
+      const buckets = [];
+      if (sub.grupos) buckets.push(...Object.values(sub.grupos));
+      if (sub.geracoes) buckets.push(...Object.values(sub.geracoes));
+      for (const bucket of buckets) {
+        if (bucket.drogas && bucket.drogas[drugId]) {
+          return bucket.drogas[drugId];
+        }
+      }
+    }
+  }
+  if (drugId === classeId && content.nome) {
+    return content;
+  }
+  if (content[drugId]) {
+    return mergeCamposComuns(content.campos_comuns, content[drugId]);
+  }
+  return null;
+}
+
+// Combina campos compartilhados de uma classe (ex: penicilinas.json > campos_comuns)
+// com os campos específicos de uma droga individual. Campos já presentes na
+// droga específica sempre têm prioridade sobre o valor comum.
+function mergeCamposComuns(cc, raw){
+  if (!cc) return raw;
+  const merged = Object.assign({}, raw);
+  if (merged.sinonimos === undefined) merged.sinonimos = cc.sinonimos;
+  if (merged.mecanismo_acao === undefined) merged.mecanismo_acao = cc.mecanismo_acao;
+  if (merged.espectro === undefined) merged.espectro = cc.espectro;
+  if (merged.contraindicacoes === undefined) {
+    merged.contraindicacoes = raw.contraindicacoes_especificas || cc.contraindicacoes_comuns;
+  }
+  if (merged.interacoes === undefined) {
+    merged.interacoes = raw.interacoes_especificas || cc.interacoes_comuns;
+  }
+  if (merged.monitorizacao === undefined) merged.monitorizacao = cc.monitorizacao_comum;
+  return merged;
+}
+
+function esc(s){
+  if (s===undefined||s===null) return '';
+  return String(s);
+}
+
+function isPlaceholder(s){
+  return typeof s === 'string' && s.includes('[A PREENCHER]');
+}
+
+function pClass(s){
+  return isPlaceholder(s) ? ' class="placeholder"' : '';
+}
+
+function renderList(items){
+  if (!items || !items.length) return '<p class="placeholder">[A PREENCHER]</p>';
+  return '<ul>' + items.map(i=>`<li${pClass(i)}>${esc(i)}</li>`).join('') + '</ul>';
+}
+
+function renderDoseBlock(doses){
+  if (!doses || !doses.length) return '<p class="placeholder">[A PREENCHER]</p>';
+  return doses.map(d=>`
+    <div class="dcase">
+      <div class="dcase-t"${pClass(d.indicacao)}>${esc(d.indicacao)}</div>
+      ${d.via?`<div class="drow"><span class="drow-l">Via</span><span class="drow-r"${pClass(d.via)}>${esc(d.via)}</span></div>`:''}
+      ${d.ataque?`<div class="drow"><span class="drow-l">Ataque</span><span class="drow-r"${pClass(d.ataque)}>${esc(d.ataque)}</span></div>`:''}
+      ${d.dose?`<div class="drow"><span class="drow-l">Dose</span><span class="drow-r"${pClass(d.dose)}>${esc(d.dose)}</span></div>`:''}
+      ${d.duracao?`<div class="drow"><span class="drow-l">Duração</span><span class="drow-r"${pClass(d.duracao)}>${esc(d.duracao)}</span></div>`:''}
+      ${d.max?`<div class="drow"><span class="drow-l">Máx.</span><span class="drow-r"${pClass(d.max)}>${esc(d.max)}</span></div>`:''}
+      ${d.alerta?`<div class="callout am" style="margin-top:.55rem"><p${pClass(d.alerta)}>${esc(d.alerta)}</p></div>`:''}
+    </div>
+  `).join('');
+}
+
+function renderPkpdRow(label, val){
+  if (!val) return '';
+  return `<div class="drow"><span class="drow-l">${label}</span><span class="drow-r"${pClass(val)}>${esc(val)}</span></div>`;
+}
+
+// Diálise: aceita objeto estruturado {hemodialise, dialise_peritoneal, crrt, referencia}
+// OU string simples (compatibilidade com fichas antigas).
+function renderDialise(dialise){
+  if (!dialise) return '<p class="placeholder">[A PREENCHER]</p>';
+  if (typeof dialise === 'string') {
+    return `<p${pClass(dialise)}>${esc(dialise)}</p>`;
+  }
+  const rows = [
+    ['Hemodiálise', dialise.hemodialise],
+    ['D. peritoneal', dialise.dialise_peritoneal],
+    ['CRRT', dialise.crrt]
+  ];
+  const out = rows
+    .filter(([,v]) => v)
+    .map(([label, v]) => `<div class="drow"><span class="drow-l">${label}</span><span class="drow-r"${pClass(v)}>${esc(v)}</span></div>`)
+    .join('');
+  const body = out || '<p class="placeholder">[A PREENCHER]</p>';
+  const ref = dialise.referencia
+    ? `<div class="drow"><span class="drow-l">Referência</span><span class="drow-r" style="font-size:11.5px;color:var(--mu)">${esc(dialise.referencia)}</span></div>`
+    : '';
+  return body + ref;
+}
+
+// Lactação: aceita objeto estruturado {classificacao, observacao}
+// OU string simples (compatibilidade com fichas antigas).
+function renderLactacao(lactacao){
+  if (!lactacao) return '<p class="placeholder">[A PREENCHER]</p>';
+  if (typeof lactacao === 'string') {
+    return `<p${pClass(lactacao)}>${esc(lactacao)}</p>`;
+  }
+  const badge = lactacao.classificacao
+    ? `<p style="margin-bottom:.35rem"><span class="pill p-gr"${pClass(lactacao.classificacao)}>${esc(lactacao.classificacao)}</span></p>`
+    : '';
+  const obs = lactacao.observacao
+    ? `<p${pClass(lactacao.observacao)}>${esc(lactacao.observacao)}</p>`
+    : (lactacao.classificacao ? '' : '<p class="placeholder">[A PREENCHER]</p>');
+  return badge + obs;
+}
+
+async function openDrug(evt, classeId, drugId){
+  if (evt) evt.stopPropagation();
+  const classData = await loadClassData(classeId);
+  const d = findDrugInClassData(classData, classeId, drugId);
+  if (!d){
+    console.error('Droga não encontrada:', classeId, drugId);
+    renderDrugPending(drugId);
+    document.getElementById('drug-screen').classList.add('on');
+    document.getElementById('drug-body').scrollTop = 0;
+    return;
+  }
+  renderDrug(d);
+  document.getElementById('drug-screen').classList.add('on');
+  document.getElementById('drug-body').scrollTop = 0;
+}
+
+function renderDrugPending(drugId){
+  const nome = drugId.replace(/_/g, ' ');
+  document.getElementById('drug-body').innerHTML = `
+    <div class="drug-title">
+      <h2 style="text-transform:capitalize">${esc(nome)}</h2>
+      <p>Ficha ainda não cadastrada</p>
+    </div>
+    <div class="dsec">
+      <div class="dsec-b" style="padding:1rem 0;color:var(--mu);font-size:13px;line-height:1.5">
+        Essa ficha ainda não foi preenchida. Assim que o JSON dessa droga for adicionado em <code>/data</code>, ela aparece aqui automaticamente.
+      </div>
+    </div>
+  `;
+}
+
+function closeDrug(){
+  document.getElementById('drug-screen').classList.remove('on');
+}
+
+function renderDrug(d){
+  const esp = d.espectro || {};
+  const pk = d.pkpd || {};
+  const renal = d.ajuste_renal || {};
+  const gl = d.gestacao_lactacao || {};
+
+  const html = `
+    <div class="drug-title">
+      <h2>${esc(d.nome)}</h2>
+      <p>${esc(d.sinonimos)}</p>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Mecanismo de ação</div>
+      <div class="dsec-b"><p${pClass(d.mecanismo_acao)}>${esc(d.mecanismo_acao)}</p></div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Espectro</div>
+      <div class="dsec-b">
+        <div class="dsub">Cobertura</div>
+        ${renderList(esp.cobertura)}
+        <div class="dsub">Sem atividade</div>
+        ${renderList(esp.sem_atividade)}
+        ${esp.observacao?`<div class="callout bl" style="margin-top:.6rem"><p${pClass(esp.observacao)}>${esc(esp.observacao)}</p></div>`:''}
+      </div>
+    </div>
+
+    ${d.indicacoes_bula?`
+    <div class="dsec">
+      <div class="dsec-h">Indicações (bula)</div>
+      <div class="dsec-b">${renderList(d.indicacoes_bula)}</div>
+    </div>`:''}
+
+    <div class="dsec">
+      <div class="dsec-h">PK/PD</div>
+      <div class="dsec-b">
+        ${renderPkpdRow('Via de administração', d.via_administracao)}
+        ${renderPkpdRow('Tipo', pk.tipo)}
+        ${renderPkpdRow('Perfil de liberação/absorção', pk.perfil)}
+        ${renderPkpdRow('Alvo farmacodinâmico', pk.alvo_farmacodinamico)}
+        ${renderPkpdRow('Vale-alvo', pk.vale_alvo)}
+        ${renderPkpdRow('Meia-vida', pk.meia_vida)}
+        ${renderPkpdRow('Níveis séricos', pk.niveis_sericos)}
+        ${renderPkpdRow('Ligação proteica', pk.ligacao_proteica)}
+        ${renderPkpdRow('Volume de distribuição', pk.volume_distribuicao)}
+        ${renderPkpdRow('Distribuição', pk.distribuicao)}
+        ${renderPkpdRow('Metabolização', pk.metabolizacao)}
+        ${renderPkpdRow('Excreção', pk.excrecao)}
+        ${renderPkpdRow('Eliminação', pk.eliminacao)}
+        ${renderPkpdRow('Componente procaína', pk.componente_procaina)}
+        ${renderPkpdRow('Populações especiais', pk.populacoes_especiais)}
+        ${pk.alerta?`<div class="callout am" style="margin-top:.6rem"><p${pClass(pk.alerta)}>${esc(pk.alerta)}</p></div>`:''}
+      </div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Dose por indicação — Adulto</div>
+      <div class="dsec-b">${renderDoseBlock(d.dose_adulto)}</div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Dose pediátrica</div>
+      <div class="dsec-b">${renderDoseBlock(d.dose_pediatrica)}</div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Ajuste renal</div>
+      <div class="dsec-b">
+        ${(!renal.formula_recomendada && !(renal.tabela&&renal.tabela.length) && !renal.alerta) ? '<p class="placeholder">[A PREENCHER]</p>' : `
+        ${renderPkpdRow('Fórmula recomendada', renal.formula_recomendada)}
+        ${(renal.tabela||[]).map(t=>renderPkpdRow('ClCr '+esc(t.clcr), t.dose_ajustada)).join('')}
+        ${renal.alerta?`<div class="callout am" style="margin-top:.6rem"><p${pClass(renal.alerta)}>${esc(renal.alerta)}</p></div>`:''}
+        `}
+      </div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Diálise</div>
+      <div class="dsec-b">${renderDialise(d.dialise)}</div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Gestação e lactação</div>
+      <div class="dsec-b">
+        ${gl.fda?`<div class="drow"><span class="drow-l">FDA</span><span class="drow-r"><span class="pill p-bl"${pClass(gl.fda)}>${esc(gl.fda)}</span></span></div>`:''}
+        <div class="dsub">Gestação</div>
+        <p${pClass(gl.gestacao||gl.observacao)}>${esc(gl.gestacao||gl.observacao)}</p>
+        <div class="dsub">Lactação</div>
+        ${renderLactacao(gl.lactacao)}
+        ${gl.referencia?`<div class="drow"><span class="drow-l">Referência</span><span class="drow-r" style="font-size:11.5px;color:var(--mu)">${esc(gl.referencia)}</span></div>`:''}
+      </div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Monitorização</div>
+      <div class="dsec-b">${renderList(d.monitorizacao)}</div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Efeitos adversos</div>
+      <div class="dsec-b">${renderList(d.efeitos_adversos)}</div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Interações</div>
+      <div class="dsec-b">${renderList(d.interacoes)}</div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Contraindicações</div>
+      <div class="dsec-b">${renderList(d.contraindicacoes)}</div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Preparo e administração</div>
+      <div class="dsec-b"><p${pClass(d.preparo_administracao)}>${esc(d.preparo_administracao)}</p></div>
+    </div>
+
+    <div class="dsec">
+      <div class="dsec-h">Referências</div>
+      <div class="dsec-b">
+        ${(d.referencias||[]).map(r=>`<div class="dref"${pClass(r)}>${esc(r)}</div>`).join('') || '<p class="placeholder">[A PREENCHER]</p>'}
+      </div>
+    </div>
+
+    <div class="dmeta">Última atualização: ${esc(d.ultima_atualizacao)} · Autor: ${esc(d.autor)}</div>
+  `;
+  document.getElementById('drug-body').innerHTML = html;
+}
+
 
 // ── MECHANISM TOOLTIPS ────────────────────────
 const BACT_TIPS={
@@ -1376,6 +1972,19 @@ if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.ser
 
   </div>
 </footer>
+
+<!-- ═══ TELA DE DETALHE DA DROGA (tela cheia, fora do fluxo de tabs) ═══ -->
+<div class="drug-screen" id="drug-screen">
+  <div class="drug-hdr">
+    <button class="drug-back" onclick="closeDrug()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar
+    </button>
+  </div>
+  <div class="drug-body" id="drug-body">
+    <!-- preenchido via JS por renderDrug() -->
+  </div>
+</div>
 
 </body>
 </html>
