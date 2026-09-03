@@ -269,6 +269,306 @@ table.brc tr:last-child td{border-bottom:none;}
 /* Corpo das abas */
 .ref-body { display:none; }
 .ref-body.active { display:block; }
+
+/* ══════════ PRESCRIÇÃO (Crivo) ══════════ */
+.presc-wrap{
+  --paper:var(--sf);
+  --ink:var(--tx);
+  --ink-soft:var(--mu);
+  --line:var(--bd);
+  --red:var(--re);
+  --red-bg:#FAEAEA;
+  --amber:var(--am);
+  --amber-bg:#FEF3C7;
+  --teal:var(--tl);
+  --teal-bg:#CCFBF1;
+  --green:var(--gr);
+  --green-bg:#E6F4EE;
+  --mono:var(--mono);
+  --sans:var(--font);
+  padding-bottom:1rem;
+}
+
+.presc-wrap header{
+    padding:28px 20px 20px; border-bottom:2px solid var(--ink);
+    background:var(--paper);
+  }
+.presc-wrap .brand{ display:flex; align-items:baseline; gap:10px; }
+.presc-wrap .brand h1{
+    font-family:var(--mono); font-weight:700; font-size:28px; margin:0;
+    letter-spacing:-0.5px;
+  }
+.presc-wrap .brand .tag{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase;
+    letter-spacing:1.5px; color:var(--ink-soft); border:1px solid var(--line);
+    padding:3px 7px; border-radius:3px;
+  }
+.presc-wrap header p.sub{ margin:8px 0 0; color:var(--ink-soft); font-size:14px; max-width:520px; }
+
+.presc-wrap main{ max-width:640px; margin:0 auto; padding:20px 16px; }
+
+.presc-wrap section.card{
+    background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    padding:18px; margin-bottom:16px;
+  }
+.presc-wrap section.card h2{
+    font-family:var(--mono); font-size:13px; text-transform:uppercase;
+    letter-spacing:1.2px; color:var(--ink-soft); margin:0 0 14px;
+  }
+
+.presc-wrap .context-note{
+    display:inline-block; margin-top:8px; font-size:12.5px; color:var(--teal);
+    background:var(--teal-bg); border-radius:6px; padding:8px 10px; line-height:1.4;
+  }
+.presc-wrap .finding .ctx-note{
+    margin-top:8px; padding-top:8px; border-top:1px dashed var(--line);
+    font-size:12.5px; color:var(--teal); line-height:1.45;
+  }
+.presc-wrap .finding .ctx-note b{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:0.6px; }
+.presc-wrap .checklist-item{
+    display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line);
+    border-radius:8px; padding:10px 12px; margin-bottom:8px; background:#fff;
+  }
+.presc-wrap .checklist-item .ci-icon{ font-family:var(--mono); font-weight:700; font-size:15px; flex-shrink:0; width:18px; text-align:center; }
+.presc-wrap .checklist-item.present .ci-icon{ color:var(--green); }
+.presc-wrap .checklist-item.missing .ci-icon{ color:var(--red); }
+.presc-wrap .checklist-item.attention .ci-icon{ color:var(--amber); }
+.presc-wrap .checklist-item.info .ci-icon{ color:var(--teal); }
+.presc-wrap .checklist-item .ci-title{ font-weight:600; font-size:13.5px; margin-bottom:2px; }
+.presc-wrap .checklist-item .ci-detail{ font-size:12.5px; color:var(--ink-soft); line-height:1.4; }
+.presc-wrap .drug-panel{
+    border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin-top:10px;
+    background:#fff;
+  }
+  .presc-wrap .drug-panel + .drug-panel{ margin-top:8px; }
+.presc-wrap .drug-panel .dp-name{ font-family:var(--mono); font-weight:700; font-size:13.5px; margin-bottom:6px; }
+.presc-wrap .drug-panel .dp-block{ margin-top:6px; }
+.presc-wrap .drug-panel .dp-label{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--ink-soft);
+    font-family:var(--mono); margin-bottom:3px;
+  }
+.presc-wrap .drug-panel ul{ margin:0; padding-left:16px; font-size:13px; line-height:1.5; }
+.presc-wrap .drug-panel .dp-empty{ font-size:12.5px; color:var(--ink-soft); font-style:italic; }
+.presc-wrap .case-item{
+    border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-bottom:8px;
+    background:#fff; font-size:13px;
+  }
+.presc-wrap .case-item .meta{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); margin-bottom:3px; }
+.presc-wrap .case-item .row{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+.presc-wrap .case-item button{
+    border:none; background:transparent; color:var(--red); font-size:12px; cursor:pointer;
+    flex-shrink:0; padding:2px 4px;
+  }
+.presc-wrap .visually-hidden{
+    position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+.presc-wrap .quick-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+.presc-wrap .quick-chip{
+    font-family:var(--sans); font-size:13px; font-weight:600; padding:8px 14px;
+    border-radius:20px; border:1.5px solid var(--line); background:#fff; color:var(--ink-soft);
+    cursor:pointer; transition:all .12s ease;
+  }
+.presc-wrap .quick-chip:active{ transform:scale(0.96); }
+.presc-wrap .quick-chip.active{ background:var(--ink); border-color:var(--ink); color:#fff; }
+.presc-wrap .evo-entry{
+    border:1px solid var(--line); border-left-width:4px; border-radius:8px;
+    padding:10px 12px; margin-bottom:10px; background:#fff; font-size:13px;
+    border-left-color:var(--ink);
+  }
+.presc-wrap .evo-entry.critico{ border-left-color:var(--red); }
+.presc-wrap .evo-entry.atencao{ border-left-color:var(--amber); }
+.presc-wrap .evo-entry.informativo{ border-left-color:var(--teal); }
+.presc-wrap .evo-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.presc-wrap .evo-date{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
+.presc-wrap .evo-origin{
+    font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.6px;
+    padding:2px 6px; border-radius:3px;
+  }
+.presc-wrap .evo-origin.auto{ color:var(--teal); background:var(--teal-bg); }
+.presc-wrap .evo-origin.manual{ color:var(--ink-soft); background:var(--bg); }
+.presc-wrap .evo-field{ margin-top:4px; line-height:1.45; }
+.presc-wrap .evo-field b{
+    font-family:var(--mono); font-size:10.5px; text-transform:uppercase;
+    letter-spacing:0.5px; color:var(--ink-soft);
+  }
+.presc-wrap .evo-conduta-input{
+    width:100%; margin-top:3px; padding:6px 8px; border:1px solid var(--line); border-radius:6px;
+    font-size:13px; font-family:var(--sans); background:#fff; color:var(--ink);
+  }
+.presc-wrap .evo-obs{ font-style:italic; color:var(--ink-soft); }
+.presc-wrap .evo-context{
+    margin-top:6px; padding-top:6px; border-top:1px dashed var(--line);
+    font-family:var(--mono); font-size:11px; color:var(--ink-soft); line-height:1.5;
+  }
+.presc-wrap .evo-delete{
+    border:none; background:transparent; color:var(--red); font-size:11.5px; cursor:pointer;
+    margin-top:6px; padding:2px 0;
+  }
+.presc-wrap textarea{
+    width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:6px;
+    font-size:15px; font-family:var(--sans); background:#fff; color:var(--ink);
+    resize:vertical; min-height:44px;
+  }
+.presc-wrap .field-row{ display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;}
+.presc-wrap .field{ flex:1; min-width:100px; }
+.presc-wrap .field label{ display:block; font-size:12px; color:var(--ink-soft); margin-bottom:4px; }
+.presc-wrap .field input{
+    width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:6px;
+    font-size:15px; font-family:var(--sans); background:#fff; color:var(--ink);
+  }
+.presc-wrap .field input:focus{ outline:2px solid var(--teal); outline-offset:1px; }
+
+.presc-wrap .autocomplete{ position:relative; }
+.presc-wrap .ac-list{
+    position:absolute; top:100%; left:0; right:0; background:#fff;
+    border:1px solid var(--line); border-top:none; border-radius:0 0 8px 8px;
+    max-height:220px; overflow-y:auto; z-index:20; box-shadow:0 8px 18px rgba(0,0,0,0.08);
+  }
+.presc-wrap .ac-item{ padding:10px 12px; cursor:pointer; font-size:14px; border-bottom:1px solid var(--line); }
+.presc-wrap .ac-item:last-child{border-bottom:none;}
+  .presc-wrap .ac-item:hover, .presc-wrap .ac-item.active{ background:var(--teal-bg); }
+.presc-wrap .ac-item small{ display:block; color:var(--ink-soft); font-size:11px; margin-top:2px; }
+
+.presc-wrap .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.presc-wrap .chip{
+    display:flex; align-items:center; gap:8px; background:#fff;
+    border:1px solid var(--ink); border-radius:20px; padding:6px 8px 6px 14px;
+    font-family:var(--mono); font-size:13px;
+  }
+.presc-wrap .chip button{
+    border:none; background:var(--ink); color:#fff; width:20px; height:20px;
+    border-radius:50%; cursor:pointer; font-size:13px; line-height:1; padding:0;
+  }
+.presc-wrap .empty-note{ color:var(--ink-soft); font-size:13px; font-style:italic; }
+
+.presc-wrap .btn-primary{
+    width:100%; padding:14px; background:var(--ink); color:#fff; border:none;
+    border-radius:8px; font-size:16px; font-weight:600; cursor:pointer;
+    font-family:var(--sans); margin-top:6px;
+  }
+.presc-wrap .btn-primary:disabled{ background:#B7BEB9; cursor:not-allowed; }
+.presc-wrap .btn-clear{
+    width:100%; padding:10px; background:transparent; color:var(--ink-soft);
+    border:1px solid var(--line); border-radius:8px; font-size:13px; cursor:pointer;
+    margin-top:8px; font-family:var(--sans);
+  }
+
+.presc-wrap .results-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px;}
+.presc-wrap .results-head h2{ font-family:var(--mono); font-size:16px; margin:0; }
+.presc-wrap .results-count{ font-size:12px; color:var(--ink-soft); }
+
+.presc-wrap .finding{
+    display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+    margin-bottom:10px; background:#fff;
+  }
+.presc-wrap .finding .stripe{ width:8px; flex-shrink:0; }
+.presc-wrap .finding.critico .stripe{ background:var(--red); }
+.presc-wrap .finding.atencao .stripe{ background:var(--amber); }
+.presc-wrap .finding.informativo .stripe{ background:var(--teal); }
+.presc-wrap .finding .body{ padding:12px 14px; flex:1; }
+.presc-wrap .finding .sev-label{
+    font-family:var(--mono); font-size:10px; text-transform:uppercase;
+    letter-spacing:1.2px; font-weight:700; margin-bottom:5px; display:inline-block;
+    padding:2px 7px; border-radius:3px;
+  }
+.presc-wrap .finding.critico .sev-label{ color:var(--red); background:var(--red-bg); }
+.presc-wrap .finding.atencao .sev-label{ color:var(--amber); background:var(--amber-bg); }
+.presc-wrap .finding.informativo .sev-label{ color:var(--teal); background:var(--teal-bg); }
+.presc-wrap .finding .drugs{ font-family:var(--mono); font-weight:700; font-size:14px; margin-bottom:4px; }
+.presc-wrap .finding .desc{ font-size:13.5px; color:var(--ink); line-height:1.45; }
+
+.presc-wrap .all-clear{
+    display:flex; align-items:center; gap:10px; background:var(--green-bg);
+    border:1px solid var(--green); color:var(--green); border-radius:8px;
+    padding:14px; font-size:14px; font-weight:600;
+  }
+
+.presc-wrap footer.disclaimer{
+    max-width:640px; margin:24px auto 0; padding:0 16px 20px; color:var(--ink-soft);
+    font-size:11.5px; line-height:1.5;
+  }
+
+/* ══════════ Severity dashboard ══════════ */
+.presc-wrap .sev-dash{
+    display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;
+  }
+.presc-wrap .sev-pill{
+    display:flex; align-items:center; gap:6px; border:1px solid var(--line);
+    border-radius:20px; padding:6px 12px 6px 10px; font-family:var(--mono);
+    font-size:12.5px; font-weight:700; cursor:pointer; background:#fff;
+    transition:transform .12s ease, box-shadow .12s ease; user-select:none;
+  }
+.presc-wrap .sev-pill:active{ transform:scale(0.96); }
+.presc-wrap .sev-pill .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.presc-wrap .sev-pill.critico .dot{ background:var(--red); }
+.presc-wrap .sev-pill.atencao .dot{ background:var(--amber); }
+.presc-wrap .sev-pill.informativo .dot{ background:var(--teal); }
+.presc-wrap .sev-pill.off{ opacity:0.4; }
+.presc-wrap .sev-pill.off .dot{ filter:grayscale(1); }
+.presc-wrap .sev-pill .n{ font-size:14px; }
+.presc-wrap .sev-pill.all-clear-pill{ color:var(--green); border-color:var(--green); background:var(--green-bg); cursor:default; }
+
+/* ══════════ Collapsible drug panel ══════════ */
+.presc-wrap .drug-panel .dp-name{
+    display:flex; align-items:center; justify-content:space-between; cursor:pointer;
+    margin-bottom:0; padding-bottom:6px;
+  }
+.presc-wrap .drug-panel .dp-name .chev{
+    font-family:var(--mono); font-size:12px; color:var(--ink-soft);
+    transition:transform .16s ease; flex-shrink:0;
+  }
+.presc-wrap .drug-panel.collapsed .dp-name .chev{ transform:rotate(-90deg); }
+.presc-wrap .drug-panel .dp-body{
+    display:grid; grid-template-rows:1fr; transition:grid-template-rows .18s ease;
+  }
+.presc-wrap .drug-panel.collapsed .dp-body{ grid-template-rows:0fr; }
+.presc-wrap .drug-panel .dp-body-inner{ overflow:hidden; }
+.presc-wrap .drug-panel.collapsed .dp-body-inner{ padding-top:0; }
+
+/* ══════════ PK/PD bridge button ══════════ */
+.presc-wrap .pkpd-bridge{
+    display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+    padding:8px 12px; background:var(--navy); color:#fff; border:none;
+    border-radius:6px; font-family:var(--sans); font-size:12.5px; font-weight:600;
+    cursor:pointer;
+  }
+.presc-wrap .pkpd-bridge:active{ opacity:0.85; }
+
+/* ══════════ Autocomplete preview badge ══════════ */
+.presc-wrap .ac-item{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.presc-wrap .ac-item .ac-main{ flex:1; min-width:0; }
+.presc-wrap .ac-preview{
+    font-family:var(--mono); font-size:10px; font-weight:700; padding:2px 6px;
+    border-radius:10px; flex-shrink:0; white-space:nowrap;
+  }
+.presc-wrap .ac-preview.critico{ color:var(--red); background:var(--red-bg); }
+.presc-wrap .ac-preview.atencao{ color:var(--amber); background:var(--amber-bg); }
+
+/* ══════════ Evolution entry animation ══════════ */
+@keyframes evoIn{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+.presc-wrap .evo-entry.sistema{
+    border-left-color:var(--ink-soft); background:var(--bg); text-align:center;
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-soft);
+    text-transform:uppercase; letter-spacing:0.6px; padding:8px 12px;
+  }
+.presc-wrap .evo-history-toggle{
+    display:block; background:none; border:none; color:var(--teal); font-size:12.5px;
+    cursor:pointer; margin-bottom:10px; padding:0; text-decoration:underline; text-align:left;
+  }
+
+/* ══════════ Toast ══════════ */
+.presc-toast{
+    position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(12px);
+    background:var(--navy); color:#fff; padding:11px 18px; border-radius:8px;
+    font-family:var(--font); font-size:13.5px; z-index:999; opacity:0; pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease; max-width:88vw; text-align:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);
+  }
+.presc-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -307,9 +607,9 @@ table.brc tr:last-child td{border-bottom:none;}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
     Patógenos
   </button>
-  <button class="tb" id="tb-pkpd" onclick="goTab('pkpd',3)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    PK/PD
+  <button class="tb" id="tb-presc" onclick="goTab('presc',3)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 3V2h6v1"/><path d="M9 11l2 2 4-4"/></svg>
+    Prescrição
   </button>
 </div>
 
@@ -1181,158 +1481,133 @@ table.brc tr:last-child td{border-bottom:none;}
   </div>
 </div>
 
-<!-- ═══ ABA 4: PK/PD ═══ -->
-<div class="scr" id="scr-pkpd">
-
-  <!-- BLOCO 1: Segurança e adequação de dose -->
-  <div class="pkpd-sec">
-    <h3>Dose certa, no momento certo</h3>
-    <div class="callout bl">
-      <p style="font-size:12px;line-height:1.8">
-        A prescrição de um antimicrobiano não termina na escolha do agente — termina quando a concentração no sítio de infecção supera a MIC do patógeno pelo tempo e magnitude necessários. Uma dose subterapêutica seleciona resistência sem eliminar o micro-organismo; uma dose excessiva expõe o paciente a toxicidade renal, auditiva ou neurológica sem benefício adicional. A janela terapêutica é estreita, e variáveis como função renal, peso corporal e gravidade da doença a deslocam continuamente.
-      </p>
-    </div>
-    <div class="callout gr">
-      <p style="font-size:12px;line-height:1.8">
-        Cada classe antimicrobiana tem um índice que prediz eficácia: %T&gt;MIC para β-lactâmicos, Cmax/MIC para aminoglicosídeos e AUC/MIC para vancomicina e fluoroquinolonas. Atingir esse alvo não é opcional — é o critério que separa tratamento adequado de falha terapêutica. O PharmaCalc traduz os parâmetros individuais do paciente nesses índices, tornando visível o que a prescrição empírica não consegue garantir.
-      </p>
-    </div>
+<!-- ═══ ABA 4: PRESCRIÇÃO (Crivo) ═══ -->
+<div class="scr" id="scr-presc">
+<div class="presc-wrap">
+<header>
+  <div class="brand">
+    <h1>Crivo</h1>
+    <span class="tag">Triagem de prescrição</span>
   </div>
+  <p class="sub">Motor de regras para triagem farmacêutica: interações, redundâncias e alertas de segurança. Protótipo — base de dados em expansão.</p>
+</header>
 
-  <!-- BLOCO 2: Tipos de atividade -->
-  <div class="pkpd-sec">
-    <h3>Tipos de atividade antimicrobiana</h3>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+<main>
 
-      <div style="border-radius:10px;padding:.75rem .9rem;border:1px solid var(--bd);background:var(--s2)">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span style="font-size:15px">⏱</span>
-          <strong style="font-size:12.5px;color:#0A7EA4">Tempo-dependente</strong>
-          <span class="pill p-bl" style="margin-left:auto">%T&gt;MIC</span>
-        </div>
-        <div style="font-size:11.5px;color:var(--mu);line-height:1.6">
-          β-lactâmicos, carbapenems. A eficácia depende do <em>tempo</em> em que a concentração livre supera a MIC. Infusão prolongada maximiza o índice.
-        </div>
+  <section class="card">
+    <h2>Dados do paciente</h2>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="leito">Leito</label>
+      <input type="text" id="leito" placeholder="ex: Leito 4">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="idade">Idade (anos)</label>
+        <input type="number" id="idade" min="0" max="120" placeholder="—">
       </div>
-
-      <div style="border-radius:10px;padding:.75rem .9rem;border:1px solid var(--bd);background:var(--s2)">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span style="font-size:15px">📈</span>
-          <strong style="font-size:12.5px;color:#1A6B4A">Concentração-dependente</strong>
-          <span class="pill p-gr" style="margin-left:auto">Cmax/MIC</span>
-        </div>
-        <div style="font-size:11.5px;color:var(--mu);line-height:1.6">
-          Aminoglicosídeos. A eficácia depende do <em>pico</em> sérico em relação à MIC. Dose única diária maximiza Cmax/MIC e reduz nefrotoxicidade.
-        </div>
+      <div class="field">
+        <label for="peso">Peso (kg)</label>
+        <input type="number" id="peso" min="0" max="300" placeholder="—">
       </div>
-
-      <div style="border-radius:10px;padding:.75rem .9rem;border:1px solid var(--bd);background:var(--s2)">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span style="font-size:15px">📊</span>
-          <strong style="font-size:12.5px;color:#6D28D9">Exposição-dependente</strong>
-          <span class="pill p-pu" style="margin-left:auto">AUC/MIC</span>
-        </div>
-        <div style="font-size:11.5px;color:var(--mu);line-height:1.6">
-          Vancomicina, fluoroquinolonas. A eficácia depende da <em>exposição total</em> ao longo do tempo. Alvo vancomicina: AUC&#8320;&#8324;/MIC 400–600 mg·h/L.
-        </div>
+      <div class="field">
+        <label for="clcr">ClCr (mL/min)</label>
+        <input type="number" id="clcr" min="0" max="200" placeholder="—">
       </div>
+    </div>
 
+    <div class="field" style="margin-top:12px;">
+      <label>Suporte ventilatório</label>
+      <div class="quick-chips" id="vmQuickChips">
+        <button type="button" class="quick-chip" data-vm="0">Sem VM</button>
+        <button type="button" class="quick-chip" data-vm="1">Em VM</button>
+      </div>
+      <input type="checkbox" id="emVM" class="visually-hidden">
     </div>
-  </div>
 
-  <!-- BLOCO 3: Tabela de índices -->
-  <div class="pkpd-sec">
-    <h3>Índices PK/PD por antimicrobiano</h3>
-    <div style="overflow-x:auto">
-      <table class="idx-t">
-        <thead>
-          <tr>
-            <th>Fármaco</th>
-            <th>Índice</th>
-            <th>Alvo eficácia</th>
-            <th>Limiar toxicidade</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Amicacina</td>
-            <td><span class="pill p-gr" style="font-size:9px">Cmax/MIC</span></td>
-            <td style="color:#1A6B4A;font-weight:600">≥ 8–10</td>
-            <td style="color:#B45309">Cmin &gt; 5 mg/L</td>
-          </tr>
-          <tr>
-            <td>Gentamicina/<br>Tobramicina</td>
-            <td><span class="pill p-gr" style="font-size:9px">Cmax/MIC</span></td>
-            <td style="color:#1A6B4A;font-weight:600">≥ 8–10</td>
-            <td style="color:#B45309">Cmin &gt; 1 mg/L</td>
-          </tr>
-          <tr>
-            <td>Carbapenems</td>
-            <td><span class="pill p-bl" style="font-size:9px">%fT&gt;MIC</span></td>
-            <td style="color:#0A7EA4;font-weight:600">50–100%</td>
-            <td style="color:#B45309">Cmin &gt; 44,5 mg/L</td>
-          </tr>
-          <tr>
-            <td>Cefalosporinas</td>
-            <td><span class="pill p-bl" style="font-size:9px">%fT&gt;MIC</span></td>
-            <td style="color:#0A7EA4;font-weight:600">45–100%</td>
-            <td style="color:#B45309">Cmin &gt; 20 mg/L</td>
-          </tr>
-          <tr>
-            <td>Penicilinas</td>
-            <td><span class="pill p-bl" style="font-size:9px">%fT&gt;MIC</span></td>
-            <td style="color:#0A7EA4;font-weight:600">50–100%</td>
-            <td style="color:#B45309">Cmin &gt; 361 mg/L</td>
-          </tr>
-          <tr>
-            <td>Vancomicina</td>
-            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
-            <td style="color:#6D28D9;font-weight:600">400–600 mg·h/L</td>
-            <td style="color:#B45309">AUC &gt; 700 mg·h/L</td>
-          </tr>
-          <tr>
-            <td>Fluoroquinolonas</td>
-            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
-            <td style="color:#6D28D9;font-weight:600">125–250 mg·h/L</td>
-            <td style="color:var(--mu)">Incerto</td>
-          </tr>
-          <tr>
-            <td>Daptomicina</td>
-            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
-            <td style="color:#6D28D9;font-weight:600">≥ 666 mg·h/L</td>
-            <td style="color:#B45309">Cmin &gt; 24 mg/L</td>
-          </tr>
-          <tr>
-            <td>Linezolida</td>
-            <td><span class="pill p-pu" style="font-size:9px">AUC/MIC</span></td>
-            <td style="color:#6D28D9;font-weight:600">80–120 mg·h/L</td>
-            <td style="color:#B45309">AUC &gt; 300 mg·h/L</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="field" style="margin-top:12px;">
+      <label>Modalidade de diálise / TRS</label>
+      <div class="quick-chips" id="dialiseQuickChips">
+        <button type="button" class="quick-chip" data-dialise="">Nenhuma</button>
+        <button type="button" class="quick-chip" data-dialise="hd">HD intermitente</button>
+        <button type="button" class="quick-chip" data-dialise="cvvh">CVVH</button>
+        <button type="button" class="quick-chip" data-dialise="cvvhd">CVVHD</button>
+        <button type="button" class="quick-chip" data-dialise="cvvhdf">CVVHDF</button>
+      </div>
+      <select id="dialise" class="visually-hidden">
+        <option value="">Nenhuma</option>
+        <option value="hd">Hemodiálise intermitente</option>
+        <option value="cvvh">CVVH</option>
+        <option value="cvvhd">CVVHD</option>
+        <option value="cvvhdf">CVVHDF</option>
+      </select>
     </div>
-    <div style="font-size:10px;color:var(--mu);margin-top:8px;line-height:1.5">
-      Fonte: Abdul-Aziz MH et al. <em>Intensive Care Med.</em> 2020;46(6):1127–1153.
-    </div>
-  </div>
 
-  <!-- BLOCO 4: Aplicação prática -->
-  <div class="pkpd-sec">
-    <h3>Aplicação prática</h3>
-    <div class="callout bl">
-      <div class="callout-t">Meropenem em infusão prolongada</div>
-      <p>Estender a infusão de 30 min para 3 h mantém a concentração acima da MIC por mais tempo no intervalo, aumentando o %T&gt;MIC sem aumentar a dose total. Essencial para MIC 4–8 mg/L (categoria I BrCAST).</p>
+    <div class="field" style="margin-top:12px;">
+      <label for="ctxNota">Contexto clínico / diagnóstico</label>
+      <textarea id="ctxNota" placeholder="ex: sepse por KPC em choque, tétano grave, status epilepticus refratário..."></textarea>
     </div>
-    <div class="callout gr">
-      <div class="callout-t">Amicacina em dose única diária</div>
-      <p>Concentrar toda a dose em uma única administração maximiza o pico (Cmax/MIC ≥ 8–10) e permite que o vale caia abaixo de 5 mg/L antes da próxima dose, reduzindo acúmulo renal e ototoxicidade.</p>
-    </div>
-    <div class="callout pu">
-      <div class="callout-t">Vancomicina guiada por AUC</div>
-      <p>Monitorizar pelo AUC/MIC (alvo 400–600 mg·h/L) em vez do vale isolado reduz nefrotoxicidade e identifica com mais precisão exposição insuficiente. Diretriz ASHP/IDSA 2020 recomenda essa abordagem como padrão.</p>
-    </div>
-  </div>
+  </section>
 
+  <section class="card">
+    <h2>Medicações da prescrição</h2>
+    <div class="autocomplete">
+      <input type="text" id="drugSearch" placeholder="Digite o nome do medicamento..." autocomplete="off">
+      <div class="ac-list" id="acList" style="display:none;"></div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <p class="empty-note" id="emptyNote">Nenhuma medicação adicionada ainda.</p>
+    <div id="drugPanelWrap"></div>
+  </section>
+
+  <div id="sevDashWrap"></div>
+  <div id="resultsWrap"></div>
+  <div id="checklistWrap"></div>
+
+  <button class="btn-primary" id="analyzeBtn" disabled>Registrar achados na evolução</button>
+  <button class="btn-clear" id="clearBtn">Limpar tudo</button>
+
+  <section class="card">
+    <h2>Evolução do paciente</h2>
+    <p class="empty-note" style="margin-bottom:12px;">Linha do tempo por leito. Os achados da triagem entram aqui automaticamente ao analisar a prescrição; complemente com a conduta do prescritor ou registre uma entrada manual.</p>
+    <div class="field" style="margin-bottom:6px;">
+      <label for="sheetsUrl">URL do Web App (Google Apps Script) — sincroniza a evolução com uma planilha Google, opcional</label>
+      <input type="text" id="sheetsUrl" placeholder="https://script.google.com/macros/s/AAAA.../exec">
+    </div>
+    <div id="evoSyncStatus" class="empty-note" style="margin-bottom:12px;"></div>
+    <div class="results-head" style="margin-bottom:8px;">
+      <h2 style="font-size:13px;">Linha do tempo</h2>
+      <button class="evo-history-toggle" id="evoRefreshBtn" style="margin-top:0; margin-bottom:0;">Atualizar da planilha</button>
+    </div>
+    <div id="evoHistoryToggleWrap"></div>
+    <div id="evolucaoWrap"></div>
+    <button class="btn-clear" id="encerrarLeitoBtn" style="margin-top:10px;">Encerrar leito (novo paciente/episódio)</button>
+    <div class="field" style="margin-top:14px;">
+      <label for="evoAchado">Achado (opcional se for só uma observação)</label>
+      <input type="text" id="evoAchado" placeholder="ex: Vancomicina em nível sub-terapêutico">
+    </div>
+    <div class="field" style="margin-top:10px;">
+      <label for="evoSugestao">Sugestão</label>
+      <input type="text" id="evoSugestao" placeholder="ex: Aumentar dose de manutenção">
+    </div>
+    <div class="field" style="margin-top:10px;">
+      <label for="evoConduta">Conduta do prescritor</label>
+      <input type="text" id="evoConduta" placeholder="ex: Aceito, dose ajustada">
+    </div>
+    <div class="field" style="margin-top:10px;">
+      <label for="evoObs">Observação livre</label>
+      <textarea id="evoObs" placeholder="observações adicionais..."></textarea>
+    </div>
+    <button class="btn-primary" id="evoSaveBtn" style="margin-top:12px;">Registrar entrada manual</button>
+    <div id="evoStatus" style="font-size:12px; color:var(--ink-soft); margin-top:6px;"></div>
+  </section>
+
+</main>
+
+<footer class="disclaimer">
+  Ferramenta de apoio à decisão clínica. Não substitui avaliação farmacêutica e julgamento clínico individualizado. Base de dados curada manualmente — cobertura parcial de medicamentos e interações.
+</footer>
+</div>
+<div class="presc-toast" id="prescToast"></div>
 </div>
 </div><!-- /content -->
 
@@ -1452,7 +1727,7 @@ table.brc tr:last-child td{border-bottom:none;}
 
 <script>
 // ── TABS ─────────────────────────────────────
-const TABS=['calc','abx','pat','pkpd'];
+const TABS=['calc','abx','pat','presc'];
 const tl=document.getElementById('tline');
 const W=100/TABS.length;
 tl.style.width=W+'%';
@@ -1986,5 +2261,1653 @@ if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.ser
   </div>
 </div>
 
+
+<!-- ══════════ SCRIPT PRESCRIÇÃO (Crivo) ══════════ -->
+<script>
+(function(){
+
+  // localStorage helper — persiste a linha do tempo de evolução por leito.
+  const crivoStorage = {
+    async get(key){
+      try{
+        const raw = localStorage.getItem('crivo:' + key);
+        return raw === null ? null : JSON.parse(raw);
+      } catch(e){ return null; }
+    },
+    async set(key, value){
+      try{
+        localStorage.setItem('crivo:' + key, JSON.stringify(value));
+        return true;
+      } catch(e){ return false; }
+    }
+  };
+
+// Renal adjustment table per drug: array of { min, max, dose, note }, where
+// max can be Infinity and min can be 0. 'hd' / 'crrt' are separate flags.
+// EMPTY by default — populated only from verified sources (bula ANVISA / guideline),
+// same workflow as the PharmaCalc fichas. Until populated, the engine reports
+// "ajuste necessário, dado pendente" rather than guessing.
+const DRUGS = {
+  meropenem:            { name:'Meropenem', tags:['antibiotico','carbapenem','renal_ajuste'],
+    renal:[
+      {min:50, max:999, dose:'1 a 2g a cada 8 horas (dose padrão)'},
+      {min:26, max:50, dose:'Mesma dose a cada 12 horas'},
+      {min:10, max:25, dose:'Metade da dose a cada 12 horas'},
+      {min:0, max:9, dose:'Metade da dose a cada 24 horas'},
+    ],
+    dialysis:{
+      cvvh:'500mg a cada 8h ou 1g a cada 8-12h',
+      cvvhd:'500mg a cada 6-8h ou 1g a cada 8-12h',
+      cvvhdf:'500mg a cada 6-8h ou 1g a cada 8-12h',
+      hd:'500mg a cada 24h (nos dias de HD, administrar após a sessão)'
+    },
+    effects:['Convulsões (raras, associadas a dose alta/disfunção renal)','Diarreia associada a C. difficile'],
+    monitor:['Função renal (ClCr)','Sinais neurológicos se dose alta ou disfunção renal']
+  },
+  linezolida:            { name:'Linezolida', tags:['antibiotico','oxazolidinona','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'600mg a cada 12 horas — não é necessário ajuste de dose por função renal segundo o guia ILAS'},
+    ],
+    dialysis:'Não é necessário ajuste de dose (todas as modalidades, segundo o guia ILAS).',
+    effects:['Trombocitopenia (uso prolongado >2 semanas)','Neuropatia periférica/óptica (uso prolongado)','Síndrome serotoninérgica (com ISRS/IMAO)'],
+    monitor:['Hemograma seriado (plaquetas)','Sinais de neuropatia se uso prolongado','Interação serotoninérgica se houver outros fármacos serotoninérgicos']
+  },
+  vancomicina:           { name:'Vancomicina', tags:['antibiotico','glicopeptideo','renal_ajuste','nefrotoxico','nivel_serico'],
+    renal:[
+      {min:50, max:999, dose:'25-30mg/kg ataque, depois 15-20mg/kg/dose a cada 8-12h', note:'Ajustar por nível sérico'},
+      {min:20, max:49, dose:'Após ataque de 25-30mg/kg: 15-20mg/kg/dose a cada 24h (usual 750-1500mg)'},
+      {min:0, max:19, dose:'Intervalos mais longos, conforme concentração sérica'},
+    ],
+    dialysis:{
+      cvvh:'1g a cada 48h ou 10-15mg/kg a cada 24-48h',
+      cvvhd:'1g a cada 24h ou 10-15mg/kg a cada 24h',
+      cvvhdf:'1g a cada 24h ou 7,5-10mg/kg a cada 12h',
+      hd:'500mg-1g ou 5-10mg/kg (administrar depois da sessão de diálise)'
+    },
+    effects:['Nefrotoxicidade (dose/tempo-dependente)','Síndrome do "homem vermelho" (infusão rápida)','Ototoxicidade (rara, geralmente com nível alto)'],
+    monitor:['Função renal seriada','Nível sérico (trough ou AUC-guiada)','Velocidade de infusão']
+  },
+  polimixina_b:          { name:'Polimixina B', tags:['antibiotico','polimixina','nefrotoxico_alto','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'30.000 UI/kg (3mg/kg) ataque, depois 15.000 UI/kg 12/12h — não é necessário ajuste de dose por função renal segundo o guia ILAS'},
+    ],
+    dialysis:'Não é necessário ajuste de dose (todas as modalidades, segundo o guia ILAS).',
+    effects:['Nefrotoxicidade (alta incidência)','Neurotoxicidade (parestesias, tontura, bloqueio neuromuscular em doses altas)'],
+    monitor:['Função renal seriada (creatinina diária em uso prolongado)','Sinais neurológicos']
+  },
+  amicacina:             { name:'Amicacina', tags:['antibiotico','aminoglicosideo','nefrotoxico','ototoxico','renal_ajuste','nivel_serico'],
+    renal:[
+      {min:50, max:999, dose:'15mg/kg/dia a cada 24h (dose padrão) — não é necessário ajuste', note:'Ajustar por nível sérico'},
+      {min:10, max:49, dose:'7,5mg/kg/dose a cada 12 horas', note:'Fonte também cita esquema alternativo por faixa (30-40: 4mg/kg/24h; 20-30: 7,5mg/kg/48h; 10-20: 4mg/kg/48h) — conferir pág. 41 do guia ILAS antes de usar esse esquema alternativo'},
+      {min:0, max:9, dose:'7,5mg/kg/dose a cada 12 horas ou 3mg/kg a cada 72h conforme nível sérico'},
+    ],
+    dialysis:{
+      cvvh:'7,5mg/kg a cada 24-48h',
+      cvvhd:'7,5mg/kg a cada 24-48h',
+      cvvhdf:'7,5mg/kg a cada 24-48h',
+      hd:'5-7,5mg/kg a cada 48-72h (dose extra de 3,25mg/kg após a sessão de HD)'
+    },
+    effects:['Nefrotoxicidade','Ototoxicidade (coclear e vestibular, pode ser irreversível)'],
+    monitor:['Função renal','Nível sérico (pico/vale)','Audição em uso prolongado']
+  },
+  fenitoina:             { name:'Fenitoína', tags:['anticonvulsivante','substrato_cyp2c9','janela_terapeutica_estreita','indutor_enzimatico_potente','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)', note:'Hipoalbuminemia/uremia aumentam a fração livre — considerar nível de fenitoína livre em insuficiência renal.'},
+    ],
+    dialysis:'Não é dialisável de forma significativa (alta ligação proteica); não necessita suplementação em diálise.',
+    effects:['Nistagmo/ataxia (toxicidade)','Hiperplasia gengival (uso crônico)','Hepatotoxicidade','Arritmia com infusão IV rápida'],
+    monitor:['Nível sérico (considerar fração livre se hipoalbuminemia)','ECG se infusão IV rápida']
+  },
+  midazolam:             { name:'Midazolam', tags:['sedativo','cns_depressor','substrato_cyp3a4'], renal:[],
+    effects:['Depressão respiratória','Acúmulo/sedação prolongada em uso contínuo, obesidade ou disfunção hepática/renal','Delirium (uso prolongado)'],
+    monitor:['Escala de sedação (RASS)','Drive respiratório','Rastreio de delirium (CAM-ICU)']
+  },
+  diazepam:              { name:'Diazepam', tags:['sedativo','cns_depressor','benzo_longa_acao','evitar_idoso'], renal:[],
+    effects:['Sedação prolongada (metabólitos ativos de meia-vida longa)','Depressão respiratória','Maior risco de queda/delirium em idosos'],
+    monitor:['Escala de sedação','Nível de consciência','Drive respiratório']
+  },
+  metoclopramida:        { name:'Metoclopramida', tags:['procinetico','antagonista_d2','risco_extrapiramidal'], renal:[],
+    effects:['Reação extrapiramidal (distonia aguda, acatisia)','Sedação','Discinesia tardia (uso prolongado)'],
+    monitor:['Sinais extrapiramidais, especialmente se histórico prévio de reação']
+  },
+  bromoprida:            { name:'Bromoprida', tags:['procinetico','antagonista_d2','risco_extrapiramidal','renal_ajuste_avaliar'], renal:[],
+    effects:['Reação extrapiramidal (distonia aguda, acatisia)','Sedação'],
+    monitor:['Sinais extrapiramidais, especialmente se histórico prévio de reação']
+  },
+  rifampicina:           { name:'Rifampicina', tags:['antiTB','indutor_cyp3a4_potente','hepatotoxico','indutor_enzimatico_potente','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'Não é necessário ajuste renal — eliminação predominantemente biliar/hepática'},
+    ],
+    dialysis:'Não dialisável (alto peso molecular, alta ligação proteica); não necessita suplementação em diálise.',
+    effects:['Hepatotoxicidade','Coloração alaranjada de fluidos corporais (esperado, não patológico)','Indução enzimática ampla — reduz níveis de múltiplos fármacos concomitantes'],
+    monitor:['Transaminases','Nível/efeito de fármacos com interação conhecida (fenitoína, midazolam, fentanil, etc.)']
+  },
+  anfotericina_b:        { name:'Anfotericina B (lipídica)', tags:['antifungico','nefrotoxico','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'3-6mg/kg/dia — não é necessário ajuste de dose por função renal segundo o guia ILAS'},
+    ],
+    dialysis:'Não é necessário ajuste de dose (todas as modalidades, segundo o guia ILAS).',
+    effects:['Hipocalemia (perda renal de potássio induzida pela droga)','Nefrotoxicidade','Febre/calafrios relacionados à infusão','Hipomagnesemia'],
+    monitor:['Potássio e magnésio','Função renal','Sinais/sintomas na infusão']
+  },
+  anfotericina_desoxicolato: { name:'Anfotericina B desoxicolato', tags:['antifungico','nefrotoxico_alto','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'0,5-1mg/kg/dia — não há esquema de ajuste de dose por função renal estabelecido; a nefrotoxicidade é dose-limitante, considerar troca para formulação lipídica se houver piora da função renal'},
+    ],
+    dialysis:'Não é dialisável de forma significativa; não necessita suplementação em diálise.',
+    effects:['Nefrotoxicidade (a mais alta entre as formulações de anfotericina)','Reações relacionadas à infusão (febre, calafrios — mais intensas que as formulações lipídicas)','Hipocalemia/hipomagnesemia'],
+    monitor:['Função renal diária','Potássio e magnésio','Pré-medicação para reações infusionais (antitérmico/anti-histamínico)']
+  },
+  anfotericina_complexo_lipidico: { name:'Anfotericina B complexo lipídico (ABLC)', tags:['antifungico','nefrotoxico','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'5mg/kg/dia — não é necessário ajuste de dose por função renal'},
+    ],
+    dialysis:'Não é dialisável de forma significativa; não necessita suplementação em diálise.',
+    effects:['Nefrotoxicidade (menor que a formulação desoxicolato, porém presente)','Reações relacionadas à infusão (geralmente mais leves que a formulação convencional)','Hipocalemia'],
+    monitor:['Função renal','Potássio e magnésio']
+  },
+  fluconazol:            { name:'Fluconazol', tags:['antifungico','triazol','renal_ajuste','qt'],
+    renal:[
+      {min:50, max:999, dose:'Dose padrão (200-800mg/dia conforme indicação) — não é necessário ajuste'},
+      {min:10, max:49, dose:'50% da dose padrão, no mesmo intervalo'},
+      {min:0, max:9, dose:'50% da dose padrão'},
+    ],
+    dialysis:{ hd:'Administrar 100% da dose padrão após cada sessão de hemodiálise (fármaco significativamente removido por HD)' },
+    effects:['Prolongamento de QT','Hepatotoxicidade','Alopecia e xerose cutânea (uso prolongado)'],
+    monitor:['ECG se outros fatores de risco para QT longo','Transaminases']
+  },
+  itraconazol:           { name:'Itraconazol', tags:['antifungico','triazol','inibidor_cyp3a4_potente','renal_ajuste'],
+    renal:[
+      {min:30, max:999, dose:'Dose padrão via oral — não é necessário ajuste'},
+      {min:0, max:29, dose:'Formulação IV contraindicada (acúmulo do veículo ciclodextrina) — preferir via oral quando possível'},
+    ],
+    effects:['Hepatotoxicidade','Insuficiência cardíaca congestiva (efeito inotrópico negativo — contraindicado em disfunção ventricular)','Interações extensas via CYP3A4'],
+    monitor:['Transaminases','Sinais de insuficiência cardíaca','Revisar interações medicamentosas via CYP3A4']
+  },
+  voriconazol:           { name:'Voriconazol', tags:['antifungico','triazol','inibidor_cyp3a4_potente','qt','renal_ajuste','nivel_serico'],
+    renal:[
+      {min:50, max:999, dose:'Dose padrão via oral ou IV — não é necessário ajuste'},
+      {min:0, max:49, dose:'Preferir via oral (mesma dose); a formulação IV deve ser evitada pelo acúmulo do veículo ciclodextrina (SBECD) — se IV for imprescindível, avaliar risco-benefício com a equipe'},
+    ],
+    dialysis:{ hd:'Não é removido significativamente por HD convencional; a formulação IV segue contraindicada pelo veículo — preferir via oral' },
+    effects:['Alterações visuais transitórias (fotopsia)','Hepatotoxicidade','Alucinações/efeitos neuropsiquiátricos','Fototoxicidade cutânea (uso prolongado)','Prolongamento de QT'],
+    monitor:['Nível sérico (metabolismo variável via CYP2C19)','Transaminases','ECG se outros fatores de risco para QT longo']
+  },
+  micafungina:           { name:'Micafungina', tags:['antifungico','equinocandina'],
+    renal:[
+      {min:0, max:999, dose:'Não é necessário ajuste renal (eliminação predominantemente hepática/biliar)'},
+    ],
+    dialysis:'Não é dialisável de forma significativa; não necessita suplementação em diálise.',
+    effects:['Hepatotoxicidade (elevação de transaminases)','Reações relacionadas à infusão (flushing)','Hemólise (rara)'],
+    monitor:['Transaminases']
+  },
+  flucitosina:           { name:'Flucitosina (5-FC)', tags:['antifungico','renal_ajuste','nivel_serico'],
+    renal:[
+      {min:40, max:999, dose:'25mg/kg a cada 6 horas (dose padrão) — não é necessário ajuste'},
+      {min:20, max:39, dose:'25mg/kg a cada 12 horas'},
+      {min:10, max:19, dose:'25mg/kg a cada 24 horas'},
+      {min:0, max:9, dose:'25-50mg/kg, dose única, guiada por nível sérico'},
+    ],
+    dialysis:{ hd:'25-50mg/kg após cada sessão de hemodiálise (fármaco significativamente removido por HD)' },
+    effects:['Mielotoxicidade (leucopenia/trombocitopenia, dose/nível sérico-dependente)','Hepatotoxicidade','Diarreia'],
+    monitor:['Nível sérico','Hemograma seriado','Função renal']
+  },
+  gentamicina:           { name:'Gentamicina', tags:['antibiotico','aminoglicosideo','nefrotoxico','ototoxico','renal_ajuste'],
+    renal:[
+      {min:60, max:999, dose:'5-7mg/kg/dia a cada 24 horas — não é necessário ajuste'},
+      {min:40, max:59, dose:'Mesma dose, administrar a cada 36 horas'},
+      {min:20, max:39, dose:'Mesma dose, administrar a cada 48 horas'},
+      {min:0, max:19, dose:'Administrar a dose íntegra; doses subsequentes conforme concentração sérica'},
+    ],
+    dialysis:{
+      cvvh:'1,5-2,5mg/kg a cada 24-48h',
+      cvvhd:'1,5-2,5mg/kg a cada 24-48h',
+      cvvhdf:'1,5-2,5mg/kg a cada 24-48h',
+      hd:'1-2mg/kg a cada 48-72h (dose extra de 0,85-1mg/kg após a sessão de HD)'
+    },
+    effects:['Nefrotoxicidade','Ototoxicidade (coclear e vestibular)'],
+    monitor:['Função renal','Nível sérico (pico/vale)','Audição em uso prolongado']
+  },
+  cefepima:              { name:'Cefepima', tags:['antibiotico','cefalosporina','renal_ajuste','neurotoxico'],
+    renal:[
+      {min:60, max:999, dose:'2g a cada 8-12 horas — não é necessário ajuste'},
+      {min:30, max:59, dose:'Mesma dose a cada 12 horas'},
+      {min:11, max:29, dose:'Metade da dose a cada 12 horas'},
+      {min:0, max:10, dose:'Metade da dose a cada 24 horas'},
+    ],
+    dialysis:{
+      cvvh:'1-2g a cada 12h',
+      cvvhd:'1g a cada 8h ou 2g a cada 12h',
+      cvvhdf:'1g a cada 8h ou 2g a cada 12h',
+      hd:'500-1000mg a cada 24h (dose extra de 1g após a sessão de HD)'
+    },
+    effects:['Neurotoxicidade (encefalopatia, mioclonias, convulsões — sobretudo com acúmulo por disfunção renal)','Diarreia associada a C. difficile'],
+    monitor:['Função renal','Estado mental/neurológico, especialmente se dose não ajustada']
+  },
+  ceftriaxona:           { name:'Ceftriaxona', tags:['antibiotico','cefalosporina','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'1-2g a cada 12-24 horas — não é necessário ajuste de dose por função renal segundo o guia ILAS'},
+    ],
+    dialysis:'Não é necessário ajuste de dose (todas as modalidades, segundo o guia ILAS).',
+    effects:['Pseudolitíase biliar (sludge biliar)','Diarreia associada a C. difficile','Risco de precipitação com soluções contendo cálcio (relevante em neonatos)'],
+    monitor:['Sinais de colestase em uso prolongado']
+  },
+  ceftazidima_avibactam: { name:'Ceftazidima + Avibactam', tags:['antibiotico','cefalosporina','inibidor_betalactamase','renal_ajuste'],
+    renal:[
+      {min:50, max:90, dose:'2,5g a cada 8 horas (dose padrão)'},
+      {min:31, max:50, dose:'1,25g a cada 8 horas'},
+      {min:16, max:30, dose:'0,94g a cada 12 horas'},
+      {min:6, max:15, dose:'0,94g a cada 24 horas'},
+      {min:0, max:5, dose:'0,94g a cada 48 horas'},
+    ],
+    dialysis:{ hd:'0,94g a cada 48 horas (administrar após a sessão de HD)' },
+    effects:['Diarreia associada a C. difficile','Convulsões/neurotoxicidade em disfunção renal não ajustada (efeito de classe cefalosporina)','Reações de hipersensibilidade'],
+    monitor:['Função renal (ajuste de dose)','Estado neurológico se dose não ajustada']
+  },
+  aztreonam:             { name:'Aztreonam', tags:['antibiotico','monobactamico','renal_ajuste'],
+    renal:[
+      {min:30, max:999, dose:'Dose padrão (1-2g a cada 6-12h, conforme gravidade) — não é necessário ajuste'},
+      {min:10, max:29, dose:'Dose de ataque plena, depois reduzir a manutenção para 50% da dose usual, no mesmo intervalo'},
+      {min:0, max:9, dose:'Dose de ataque plena, depois reduzir a manutenção para 25% da dose usual, no mesmo intervalo'},
+    ],
+    dialysis:{ hd:'Manter as doses de manutenção da faixa <10 mL/min; em infecções graves, administrar dose extra de 1/8 da dose de ataque após cada sessão de HD' },
+    effects:['Geralmente bem tolerado — baixo potencial de alergia cruzada com penicilinas/cefalosporinas','Flebite no local de infusão','Elevação transitória de transaminases'],
+    monitor:['Função renal (ajuste de dose)']
+  },
+  ceftazidima:           { name:'Ceftazidima', tags:['antibiotico','cefalosporina','renal_ajuste'],
+    renal:[
+      {min:50, max:999, dose:'2g a cada 8 horas (dose padrão) — não é necessário ajuste'},
+      {min:31, max:50, dose:'1g a cada 12 horas'},
+      {min:16, max:30, dose:'1g a cada 24 horas'},
+      {min:6, max:15, dose:'500mg a cada 24 horas'},
+      {min:0, max:5, dose:'500mg a cada 48 horas'},
+    ],
+    dialysis:{
+      cvvh:'1-2g a cada 12h',
+      cvvhd:'1g a cada 8h ou 2g a cada 12h',
+      cvvhdf:'1g a cada 8h ou 2g a cada 12h',
+      hd:'2g a cada 24h (dose extra de 1g após a sessão de HD)'
+    },
+    effects:['Neurotoxicidade em disfunção renal não ajustada (menos frequente que cefepima)','Diarreia associada a C. difficile'],
+    monitor:['Função renal']
+  },
+  ampicilina_sulbactam:  { name:'Ampicilina + Sulbactam', tags:['antibiotico','betalactamico','renal_ajuste'], renal:[],
+    effects:['Rash cutâneo','Diarreia','Flebite no local de infusão'],
+    monitor:['Função renal','Sinais de reação alérgica']
+  },
+  amoxicilina_clavulanato:{ name:'Amoxicilina + Clavulanato', tags:['antibiotico','betalactamico','renal_ajuste'], renal:[],
+    effects:['Hepatotoxicidade colestática (pode surgir semanas após o término do uso)','Diarreia'],
+    monitor:['Transaminases/bilirrubina se uso prolongado']
+  },
+  piperacilina_tazobactam:{ name:'Piperacilina + Tazobactam', tags:['antibiotico','betalactamico','renal_ajuste'],
+    renal:[
+      {min:40, max:999, dose:'4,5g a cada 6-8 horas (dose padrão) — não é necessário ajuste'},
+      {min:20, max:40, dose:'4,5g a cada 8 horas ou 3,375g a cada 6 horas'},
+      {min:0, max:19, dose:'4,5g a cada 12 horas ou 2,25g a cada 6 horas'},
+    ],
+    dialysis:{
+      cvvh:'2,25-3,375g a cada 6-8h',
+      cvvhd:'2,25-3,375g a cada 6h',
+      cvvhdf:'3,375g a cada 6h',
+      hd:'2,25g a cada 8-12h (dose extra de 0,75g após a sessão de HD)'
+    },
+    effects:['Nefrotoxicidade (especialmente em associação com vancomicina)','Neutropenia em uso prolongado','Hipocalemia'],
+    monitor:['Função renal','Hemograma em uso prolongado','Potássio']
+  },
+  levofloxacino:         { name:'Levofloxacino', tags:['antibiotico','quinolona','renal_ajuste','qt'],
+    renal:[
+      {min:20, max:49, dose:'Esquema 750mg/dia: 750mg a cada 48h. Esquema 500mg/dia: 500mg dose inicial, depois 250mg a cada 24h'},
+      {min:10, max:19, dose:'Esquema 750mg/dia: 750mg inicial, depois 500mg a cada 48h. Esquema 500mg/dia: 500mg dose inicial, depois 250mg a cada 48h'},
+      {min:50, max:999, dose:'500-750mg a cada 24 horas (dose padrão) — não é necessário ajuste'},
+    ],
+    dialysis:{
+      cvvh:'250mg a cada 24h',
+      cvvhd:'250-500mg a cada 24h',
+      cvvhdf:'250-750mg a cada 24h',
+      hd:'500mg a cada 48h (administrar após a sessão de diálise)'
+    },
+    effects:['Prolongamento de QT','Tendinite/ruptura de tendão','Neuropatia periférica','Disglicemia (hipo ou hiperglicemia)'],
+    monitor:['ECG se outros fatores de risco para QT longo','Glicemia']
+  },
+  ciprofloxacino:        { name:'Ciprofloxacino', tags:['antibiotico','quinolona','renal_ajuste','qt'], renal:[],
+    effects:['Prolongamento de QT','Tendinite/ruptura de tendão','Neuropatia periférica','Redução do limiar convulsivo'],
+    monitor:['ECG se outros fatores de risco para QT longo']
+  },
+  smx_tmp:               { name:'Sulfametoxazol-Trimetoprima', tags:['antibiotico','renal_ajuste','nefrotoxico_leve','hipercalemia'], renal:[],
+    effects:['Hipercalemia (efeito poupador de potássio da trimetoprima)','Nefrotoxicidade leve','Rash cutâneo / Stevens-Johnson (raro)','Mielossupressão em uso prolongado'],
+    monitor:['Potássio','Função renal','Hemograma se uso prolongado']
+  },
+  metronidazol:          { name:'Metronidazol', tags:['antibiotico','renal_ajuste_hepatico','renal_ajuste'],
+    renal:[
+      {min:10, max:999, dose:'500mg a cada 6-8 horas — não é necessário ajuste'},
+      {min:0, max:9, dose:'Considerar redução de 50% da dose a cada 12 horas (fora de diálise)'},
+    ],
+    dialysis:'Não é necessário ajuste de dose (todas as modalidades, segundo o guia ILAS).',
+    effects:['Neuropatia periférica (uso prolongado)','Efeito dissulfiram-like com álcool','Gosto metálico'],
+    monitor:['Sinais neurológicos em uso prolongado']
+  },
+  claritromicina:        { name:'Claritromicina', tags:['antibiotico','macrolideo','qt','renal_ajuste','inibidor_cyp3a4'],
+    renal:[
+      {min:30, max:999, dose:'500mg a cada 12 horas — não é necessário ajuste'},
+      {min:0, max:29, dose:'Reduzir a dose em 50%'},
+    ],
+    dialysis:{
+      cvvh:'500mg a cada 12-24h',
+      cvvhd:'500mg a cada 12-24h',
+      cvvhdf:'500mg a cada 12-24h',
+      hd:'500mg a cada 24h (administrar após a sessão de HD)'
+    },
+    effects:['Prolongamento de QT','Alterações do paladar (gosto metálico)','Hepatotoxicidade','Inibidor potente de CYP3A4 — risco de toxicidade de estatinas, tacrolimo, entre outros'],
+    monitor:['ECG se outros fatores de risco para QT longo','Revisar interações medicamentosas via CYP3A4 (estatinas, tacrolimo, varfarina)']
+  },
+  azitromicina:          { name:'Azitromicina', tags:['antibiotico','macrolideo','qt'], renal:[],
+    effects:['Prolongamento de QT','Hepatotoxicidade (rara)','Ototoxicidade (rara, uso prolongado/altas doses)'],
+    monitor:['ECG se outros fatores de risco para QT longo']
+  },
+  daptomicina:           { name:'Daptomicina', tags:['antibiotico','renal_ajuste'], renal:[],
+    effects:['Miopatia/rabdomiólise (elevação de CPK)','Pneumonia eosinofílica (rara — não usar em pneumonia, droga inativada pelo surfactante)'],
+    monitor:['CPK semanal']
+  },
+  tigeciclina:           { name:'Tigeciclina', tags:['antibiotico'], renal:[],
+    effects:['Náusea/vômito frequentes','Pancreatite (rara)','Coagulopatia em uso prolongado'],
+    monitor:['Sinais de pancreatite se dor abdominal','Coagulograma em uso prolongado']
+  },
+  isoniazida:            { name:'Isoniazida', tags:['antiTB','inibidor_cyp2c9','hepatotoxico','renal_ajuste'],
+    renal:[
+      {min:50, max:999, dose:'Dose padrão — não é necessário ajuste'},
+      {min:10, max:49, dose:'Manter 100% da dose ou considerar redução para 75%', note:'Fontes divergem: parte da literatura considera desnecessário ajuste (eliminação predominantemente hepática); tabela de referência brasileira (SOPTERJ) recomenda cautela nessa faixa.'},
+      {min:0, max:9, dose:'Considerar redução para 50% da dose', note:'Fontes divergem — ver nota acima.'},
+    ],
+    dialysis:'Eliminação predominantemente hepática — não é necessário suplementação após hemodiálise segundo diretrizes brasileiras de TB.',
+    effects:['Hepatotoxicidade','Neuropatia periférica (por deficiência de piridoxina induzida pela droga)'],
+    monitor:['Transaminases','Considerar piridoxina profilática']
+  },
+  pirazinamida:          { name:'Pirazinamida', tags:['antiTB','hepatotoxico','renal_ajuste'],
+    renal:[
+      {min:30, max:999, dose:'Dose diária padrão — não é necessário ajuste'},
+      {min:0, max:29, dose:'Manter a dose habitual, mas administrar 3x por semana (intervalo estendido)', note:'Preferencialmente administrar após a sessão de hemodiálise, se aplicável, conforme protocolo brasileiro de TB.'},
+    ],
+    dialysis:'Administrar após a sessão de hemodiálise; sem necessidade de dose suplementar nesse esquema.',
+    effects:['Hepatotoxicidade','Hiperuricemia/artralgia'],
+    monitor:['Transaminases','Ácido úrico se sintomas articulares']
+  },
+  etambutol:             { name:'Etambutol', tags:['antiTB','renal_ajuste'],
+    renal:[
+      {min:30, max:999, dose:'Dose diária padrão — não é necessário ajuste'},
+      {min:0, max:29, dose:'Manter a dose habitual, mas administrar 3x por semana (intervalo estendido)', note:'Preferencialmente administrar após a sessão de hemodiálise, se aplicável, conforme protocolo brasileiro de TB. Fonte alternativa (SOPTERJ) sugere reduzir a dose em 50% nessa faixa em vez de estender intervalo.'},
+    ],
+    dialysis:'Sem necessidade de suplementação adicional se administrado após a sessão de hemodiálise.',
+    effects:['Neurite óptica (dose-dependente)'],
+    monitor:['Acuidade visual e discriminação de cores, especialmente em uso prolongado ou disfunção renal']
+  },
+  carbamazepina:         { name:'Carbamazepina', tags:['anticonvulsivante','janela_terapeutica_estreita','indutor_enzimatico_potente','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'},
+    ],
+    effects:['Leucopenia/agranulocitose (rara, porém grave)','Hiponatremia (SIADH)','Hepatotoxicidade','Reações cutâneas graves — Stevens-Johnson/DRESS (associadas a HLA-B*1502, mais relevante em população asiática)','Ataxia/diplopia (sinais de toxicidade)'],
+    monitor:['Hemograma','Sódio','Transaminases','Nível sérico']
+  },
+  acido_valproico:       { name:'Ácido Valproico', tags:['anticonvulsivante','janela_terapeutica_estreita','hepatotoxico','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'},
+    ],
+    dialysis:'Baixa remoção por diálise (alta ligação proteica); não necessita suplementação.',
+    effects:['Trombocitopenia e disfunção plaquetária (dose-dependente)','Hepatotoxicidade','Hiperamonemia (mesmo com transaminases normais)','Pancreatite (rara)'],
+    monitor:['Hemograma (plaquetas)','Transaminases','Nível sérico (janela terapêutica estreita)','Amônia se alteração do sensório']
+  },
+  fenobarbital:          { name:'Fenobarbital', tags:['anticonvulsivante','indutor_enzimatico','cns_depressor','indutor_enzimatico_potente','renal_ajuste'],
+    renal:[
+      {min:10, max:999, dose:'Dose padrão'},
+      {min:0, max:9, dose:'Usar doses menores (TFG <10 mL/min)'},
+    ],
+    dialysis:'Dose suplementar recomendada após hemodiálise ou diálise peritoneal, para manter níveis terapêuticos (fármaco dialisável).',
+    effects:['Sedação','Depressão respiratória em dose alta','Indução enzimática ampla'],
+    monitor:['Nível de consciência','Nível sérico']
+  },
+  levetiracetam:         { name:'Levetiracetam', tags:['anticonvulsivante','renal_ajuste'],
+    renal:[
+      {min:80, max:999, dose:'500-1500mg a cada 12 horas (dose padrão)'},
+      {min:50, max:79, dose:'500-1000mg a cada 12 horas'},
+      {min:30, max:49, dose:'250-750mg a cada 12 horas'},
+      {min:0, max:29, dose:'250-500mg a cada 12 horas'},
+    ],
+    dialysis:{ hd:'500-1000mg a cada 24 horas + dose suplementar de 250-500mg após a sessão de hemodiálise (remove ~50% do fármaco)' },
+    effects:['Alterações comportamentais/irritabilidade','Sonolência'],
+    monitor:['Sinais neuropsiquiátricos']
+  },
+  propofol:              { name:'Propofol', tags:['sedativo','cns_depressor'], renal:[],
+    effects:['Hipotensão','Síndrome da infusão de propofol (dose alta/uso prolongado — acidose metabólica, rabdomiólise, arritmia)','Hipertrigliceridemia'],
+    monitor:['Triglicerídeos em uso prolongado','CPK e gasometria se suspeita de síndrome da infusão','Pressão arterial']
+  },
+  cetamina:              { name:'Cetamina', tags:['sedativo','cns_depressor'], renal:[],
+    effects:['Alucinações/agitação ao despertar','Hipertensão/taquicardia','Sialorreia'],
+    monitor:['Pressão arterial','Nível de sedação/agitação']
+  },
+  dexmedetomidina:       { name:'Dexmedetomidina (Precedex)', tags:['sedativo','alfa2_agonista','cns_depressor'], renal:[],
+    effects:['Bradicardia','Hipotensão'],
+    monitor:['Frequência cardíaca e pressão arterial']
+  },
+  morfina:               { name:'Morfina', tags:['opioide','cns_depressor','renal_ajuste'], renal:[],
+    effects:['Depressão respiratória','Constipação','Liberação de histamina (prurido, hipotensão)','Acúmulo de metabólito ativo em disfunção renal'],
+    monitor:['Drive respiratório','Função renal','Trânsito intestinal']
+  },
+  fentanil:              { name:'Fentanil', tags:['opioide','cns_depressor','substrato_cyp3a4'], renal:[],
+    effects:['Depressão respiratória','Rigidez torácica (dose alta/infusão rápida)','Tolerância/hiperalgesia em uso prolongado'],
+    monitor:['Drive respiratório']
+  },
+  metadona:              { name:'Metadona', tags:['opioide','cns_depressor','qt'], renal:[],
+    effects:['Prolongamento de QT (dose-dependente)','Depressão respiratória','Acúmulo por meia-vida longa e variável entre indivíduos'],
+    monitor:['ECG (QT), especialmente em doses altas ou associação a outros QT-prolongadores','Drive respiratório','Nível de sedação']
+  },
+  hidralazina:           { name:'Hidralazina', tags:['anti_hipertensivo','vasodilatador_direto','renal_ajuste'],
+    renal:[
+      {min:30, max:999, dose:'Dose padrão — sem ajuste específico publicado'},
+      {min:0, max:29, dose:'Ajustar a dose ou o intervalo conforme resposta clínica, para evitar acúmulo (disfunção renal moderada a grave)'},
+    ],
+    effects:['Síndrome lupus-like (uso prolongado, mais frequente em doses >100mg/dia)','Taquicardia reflexa','Cefaleia, rubor facial','Neurite periférica (rara, pode responder à piridoxina)'],
+    monitor:['Frequência cardíaca e pressão arterial','Sinais de síndrome lupus-like em uso prolongado']
+  },
+  clonidina:             { name:'Clonidina', tags:['anti_hipertensivo','alfa2_agonista','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'Ajustar individualmente conforme resposta anti-hipertensiva', note:'Variações importantes de resposta em insuficiência renal — monitorização cuidadosa recomendada pela bula. Sem faixas numéricas específicas por ClCr publicadas.'},
+    ],
+    dialysis:'Não é necessária dose suplementar após hemodiálise — a clonidina não é significativamente dialisável (remoção de 0-5%).',
+    effects:['Hipotensão','Bradicardia','Rebote hipertensivo em suspensão abrupta'],
+    monitor:['Pressão arterial e frequência cardíaca','Evitar suspensão abrupta']
+  },
+  quetiapina:            { name:'Quetiapina', tags:['antipsicotico','qt','cns_depressor'], renal:[],
+    effects:['Prolongamento de QT','Sedação','Hipotensão ortostática'],
+    monitor:['ECG se outros fatores de risco para QT longo']
+  },
+  haloperidol:           { name:'Haloperidol', tags:['antipsicotico','qt','risco_extrapiramidal'], renal:[],
+    effects:['Prolongamento de QT','Reação extrapiramidal','Síndrome neuroléptica maligna (rara)'],
+    monitor:['ECG','Sinais extrapiramidais']
+  },
+  ondansetrona:          { name:'Ondansetrona', tags:['antiemetico','qt'], renal:[],
+    effects:['Prolongamento de QT','Cefaleia','Constipação'],
+    monitor:['ECG se outros fatores de risco para QT longo']
+  },
+  domperidona:           { name:'Domperidona', tags:['procinetico','antagonista_d2','qt'], renal:[],
+    effects:['Prolongamento de QT','Hiperprolactinemia'],
+    monitor:['ECG se outros fatores de risco para QT longo']
+  },
+  baclofeno:             { name:'Baclofeno', tags:['relaxante_muscular','cns_depressor','renal_ajuste'], renal:[],
+    effects:['Sedação','Depressão respiratória em dose alta ou disfunção renal (eliminação predominantemente renal)','Síndrome de abstinência em suspensão abrupta'],
+    monitor:['Nível de consciência','Função renal','Evitar suspensão abrupta']
+  },
+  furosemida:            { name:'Furosemida', tags:['diuretico_alca','potencializa_ototoxicidade'], renal:[],
+    effects:['Hipocalemia','Hiponatremia','Ototoxicidade (dose alta/infusão rápida, sobretudo associada a aminoglicosídeo)','Alcalose metabólica'],
+    monitor:['Eletrólitos (K, Na, Mg)','Função renal','Balanço hídrico']
+  },
+  dolutegravir:          { name:'Dolutegravir', tags:['antirretroviral','susceptivel_inducao','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'50mg — não é necessário ajuste de dose por função renal'},
+    ],
+    effects:['Cefaleia','Insônia','Elevação de transaminases (rara)'],
+    monitor:['Adesão/continuidade do esquema antirretroviral']
+  },
+  abacavir:              { name:'Abacavir (ABC)', tags:['antirretroviral','intr','renal_ajuste'],
+    renal:[
+      {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'},
+    ],
+    effects:['Reação de hipersensibilidade grave (associada a HLA-B*5701 — rastrear antes de iniciar)','Risco cardiovascular aumentado (dados observacionais)'],
+    monitor:['Rastreio de HLA-B*5701 antes do início','Sinais de hipersensibilidade (febre, rash, sintomas GI/respiratórios) nas primeiras semanas']
+  },
+  didanosina:            { name:'Didanosina (ddI)', tags:['antirretroviral','intr','renal_ajuste'], renal:[],
+    effects:['Pancreatite','Neuropatia periférica','Acidose láctica/esteatose hepática (efeito de classe NRTI)'],
+    monitor:['Amilase/lipase se dor abdominal','Sinais de neuropatia periférica']
+  },
+  zidovudina:            { name:'Zidovudina (AZT)', tags:['antirretroviral','intr','renal_ajuste'], renal:[],
+    effects:['Mielotoxicidade (anemia, neutropenia — efeito adverso clássico)','Miopatia (uso prolongado)','Cefaleia, astenia'],
+    monitor:['Hemograma seriado']
+  },
+  estavudina:            { name:'Estavudina (d4T)', tags:['antirretroviral','intr','renal_ajuste'], renal:[],
+    effects:['Neuropatia periférica','Lipodistrofia (uso prolongado)','Acidose láctica/esteatose hepática (efeito de classe NRTI)','Pancreatite'],
+    monitor:['Sinais de neuropatia periférica']
+  },
+  efavirenz:             { name:'Efavirenz (EFZ)', tags:['antirretroviral','inntr'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'} ],
+    effects:['Efeitos no SNC (tontura, sonhos vívidos, insônia — geralmente nas primeiras semanas)','Sintomas psiquiátricos (ideação suicida, depressão — uso com cautela em histórico psiquiátrico)','Hepatotoxicidade','Rash cutâneo'],
+    monitor:['Sintomas neuropsiquiátricos, especialmente nas primeiras semanas','Transaminases']
+  },
+  nevirapina:            { name:'Nevirapina (NVP)', tags:['antirretroviral','inntr'],
+    renal:[ {min:20, max:999, dose:'Não é necessário ajuste renal'}, {min:0, max:19, dose:'Dose suplementar de 200mg após cada sessão de hemodiálise'} ],
+    effects:['Hepatotoxicidade grave (incluindo hepatite fulminante — mais comum nas primeiras semanas)','Reações cutâneas graves (Stevens-Johnson/DRESS)'],
+    monitor:['Transaminases nas primeiras semanas','Sinais de reação cutânea grave']
+  },
+  etravirina:            { name:'Etravirina (ETR)', tags:['antirretroviral','inntr'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'} ],
+    effects:['Rash cutâneo','Hepatotoxicidade','Náusea'],
+    monitor:['Transaminases']
+  },
+  atazanavir:            { name:'Atazanavir (ATV)', tags:['antirretroviral','ip','inibidor_cyp3a4_potente'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática); nefrolitíase é efeito adverso, não indicação de ajuste'} ],
+    effects:['Hiperbilirrubinemia indireta (icterícia benigna, muito comum)','Nefrolitíase','Prolongamento de intervalo PR','Inibidor potente de CYP3A4 — múltiplas interações relevantes'],
+    monitor:['Bilirrubina (esperado elevar — diferenciar de hepatotoxicidade)','ECG se outros fatores de risco para arritmia','Revisar interações via CYP3A4']
+  },
+  darunavir:             { name:'Darunavir (DRV)', tags:['antirretroviral','ip'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática); geralmente associado a ritonavir como potencializador'} ],
+    effects:['Rash cutâneo (contém grupamento sulfa — cautela em alergia a sulfa)','Hepatotoxicidade','Hiperlipidemia'],
+    monitor:['Transaminases','Perfil lipídico']
+  },
+  fosamprenavir:         { name:'Fosamprenavir (FPV)', tags:['antirretroviral','ip'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'} ],
+    effects:['Rash cutâneo (contém grupamento sulfa)','Efeitos gastrointestinais','Hiperlipidemia'],
+    monitor:['Perfil lipídico']
+  },
+  ritonavir:             { name:'Ritonavir (RTV)', tags:['antirretroviral','ip','inibidor_cyp3a4_potente'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'} ],
+    effects:['Inibidor extremamente potente de CYP3A4 — usado propositalmente como potencializador farmacocinético, mas gera risco alto de interação','Efeitos gastrointestinais (náusea, diarreia)','Parestesias perioral','Dislipidemia'],
+    monitor:['Revisar cuidadosamente todas as interações via CYP3A4 antes de associar qualquer fármaco novo']
+  },
+  lopinavir_ritonavir:   { name:'Lopinavir + Ritonavir', tags:['antirretroviral','ip','inibidor_cyp3a4_potente','qt'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'} ],
+    effects:['Prolongamento de QT e PR','Efeitos gastrointestinais (diarreia é comum)','Dislipidemia','Inibidor potente de CYP3A4 (via ritonavir)'],
+    monitor:['ECG se outros fatores de risco para QT longo','Perfil lipídico']
+  },
+  saquinavir:            { name:'Saquinavir (SQV)', tags:['antirretroviral','ip','qt'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'} ],
+    effects:['Prolongamento de QT e PR — contraindicado com outros QT-prolongadores ou distúrbio de condução prévio','Efeitos gastrointestinais'],
+    monitor:['ECG basal obrigatório antes do início e durante o uso']
+  },
+  tipranavir:            { name:'Tipranavir (TPV)', tags:['antirretroviral','ip','inibidor_cyp3a4_potente'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal (metabolização hepática)'} ],
+    effects:['Hepatotoxicidade grave (alerta de tarja preta)','Hemorragia intracraniana (rara, mais descrita com uso prolongado)','Rash cutâneo (contém grupamento sulfa)'],
+    monitor:['Transaminases','Sinais neurológicos']
+  },
+  enfuvirtida:           { name:'Enfuvirtida (T20)', tags:['antirretroviral','inibidor_fusao'], renal:[],
+    effects:['Reações no local de injeção (muito comuns — nódulos, dor, eritema)','Reação de hipersensibilidade sistêmica (rara)','Aumento da incidência de pneumonia bacteriana (observado em estudos)'],
+    monitor:['Sítios de aplicação (rodízio recomendado)']
+  },
+  maraviroque:           { name:'Maraviroque (MRV)', tags:['antirretroviral','antagonista_ccr5'],
+    renal:[ {min:0, max:999, dose:'Requer ajuste apenas se associado a inibidores potentes de CYP3A4 e disfunção renal concomitante — avaliar caso a caso'} ],
+    effects:['Hepatotoxicidade (pode ser precedida de reação alérgica sistêmica)','Hipotensão postural','Tontura'],
+    monitor:['Transaminases','Requer teste de tropismo viral (uso exclusivo em vírus CCR5-trópico)']
+  },
+  raltegravir:           { name:'Raltegravir (RAL)', tags:['antirretroviral'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal'} ],
+    effects:['Elevação de CPK/miopatia (rara)','Rash cutâneo','Cefaleia'],
+    monitor:['CPK se mialgia/fraqueza muscular']
+  },
+  piridoxina:            { name:'Piridoxina (Vitamina B6)', tags:['vitamina'],
+    renal:[ {min:0, max:999, dose:'Não é necessário ajuste renal'} ],
+    effects:['Geralmente bem tolerada','Neuropatia sensitiva com doses muito altas e uso crônico (raro nas doses profiláticas)'],
+    monitor:['Sem monitorização específica nas doses profiláticas usuais (associada à isoniazida para prevenir neuropatia)']
+  },
+  aciclovir:             { name:'Aciclovir', tags:['antiviral','renal_ajuste','nefrotoxico_leve'],
+    renal:[
+      {min:50, max:999, dose:'Dose padrão a cada 8 horas (IV) — não é necessário ajuste'},
+      {min:25, max:49, dose:'Mesma dose a cada 12 horas'},
+      {min:10, max:24, dose:'Mesma dose a cada 24 horas'},
+      {min:0, max:9, dose:'Metade da dose a cada 24 horas'},
+    ],
+    dialysis:{ hd:'Administrar a dose da faixa <10 mL/min após a sessão de hemodiálise (fármaco significativamente removido por HD)' },
+    effects:['Nefrotoxicidade (cristalúria/nefropatia obstrutiva — risco maior com infusão rápida e desidratação)','Neurotoxicidade (confusão, tremor — mais comum em disfunção renal/dose não ajustada)','Flebite no local de infusão'],
+    monitor:['Função renal seriada','Hidratação adequada e infusão lenta (≥1h) para reduzir risco de cristalúria','Estado neurológico se dose não ajustada']
+  },
+  tenofovir:             { name:'Tenofovir', tags:['antirretroviral','nefrotoxico_leve','renal_ajuste'],
+    renal:[
+      {min:50, max:999, dose:'300mg a cada 24 horas (dose padrão)'},
+      {min:30, max:49, dose:'300mg a cada 48 horas'},
+      {min:10, max:29, dose:'300mg 2x/semana (a cada 72-96h)'},
+    ],
+    dialysis:{ hd:'300mg a cada 7 dias, ou após completar uma sessão de hemodiálise (~12h de diálise cumulativa)' },
+    effects:['Nefrotoxicidade (tubulopatia renal)','Redução de densidade mineral óssea (uso crônico)'],
+    monitor:['Função renal','Fósforo sérico']
+  },
+  lamivudina:            { name:'Lamivudina', tags:['antirretroviral','renal_ajuste'],
+    renal:[
+      {min:50, max:999, dose:'150mg a cada 12h ou 300mg 1x/dia (dose padrão)'},
+      {min:30, max:49, dose:'150mg 1x/dia'},
+      {min:15, max:29, dose:'150mg dose inicial, depois 100mg 1x/dia'},
+      {min:5, max:14, dose:'150mg dose inicial, depois 50mg 1x/dia'},
+      {min:0, max:4, dose:'50mg dose inicial, depois 25mg 1x/dia'},
+    ],
+    dialysis:'Administrar a dose correspondente à faixa mais baixa de ClCr preferencialmente após a sessão de hemodiálise.',
+    effects:['Geralmente bem tolerada','Pancreatite (rara)','Acidose láctica (rara, classe NRTI)'],
+    monitor:['Função renal (ajuste de dose)','Adesão/continuidade do esquema antirretroviral']
+  },
+  noradrenalina:         { name:'Noradrenalina', tags:['vasopressor'], renal:[],
+    effects:['Isquemia periférica/necrose tecidual em extravasamento','Arritmia','Hipertensão'],
+    monitor:['Perfusão periférica e local de infusão (idealmente via central)','Pressão arterial e frequência cardíaca']
+  },
+  amiodarona:            { name:'Amiodarona', tags:['antiarritmico','qt','indutor_inibidor_multiplo'], renal:[],
+    effects:['Prolongamento de QT','Disfunção tireoidiana (hipo ou hipertireoidismo)','Hepatotoxicidade','Toxicidade pulmonar (uso crônico)','Bradicardia'],
+    monitor:['ECG','Função tireoidiana e hepática em uso prolongado']
+  },
+  nitroprussiato:        { name:'Nitroprussiato de sódio', tags:['vasodilatador'], renal:[],
+    effects:['Hipotensão','Toxicidade por cianeto/tiocianato (uso prolongado, dose alta, disfunção renal/hepática)'],
+    monitor:['Pressão arterial contínua','Sinais de toxicidade por cianeto (acidose lática) em uso prolongado/dose alta','Função renal e hepática']
+  },
+  nitroglicerina:        { name:'Nitroglicerina', tags:['vasodilatador'], renal:[],
+    effects:['Hipotensão','Cefaleia','Taquifilaxia em infusão contínua prolongada'],
+    monitor:['Pressão arterial e frequência cardíaca']
+  },
+  tiamina:               { name:'Tiamina (Vitamina B1)', tags:['vitamina'], renal:[],
+    effects:['Geralmente bem tolerada','Reação anafilactoide rara com infusão IV rápida'],
+    monitor:['Sinais de encefalopatia de Wernicke se reposição tardia ou inadequada']
+  },
+  neostigmina:           { name:'Neostigmina', tags:['anticolinesterasico'], renal:[],
+    effects:['Bradicardia/bloqueio AV','Broncoespasmo','Hipersecreção (salivação, secreção brônquica)','Cólica abdominal/diarreia'],
+    monitor:['Frequência cardíaca e ritmo (associação com atropina/glicopirrolato é prática comum)','Função respiratória']
+  },
+  escopolamina:          { name:'Escopolamina (Hioscina)', tags:['anticolinergico'], renal:[],
+    effects:['Efeitos anticolinérgicos (boca seca, retenção urinária, taquicardia)','Confusão/delirium (sobretudo em idosos)','Constipação'],
+    monitor:['Rastreio de delirium em idosos','Trânsito intestinal e diurese']
+  },
+  enoxaparina:           { name:'Enoxaparina', tags:['anticoagulante','profilaxia_tvp','renal_ajuste'], renal:[],
+    effects:['Sangramento','Trombocitopenia induzida por heparina (rara, mas monitorar)','Hematoma espinhal se associado a procedimento neuroaxial'],
+    monitor:['Sinais de sangramento','Plaquetas (rastreio de HIT)','Função renal (relevante para ajuste de dose)']
+  },
+  omeprazol:             { name:'Omeprazol', tags:['ibp','profilaxia_ulcera'], renal:[],
+    effects:['Hipomagnesemia (uso prolongado)','Maior risco de infecção entérica/pneumonia associada a cuidados de saúde (uso prolongado)','Deficiência de B12 (uso crônico)'],
+    monitor:['Magnésio em uso prolongado','Reavaliar periodicamente a necessidade de manter a profilaxia']
+  },
+  prednisona:            { name:'Prednisona', tags:['corticosteroide'], renal:[],
+    effects:['Hiperglicemia','Imunossupressão','Insônia/alterações de humor','Miopatia (uso prolongado)','Supressão do eixo hipotálamo-hipófise-adrenal (uso prolongado)'],
+    monitor:['Glicemia','Sinais de infecção','Necessidade de desmame gradual em uso prolongado']
+  },
+  metilprednisolona:     { name:'Metilprednisolona', tags:['corticosteroide'], renal:[],
+    effects:['Hiperglicemia','Imunossupressão','Miopatia (uso prolongado, sobretudo associada a bloqueador neuromuscular)','Supressão do eixo hipotálamo-hipófise-adrenal (uso prolongado)'],
+    monitor:['Glicemia','Sinais de infecção','Necessidade de desmame gradual em uso prolongado']
+  },
+  dexametasona:          { name:'Dexametasona', tags:['corticosteroide'], renal:[],
+    effects:['Hiperglicemia','Imunossupressão','Insônia/alterações de humor','Supressão do eixo hipotálamo-hipófise-adrenal (uso prolongado)'],
+    monitor:['Glicemia','Sinais de infecção','Necessidade de desmame gradual em uso prolongado']
+  },
+};
+
+
+// ---------- PROPHYLAXIS CHECKLIST ----------
+// Presence/absence checks — different in nature from the interaction findings above.
+function runProphylaxisChecklist(selected, ctx){
+  const items = [];
+
+  const tvp = selected.filter(id => DRUGS[id].tags.includes('profilaxia_tvp')).map(id => DRUGS[id].name);
+  if (tvp.length){
+    items.push({ status:'present', title:'Profilaxia de TVP', detail:`Presente: ${tvp.join(' + ')}.` });
+  } else {
+    items.push({ status:'attention', title:'Profilaxia de TVP', detail:'Não identificada na prescrição (ex: enoxaparina). Avaliar indicação e contraindicações (sangramento ativo, plaquetopenia grave, neuroeixo recente).' });
+  }
+
+  const ulcera = selected.filter(id => DRUGS[id].tags.includes('profilaxia_ulcera')).map(id => DRUGS[id].name);
+  if (ulcera.length){
+    items.push({ status:'present', title:'Profilaxia de úlcera de estresse', detail:`Presente: ${ulcera.join(' + ')}.` });
+  } else if (ctx.vm){
+    items.push({ status:'attention', title:'Profilaxia de úlcera de estresse', detail:'Não identificada — paciente em suporte ventilatório, indicação clássica de profilaxia (VM prolongada é fator de risco reconhecido).' });
+  } else {
+    items.push({ status:'info', title:'Profilaxia de úlcera de estresse', detail:'Não identificada. Avaliar indicação conforme fatores de risco (coagulopatia, VM prolongada, etc.) — nem todo paciente de UTI precisa.' });
+  }
+
+  const cortico = selected.filter(id => DRUGS[id].tags.includes('corticosteroide')).map(id => DRUGS[id].name);
+  if (cortico.length){
+    items.push({ status:'info', title:'Corticosteroide em uso', detail:`${cortico.join(' + ')} — atenção a glicemia, sinais de infecção e necessidade de desmame gradual se uso prolongado.` });
+  }
+
+  return items;
+}
+
+function renderChecklist(items){
+  const wrap = document.getElementById('checklistWrap');
+  wrap.innerHTML = '';
+  if (items.length === 0) return;
+  const head = document.createElement('div');
+  head.className = 'results-head';
+  head.innerHTML = `<h2>Checklist de profilaxias</h2>`;
+  wrap.appendChild(head);
+  const iconFor = { present:'✓', missing:'✗', attention:'!', info:'i' };
+  items.forEach(it => {
+    const el = document.createElement('div');
+    el.className = `checklist-item ${it.status}`;
+    el.innerHTML = `
+      <div class="ci-icon">${iconFor[it.status]}</div>
+      <div>
+        <div class="ci-title">${it.title}</div>
+        <div class="ci-detail">${it.detail}</div>
+      </div>`;
+    wrap.appendChild(el);
+  });
+}
+
+// ---------- CLINICAL CONTEXT (indications) ----------
+const INDICATIONS = {
+  tetano:              { name:'Tétano' },
+  sepse_mdr:           { name:'Infecção por MDR / sepse grave' },
+  status_epilepticus:  { name:'Status epilepticus / epilepsia refratária' },
+  tce_hic:             { name:'TCE / hipertensão intracraniana' },
+  agitacao_refrataria: { name:'Agitação / delirium refratário' },
+};
+
+// Never fully hides a finding — only downgrades severity and appends an
+// explanatory note. The original finding key must still be present.
+const CONTEXT_MODIFIERS = [
+  {
+    indication: 'tetano', key: 'cns_stack', newSeverity: 'atencao',
+    note: 'Combinação de sedativos/relaxantes musculares (benzodiazepínicos ± baclofeno) é conduta padrão no controle de espasmos no tétano grave. Mantida a recomendação de monitorização respiratória e de nível de consciência.'
+  },
+  {
+    indication: 'sepse_mdr', key: 'nefro_stack', newSeverity: 'atencao',
+    note: 'Associação provavelmente intencional para cobertura de patógeno multirresistente. A monitorização de função renal segue recomendada.'
+  },
+  {
+    indication: 'status_epilepticus', key: 'janela_estreita_stack', newSeverity: 'atencao',
+    note: 'Politerapia anticonvulsivante esperada no manejo de status epilepticus / epilepsia refratária. Monitorização de níveis séricos segue recomendada.'
+  },
+  {
+    indication: 'agitacao_refrataria', key: 'cns_stack', newSeverity: 'atencao',
+    note: 'Associação de sedativos pode ser intencional no manejo de agitação refratária. Ainda assim, atenção ao efeito aditivo sobre drive respiratório.'
+  },
+];
+
+// Explicit, high-value clinical rules (checked in addition to generic tag rules)
+const SPECIFIC_RULES = [
+  {
+    match: ['meropenem','acido_valproico'],
+    key: 'meropenem_valproico',
+    severity: 'critico',
+    text: 'Carbapenêmicos reduzem significativamente (60–90%) o nível sérico de valproato, com risco real de crise convulsiva breakthrough. Considerar dosagem sérica de valproato durante o curso do antibiótico ou discutir esquema anticonvulsivante alternativo.'
+  },
+  {
+    match: ['fenitoina','acido_valproico'],
+    key: 'fenitoina_valproico',
+    severity: 'atencao',
+    text: 'Interação bidirecional: valproato inibe o metabolismo da fenitoína (aumenta fração livre); fenitoína induz o metabolismo do valproato (reduz nível). Monitorar níveis séricos de ambos.'
+  },
+  {
+    match: ['fenitoina','fenobarbital'],
+    key: 'fenitoina_fenobarbital',
+    severity: 'atencao',
+    text: 'Dois anticonvulsivantes indutores enzimáticos associados — interação mútua complexa e imprevisível sobre os níveis séricos de ambos. Reforçar monitorização de nível sérico e resposta clínica.'
+  },
+  {
+    match: ['carbamazepina','fenitoina'],
+    key: 'carbamazepina_fenitoina',
+    severity: 'atencao',
+    text: 'Indução enzimática mútua entre dois anticonvulsivantes — pode alterar imprevisivelmente os níveis séricos de ambos. Monitorar nível sérico e resposta clínica.'
+  },
+  {
+    match: ['carbamazepina','acido_valproico'],
+    key: 'carbamazepina_valproico',
+    severity: 'atencao',
+    text: 'Valproato inibe a epóxido-hidrolase e pode elevar o metabólito ativo da carbamazepina (10,11-epóxido) mesmo com o nível total de carbamazepina normal — risco de toxicidade sem elevação aparente do nível medido. Monitorar clinicamente sinais de toxicidade (ataxia, diplopia, sedação).'
+  },
+  {
+    match: ['rifampicina','fenitoina'],
+    key: 'rifampicina_fenitoina',
+    severity: 'critico',
+    text: 'Rifampicina é indutor potente do CYP450 e reduz substancialmente os níveis de fenitoína — risco de perda de controle de crises. Monitorar nível sérico e considerar ajuste de dose.'
+  },
+  {
+    match: ['rifampicina','midazolam'],
+    key: 'rifampicina_midazolam',
+    severity: 'atencao',
+    text: 'Rifampicina induz CYP3A4 e pode reduzir significativamente o efeito sedativo do midazolam — risco de sedação inadequada em uso prolongado concomitante.'
+  },
+  {
+    match: ['rifampicina','fentanil'],
+    key: 'rifampicina_fentanil',
+    severity: 'atencao',
+    text: 'Rifampicina (indutor de CYP3A4) pode reduzir a eficácia analgésica do fentanil em uso concomitante prolongado.'
+  },
+  {
+    match: ['isoniazida','fenitoina'],
+    key: 'isoniazida_fenitoina',
+    severity: 'atencao',
+    text: 'Isoniazida inibe o metabolismo da fenitoína (CYP2C9), podendo elevar seus níveis séricos — risco de toxicidade. Considerar monitorização, especialmente em acetiladores lentos.'
+  },
+  {
+    match: ['amicacina','furosemida'],
+    key: 'aminoglicosideo_furosemida',
+    severity: 'atencao',
+    text: 'Associação de aminoglicosídeo com diurético de alça potencializa o risco de ototoxicidade.'
+  },
+  {
+    match: ['gentamicina','furosemida'],
+    key: 'aminoglicosideo_furosemida',
+    severity: 'atencao',
+    text: 'Associação de aminoglicosídeo com diurético de alça potencializa o risco de ototoxicidade.'
+  },
+];
+
+// ---------- GENERIC TAG-BASED RULES ----------
+function tagCount(selected, tag){
+  return selected.filter(id => DRUGS[id].tags.includes(tag)).length;
+}
+function drugsWithTag(selected, tag){
+  return selected.filter(id => DRUGS[id].tags.includes(tag)).map(id => DRUGS[id].name);
+}
+
+function runGenericRules(selected, ctx){
+  const findings = [];
+
+  // Enzyme induction reducing levels of susceptible drugs (e.g. dolutegravir + fenitoína/rifampicina/fenobarbital)
+  const indutores = drugsWithTag(selected, 'indutor_enzimatico_potente');
+  const susceptiveis = drugsWithTag(selected, 'susceptivel_inducao');
+  if (indutores.length && susceptiveis.length){
+    findings.push({
+      key:'inducao_enzimatica', severity:'critico',
+      drugs: [...new Set(indutores)].join(' + ') + ' × ' + [...new Set(susceptiveis)].join(' + '),
+      text:'Indutor(es) enzimático(s) potente(s) associado(s) a fármaco suscetível à indução — risco de queda significativa do nível sérico e falha terapêutica (ex: falha virológica, no caso de antirretrovirais). Considerar ajuste de dose (quando existir esquema validado) ou troca de fármaco durante a coadministração.'
+    });
+  }
+
+  // Enzyme inhibition raising levels of sensitive substrates (e.g. ritonavir + midazolam/fentanil)
+  const inibidores = drugsWithTag(selected, 'inibidor_cyp3a4_potente');
+  const substratosCyp3a4 = drugsWithTag(selected, 'substrato_cyp3a4');
+  if (inibidores.length && substratosCyp3a4.length){
+    findings.push({
+      key:'inibicao_enzimatica', severity:'critico',
+      drugs: [...new Set(inibidores)].join(' + ') + ' × ' + [...new Set(substratosCyp3a4)].join(' + '),
+      text:'Inibidor(es) potente(s) de CYP3A4 associado(s) a substrato sensível — risco de elevação significativa do nível sérico e toxicidade (ex: sedação profunda/depressão respiratória prolongada com midazolam ou fentanil). Considerar reduzir substancialmente a dose do substrato ou usar alternativa não dependente de CYP3A4.'
+    });
+  }
+
+  // Extrapyramidal risk duplication — always critical regardless of age
+  const d2 = drugsWithTag(selected, 'risco_extrapiramidal');
+  if (d2.length >= 2){
+    findings.push({
+      key:'d2_stack', severity:'critico', drugs: d2.join(' + '),
+      text:'Dois ou mais antagonistas dopaminérgicos D2 associados — risco somado de reação extrapiramidal (distonia, acatisia). Reavaliar necessidade de manter ambos, especialmente se houver histórico prévio de reação extrapiramidal.'
+    });
+  }
+
+  // Nephrotoxic stacking
+  const nefro = drugsWithTag(selected, 'nefrotoxico').concat(drugsWithTag(selected, 'nefrotoxico_alto'));
+  if (nefro.length >= 2){
+    const hasAlto = tagCount(selected,'nefrotoxico_alto') > 0;
+    findings.push({
+      key:'nefro_stack', severity: hasAlto ? 'critico' : 'atencao',
+      drugs: nefro.join(' + '),
+      text:'Múltiplos agentes nefrotóxicos associados. Monitorização ativa de função renal recomendada (creatinina seriada), especialmente relevante se houver instabilidade hemodinâmica concomitante.'
+    });
+  }
+
+  // QT prolongation stacking
+  const qt = drugsWithTag(selected, 'qt');
+  if (qt.length >= 2){
+    findings.push({
+      key:'qt_stack', severity:'atencao', drugs: qt.join(' + '),
+      text:'Múltiplos agentes prolongadores de intervalo QT associados. Considerar ECG basal/seriado e correção de eletrólitos (K, Mg, Ca), sobretudo se houver uso de vasopressor ou distúrbio hidroeletrolítico.'
+    });
+  }
+
+  // CNS depressant stacking
+  const cns = drugsWithTag(selected, 'cns_depressor');
+  const idade = ctx.idade;
+  if (cns.length >= 3){
+    const idoso = idade !== null && idade >= 60;
+    findings.push({
+      key:'cns_stack', severity: idoso ? 'critico' : 'atencao',
+      drugs: cns.join(' + '),
+      text: idoso
+        ? 'Três ou mais depressores do SNC associados em paciente idoso (≥60 anos) — risco elevado de sedação excessiva, depressão respiratória e delirium.'
+        : 'Três ou mais depressores do SNC associados. Atenção a efeito aditivo sobre nível de consciência e drive respiratório.'
+    });
+  }
+
+  // Benzodiazepine of long action in elderly (Beers-type caution)
+  if (idade !== null && idade >= 60){
+    const evitarIdoso = drugsWithTag(selected, 'evitar_idoso');
+    evitarIdoso.forEach(name => {
+      findings.push({
+        key:'benzo_longa_idoso', severity:'atencao', drugs:name,
+        text:'Benzodiazepínico de ação longa em paciente idoso — critérios de Beers recomendam evitar pelo risco de sedação prolongada, quedas e delirium. Considerar alternativa de ação curta se uso continuado for necessário.'
+      });
+    });
+  }
+
+  // Narrow therapeutic index anticonvulsants stacked (e.g. phenytoin + valproate)
+  const janelaEstreita = drugsWithTag(selected, 'janela_terapeutica_estreita');
+  if (janelaEstreita.length >= 2){
+    findings.push({
+      key:'janela_estreita_stack', severity:'atencao', drugs: janelaEstreita.join(' + '),
+      text:'Politerapia com anticonvulsivantes de janela terapêutica estreita — monitorização de níveis séricos recomendada.'
+    });
+  }
+
+  // Renal adjustment now lives in the drug panel (see renderDrugPanel), not in triage findings
+
+  return findings;
+}
+
+function applyContextModifiers(findings, indications){
+  if (indications.size === 0) return findings;
+  return findings.map(f => {
+    const mod = CONTEXT_MODIFIERS.find(m => indications.has(m.indication) && m.key === f.key);
+    if (!mod) return f;
+    return { ...f, severity: mod.newSeverity, ctxNote: mod.note, ctxIndication: INDICATIONS[mod.indication].name };
+  });
+}
+
+function runSpecificRules(selected){
+  const set = new Set(selected);
+  return SPECIFIC_RULES
+    .filter(r => r.match.every(id => set.has(id)))
+    .map(r => ({
+      severity: r.severity,
+      drugs: r.match.map(id => DRUGS[id].name).join(' + '),
+      text: r.text
+    }));
+}
+
+const SEV_ORDER = { critico:0, atencao:1, informativo:2 };
+const SEV_LABEL = { critico:'Crítico', atencao:'Atenção', informativo:'Informativo' };
+
+// Pure: no DOM writes, no network. Used both for the live preview and for
+// the explicit "Registrar" action, so the two never disagree.
+function computeFindings(selectedIds, ctx, indications){
+  let findings = [...runSpecificRules(selectedIds), ...runGenericRules(selectedIds, ctx)];
+  findings = applyContextModifiers(findings, indications);
+  findings.sort((a,b) => SEV_ORDER[a.severity] - SEV_ORDER[b.severity]);
+  return findings;
+}
+
+function currentCtx(){
+  return {
+    idade: numOrNull(document.getElementById('idade').value),
+    peso: numOrNull(document.getElementById('peso').value),
+    clcr: numOrNull(document.getElementById('clcr').value),
+    vm: document.getElementById('emVM').checked,
+  };
+}
+
+const DIALISE_LABELS = { '':'', hd:'HD intermitente', cvvh:'CVVH', cvvhd:'CVVHD', cvvhdf:'CVVHDF' };
+
+// Snapshot of the patient-context fields at the moment an entry is
+// registered, so each row in the evolution/planilha carries the context it
+// was true under — not just "what's on screen right now".
+function patientSnapshot(){
+  return {
+    idade: numOrNull(document.getElementById('idade').value),
+    peso: numOrNull(document.getElementById('peso').value),
+    clcr: numOrNull(document.getElementById('clcr').value),
+    dialise: document.getElementById('dialise').value || '',
+    vm: document.getElementById('emVM').checked,
+    indicacoes: document.getElementById('ctxNota').value.trim(),
+  };
+}
+
+// Last computed findings, kept so the severity filter chips and the
+// "Registrar" button don't need to recompute from scratch.
+let lastFindings = [];
+const sevFilter = new Set(['critico','atencao','informativo']);
+
+// Live preview: recomputes and re-renders on every relevant change, but
+// never touches the evolution timeline/Sheets — that stays an explicit,
+// deliberate action via analyze().
+function liveUpdate(){
+  const ctx = currentCtx();
+  const selected = [...state.selected];
+  lastFindings = computeFindings(selected, ctx, matchedIndications());
+  renderSeverityDashboard(lastFindings);
+  renderResults(lastFindings);
+  renderChecklist(runProphylaxisChecklist(selected, ctx));
+}
+let liveUpdateTimer = null;
+function scheduleLiveUpdate(){
+  clearTimeout(liveUpdateTimer);
+  liveUpdateTimer = setTimeout(liveUpdate, 220);
+}
+
+// Explicit action (the former "Analisar" button): uses whatever is already
+// on screen from the live preview and commits it to the evolution timeline.
+function analyze(){
+  liveUpdate();
+  if (lastFindings.length === 0){
+    showToast('Nenhum achado para registrar com a seleção atual.');
+    return;
+  }
+  logAutoFindings(lastFindings).then(() => {
+    refreshEvolucaoView();
+    showToast(document.getElementById('leito').value.trim()
+      ? 'Achados registrados na evolução do leito.'
+      : 'Informe o leito para registrar na evolução.');
+  });
+}
+
+function numOrNull(v){
+  if (v === '' || v === null || v === undefined) return null;
+  const n = Number(v);
+  return isNaN(n) ? null : n;
+}
+
+function showToast(msg, ms = 2600){
+  const el = document.getElementById('prescToast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => el.classList.remove('show'), ms);
+}
+
+function renderSeverityDashboard(findings){
+  const wrap = document.getElementById('sevDashWrap');
+  if (state.selected.size === 0){ wrap.innerHTML = ''; return; }
+  const counts = { critico:0, atencao:0, informativo:0 };
+  findings.forEach(f => counts[f.severity]++);
+  if (findings.length === 0){
+    wrap.innerHTML = `<div class="sev-dash"><span class="sev-pill all-clear-pill">✓ Nenhum alerta</span></div>`;
+    return;
+  }
+  wrap.innerHTML = `<div class="sev-dash">${
+    ['critico','atencao','informativo'].map(sev => `
+      <button class="sev-pill ${sev} ${sevFilter.has(sev) ? '' : 'off'}" data-sev="${sev}">
+        <span class="dot"></span><span class="n">${counts[sev]}</span> ${SEV_LABEL[sev]}
+      </button>`).join('')
+  }</div>`;
+  wrap.querySelectorAll('.sev-pill[data-sev]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sev = btn.dataset.sev;
+      if (sevFilter.has(sev)) sevFilter.delete(sev); else sevFilter.add(sev);
+      renderSeverityDashboard(lastFindings);
+      renderResults(lastFindings);
+    });
+  });
+}
+
+function renderResults(findings){
+  const wrap = document.getElementById('resultsWrap');
+  wrap.innerHTML = '';
+  const head = document.createElement('div');
+  head.className = 'results-head';
+  head.innerHTML = `<h2>Achados da triagem</h2><span class="results-count">${findings.length} ${findings.length===1?'achado':'achados'}</span>`;
+  wrap.appendChild(head);
+
+  if (findings.length === 0){
+    const ok = document.createElement('div');
+    ok.className = 'all-clear';
+    ok.textContent = state.selected.size === 0
+      ? 'Adicione medicações para ver os achados da triagem em tempo real.'
+      : 'Nenhum alerta identificado pelas regras atuais para esta combinação. Isso não substitui a revisão farmacêutica completa.';
+    wrap.appendChild(ok);
+    return;
+  }
+
+  const visible = findings.filter(f => sevFilter.has(f.severity));
+  if (visible.length === 0){
+    const hidden = document.createElement('p');
+    hidden.className = 'empty-note';
+    hidden.textContent = 'Todos os achados estão ocultos pelos filtros de severidade acima.';
+    wrap.appendChild(hidden);
+    return;
+  }
+
+  visible.forEach(f => {
+    const el = document.createElement('div');
+    el.className = `finding ${f.severity}`;
+    el.innerHTML = `
+      <div class="stripe"></div>
+      <div class="body">
+        <span class="sev-label">${SEV_LABEL[f.severity]}</span>
+        <div class="drugs">${f.drugs}</div>
+        <div class="desc">${f.text}</div>
+        ${f.ctxNote ? `<div class="ctx-note"><b>Contexto: ${f.ctxIndication}</b><br>${f.ctxNote}</div>` : ''}
+      </div>`;
+    wrap.appendChild(el);
+  });
+}
+
+// ---------- UI: autocomplete + chips ----------
+const state = { selected: new Set() };
+
+const ctxNota = document.getElementById('ctxNota');
+
+function normalizeText_(s){
+  return (s || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+// The context box is free text (the pharmacist just describes the case).
+// CONTEXT_MODIFIERS still needs to know which of the handful of known
+// clinical contexts applies, so this does a light, accent-insensitive
+// keyword match against INDICATIONS names — no picking from a list required.
+function matchedIndications(){
+  const norm = normalizeText_(ctxNota.value);
+  const set = new Set();
+  if (!norm) return set;
+  Object.entries(INDICATIONS).forEach(([id, d]) => {
+    if (norm.includes(normalizeText_(d.name))) set.add(id);
+  });
+  return set;
+}
+
+ctxNota.addEventListener('input', scheduleLiveUpdate);
+
+// ---------- Quick-pick chips: suporte ventilatório + diálise ----------
+// Both drive the same underlying <select>/<checkbox> the rest of the app
+// already reads, just presented as one-tap pills instead of a dropdown/
+// checkbox — faster during a round. Dispatching 'change' keeps every
+// existing listener on #dialise/#emVM working untouched.
+const dialiseSelectEl = document.getElementById('dialise');
+const vmCheckboxEl = document.getElementById('emVM');
+
+function setActiveChip(container, attr, value){
+  container.querySelectorAll('.quick-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset[attr] === String(value));
+  });
+}
+
+document.getElementById('dialiseQuickChips').addEventListener('click', (e) => {
+  const btn = e.target.closest('.quick-chip');
+  if (!btn) return;
+  dialiseSelectEl.value = btn.dataset.dialise;
+  setActiveChip(document.getElementById('dialiseQuickChips'), 'dialise', btn.dataset.dialise);
+  dialiseSelectEl.dispatchEvent(new Event('change'));
+});
+document.getElementById('vmQuickChips').addEventListener('click', (e) => {
+  const btn = e.target.closest('.quick-chip');
+  if (!btn) return;
+  vmCheckboxEl.checked = btn.dataset.vm === '1';
+  setActiveChip(document.getElementById('vmQuickChips'), 'vm', btn.dataset.vm);
+  vmCheckboxEl.dispatchEvent(new Event('change'));
+});
+setActiveChip(document.getElementById('dialiseQuickChips'), 'dialise', '');
+setActiveChip(document.getElementById('vmQuickChips'), 'vm', '0');
+
+const drugSearch = document.getElementById('drugSearch');
+const acList = document.getElementById('acList');
+const chips = document.getElementById('chips');
+const emptyNote = document.getElementById('emptyNote');
+const analyzeBtn = document.getElementById('analyzeBtn');
+
+function updateChips(){
+  chips.innerHTML = '';
+  if (state.selected.size === 0){
+    emptyNote.style.display = 'block';
+  } else {
+    emptyNote.style.display = 'none';
+    state.selected.forEach(id => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.innerHTML = `<span>${DRUGS[id].name}</span>`;
+      const btn = document.createElement('button');
+      btn.textContent = '×';
+      btn.onclick = () => { state.selected.delete(id); updateChips(); };
+      chip.appendChild(btn);
+      chips.appendChild(chip);
+    });
+  }
+  analyzeBtn.disabled = state.selected.size === 0;
+  renderDrugPanel();
+  scheduleLiveUpdate();
+}
+
+function renalAdjustmentHTML(d){
+  const clcrRaw = document.getElementById('clcr').value;
+  const clcr = clcrRaw === '' ? null : Number(clcrRaw);
+  const modality = document.getElementById('dialise').value; // '', hd, cvvh, cvvhd, cvvhdf
+  if (clcr === null && !modality) return ''; // nothing informed — stay quiet, no clutter
+
+  const needsAdjust = d.tags.includes('renal_ajuste');
+  const needsEval = d.tags.includes('renal_ajuste_avaliar');
+  if (!needsAdjust && !needsEval) return '';
+
+  let line = '';
+  if (modality){
+    const modLabel = {hd:'Hemodiálise intermitente', cvvh:'CVVH', cvvhd:'CVVHD', cvvhdf:'CVVHDF'}[modality];
+    if (!d.dialysis){
+      line = `<div class="dp-empty">Ajuste em ${modLabel}: ainda não cadastrado. Consultar bula/protocolo institucional.</div>`;
+    } else if (typeof d.dialysis === 'string'){
+      line = `<div>${d.dialysis}</div>`;
+    } else if (d.dialysis[modality]){
+      line = `<div><b>${modLabel}:</b> ${d.dialysis[modality]}</div>`;
+    } else {
+      line = `<div class="dp-empty">Ajuste em ${modLabel}: ainda não cadastrado. Consultar bula/protocolo institucional.</div>`;
+    }
+  } else if (clcr !== null){
+    if (needsEval){
+      line = `<div class="dp-empty">Ainda não está definido nesta ferramenta se este fármaco exige ajuste renal. Consultar bula/protocolo institucional.</div>`;
+    } else {
+      const tier = (d.renal || []).find(t => clcr >= t.min && clcr <= t.max);
+      line = tier
+        ? `<div>Para ClCr ${clcr} mL/min: ${tier.dose}${tier.note ? ' — ' + tier.note : ''}</div>`
+        : `<div class="dp-empty">Ajuste necessário para ClCr ${clcr} mL/min, mas ainda não cadastrado nesta ferramenta. Consultar bula/protocolo institucional.</div>`;
+    }
+  }
+  return `
+      <div class="dp-block">
+        <div class="dp-label">Ajuste renal / diálise</div>
+        ${line}
+      </div>`;
+}
+
+// Drugs whose PK/PD calculators already exist in PharmaCalc. Kept as a plain
+// id->section map so the bridge button just needs wiring once Crivo lives
+// inside the same app (same-origin localStorage handoff already works now).
+const PKPD_BRIDGE = {
+  meropenem:'meropenem', amicacina:'amicacina', vancomicina:'vancomicina',
+};
+
+// Panels auto-collapse once the prescription has more than 3 drugs, so the
+// screen doesn't turn into an endless scroll — user can still expand any one.
+const panelCollapsed = new Set();
+let panelAutoCollapseApplied = false;
+
+function renderDrugPanel(){
+  const wrap = document.getElementById('drugPanelWrap');
+  wrap.innerHTML = '';
+  const ids = [...state.selected];
+  if (!panelAutoCollapseApplied && ids.length > 3){
+    ids.forEach(id => panelCollapsed.add(id));
+    panelAutoCollapseApplied = true;
+  }
+  ids.forEach(id => {
+    const d = DRUGS[id];
+    const effects = d.effects || [];
+    const monitor = d.monitor || [];
+    const collapsed = panelCollapsed.has(id);
+    const bridgeKey = PKPD_BRIDGE[id];
+    const panel = document.createElement('div');
+    panel.className = `drug-panel${collapsed ? ' collapsed' : ''}`;
+    panel.innerHTML = `
+      <div class="dp-name"><span>${d.name}</span><span class="chev">▾</span></div>
+      <div class="dp-body"><div class="dp-body-inner">
+        <div class="dp-block">
+          <div class="dp-label">Efeitos adversos relevantes</div>
+          ${effects.length ? `<ul>${effects.map(e=>`<li>${e}</li>`).join('')}</ul>` : `<div class="dp-empty">Ainda não cadastrado.</div>`}
+        </div>
+        <div class="dp-block">
+          <div class="dp-label">O que monitorar</div>
+          ${monitor.length ? `<ul>${monitor.map(m=>`<li>${m}</li>`).join('')}</ul>` : `<div class="dp-empty">Ainda não cadastrado.</div>`}
+        </div>
+        ${renalAdjustmentHTML(d)}
+        ${bridgeKey ? `<button class="pkpd-bridge" data-bridge="${bridgeKey}">⇢ Calcular dose PK/PD (${d.name})</button>` : ''}
+      </div></div>`;
+    panel.querySelector('.dp-name').addEventListener('click', () => {
+      if (panelCollapsed.has(id)) panelCollapsed.delete(id); else panelCollapsed.add(id);
+      panel.classList.toggle('collapsed');
+    });
+    const bridgeBtn = panel.querySelector('.pkpd-bridge');
+    if (bridgeBtn) bridgeBtn.addEventListener('click', (e) => { e.stopPropagation(); handOffToPkpd(bridgeKey); });
+    wrap.appendChild(panel);
+  });
+}
+
+// Saves the patient data already typed in Crivo so, once Crivo is merged
+// into PharmaCalc replacing the PK/PD tab, opening a calculator can pick it
+// up automatically instead of asking the user to retype idade/peso/ClCr.
+// Standalone (as this file is today) there's no PK/PD tab to jump to yet,
+// so this confirms the handoff is ready rather than navigating anywhere.
+async function handOffToPkpd(drugId){
+  const payload = {
+    drug: drugId,
+    idade: numOrNull(document.getElementById('idade').value),
+    peso: numOrNull(document.getElementById('peso').value),
+    clcr: numOrNull(document.getElementById('clcr').value),
+    ts: Date.now(),
+  };
+  await crivoStorage.set('handoff:pkpd', payload);
+  showToast(`Dados do paciente prontos para a calculadora de ${DRUGS[drugId].name}.`);
+}
+
+// Preview: for each autocomplete candidate, shows whether adding it would
+// introduce a *new* finding beyond what's already selected — and its worst
+// severity — before the user commits to adding the drug.
+function previewBadgeFor(id){
+  if (state.selected.size === 0) return '';
+  const ctx = currentCtx();
+  const current = new Set(lastFindings.map(f => `${f.drugs}||${f.text}`));
+  const withNew = computeFindings([...state.selected, id], ctx, matchedIndications());
+  const added = withNew.filter(f => !current.has(`${f.drugs}||${f.text}`));
+  if (added.length === 0) return '';
+  const worst = added.some(f => f.severity === 'critico') ? 'critico' : 'atencao';
+  const label = worst === 'critico' ? '⚠ crítico' : '⚠ atenção';
+  return `<span class="ac-preview ${worst}">${label}</span>`;
+}
+
+function showMatches(query){
+  const q = query.trim().toLowerCase();
+  if (q.length === 0){ acList.style.display = 'none'; return; }
+  const matches = Object.entries(DRUGS)
+    .filter(([id, d]) => !state.selected.has(id) && d.name.toLowerCase().includes(q))
+    .slice(0, 8);
+  if (matches.length === 0){ acList.style.display = 'none'; return; }
+  acList.innerHTML = '';
+  matches.forEach(([id, d]) => {
+    const item = document.createElement('div');
+    item.className = 'ac-item';
+    item.innerHTML = `<span class="ac-main">${d.name}<small>${d.tags.slice(0,3).join(' · ')}</small></span>${previewBadgeFor(id)}`;
+    item.onclick = () => {
+      state.selected.add(id);
+      drugSearch.value = '';
+      acList.style.display = 'none';
+      updateChips();
+    };
+    acList.appendChild(item);
+  });
+  acList.style.display = 'block';
+}
+
+drugSearch.addEventListener('input', e => showMatches(e.target.value));
+drugSearch.addEventListener('focus', e => showMatches(e.target.value));
+document.addEventListener('click', e => {
+  if (!e.target.closest('.autocomplete')) acList.style.display = 'none';
+});
+
+analyzeBtn.addEventListener('click', analyze);
+document.getElementById('clcr').addEventListener('input', renderDrugPanel);
+document.getElementById('dialise').addEventListener('change', renderDrugPanel);
+document.getElementById('idade').addEventListener('input', scheduleLiveUpdate);
+document.getElementById('emVM').addEventListener('change', scheduleLiveUpdate);
+document.getElementById('clearBtn').addEventListener('click', () => {
+  state.selected.clear();
+  updateChips();
+  document.getElementById('leito').value = '';
+  document.getElementById('idade').value = '';
+  document.getElementById('peso').value = '';
+  document.getElementById('clcr').value = '';
+  document.getElementById('dialise').value = '';
+  document.getElementById('emVM').checked = false;
+  document.getElementById('ctxNota').value = '';
+  setActiveChip(document.getElementById('dialiseQuickChips'), 'dialise', '');
+  setActiveChip(document.getElementById('vmQuickChips'), 'vm', '0');
+  lastFindings = [];
+  panelCollapsed.clear();
+  panelAutoCollapseApplied = false;
+  document.getElementById('sevDashWrap').innerHTML = '';
+  document.getElementById('resultsWrap').innerHTML = '';
+  document.getElementById('checklistWrap').innerHTML = '';
+  refreshEvolucaoView();
+});
+
+updateChips();
+
+
+// ---------- Evolução do paciente (linha do tempo por leito) ----------
+let evoCache = { leito:'', entries:[], synced:false };
+let evoShowFull = false;
+
+// Fonte de verdade: a planilha Google, via Web App do Apps Script (URL
+// configurável). O localStorage funciona só como cache/fallback quando não
+// há URL configurada ou quando a rede falha — nesse caso a entrada fica
+// salva localmente e é reenviada na próxima sincronização bem-sucedida.
+function evolucaoKey(leito){
+  return 'evolucao:' + leito.trim().toLowerCase();
+}
+
+async function getSheetsUrl(){
+  const cfg = await crivoStorage.get('config:sheetsUrl');
+  return (typeof cfg === 'string' && cfg.trim()) ? cfg.trim() : '';
+}
+
+async function sheetsGet(leito){
+  const url = await getSheetsUrl();
+  if (!url) return null;
+  try{
+    const res = await fetch(`${url}?leito=${encodeURIComponent(leito)}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return Array.isArray(data) ? data : null;
+  } catch(e){ return null; }
+}
+
+async function sheetsSet(leito, entries){
+  const url = await getSheetsUrl();
+  if (!url) return false;
+  try{
+    // text/plain evita o preflight CORS que o Apps Script Web App não trata.
+    const res = await fetch(url, {
+      method:'POST',
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+      body: JSON.stringify({ leito, entries })
+    });
+    return res.ok;
+  } catch(e){ return false; }
+}
+
+async function loadEvolucao(leito){
+  const remote = await sheetsGet(leito);
+  if (remote){
+    await crivoStorage.set(evolucaoKey(leito), remote);
+    return { entries: remote, synced: true };
+  }
+  const cached = await crivoStorage.get(evolucaoKey(leito));
+  return { entries: Array.isArray(cached) ? cached : [], synced: false };
+}
+
+async function saveEvolucao(leito, entries){
+  await crivoStorage.set(evolucaoKey(leito), entries);
+  return await sheetsSet(leito, entries);
+}
+
+function escapeHtmlEvo(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function escapeAttrEvo(s){
+  return String(s).replace(/"/g, '&quot;');
+}
+
+// Achados da triagem entram automaticamente aqui (origin:'auto'), sem
+// duplicar achados já registrados para o mesmo leito. Entradas manuais têm
+// origin:'manual'. A conduta do prescritor é editável depois, direto na lista.
+async function logAutoFindings(findings){
+  const leito = document.getElementById('leito').value.trim();
+  if (!leito || findings.length === 0) return;
+  const { entries } = await loadEvolucao(leito);
+  const existingKeys = new Set(entries.map(e => `${e.achado}||${e.sugestao}`));
+  const snapshot = patientSnapshot();
+  let changed = false;
+  findings.forEach(f => {
+    const dedupeKey = `${f.drugs}||${f.text}`;
+    if (existingKeys.has(dedupeKey)) return;
+    entries.push({
+      id: `${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
+      ts: Date.now(), origin:'auto',
+      achado: f.drugs, sugestao: f.text, conduta:'', observacao:'',
+      severidade: f.severity,
+      ...snapshot,
+    });
+    existingKeys.add(dedupeKey);
+    changed = true;
+  });
+  if (changed) await saveEvolucao(leito, entries);
+}
+
+function renderSyncStatus(synced){
+  const el = document.getElementById('evoSyncStatus');
+  crivoStorage.get('config:sheetsUrl').then(url => {
+    if (!url){
+      el.textContent = 'Planilha não configurada — a evolução fica salva só neste aparelho.';
+    } else if (synced){
+      el.textContent = 'Sincronizado com a planilha.';
+    } else {
+      el.textContent = 'Não foi possível falar com a planilha agora — mostrando a última cópia salva neste aparelho.';
+    }
+  });
+}
+
+async function refreshEvolucaoView(){
+  const leito = document.getElementById('leito').value.trim();
+  const wrap = document.getElementById('evolucaoWrap');
+  document.getElementById('encerrarLeitoBtn').style.display = leito ? '' : 'none';
+  if (!leito){
+    wrap.innerHTML = `<p class="empty-note">Informe o leito em "Dados do paciente" para ver ou registrar a evolução.</p>`;
+    document.getElementById('evoSyncStatus').textContent = '';
+    document.getElementById('evoHistoryToggleWrap').innerHTML = '';
+    return;
+  }
+  if (leito !== evoCache.leito) evoShowFull = false; // trocou de leito: sempre começa vendo só o episódio atual
+  wrap.innerHTML = `<p class="empty-note">Carregando...</p>`;
+  const { entries, synced } = await loadEvolucao(leito);
+  evoCache = { leito, entries, synced };
+  renderSyncStatus(synced);
+  renderEvolucaoView_();
+}
+
+// A entrada com origin:'sistema' marca "fim de episódio" (encerramento de
+// leito). Por padrão só mostramos o que veio depois da última — evita
+// misturar achados do paciente anterior com o atual num leito reocupado.
+function lastEncerramentoTs_(entries){
+  const marks = entries.filter(e => e.origin === 'sistema');
+  return marks.length ? Math.max(...marks.map(e => e.ts)) : null;
+}
+
+function renderEvolucaoView_(){
+  const { entries, leito } = evoCache;
+  const lastMark = lastEncerramentoTs_(entries);
+  const toggleWrap = document.getElementById('evoHistoryToggleWrap');
+
+  if (lastMark === null){
+    toggleWrap.innerHTML = '';
+    renderEvolucaoList(entries, leito);
+    return;
+  }
+
+  const episodesCount = entries.filter(e => e.origin === 'sistema').length;
+  if (evoShowFull){
+    toggleWrap.innerHTML = `<button class="evo-history-toggle" id="evoHistToggleBtn">← Mostrar só o episódio atual</button>`;
+    renderEvolucaoList(entries, leito);
+  } else {
+    const filtered = entries.filter(e => e.ts >= lastMark);
+    toggleWrap.innerHTML = `<button class="evo-history-toggle" id="evoHistToggleBtn">Ver histórico completo (${episodesCount} episódio${episodesCount>1?'s':''} anterior${episodesCount>1?'es':''}) →</button>`;
+    renderEvolucaoList(filtered, leito);
+  }
+  document.getElementById('evoHistToggleBtn').addEventListener('click', () => {
+    evoShowFull = !evoShowFull;
+    renderEvolucaoView_();
+  });
+}
+
+// Compact "context under which this entry was true" line — idade/peso/ClCr/
+// diálise/VM/contexto clínico, as they stood at the moment of registro.
+function contextLineHtml_(entry){
+  const parts = [];
+  if (entry.idade != null && entry.idade !== '') parts.push(`${entry.idade}a`);
+  if (entry.peso != null && entry.peso !== '') parts.push(`${entry.peso}kg`);
+  if (entry.clcr != null && entry.clcr !== '') parts.push(`ClCr ${entry.clcr}`);
+  if (entry.dialise) parts.push(DIALISE_LABELS[entry.dialise] || entry.dialise);
+  if (entry.vm === true || entry.vm === 'true') parts.push('VM');
+  if (entry.indicacoes) parts.push(entry.indicacoes);
+  if (parts.length === 0) return '';
+  return `<div class="evo-context">${escapeHtmlEvo(parts.join(' · '))}</div>`;
+}
+
+function renderEvolucaoList(entries, leito){
+  const wrap = document.getElementById('evolucaoWrap');
+  wrap.innerHTML = '';
+  if (entries.length === 0){
+    wrap.innerHTML = `<p class="empty-note">Nenhuma entrada registrada para este leito ainda.</p>`;
+    return;
+  }
+  const sorted = [...entries].sort((a,b) => b.ts - a.ts);
+  sorted.forEach(entry => {
+    const el = document.createElement('div');
+    const date = new Date(entry.ts).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+
+    if (entry.origin === 'sistema'){
+      el.className = 'evo-entry sistema';
+      el.innerHTML = `▾ ${date} — leito encerrado (novo paciente/episódio) <button class="evo-delete" data-id="${entry.id}" style="margin-top:4px;">desfazer</button>`;
+      wrap.appendChild(el);
+      return;
+    }
+
+    el.className = `evo-entry ${entry.severidade || ''}`;
+    el.innerHTML = `
+      <div class="evo-head">
+        <span class="evo-date">${date}</span>
+        <span class="evo-origin ${entry.origin}">${entry.origin === 'auto' ? 'Automático' : 'Manual'}</span>
+      </div>
+      ${entry.achado ? `<div class="evo-field"><b>Achado</b><br>${escapeHtmlEvo(entry.achado)}</div>` : ''}
+      ${entry.sugestao ? `<div class="evo-field"><b>Sugestão</b><br>${escapeHtmlEvo(entry.sugestao)}</div>` : ''}
+      <div class="evo-field">
+        <b>Conduta do prescritor</b><br>
+        <input type="text" class="evo-conduta-input" data-id="${entry.id}" value="${escapeAttrEvo(entry.conduta || '')}" placeholder="ainda não registrada">
+      </div>
+      ${entry.observacao ? `<div class="evo-field evo-obs">${escapeHtmlEvo(entry.observacao)}</div>` : ''}
+      ${contextLineHtml_(entry)}
+      <button class="evo-delete" data-id="${entry.id}">excluir entrada</button>`;
+    wrap.appendChild(el);
+  });
+
+  wrap.querySelectorAll('.evo-conduta-input').forEach(inp => {
+    inp.addEventListener('change', async () => {
+      const { entries: current } = await loadEvolucao(leito);
+      const idx = current.findIndex(e => e.id === inp.dataset.id);
+      if (idx >= 0){
+        current[idx].conduta = inp.value;
+        const ok = await saveEvolucao(leito, current);
+        renderSyncStatus(ok);
+      }
+    });
+  });
+  wrap.querySelectorAll('.evo-delete').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const { entries: current } = await loadEvolucao(leito);
+      const filtered = current.filter(e => e.id !== btn.dataset.id);
+      await saveEvolucao(leito, filtered);
+      refreshEvolucaoView();
+    });
+  });
+}
+
+document.getElementById('evoSaveBtn').addEventListener('click', async () => {
+  const leito = document.getElementById('leito').value.trim();
+  const evoStatus = document.getElementById('evoStatus');
+  if (!leito){
+    evoStatus.textContent = 'Informe o leito em "Dados do paciente" antes de registrar.';
+    return;
+  }
+  const achado = document.getElementById('evoAchado').value.trim();
+  const sugestao = document.getElementById('evoSugestao').value.trim();
+  const conduta = document.getElementById('evoConduta').value.trim();
+  const observacao = document.getElementById('evoObs').value.trim();
+  if (!achado && !observacao){
+    evoStatus.textContent = 'Preencha ao menos o achado ou uma observação.';
+    return;
+  }
+  evoStatus.textContent = 'Salvando...';
+  const { entries } = await loadEvolucao(leito);
+  entries.push({
+    id: `${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
+    ts: Date.now(), origin:'manual',
+    achado, sugestao, conduta, observacao,
+    ...patientSnapshot(),
+  });
+  const ok = await saveEvolucao(leito, entries);
+  document.getElementById('evoAchado').value = '';
+  document.getElementById('evoSugestao').value = '';
+  document.getElementById('evoConduta').value = '';
+  document.getElementById('evoObs').value = '';
+  evoStatus.textContent = ok ? 'Entrada registrada e sincronizada.' : 'Entrada registrada localmente (sem sincronizar com a planilha agora).';
+  refreshEvolucaoView();
+});
+
+document.getElementById('sheetsUrl').addEventListener('change', async (e) => {
+  await crivoStorage.set('config:sheetsUrl', e.target.value.trim());
+  refreshEvolucaoView();
+});
+
+document.getElementById('encerrarLeitoBtn').addEventListener('click', async () => {
+  const leito = document.getElementById('leito').value.trim();
+  if (!leito){ showToast('Informe o leito antes de encerrar.'); return; }
+  const ok1 = confirm(`Encerrar o leito "${leito}"?\n\nA timeline volta a mostrar só o que vier depois disso — o histórico anterior continua salvo, acessível em "ver histórico completo".`);
+  if (!ok1) return;
+  const { entries } = await loadEvolucao(leito);
+  entries.push({
+    id: `${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
+    ts: Date.now(), origin:'sistema',
+    achado:'', sugestao:'', conduta:'', observacao:'Leito encerrado — novo paciente/episódio'
+  });
+  const ok = await saveEvolucao(leito, entries);
+  evoShowFull = false;
+  showToast(ok ? 'Leito encerrado — timeline pronta para o próximo paciente.' : 'Encerrado localmente (sem sincronizar com a planilha agora).');
+  refreshEvolucaoView();
+});
+
+document.getElementById('evoRefreshBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  refreshEvolucaoView();
+});
+
+document.getElementById('leito').addEventListener('input', refreshEvolucaoView);
+
+crivoStorage.get('config:sheetsUrl').then(url => {
+  if (url) document.getElementById('sheetsUrl').value = url;
+});
+refreshEvolucaoView();
+
+})();
+</script>
 </body>
 </html>
