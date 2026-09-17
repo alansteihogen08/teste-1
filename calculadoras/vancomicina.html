@@ -57,6 +57,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .panel-head-dot{width:7px;height:7px;border-radius:50%;}
 .panel-head h2{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
 .panel-body{padding:1rem;}
+.modelo-ativo{margin-left:auto;font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.03em;text-transform:none;}
 
 /* FORM */
 label{display:block;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
@@ -89,9 +90,10 @@ input:focus,select:focus{border-color:var(--accent);}
 /* METRICS */
 .metric-grid{display:grid;gap:.65rem;padding:1rem;}
 .mg5{grid-template-columns:repeat(5,1fr);}
+.mg4{grid-template-columns:repeat(4,1fr);}
 .mg3{grid-template-columns:repeat(3,1fr);}
 .mg2{grid-template-columns:repeat(2,1fr);}
-@media(max-width:740px){.mg5,.mg3{grid-template-columns:repeat(2,1fr);}.mg2{grid-template-columns:1fr 1fr;}}
+@media(max-width:740px){.mg5,.mg4,.mg3{grid-template-columns:repeat(2,1fr);}.mg2{grid-template-columns:1fr 1fr;}}
 .metric{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.7rem .85rem;}
 .metric-label{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;line-height:1.4;}
 .metric-value{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);}
@@ -144,7 +146,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
   .btn-pdf,.btn-calc,.btn-reset,.chart-btn,.detail-toggle,.back-link{display:none!important;}
   .wrap{display:block;}
   .panel{break-inside:avoid;margin-bottom:1rem;}
-  .chart-wrap,.detail-table{display:block!important;}
+  .chart-wrap,.detail-table,#meta-box{display:block!important;}
 }
 </style>
 </head>
@@ -155,7 +157,7 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
 <div class="header">
   <div class="header-left">
     <h1>Calculadora PK/PD — Vancomicina · AUC₂₄/MIC</h1>
-    <div class="header-sub">Modelo Matzke · ClVanco = ClCr × 0,06 · Vd = 0,7 L/kg · Ke = ClVanco/Vd · Alvo AUC₂₄/MIC 400–600 mg·h/L</div>
+    <div class="header-sub">Modelos de ClVanco e Vd selecionáveis · Alvo AUC₂₄/MIC 400–600 mg·h/L</div>
     <div class="header-author">Desenvolvido por Alan Steihogen</div>
   </div>
   <div class="header-right">
@@ -209,6 +211,15 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         </div>
       </div>
 
+      <div class="form-grid">
+        <div class="form-row"><label>Altura (cm)</label>
+          <input type="number" id="altura" placeholder="Ex: 170" oninput="calcular()">
+        </div>
+        <div class="form-row"><label>IMC calculado</label>
+          <input type="text" id="imc-display" placeholder="—" disabled style="opacity:.7">
+        </div>
+      </div>
+
       <div class="form-row">
         <label>Bactéria isolada (opcional)</label>
         <select id="bacteria" onchange="calcular()">
@@ -238,6 +249,29 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
           <option value="2">2 mg/L</option>
         </select>
         <div id="mic-badge"></div>
+      </div>
+
+      <div class="section-label">Modelo Farmacocinético</div>
+      <div class="form-grid" style="padding-top:.6rem">
+        <div class="form-row"><label>Clearance (ClVanco)</label>
+          <select id="clModelSelect" onchange="calcular()">
+            <option value="matzke" selected>Matzke (1984)</option>
+            <option value="bauer">Bauer (1983)</option>
+            <option value="empirico">Empírico (ClCr×0,06)</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Volume (Vd)</label>
+          <select id="vdModelSelect" onchange="calcular()">
+            <option value="matzke" selected>Matzke (IMC)</option>
+            <option value="bauer">Bauer (0,7 L/kg)</option>
+            <option value="morbid_obesity">Obes. mórbida (0,52)</option>
+            <option value="custom">Personalizado</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row" id="vd-custom-row" style="display:none">
+        <label>Fator Vd personalizado (L/kg)</label>
+        <input type="number" step="0.01" id="vd-custom" placeholder="Ex: 0,65" oninput="calcular()">
       </div>
 
     </div>
@@ -295,7 +329,8 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       <div class="panel-head-dot" style="background:#7C3AED"></div>
       <h2>Meta Terapêutica</h2>
     </div>
-    <div class="info-box" style="margin:1rem;margin-bottom:.5rem">
+    <button class="detail-toggle" id="btn-meta" onclick="toggleMeta()" style="margin:1rem 1rem 0;width:calc(100% - 2rem)">▼ Ver metas e referências rápidas</button>
+    <div class="info-box" id="meta-box" style="display:none;margin:1rem">
       <strong>Alvo AUC₂₄/MIC:</strong> 400–600 mg·h/L (ASHP/IDSA/SIDP 2020)<br>
       <strong>MIC empírico padrão:</strong> 1 mg/L → AUC₂₄ alvo 400–600 mg·h/L<br>
       <strong>MIC = 2 mg/L:</strong> limiar de resistência — interpretar conforme bactéria e contexto clínico<br>
@@ -314,18 +349,16 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
   <div class="panel">
     <div class="panel-head">
       <div class="panel-head-dot" style="background:var(--accent)"></div>
-      <h2>Parâmetros PK — Modelo Matzke</h2>
+      <h2>Parâmetros PK</h2>
+      <span class="modelo-ativo" id="modelo-ativo">Matzke · Matzke</span>
     </div>
-    <div class="metric-grid mg5">
+    <div class="metric-grid mg4">
       <div class="metric c-accent"><div class="metric-label">Vd</div><div class="metric-value" id="m-vd">—<small>L</small></div></div>
       <div class="metric c-accent"><div class="metric-label">ClVanco</div><div class="metric-value" id="m-clv">—<small>L/h</small></div></div>
       <div class="metric c-accent"><div class="metric-label">Ke</div><div class="metric-value" id="m-ke">—<small>h⁻¹</small></div></div>
       <div class="metric"><div class="metric-label">T½ ajustada</div><div class="metric-value" id="m-t12">—<small>h</small></div></div>
       <div class="metric c-green"><div class="metric-label">AUC₂₄ atual</div><div class="metric-value" id="m-auc">—<small>mg·h/L</small></div></div>
-    </div>
-    <div class="section-label">Concentrações em steady-state — Fórmulas ClinCalc</div>
-    <div class="metric-grid mg2" style="padding-top:.5rem">
-      <div class="metric c-blue"><div class="metric-label">Cpeak (fim da infusão)</div><div class="metric-value" id="m-cpeak">—<small>mg/L</small></div></div>
+      <div class="metric c-blue"><div class="metric-label">Cpeak (fim infusão)</div><div class="metric-value" id="m-cpeak">—<small>mg/L</small></div></div>
       <div class="metric"><div class="metric-label">Ctrough (pré-dose)</div><div class="metric-value" id="m-ctrough">—<small>mg/L</small></div></div>
     </div>
   </div>
@@ -392,34 +425,18 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
     <button class="detail-toggle" id="btn-det" onclick="toggleDetail()">▼ Detalhamento do cálculo</button>
     <div class="detail-table" id="det-wrap">
       <table class="det">
-        <tr><td>Fórmula ClCr</td><td>Cockcroft-Gault</td></tr>
-        <tr><td>ClCr calculado</td><td id="d-clcr">—</td></tr>
-        <tr><td>Categoria renal</td><td id="d-renal">—</td></tr>
-        <tr><td>Vd = 0,7 × Peso</td><td id="d-vd">—</td></tr>
-        <tr><td>ClVanco = ClCr × 0,06</td><td id="d-clv">—</td></tr>
+        <tr><td id="d-vd-label">Vd</td><td id="d-vd">—</td></tr>
+        <tr><td id="d-clv-label">ClVanco</td><td id="d-clv">—</td></tr>
         <tr><td>Ke = ClVanco / Vd</td><td id="d-ke">—</td></tr>
         <tr><td>T½ = ln(2) / Ke</td><td id="d-t12">—</td></tr>
-        <tr><td>MIC selecionado</td><td id="d-mic">—</td></tr>
-        <tr><td>Dose prescrita por intervalo</td><td id="d-dose">—</td></tr>
-        <tr><td>Intervalo τ</td><td id="d-tau">—</td></tr>
-        <tr><td>Tempo de infusão (Tinf)</td><td id="d-tinf-h">—</td></tr>
-        <tr><td>Cpeak ss</td><td id="d-cpeak">—</td></tr>
-        <tr><td>Ctrough ss</td><td id="d-ctrough">—</td></tr>
-        <tr><td>AUC_τ (lin-log trapézio)</td><td id="d-auc-tau">—</td></tr>
-        <tr><td>AUC₂₄ = AUC_τ × (24/τ)</td><td id="d-auc24">—</td></tr>
-        <tr><td>AUC₂₄ verificação = Dose×(24/τ)/ClVanco</td><td id="d-auc24b">—</td></tr>
+        <tr><td>AUC₂₄ (trapézio lin-log)</td><td id="d-auc24">—</td></tr>
+        <tr><td>AUC₂₄ (verificação: Dose×24/τ/ClVanco)</td><td id="d-auc24b">—</td></tr>
         <tr><td>AUC alvo = 500 × MIC</td><td id="d-auc-alvo">—</td></tr>
         <tr><td>AUC/MIC atual</td><td id="d-auc-ratio">—</td></tr>
-        <tr><td>Dose de ataque</td><td id="d-ataque">—</td></tr>
-        <tr><td>Dose teórica</td><td id="d-teorica">—</td></tr>
-        <tr><td>Dose prática (arred. 250 mg)</td><td id="d-pratica">—</td></tr>
-        <tr><td>Volume SF 0,9%</td><td id="d-vol">—</td></tr>
         <tr><td>Concentração da solução</td><td id="d-conc">—</td></tr>
-        <tr><td>Tempo de infusão recomendado</td><td id="d-tinf-rec">—</td></tr>
-        <tr><td>Análise AUC</td><td id="d-aauc">—</td></tr>
-        <tr><td>Análise renal</td><td id="d-arenal">—</td></tr>
         <tr><td>Referências</td><td style="font-size:10px;line-height:1.6;color:#627D98">
           Matzke GR et al. <em>Antimicrob Agents Chemother</em> 1984;25(4):433–7 ·
+          Bauer LA. Vancomycin. Em: <em>Applied Clinical Pharmacokinetics</em>, 3ª ed. McGraw-Hill ·
           Kane SP. ClinCalc Vancomycin Calculator, 2025 ·
           Rybak MJ et al. ASHP/IDSA/PIDS/SIDP 2020. <em>Am J Health-Syst Pharm</em> ·
           Macedo VABS. Dissertação USP, 2017 ·
@@ -506,6 +523,82 @@ const BRCAST = {
   }
 };
 
+// ══════════════════════════════════════════════════════════════
+// MODELOS FARMACOCINÉTICOS — ClVanco e Vd (selecionáveis via DOM)
+// ══════════════════════════════════════════════════════════════
+
+/**
+ * Calcula o Clearance de Vancomicina (ClVanco, em L/h) de acordo com
+ * o modelo farmacocinético selecionado pelo usuário.
+ *
+ * @param {number} clcr     - Clearance de creatinina (mL/min), via Cockcroft-Gault.
+ * @param {string} clModel  - 'matzke' | 'bauer' | 'empirico'
+ * @returns {{ clv:number, label:string }} ClVanco em L/h e o rótulo do modelo usado.
+ */
+function calcularCLVanco(clcr, clModel){
+  switch(clModel){
+    case 'matzke': {
+      // Matzke GR et al., 1984 — ClVanco (mL/min) = 0,689 × ClCr + 3,66
+      const clvMlMin = (0.689 * clcr) + 3.66;
+      const clv = (clvMlMin * 60) / 1000; // mL/min → L/h
+      return { clv, label: 'Matzke (1984): ClVanco (mL/min) = 0,689 × ClCr + 3,66 → convertido para L/h' };
+    }
+    case 'bauer': {
+      // Bauer LA et al., 1983 — ClVanco (L/h) = ((0,695 × ClCr) + 0,05) × 0,06
+      const clv = ((0.695 * clcr) + 0.05) * 0.06;
+      return { clv, label: 'Bauer (1983): ClVanco = ((0,695 × ClCr) + 0,05) × 0,06' };
+    }
+    case 'empirico':
+    default: {
+      // Modelo empírico simplificado — ClVanco = ClCr × 0,06
+      const clv = clcr * 0.06;
+      return { clv, label: 'Empírico: ClVanco = ClCr × 0,06' };
+    }
+  }
+}
+
+/**
+ * Calcula o Volume de Distribuição (Vd, em L) de acordo com o modelo
+ * farmacocinético selecionado pelo usuário.
+ *
+ * @param {number} weight     - Peso corporal total (kg).
+ * @param {number|null} bmi   - IMC (kg/m²), necessário apenas para o modelo Matzke.
+ * @param {string} vdModel    - 'matzke' | 'bauer' | 'morbid_obesity' | 'custom'
+ * @param {number|null} customFactor - Fator L/kg informado pelo usuário (modelo 'custom').
+ * @returns {{ vd:number, label:string }} Vd em L e o rótulo do modelo usado.
+ */
+function calcularVd(weight, bmi, vdModel, customFactor){
+  switch(vdModel){
+    case 'matzke': {
+      // Matzke: Vd = 0,89 L/kg (IMC < 30) ou 0,72 L/kg do peso corporal total (IMC ≥ 30)
+      const semIMC = (bmi === null || isNaN(bmi));
+      const fator = (!semIMC && bmi >= 30) ? 0.72 : 0.89;
+      const vd = fator * weight;
+      const obsIMC = semIMC ? ' (altura não informada — assumido IMC < 30)' : ` (IMC ${bmi.toFixed(1)} kg/m²)`;
+      return { vd, label: `Matzke: Vd = ${fator} × Peso${obsIMC}` };
+    }
+    case 'bauer': {
+      const vd = 0.7 * weight;
+      return { vd, label: 'Bauer: Vd = 0,7 × Peso' };
+    }
+    case 'morbid_obesity': {
+      const vd = 0.52 * weight;
+      return { vd, label: 'Obesidade mórbida: Vd = 0,52 × Peso' };
+    }
+    case 'custom':
+    default: {
+      const fator = (customFactor && !isNaN(customFactor) && customFactor > 0) ? customFactor : 0.7;
+      const vd = fator * weight;
+      return { vd, label: `Personalizado: Vd = ${fator} × Peso` };
+    }
+  }
+}
+
+function toggleVdCustom(){
+  const vdModel = document.getElementById('vdModelSelect').value;
+  document.getElementById('vd-custom-row').style.display = (vdModel === 'custom') ? 'block' : 'none';
+}
+
 // ══════════════════════════════════════════════
 // CÁLCULO PRINCIPAL
 // ══════════════════════════════════════════════
@@ -526,16 +619,34 @@ function calcular(){
     }
   }
   // ─── FIM DO REMENDO (PATCH) ───
+
+  toggleVdCustom();
+
   const sexo     = document.getElementById('sexo').value;
   const idade    = parseFloat(document.getElementById('idade').value);
   const peso     = parseFloat(document.getElementById('peso').value);
   const creat    = parseFloat(document.getElementById('creat').value);
+  const alturaCm = parseFloat(document.getElementById('altura').value);
   const mic      = parseFloat(document.getElementById('mic').value);
   const dose     = parseFloat(document.getElementById('dose').value);
   const tau      = parseFloat(document.getElementById('intervalo').value);
   const tinfH    = parseFloat(document.getElementById('tempo').value);
   const bacteria = document.getElementById('bacteria').value;
   const pill     = document.getElementById('status-pill');
+
+  const clModel  = document.getElementById('clModelSelect').value;
+  const vdModel  = document.getElementById('vdModelSelect').value;
+  const vdCustomFactor = parseFloat(document.getElementById('vd-custom').value);
+
+  // ── IMC (necessário para o modelo Matzke de Vd)
+  let bmi = null;
+  if(!isNaN(peso) && !isNaN(alturaCm) && alturaCm > 0){
+    const alturaM = alturaCm / 100;
+    bmi = peso / (alturaM * alturaM);
+    document.getElementById('imc-display').value = bmi.toFixed(1) + ' kg/m²';
+  } else {
+    document.getElementById('imc-display').value = '';
+  }
 
   // ── BrCAST inline (abaixo da bactéria)
   const biEl = document.getElementById('brcast-inline');
@@ -606,9 +717,6 @@ function calcular(){
     br.querySelector('.result-title').textContent = 'Análise Renal — '+a1Title;
     document.getElementById('m-clcr').innerHTML = clcrR+'<small>mL/min</small>';
     document.getElementById('m-renal').textContent = renalLabel;
-    document.getElementById('d-clcr').textContent  = clcrR+' mL/min';
-    document.getElementById('d-renal').textContent = renalLabel;
-    document.getElementById('d-arenal').textContent = a1Title;
   } else {
     document.getElementById('m-clcr').innerHTML = '—<small>mL/min</small>';
     document.getElementById('m-renal').textContent = '—';
@@ -621,11 +729,18 @@ function calcular(){
 
   if(!temDados || isNaN(mic) || isNaN(dose) || isNaN(tau) || isNaN(tinfH)) return;
 
-  // ── PK — Modelo Matzke
-  const vd  = 0.7 * peso;
-  const clv = clcr * 0.06;
+  // ── PK — ClVanco e Vd conforme modelos selecionados
+  const clvResult = calcularCLVanco(clcr, clModel);
+  const vdResult   = calcularVd(peso, bmi, vdModel, vdCustomFactor);
+  const clv = clvResult.clv;
+  const vd  = vdResult.vd;
   const ke  = clv / vd;
   const t12 = Math.LN2 / ke;
+
+  document.getElementById('modelo-ativo').textContent =
+    `${clModel==='matzke'?'Matzke':clModel==='bauer'?'Bauer':'Empírico'} · ${vdModel==='matzke'?'Matzke':vdModel==='bauer'?'Bauer':vdModel==='morbid_obesity'?'Obes.mórbida':'Custom'}`;
+  document.getElementById('d-vd-label').textContent  = vdResult.label;
+  document.getElementById('d-clv-label').textContent = clvResult.label;
 
   // ── Concentrações SS — ClinCalc
   const cpeak   = (dose*(1 - Math.exp(-ke*tinfH))) /
@@ -730,24 +845,11 @@ function calcular(){
   document.getElementById('d-clv').textContent      = clv.toFixed(4)+' L/h';
   document.getElementById('d-ke').textContent       = ke.toFixed(4)+' h⁻¹';
   document.getElementById('d-t12').textContent      = t12.toFixed(2)+' h';
-  document.getElementById('d-mic').textContent      = mic+' mg/L';
-  document.getElementById('d-dose').textContent     = dose+' mg';
-  document.getElementById('d-tau').textContent      = tau+' h';
-  document.getElementById('d-tinf-h').textContent   = (tinfH*60).toFixed(0)+' min ('+tinfH+' h)';
-  document.getElementById('d-cpeak').textContent    = cpeak.toFixed(2)+' mg/L';
-  document.getElementById('d-ctrough').textContent  = ctrough.toFixed(2)+' mg/L';
-  document.getElementById('d-auc-tau').textContent  = aucTau.toFixed(1)+' mg·h/L';
   document.getElementById('d-auc24').textContent    = auc24.toFixed(1)+' mg·h/L';
   document.getElementById('d-auc24b').textContent   = auc24v.toFixed(1)+' mg·h/L';
   document.getElementById('d-auc-alvo').textContent = aucAlvo.toFixed(0)+' mg·h/L';
   document.getElementById('d-auc-ratio').textContent= aucRatio;
-  document.getElementById('d-ataque').textContent   = doseAtq+' mg';
-  document.getElementById('d-teorica').textContent  = doseTeo.toFixed(1)+' mg';
-  document.getElementById('d-pratica').textContent  = dosePrat+' mg';
-  document.getElementById('d-vol').textContent      = vol+' mL SF 0,9%';
   document.getElementById('d-conc').textContent     = concSol+' mg/mL';
-  document.getElementById('d-tinf-rec').textContent = tinfStr;
-  document.getElementById('d-aauc').textContent     = aucTitle;
 
   lastChart = {ke, tau, tinfH, cpeak, ctrough, mic, auc24, dosePrat};
   if(document.getElementById('chart-wrap').classList.contains('open')) drawSVGChart(lastChart);
@@ -901,17 +1003,29 @@ function toggleDetail(){
   btn.textContent = det.classList.contains('open') ? '▲ Fechar detalhamento' : '▼ Detalhamento do cálculo';
 }
 
+function toggleMeta(){
+  const box = document.getElementById('meta-box');
+  const btn = document.getElementById('btn-meta');
+  const open = box.style.display !== 'none';
+  box.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '▼ Ver metas e referências rápidas' : '▲ Fechar metas e referências';
+}
+
 function gerarPDF(){
   const chart = document.getElementById('chart-wrap');
   const det   = document.getElementById('det-wrap');
+  const meta  = document.getElementById('meta-box');
   const wc = chart.classList.contains('open');
   const wd = det.classList.contains('open');
+  const wm = meta.style.display !== 'none';
   if(!wc && lastChart){ chart.classList.add('open'); drawSVGChart(lastChart); }
   if(!wd) det.classList.add('open');
+  if(!wm) meta.style.display = 'block';
   setTimeout(()=>{
     window.print();
     if(!wc){ chart.classList.remove('open'); document.getElementById('chart-svg-container').innerHTML=''; }
     if(!wd) det.classList.remove('open');
+    if(!wm) meta.style.display = 'none';
   }, 400);
 }
 
@@ -922,15 +1036,22 @@ function resetar(){
   document.getElementById('dose').value     = '2000';
   document.getElementById('intervalo').value= '8';
   document.getElementById('tempo').value    = '1.5';
-  ['idade','peso','creat'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('clModelSelect').value = 'matzke';
+  document.getElementById('vdModelSelect').value = 'matzke';
+  document.getElementById('vd-custom').value = '';
+  ['idade','peso','creat','altura'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('imc-display').value = '';
   document.getElementById('mic-badge').innerHTML = '';
   document.getElementById('brcast-inline').style.display = 'none';
+  document.getElementById('vd-custom-row').style.display = 'none';
   document.getElementById('chart-wrap').classList.remove('open');
   document.getElementById('chart-svg-container').innerHTML = '';
   document.getElementById('btn-chart').innerHTML =
     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Gerar gráfico sérico`;
   document.getElementById('det-wrap').classList.remove('open');
   document.getElementById('btn-det').textContent = '▼ Detalhamento do cálculo';
+  document.getElementById('meta-box').style.display = 'none';
+  document.getElementById('btn-meta').textContent = '▼ Ver metas e referências rápidas';
   lastChart = null;
   calcular();
 }
