@@ -30,8 +30,9 @@
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem 1rem 3rem;}
 
 /* HEADER */
-.header{max-width:980px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
-.header-left h1{font-size:clamp(16px,2.5vw,22px);font-weight:800;letter-spacing:-0.02em;color:var(--accent);}
+.header{max-width:1060px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+.header-left h1{font-size:clamp(14px,2.2vw,20px);font-weight:800;letter-spacing:-0.02em;color:var(--accent);}
+.header-sub{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.05em;font-weight:500;}
 .header-author{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:0.04em;}
 .header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .status-pill{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);transition:all .3s;}
@@ -43,8 +44,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .btn-pdf svg{width:13px;height:13px;}
 
 /* LAYOUT */
-.wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:1.25rem;align-items:start;}
-@media(max-width:680px){.wrap{grid-template-columns:1fr;}}
+.wrap{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:300px 1fr;gap:1.25rem;align-items:start;}
+@media(max-width:740px){.wrap{grid-template-columns:1fr;}}
 
 /* PANELS */
 .panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;}
@@ -61,16 +62,21 @@ input:focus,select:focus{border-color:var(--accent);}
 .form-row{margin-bottom:.8rem;}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
 
-/* MIC BUTTONS */
-.mic-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px;}
-.mic-btn{font-size:12px;padding:5px 10px;cursor:pointer;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-family:var(--mono);font-weight:500;transition:all .15s;}
-.mic-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
-.mic-btn:hover:not(.active){border-color:var(--accent);color:var(--accent);}
-
 .btn-calc{width:100%;margin-top:.4rem;padding:9px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:0.06em;cursor:pointer;transition:opacity .2s;}
 .btn-calc:hover{opacity:.88;}
 .btn-reset{width:100%;margin-top:.4rem;padding:7px;border:1px solid var(--border2);border-radius:7px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
 .btn-reset:hover{border-color:var(--muted);color:var(--text);}
+
+/* BRCAST INLINE */
+.brcast-inline{margin-top:.65rem;padding:.75rem .9rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);display:none;}
+.brcast-inline.ok{border-color:#A8D9C0;background:#E6F4EE;}
+.brcast-inline.warn{border-color:#FCD34D;background:#FEF3C7;}
+.brcast-inline.danger{border-color:#E8AAAA;background:#FAEAEA;}
+.brcast-title{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+.brcast-title.ok{color:var(--ok);}
+.brcast-title.warn{color:var(--warn);}
+.brcast-title.danger{color:var(--danger);}
+.brcast-body{font-size:12px;line-height:1.6;color:var(--text);}
 
 /* METRIC GRID */
 .metric-grid{display:grid;gap:.65rem;padding:1rem;}
@@ -98,6 +104,10 @@ input:focus,select:focus{border-color:var(--accent);}
 /* SECTION LABEL */
 .section-label{padding:.55rem 1rem .25rem;font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
 
+/* INFO BOX */
+.info-box{margin:0 1rem 1rem;padding:.8rem 1rem;border-radius:8px;border:1px solid #C4B5FD;background:#F5F3FF;font-size:11.5px;line-height:1.7;color:#5B21B6;}
+.info-box strong{font-weight:700;}
+
 /* CHART */
 .chart-btn{margin:0 1rem 1rem;padding:8px;border:1px dashed var(--border2);border-radius:8px;background:transparent;color:var(--muted);font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.06em;cursor:pointer;width:calc(100% - 2rem);transition:all .3s;display:flex;align-items:center;justify-content:center;gap:7px;}
 .chart-btn:hover{border-color:var(--accent);color:var(--accent);}
@@ -119,9 +129,10 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
 
 @media print{
   body{background:#fff;padding:0;}
-  .btn-pdf,.btn-calc,.btn-reset,.chart-btn,.detail-toggle{display:none!important;}
+  .btn-pdf,.btn-calc,.btn-reset,.chart-btn,.detail-toggle,.back-link{display:none!important;}
   .wrap{display:block;}
   .panel{break-inside:avoid;margin-bottom:1rem;}
+  .chart-wrap,.detail-table,#meta-box{display:block!important;}
 }
 </style>
 </head>
@@ -130,7 +141,8 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
 <a class="back-link" href="../index.html">← PharmaCalc</a>
 <div class="header">
   <div class="header-left">
-    <h1>Calculadora PK/PD — Meropenem</h1>
+    <h1>Calculadora PK/PD — Meropenem · %T&gt;MIC</h1>
+    <div class="header-sub">Vd = 0,25 L/kg · T½ ajustada ao ClCr · ke = 0,693/T½ · Alvo %T&gt;MIC selecionável (40/50/100%)</div>
     <div class="header-author">Desenvolvido por Alan Steihogen</div>
   </div>
   <div class="header-right">
@@ -174,18 +186,48 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
         </div>
 
         <div class="form-row">
-          <label>MIC (mg/L) — BrCAST-EUCAST v14.0</label>
-          <div class="mic-row">
-            <button class="mic-btn active" onclick="selectMIC(this,0.25)">0,25</button>
-            <button class="mic-btn" onclick="selectMIC(this,0.5)">0,5</button>
-            <button class="mic-btn" onclick="selectMIC(this,1)">1</button>
-            <button class="mic-btn" onclick="selectMIC(this,2)">2</button>
-            <button class="mic-btn" onclick="selectMIC(this,4)">4</button>
-            <button class="mic-btn" onclick="selectMIC(this,8)">8</button>
-            <button class="mic-btn" onclick="selectMIC(this,16)">&gt;8</button>
+          <label>Bactéria isolada (opcional)</label>
+          <select id="bacteria" onchange="calcular()">
+            <option value="">Selecione...</option>
+            <option value="Pseudomonas aeruginosa">Pseudomonas aeruginosa</option>
+            <option value="Klebsiella pneumoniae">Klebsiella pneumoniae</option>
+            <option value="Acinetobacter baumannii">Acinetobacter baumannii</option>
+            <option value="Enterobacter cloacae">Enterobacter cloacae</option>
+            <option value="Enterobacter aerogenes">Enterobacter aerogenes</option>
+            <option value="Escherichia coli">Escherichia coli</option>
+            <option value="Serratia marcescens">Serratia marcescens</option>
+            <option value="Burkholderia cepacia">Burkholderia cepacia</option>
+            <option value="Stenotrophomonas maltophilia">Stenotrophomonas maltophilia</option>
+            <option value="Providencia stuartii">Providencia stuartii</option>
+            <option value="Outro">Outro</option>
+          </select>
+          <div class="brcast-inline" id="brcast-inline">
+            <div class="brcast-title" id="brcast-title">—</div>
+            <div class="brcast-body" id="brcast-body">—</div>
           </div>
         </div>
 
+        <div class="form-row">
+          <label>MIC (mg/L) — BrCAST-EUCAST v14.0</label>
+          <select id="mic" onchange="calcular()">
+            <option value="0.25" selected>0,25 mg/L</option>
+            <option value="0.5">0,50 mg/L</option>
+            <option value="1">1 mg/L</option>
+            <option value="2">2 mg/L</option>
+            <option value="4">4 mg/L</option>
+            <option value="8">8 mg/L</option>
+            <option value="16">&gt; 8 mg/L</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:var(--accent2)"></div>
+        <h2>Dose Prescrita</h2>
+      </div>
+      <div class="panel-body">
         <div class="form-row"><label>Dose prescrita (mg)</label>
           <select id="dose" onchange="calcular()">
             <option value="500">500 mg</option>
@@ -215,24 +257,22 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
             <option value="100">100% (EIP/contínua)</option>
           </select>
         </div>
-        <div class="form-row"><label>Bactéria isolada (opcional)</label>
-          <select id="bacteria" onchange="calcular()">
-            <option value="">Selecione...</option>
-            <option value="Pseudomonas aeruginosa">Pseudomonas aeruginosa</option>
-            <option value="Klebsiella pneumoniae">Klebsiella pneumoniae</option>
-            <option value="Acinetobacter baumannii">Acinetobacter baumannii</option>
-            <option value="Enterobacter cloacae">Enterobacter cloacae</option>
-            <option value="Enterobacter aerogenes">Enterobacter aerogenes</option>
-            <option value="Escherichia coli">Escherichia coli</option>
-            <option value="Serratia marcescens">Serratia marcescens</option>
-            <option value="Burkholderia cepacia">Burkholderia cepacia</option>
-            <option value="Stenotrophomonas maltophilia">Stenotrophomonas maltophilia</option>
-            <option value="Providencia stuartii">Providencia stuartii</option>
-            <option value="Outro">Outro</option>
-          </select>
-        </div>
         <button class="btn-calc" onclick="calcular()">▶ Calcular</button>
         <button class="btn-reset" onclick="resetar()">↺ Limpar</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-head-dot" style="background:#7C3AED"></div>
+        <h2>Meta Terapêutica</h2>
+      </div>
+      <button class="detail-toggle" id="btn-meta" onclick="toggleMeta()" style="margin:1rem 1rem 0;width:calc(100% - 2rem)">▼ Ver metas e referências rápidas</button>
+      <div class="info-box" id="meta-box" style="display:none;margin:1rem">
+        <strong>Alvo %T&gt;MIC:</strong> 40% (bacteriostático) · 50% (bactericida) · 100% (infusão estendida/contínua)<br>
+        <strong>Pontos de corte BrCAST-EUCAST v14.0:</strong> S ≤ 2 mg/L · I 4–8 mg/L · R &gt; 8 mg/L (Enterobacterales, Pseudomonas, Acinetobacter)<br>
+        <strong>MIC ≥ 2 mg/L:</strong> considerar infusão prolongada (180 min) e/ou dose de 2000 mg para atingir o alvo<br>
+        <strong>Estabilidade em infusão prolongada:</strong> reconstituir e infundir conforme estabilidade da solução (consultar bula)
       </div>
     </div>
   </div>
@@ -256,18 +296,6 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       </div>
     </div>
 
-    <!-- BrCAST breakpoints panel -->
-    <div class="panel" id="panel-brcast" style="display:none">
-      <div class="panel-head">
-        <div class="panel-head-dot" style="background:#7C3AED"></div>
-        <h2>Pontos de Corte BrCAST-EUCAST — Meropenem</h2>
-      </div>
-      <div class="result-box" id="box-brcast" style="margin:1rem">
-        <div class="result-title" id="brcast-title">—</div>
-        <div class="result-body" id="brcast-body">—</div>
-      </div>
-    </div>
-
     <!-- Análise 1: Função Renal -->
     <div class="panel">
       <div class="panel-head">
@@ -284,21 +312,19 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       </div>
     </div>
 
-    <!-- Análise 2: Adequação da Dose -->
+    <!-- Análise 2: Adequação da Dose (baseada no %T>MIC calculado — específico do paciente) -->
     <div class="panel">
       <div class="panel-head">
         <div class="panel-head-dot" style="background:var(--accent2)"></div>
-        <h2>Análise 2 — Adequação da Dose</h2>
+        <h2>Análise 2 — Adequação da Dose (%T&gt;MIC)</h2>
       </div>
-      <div class="result-box" id="box-dose">
-        <div class="result-title">Aguardando cálculo</div>
-        <div class="result-body" id="txt-dose">Selecione MIC, dose e tempo de infusão.</div>
-      </div>
-
-      <div class="section-label">Parâmetros PK/PD estimados</div>
       <div class="result-box" id="box-pkpd">
-        <div class="result-title">PK/PD</div>
-        <div class="result-body" id="txt-pkpd">—</div>
+        <div class="result-title">Aguardando cálculo</div>
+        <div class="result-body" id="txt-pkpd">Preencha os dados e selecione dose, τ, tempo de infusão e MIC.</div>
+      </div>
+      <div class="result-box" id="box-excesso" style="display:none">
+        <div class="result-title warn">⚠️ Possível excesso de dose</div>
+        <div class="result-body" id="txt-excesso">—</div>
       </div>
 
       <!-- Gráfico SVG -->
@@ -315,21 +341,15 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
       <button class="detail-toggle" id="btn-det" onclick="toggleDetail()">▼ Detalhamento do cálculo</button>
       <div class="detail-table" id="det-wrap">
         <table class="det">
-          <tr><td>Fórmula ClCr</td><td>Cockcroft-Gault</td></tr>
-          <tr><td>ClCr calculado</td><td id="d-clcr">—</td></tr>
-          <tr><td>Categoria renal</td><td id="d-renal">—</td></tr>
-          <tr><td>Dose prescrita</td><td id="d-dose">—</td></tr>
-          <tr><td>Intervalo</td><td id="d-intervalo">—</td></tr>
-          <tr><td>Tempo de infusão</td><td id="d-tempo">—</td></tr>
-          <tr><td>MIC</td><td id="d-mic">—</td></tr>
-          <tr><td>Vd estimado</td><td id="d-vd">—</td></tr>
-          <tr><td>ke</td><td id="d-ke">—</td></tr>
-          <tr><td>T½ ajustada ao ClCr</td><td id="d-t12">—</td></tr>
-          <tr><td>Cmax estimada</td><td id="d-cmax">—</td></tr>
+          <tr><td>Vd = 0,25 × peso</td><td id="d-vd">—</td></tr>
+          <tr><td>T½ conforme faixa de ClCr</td><td id="d-t12-regra">—</td></tr>
+          <tr><td>ke = ln(2) / T½</td><td id="d-ke">—</td></tr>
+          <tr><td>Cmax estimada (infusão real)</td><td id="d-cmax">—</td></tr>
           <tr><td>%T&gt;MIC estimado</td><td id="d-tmic">—</td></tr>
-          <tr><td>Alvo %T&gt;MIC</td><td id="d-alvo">—</td></tr>
-          <tr><td>Análise da dose</td><td id="d-a1">—</td></tr>
-          <tr><td>Análise renal</td><td id="d-a2">—</td></tr>
+          <tr><td>%T&gt;MIC — método de cálculo</td><td id="d-tmic-metodo">—</td></tr>
+          <tr><td>Referências</td><td style="font-size:10px;line-height:1.6;color:#627D98">
+            BrCAST-EUCAST v14.0 · Rybak MJ et al. ASHP/IDSA/PIDS/SIDP guidance · Bula meropenem (ANVISA)
+          </td></tr>
         </table>
       </div>
     </div>
@@ -337,7 +357,6 @@ table.det td:last-child{font-family:var(--mono);color:var(--text);}
 </div>
 
 <script>
-let micAtual = 0.25;
 let lastData = null;
 
 // ── SVG Chart ──────────────────────────────────────────────
@@ -480,65 +499,14 @@ const BRCAST_MERO = {
 function getBrcastInterp(mic, bacteria){
   const bp = BRCAST_MERO[bacteria];
   if(!bp) return null;
-  if(bp.s === null) return { cat:'Sem breakpoint', classe:'', s:null };
+  if(bp.s === null) return { cat:'Sem breakpoint', classe:'' };
   if(mic <= bp.s)      return { cat:'Sensível (S)', classe:'ok' };
   if(mic <= bp.i_max)  return { cat:'Sensível – exposição aumentada (I)', classe:'warn' };
   return { cat:'Resistente (R)', classe:'danger' };
 }
 
-function getMICCategoria(mic){
-  if(mic <= 2)  return {label:'Sensível (S)', cls:'ok'};
-  if(mic <= 8)  return {label:'Sensível – exposição aumentada (I)', cls:'warn'};
-  return {label:'Resistente (R)', cls:'danger'};
-}
-
-function getAnalise1(mic, dose, tempo){
-  if(mic > 8) return {classe:'danger', titulo:'Resistente', msg:'MIC >8 mg/L — microrganismo resistente ao meropenem. Terapia alternativa necessária.'};
-  const d=dose, t=tempo, m=mic;
-  if(m===0.25){
-    if(d>=1000) return {classe:'warn', titulo:'Falha de descalonamento', msg:`MIC 0,25 mg/L com dose ${d} mg — dose excessiva para o perfil de sensibilidade. Considerar descalonamento para 500 mg.`};
-    return {classe:'ok', titulo:'Dose adequada', msg:`MIC 0,25 mg/L com ${d} mg em ${t} min — dose adequada para o perfil de sensibilidade.`};
-  }
-  if(m===0.5){
-    if(d===500)  return {classe:'ok',   titulo:'Dose adequada',         msg:`MIC 0,5 mg/L com 500 mg em ${t} min — dose adequada.`};
-    if(d===1000) return {classe:'ok',   titulo:'Dose adequada',         msg:`MIC 0,5 mg/L com 1000 mg em ${t} min — dose adequada.`};
-    if(d===2000) return {classe:'warn', titulo:'Falha de descalonamento', msg:'MIC 0,5 mg/L com 2000 mg — dose excessiva. Considerar descalonamento.'};
-  }
-  if(m===1){
-    if(d===500 && t===30)  return {classe:'warn', titulo:'Subdose possível', msg:'MIC 1 mg/L com 500 mg em 30 min — subdose possível. Considerar aumento de dose ou infusão prolongada.'};
-    if(d===500 && t===180) return {classe:'ok',   titulo:'Dose adequada',   msg:'MIC 1 mg/L com 500 mg em 180 min (prolongada) — dose adequada.'};
-    if(d===1000) return {classe:'ok',   titulo:'Dose adequada',            msg:`MIC 1 mg/L com 1000 mg em ${t} min — dose adequada.`};
-    if(d===2000) return {classe:'warn', titulo:'Falha de descalonamento',  msg:'MIC 1 mg/L com 2000 mg — dose excessiva. Considerar descalonamento para 1000 mg.'};
-  }
-  if(m===2){
-    if(d===500)            return {classe:'warn', titulo:'Subdose possível',         msg:'MIC 2 mg/L com 500 mg — subdose possível independente do tempo de infusão.'};
-    if(d===1000 && t===30)  return {classe:'warn', titulo:'Subdose possível',         msg:'MIC 2 mg/L com 1000 mg em 30 min — subdose possível. Considerar infusão prolongada (180 min).'};
-    if(d===1000 && t===180) return {classe:'ok',   titulo:'Dose adequada',            msg:'MIC 2 mg/L com 1000 mg em 180 min (prolongada) — dose adequada.'};
-    if(d===2000 && t===30)  return {classe:'ok',   titulo:'Dose adequada',            msg:'MIC 2 mg/L com 2000 mg em 30 min — dose adequada.'};
-    if(d===2000 && t===180) return {classe:'warn', titulo:'Falha de descalonamento',  msg:'MIC 2 mg/L com 2000 mg em 180 min — dose excessiva. Considerar descalonamento para 1000 mg + infusão prolongada.'};
-  }
-  if(m===4){
-    if(d===2000 && t===180) return {classe:'ok',   titulo:'Dose adequada',   msg:'MIC 4 mg/L (I — exposição aumentada) com 2000 mg em 180 min — dose adequada.'};
-    return {classe:'warn', titulo:'Subdose possível', msg:`MIC 4 mg/L com ${d} mg em ${t} min — subdose possível. Para atingir alvo PK/PD: 2000 mg em infusão de 180 min.`};
-  }
-  if(m===8){
-    if(d===2000 && t===180) return {classe:'ok',   titulo:'Dose adequada',   msg:'MIC 8 mg/L (I — exposição aumentada) com 2000 mg em 180 min — dose adequada.'};
-    if(d===2000 && t===30)  return {classe:'warn', titulo:'Subdose possível', msg:'MIC 8 mg/L com 2000 mg em 30 min — subdose possível. Usar infusão prolongada de 180 min.'};
-    return {classe:'warn', titulo:'Subdose possível', msg:`MIC 8 mg/L com ${d} mg — subdose possível. Necessário 2000 mg em 180 min para atingir alvo PK/PD.`};
-  }
-  return {classe:'', titulo:'Verificar combinação', msg:'Combinação não mapeada. Consulte protocolo clínico.'};
-}
-
-function selectMIC(btn, val){
-  document.querySelectorAll('.mic-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  micAtual = val;
-  calcular();
-}
-
 function calcular(){
- // ─── INÍCIO DO REMENDO (PATCH) ───
-  // Lê o peso salvo pela calculadora de peso farmacêutico se o campo estiver vazio
+  // ─── INÍCIO DO REMENDO (PATCH) ───
   const pesoSalvo = localStorage.getItem('pharmacalc_peso');
   const campoPeso = document.getElementById('peso');
   const tagPeso = document.getElementById('peso-tag');
@@ -547,7 +515,6 @@ function calcular(){
     if (!campoPeso.value) {
       campoPeso.value = pesoSalvo;
     }
-    // Se o valor no campo for o mesmo do salvo, exibe o aviso
     if (campoPeso.value === pesoSalvo && tagPeso) {
       tagPeso.style.display = 'block';
     }
@@ -563,40 +530,34 @@ function calcular(){
   const alvo     = parseInt(document.getElementById('alvo').value);
   const bacteria = document.getElementById('bacteria').value;
   const pill     = document.getElementById('status-pill');
-  const mic      = micAtual;
+  const mic      = parseFloat(document.getElementById('mic').value);
 
-  // Análise 1 — dose (sempre calculada)
-  const r1 = getAnalise1(mic, dose, tempo);
-  const bd = document.getElementById('box-dose');
-  bd.className = 'result-box ' + r1.classe;
-  bd.querySelector('.result-title').className = 'result-title ' + r1.classe;
-  bd.querySelector('.result-title').textContent = 'Adequação da Dose — ' + r1.titulo;
-  document.getElementById('txt-dose').textContent = r1.msg;
 
   // Alvo %T>MIC
   document.getElementById('m-alvo').innerHTML = alvo + '<small>%</small>';
 
-  // BrCAST
-  const panelBrcast = document.getElementById('panel-brcast');
-  if(bacteria && BRCAST_MERO[bacteria] !== undefined){
-    panelBrcast.style.display = 'block';
+  // ── BrCAST inline (abaixo da bactéria)
+  const biEl = document.getElementById('brcast-inline');
+  const btEl = document.getElementById('brcast-title');
+  const bbEl = document.getElementById('brcast-body');
+
+  if(bacteria && BRCAST_MERO[bacteria] && !isNaN(mic)){
     const bp = BRCAST_MERO[bacteria];
-    const interp = getBrcastInterp(mic, bacteria);
-    const boxB = document.getElementById('box-brcast');
-    const bTitle = document.getElementById('brcast-title');
-    const bBody = document.getElementById('brcast-body');
+    biEl.style.display = 'block';
     if(bp.s === null){
-      boxB.className = 'result-box'; bTitle.className = 'result-title';
-      bTitle.textContent = bp.grupo + ' — Sem breakpoint clínico BrCAST';
+      biEl.className = 'brcast-inline';
+      btEl.className = 'brcast-title';
+      btEl.textContent = bp.grupo + ' — Sem breakpoint clínico BrCAST';
     } else {
+      const interp = getBrcastInterp(mic, bacteria);
       const micLabel = mic === 16 ? '>8' : mic.toString();
-      boxB.className = 'result-box ' + interp.classe;
-      bTitle.className = 'result-title ' + interp.classe;
-      bTitle.textContent = bp.grupo + ' — ' + interp.cat;
+      biEl.className = 'brcast-inline ' + interp.classe;
+      btEl.className = 'brcast-title ' + interp.classe;
+      btEl.textContent = bp.grupo + ' — ' + interp.cat + ' (MIC ' + micLabel + ' mg/L)';
     }
-    bBody.textContent = bp.nota;
+    bbEl.textContent = bp.nota;
   } else {
-    panelBrcast.style.display = 'none';
+    biEl.style.display = 'none';
   }
 
   // ClCr
@@ -640,9 +601,6 @@ function calcular(){
     br.querySelector('.result-title').className = 'result-title ' + a1Class;
     br.querySelector('.result-title').textContent = 'Análise Renal — ' + a1Title;
     document.getElementById('txt-renal').textContent = a1Msg;
-    document.getElementById('d-clcr').textContent = clcrR + ' mL/min';
-    document.getElementById('d-renal').textContent = renalLabel;
-    document.getElementById('d-a2').textContent = a1Title;
   } else {
     document.getElementById('m-clcr').innerHTML = '—<small>mL/min</small>';
     document.getElementById('m-renal').textContent = '—';
@@ -653,18 +611,12 @@ function calcular(){
   }
 
   // PK — meropenem
-  // Vd = 0,25 L/kg (distribuição em fluidos corporais)
-  // ke por ClCr (Cockcroft-Gault): baseado em clearance renal do meropenem
-  //   T½ referência com função renal normal ≈ 1h; insuficiência grave ≈ 5–6h
-  //   ke = 0,693 / T½; T½ ajustada por ClCr:
-  //   ≥80 → 1,0h; 50–79 → 1,5h; 26–50 → 2,5h; <26 → 5,0h
   if(!isNaN(peso) && clcr !== null){
     const vd = 0.25 * peso;
     const t12 = clcr >= 80 ? 1.0 : clcr >= 50 ? 1.5 : clcr >= 26 ? 2.5 : 5.0;
     const ke = 0.693 / t12;
     const tempoH = tempo / 60;
 
-    // Cmax ajustada ao tempo de infusão
     let cmax;
     if(tempoH < 0.6){
       cmax = dose / vd;
@@ -673,7 +625,6 @@ function calcular(){
       cmax = (taxa / ke) * (1 - Math.exp(-ke * tempoH));
     }
 
-    // %T>MIC: tempo acima do MIC dentro do intervalo
     let tMicH = 0;
     if(cmax > mic){
       tMicH = Math.min(tempoH + Math.log(cmax / mic) / ke, intervalo);
@@ -681,45 +632,73 @@ function calcular(){
     const pctTMic = Math.max(0, Math.round((tMicH / intervalo) * 100));
     const metaAtingida = pctTMic >= alvo;
 
+    // ── Override BrCAST/EUCAST: CIM = 2 mg/L é o limite de suscetibilidade (breakpoint) do
+    //    meropenem para Enterobacterales/Pseudomonas/Acinetobacter. Nessa fronteira, o cálculo
+    //    determinístico de %T>MIC pode superestimar a eficácia — simulações de Monte Carlo
+    //    mostram risco de falha elevado quando a infusão é padrão (≤30 min). Nesse cenário,
+    //    o resultado NUNCA deve ser exibido como sucesso (verde), mesmo que a meta matemática
+    //    tenha sido atingida.
+    const overrideMicLimiar = (mic === 2 && tempo <= 30);
+    const metaVisual = metaAtingida && !overrideMicLimiar;
+
     document.getElementById('m-vd').innerHTML  = vd.toFixed(1)   + '<small>L</small>';
     document.getElementById('m-ke').innerHTML  = ke.toFixed(3)   + '<small>h⁻¹</small>';
     document.getElementById('m-t12').innerHTML = t12.toFixed(1)  + '<small>h</small>';
     document.getElementById('m-cmax').innerHTML= cmax.toFixed(1) + '<small>mg/L</small>';
     document.getElementById('m-tmic').innerHTML= pctTMic         + '<small>%</small>';
 
-    // PK/PD box
     const bpk = document.getElementById('box-pkpd');
-    const pkClass = metaAtingida ? 'ok' : 'warn';
+    const pkClass = metaVisual ? 'ok' : 'warn';
     bpk.className = 'result-box ' + pkClass;
     bpk.querySelector('.result-title').className = 'result-title ' + pkClass;
-    bpk.querySelector('.result-title').textContent = metaAtingida
+    bpk.querySelector('.result-title').textContent = metaVisual
       ? `✅ Meta %T>MIC atingida (${pctTMic}% ≥ ${alvo}%)`
-      : `⚠️ Meta %T>MIC não atingida (${pctTMic}% < ${alvo}%)`;
-    document.getElementById('txt-pkpd').textContent =
-      `Vd ${vd.toFixed(1)} L · ke ${ke.toFixed(3)} h⁻¹ · T½ ${t12.toFixed(1)} h · Cmax ${cmax.toFixed(1)} mg/L · %T>MIC estimado ${pctTMic}% (alvo: ${alvo}%)`;
+      : overrideMicLimiar
+        ? `⚠️ CIM no limite de suscetibilidade (2 mg/L) — ressalva aplicada`
+        : `⚠️ Meta %T>MIC não atingida (${pctTMic}% < ${alvo}%)`;
+    document.getElementById('txt-pkpd').textContent = overrideMicLimiar
+      ? `Vd ${vd.toFixed(1)} L · ke ${ke.toFixed(3)} h⁻¹ · T½ ${t12.toFixed(1)} h · Cmax ${cmax.toFixed(1)} mg/L · %T>MIC estimado ${pctTMic}% (alvo: ${alvo}%). Aviso: Para isolados com CIM de 2 mg/L (limite de suscetibilidade EUCAST), o cálculo determinístico isolado pode superestimar a eficácia in vivo. Simulações populacionais de Monte Carlo demonstram risco elevado de falha para infusões padrão de 30 minutos. Recomenda-se transição para infusão prolongada (180 min) ou regime de dose alta.`
+      : `Vd ${vd.toFixed(1)} L · ke ${ke.toFixed(3)} h⁻¹ · T½ ${t12.toFixed(1)} h · Cmax ${cmax.toFixed(1)} mg/L · %T>MIC estimado ${pctTMic}% (alvo: ${alvo}%)`;
 
-    // Status pill
-    if(r1.classe === 'danger' || a1Class === 'danger'){
+    // ── Sinal de possível excesso de dose (stewardship): testa se a dose
+    //    imediatamente inferior disponível (2000→1000→500 mg) já bateria a
+    //    meta para este paciente — calculado dinamicamente, não por tabela fixa.
+    const boxExcesso = document.getElementById('box-excesso');
+    const doseMenor = dose === 2000 ? 1000 : (dose === 1000 ? 500 : null);
+    let pctMenor = null;
+    if(metaVisual && doseMenor){
+      let cmaxMenor;
+      if(tempoH < 0.6) cmaxMenor = doseMenor / vd;
+      else { const taxaM = doseMenor / vd / tempoH; cmaxMenor = (taxaM / ke) * (1 - Math.exp(-ke * tempoH)); }
+      let tMicMenor = 0;
+      if(cmaxMenor > mic) tMicMenor = Math.min(tempoH + Math.log(cmaxMenor / mic) / ke, intervalo);
+      pctMenor = Math.max(0, Math.round((tMicMenor / intervalo) * 100));
+    }
+    if(pctMenor !== null && pctMenor >= alvo){
+      boxExcesso.style.display = 'block';
+      boxExcesso.className = 'result-box warn';
+      boxExcesso.querySelector('.result-title').className = 'result-title warn';
+      document.getElementById('txt-excesso').textContent =
+        `Mesmo com ${doseMenor} mg (dose imediatamente inferior), o %T>MIC estimado seria ${pctMenor}% — ainda dentro da meta de ${alvo}%. Considere descalonar a dose.`;
+    } else {
+      boxExcesso.style.display = 'none';
+    }
+
+    if(a1Class === 'danger'){
       pill.className = 'status-pill danger'; pill.textContent = 'Revisar — ação necessária';
-    } else if(r1.classe === 'warn' || a1Class === 'warn' || !metaAtingida){
+    } else if(a1Class === 'warn' || !metaVisual){
       pill.className = 'status-pill warn'; pill.textContent = 'Atenção — avaliar ajuste';
     } else {
       pill.className = 'status-pill ok'; pill.textContent = 'Parâmetros adequados';
     }
 
-    // Detalhamento
-    const micLabel = mic === 16 ? '>8 mg/L' : mic + ' mg/L';
-    document.getElementById('d-dose').textContent      = dose + ' mg';
-    document.getElementById('d-intervalo').textContent = intervalo + ' h';
-    document.getElementById('d-tempo').textContent     = tempo + ' min';
-    document.getElementById('d-mic').textContent       = micLabel;
-    document.getElementById('d-vd').textContent        = vd.toFixed(1) + ' L';
-    document.getElementById('d-ke').textContent        = ke.toFixed(3) + ' h⁻¹';
-    document.getElementById('d-t12').textContent       = t12.toFixed(1) + ' h';
-    document.getElementById('d-cmax').textContent      = cmax.toFixed(1) + ' mg/L';
-    document.getElementById('d-tmic').textContent      = pctTMic + '%';
-    document.getElementById('d-alvo').textContent      = alvo + '%';
-    document.getElementById('d-a1').textContent        = r1.titulo;
+    const t12Faixa = clcr >= 80 ? '≥80 mL/min → T½ 1,0h' : clcr >= 50 ? '50–79 mL/min → T½ 1,5h' : clcr >= 26 ? '26–49 mL/min → T½ 2,5h' : '<26 mL/min → T½ 5,0h';
+    document.getElementById('d-vd').textContent = vd.toFixed(1) + ' L';
+    document.getElementById('d-t12-regra').textContent = t12Faixa + ' (ClCr atual: ' + Math.round(clcr) + ' mL/min)';
+    document.getElementById('d-ke').textContent = ke.toFixed(3) + ' h⁻¹ (T½ = ' + t12.toFixed(1) + ' h)';
+    document.getElementById('d-cmax').textContent = cmax.toFixed(1) + ' mg/L';
+    document.getElementById('d-tmic').textContent = pctTMic + '%';
+    document.getElementById('d-tmic-metodo').textContent = `%T>MIC = min(Tinf + ln(Cmax/MIC)/ke, τ) ÷ τ — considera a subida durante a infusão de ${tempo} min e o decaimento exponencial até o MIC.`;
 
     lastData = { cmax, ke, intervalo, tempo, mic, alvo };
     if(document.getElementById('chart-wrap').classList.contains('open')){
@@ -735,34 +714,47 @@ function toggleDetail(){
   btn.textContent = det.classList.contains('open') ? '▲ Fechar detalhamento' : '▼ Detalhamento do cálculo';
 }
 
+function toggleMeta(){
+  const box = document.getElementById('meta-box');
+  const btn = document.getElementById('btn-meta');
+  const open = box.style.display !== 'none';
+  box.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '▼ Ver metas e referências rápidas' : '▲ Fechar metas e referências';
+}
+
 function gerarPDF(){
   const chart = document.getElementById('chart-wrap');
   const det   = document.getElementById('det-wrap');
+  const meta  = document.getElementById('meta-box');
   const wC = chart.classList.contains('open');
   const wD = det.classList.contains('open');
+  const wM = meta.style.display !== 'none';
   if(!wC && lastData){ chart.classList.add('open'); drawSVGChart(lastData); }
   if(!wD){ det.classList.add('open'); }
+  if(!wM){ meta.style.display = 'block'; }
   setTimeout(()=>{
     window.print();
     if(!wC){ chart.classList.remove('open'); document.getElementById('chart-svg-container').innerHTML=''; }
     if(!wD){ det.classList.remove('open'); }
+    if(!wM){ meta.style.display = 'none'; }
   }, 400);
 }
 
 function resetar(){
   ['sexo','bacteria'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mic').value='0.25';
   document.getElementById('dose').value='500';
   document.getElementById('intervalo').value='8';
   document.getElementById('tempo').value='30';
   document.getElementById('alvo').value='50';
   ['idade','peso','creat'].forEach(id=>document.getElementById(id).value='');
-  document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelector('.mic-btn').classList.add('active');
-  micAtual=0.25;
+  document.getElementById('brcast-inline').style.display = 'none';
   document.getElementById('chart-wrap').classList.remove('open');
   document.getElementById('chart-svg-container').innerHTML='';
   document.getElementById('btn-chart').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Gerar gráfico de decaimento`;
   document.getElementById('det-wrap').classList.remove('open');
+  document.getElementById('meta-box').style.display = 'none';
+  document.getElementById('btn-meta').textContent = '▼ Ver metas e referências rápidas';
   lastData=null;
   calcular();
 }
